@@ -1,6 +1,6 @@
 
 const MyTextArea = ({type = "text", name = "name", label = "name", id, ...rest}) => {
-	console.log(id)
+
 	return (
 		<div>
 			<label htmlFor={id}>{label}</label>
