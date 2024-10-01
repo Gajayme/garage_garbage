@@ -1,15 +1,12 @@
+import "./Styles/FixedTextArea.css";
+import "./Styles/LabeledElement.css";
 
 const MyTextArea = ({type = "text", name = "name", label = "name", id, ...rest}) => {
 
 	return (
-		<div>
+		<div className="labeled_element">
 			<label htmlFor={id}>{label}</label>
-	 		 <textarea
-				type = {type}
-				id = {id}
-				name = {name}
-				{...rest}
-			/>
+	 		<textarea {...rest} type = {type} id = {id} name = {name} className="fixed-textarea"/>
 		</div>
 	)
 }

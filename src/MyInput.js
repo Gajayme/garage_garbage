@@ -1,15 +1,16 @@
+import './Styles/LabeledElement.css'
 
 
 const MyInput = (props) => {
-	const {type = "text", name = "name", label = "labe", id, ...rest} = props
+	const {type = "text", label = "label", id,  ...rest} = props
 
 	return (
-		<div>
+		<div className="labeled_element">
 			<label htmlFor={id}> {label} </label>
 
 			<input
-				id = {id}
 				{...rest}
+				id = {id}
 				type={type}
 			/>
 		</div>
