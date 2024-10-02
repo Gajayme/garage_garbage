@@ -3,13 +3,14 @@ import MyButton from "./MyButton.js"
 import MyInput from "./MyInput.js"
 import MyTextArea from "./MyTextArea.js"
 import MyDropdown from "./MyDropDown.js"
+import MyImageUploader from "./MyImageUploader.js"
 import * as Constants from './Constants.js';
 
 import './Styles/UploadForm.css';
 
 
 
-export const TestForm = () => {
+export const UploadPageForm = () => {
 
 	const [formState, setFormState] = useState({
 		item_name: '',
@@ -20,6 +21,8 @@ export const TestForm = () => {
 		size: '',
 		buyer: '',
 		location: '',
+
+		images: '',
 	})
 
 	const handleOnSubmit = (event) => {
@@ -30,10 +33,22 @@ export const TestForm = () => {
 	const handleOnChange = (key) => {
 		return (event) => {
 			if (event && event.target) {
-				setFormState((prevState) => ({ ...prevState, [key]: event.target.value || event.target.innerText}))
-			}
+				setFormState((prevState) => ({
+						...prevState, [key]: event.target.value || event.target.innerText}))
+				}
 		}
 	}
+
+	// TODO не работает
+	const handleOnChangeImages = (key) => {
+		return (event) => {
+			if (event && event.target) {
+				setFormState((prevState) => ({
+						...prevState, [key]: [...Array.from(event.target.files)]} ))
+				}
+		}
+	}
+
 
 	// TODO собрать все пропсы отдельно, а потом декомпозировать
 	const buyerOptions = [Constants.chooseBuyer, Constants.rail, Constants.ljuba, Constants.igor, Constants.gosha, Constants.oleg, Constants.unknown];
@@ -41,9 +56,12 @@ export const TestForm = () => {
 
 	return (
 		<form onSubmit={handleOnSubmit} className="grid-container">
+
+			<MyImageUploader 														value={formState.images} 		onChange={handleOnChangeImages('images')} />
+
 			<MyTextArea className="grid-item"	label="Item name"	id="textArea_1"	value={formState.item_name}		onChange={handleOnChange('item_name')} rows='2' cols='30' />
 
-			<MyInput 	className="grid-item"	label="Buyers part"	id="input_1"	value={formState.name}			onChange={handleOnChange('buyers_part')}/>
+			<MyInput 	className="grid-item"	label="Buyers part"	id="input_1"	value={formState.buyers_part}	onChange={handleOnChange('buyers_part')}/>
 			<MyInput 	className="grid-item"	label="Bought for"	id="input_2"	value={formState.bought_for}	onChange={handleOnChange('bought_for')} />
 			<MyInput 	className="grid-item"	label="Price" 		id="input_3"	value={formState.price}			onChange={handleOnChange('price')} />
 			<MyInput 	className="grid-item"	label="Sold For"	id="input_4"	value={formState.sold_for}		onChange={handleOnChange('sold_for')} />

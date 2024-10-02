@@ -1,23 +1,23 @@
 .labeled_element {
-    display: grid; /* Используем Grid для размещения элементов */
-    grid-template-columns: 100px auto; /* Первая колонка — ширина label, вторая занимает оставшееся пространство */
-	grid-auto-rows: 50px; /* Фиксированная высота для всех строк */
-	grid-auto-columns: 50px; /* Фиксированная высота для всех строк */
-    gap: 10px; /* Отступ между колонками */
-    margin-bottom: 15px; /* Отступ снизу между группами */
+    display: grid;
+    grid-template-rows: auto 3fr;
+	grid-auto-rows: 50px;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 .labeled_element label {
-    align-self: center; /* Центрируем label по вертикали */
+    align-self: center;
 }
 
 .labeled_element input,
 .labeled_element textarea,
 .labeled_element select {
-    padding: 8px; /* Отступы внутри поля ввода */
-    border: 1px solid #ccc; /* Рамка для поля ввода */
-    border-radius: 4px; /* Закругленные углы */
-    font-size: 16px; /* Размер шрифта */
+    padding: 8px;
+    border: 1px solid #000000;
+	background-color: lightblue;
+    border-radius: 4px;
+    font-size: 16px;
 }
 
 .labeled_element select {
