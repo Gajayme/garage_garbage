@@ -1,6 +1,6 @@
 
 
-const MyImageUploader = (value, onChange) => {
+const MyImageUploader = ({value, onChange}) => {
 	return (
 	  <div>
 		<input

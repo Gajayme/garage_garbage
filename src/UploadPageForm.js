@@ -22,7 +22,7 @@ export const UploadPageForm = () => {
 		buyer: '',
 		location: '',
 
-		images: '',
+		images: [],
 	})
 
 	const handleOnSubmit = (event) => {
@@ -39,12 +39,12 @@ export const UploadPageForm = () => {
 		}
 	}
 
-	// TODO не работает
 	const handleOnChangeImages = (key) => {
 		return (event) => {
 			if (event && event.target) {
+				const files = Array.from(event.target.files);
 				setFormState((prevState) => ({
-						...prevState, [key]: [...Array.from(event.target.files)]} ))
+						...prevState, [key]: [...prevState[key], ...files]} ))
 				}
 		}
 	}
