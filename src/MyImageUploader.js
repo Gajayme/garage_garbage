@@ -1,24 +1,23 @@
+import MyButton from "./MyButton.js";
 
+import './Styles/Hidden.css';
 
-const MyImageUploader = ({value, onChange}) => {
+const redirectToFileInput = () => {
+    document.getElementById('fileInput').click(); // Программно открыть диалог выбора файлов
+};
+
+const MyImageUploader = ({value, onChange, onDelete}) => {
 	return (
-	  <div>
-		<input
-		  type="file"
-		  accept="image/*"
-		  multiple
-		  onChange={onChange}
-		/>
-		<button disabled={value.length === 0}>
-		  Удалить все изображения
-		</button>
 		<div>
-		  <p>Загружено изображений: {value.length}</p>
-		  {/* Можно отобразить информацию о файлах, если необходимо */}
-		  {/* {images.map((file, index) => (
-			<p key={index}>{file.name}</p>
-		  ))} */}
-		</div>
+			<input className="hidden" id="fileInput" type="file" accept="image/*" multiple onChange={onChange} />
+
+			<MyButton labelText={'UploadImage'} type="button" onClick={redirectToFileInput}/>
+			<MyButton labelText={'Delete all images'} type="button" onClick={onDelete}/>
+
+			<div>
+			  <p>Загружено изображений: {value.length}</p>
+			</div>
+
 	  </div>
 	);
   };

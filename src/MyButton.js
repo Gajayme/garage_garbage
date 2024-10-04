@@ -1,5 +1,5 @@
 
-const MyButton = ({labelText = "label", type = "submit", onClick}) => {
+const MyButton = ({labelText, type, onClick}) => {
 	return (
 		<button onClick={onClick} type={type}>
 		{labelText}

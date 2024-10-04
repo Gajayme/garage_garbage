@@ -49,6 +49,13 @@ export const UploadPageForm = () => {
 		}
 	}
 
+	const handleOnDeleteAllImages = (key) => {
+		return () => {
+			setFormState((prevState) => ({
+					...prevState, [key]: []} ))
+			}
+	}
+
 
 	// TODO собрать все пропсы отдельно, а потом декомпозировать
 	const buyerOptions = [Constants.chooseBuyer, Constants.rail, Constants.ljuba, Constants.igor, Constants.gosha, Constants.oleg, Constants.unknown];
@@ -57,7 +64,7 @@ export const UploadPageForm = () => {
 	return (
 		<form onSubmit={handleOnSubmit} className="grid-container">
 
-			<MyImageUploader 														value={formState.images} 		onChange={handleOnChangeImages('images')} />
+			<MyImageUploader 					onDelete={handleOnDeleteAllImages('images')}	value={formState.images} 		onChange={handleOnChangeImages('images')} />
 
 			<MyTextArea className="grid-item"	label="Item name"	id="textArea_1"	value={formState.item_name}		onChange={handleOnChange('item_name')} rows='2' cols='30' />
 
@@ -71,7 +78,7 @@ export const UploadPageForm = () => {
 			<MyDropdown className="grid-item"	label="Location"	id="dropdown_2"	options={locationOptions}		onChange={handleOnChange('location')} />
 
 
-			<MyButton labelText={'Add to database'} onClick={handleOnSubmit}/>
+			<MyButton labelText={'Add to database'} type="submit" onClick={handleOnSubmit}/>
 		</form>
 	)
 }
