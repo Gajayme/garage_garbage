@@ -2,11 +2,11 @@ import './Styles/LabeledElement.css'
 
 
 const MyInput = (props) => {
-	const {label, type, id,  ...rest} = props
+	const {labelText, type, id,  ...rest} = props
 
 	return (
 		<div className="labeled_element">
-			<label htmlFor={id}> {label} </label>
+			<label htmlFor={id}> {labelText} </label>
 
 			<input
 				{...rest}

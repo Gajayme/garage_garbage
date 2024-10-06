@@ -4,6 +4,7 @@ import MyInput from "./MyInput.js"
 import MyTextArea from "./MyTextArea.js"
 import MyDropdown from "./MyDropDown.js"
 import MyImageUploader from "./MyImageUploader.js"
+import MyImageViewer from "./MyImageViewer.js"
 import * as Constants from './Constants.js';
 
 import './Styles/UploadForm.css';
@@ -42,9 +43,11 @@ export const UploadPageForm = () => {
 	const handleOnChangeImages = (key) => {
 		return (event) => {
 			if (event && event.target) {
-				const files = Array.from(event.target.files);
+				const images = Array.from(event.target.files);
+				const newImages = images.map(image => URL.createObjectURL(image));
+				console.log(newImages)
 				setFormState((prevState) => ({
-						...prevState, [key]: [...prevState[key], ...files]} ))
+						...prevState, [key]: [...prevState[key], ...newImages]} ))
 				}
 		}
 	}
@@ -64,21 +67,24 @@ export const UploadPageForm = () => {
 	return (
 		<form onSubmit={handleOnSubmit} className="grid-container">
 
-			<MyImageUploader 					onDelete={handleOnDeleteAllImages('images')}	value={formState.images} 		onChange={handleOnChangeImages('images')} />
+			<MyImageViewer 		images={formState.images}/>
+			<MyImageUploader	value={formState.images} 		onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages('images')}/>
 
-			<MyTextArea className="grid-item"	label="Item name"	id="textArea_1"	value={formState.item_name}		onChange={handleOnChange('item_name')} rows='2' cols='30' />
 
-			<MyInput 	className="grid-item"	label="Buyers part"	id="input_1"	value={formState.buyers_part}	onChange={handleOnChange('buyers_part')}/>
-			<MyInput 	className="grid-item"	label="Bought for"	id="input_2"	value={formState.bought_for}	onChange={handleOnChange('bought_for')} />
-			<MyInput 	className="grid-item"	label="Price" 		id="input_3"	value={formState.price}			onChange={handleOnChange('price')} />
-			<MyInput 	className="grid-item"	label="Sold For"	id="input_4"	value={formState.sold_for}		onChange={handleOnChange('sold_for')} />
-			<MyInput 	className="grid-item"	label="Size"		id="input_5"	value={formState.size}			onChange={handleOnChange('size')} />
+			<MyTextArea			value={formState.item_name}		onChange={handleOnChange('item_name')} 		className="grid-item"	labelText="Item name"	id="item_name_textArea_1"	 rows='2' cols='30'/>
 
-			<MyDropdown className="grid-item"	label="Buyer"		id="dropdown_1"	options={buyerOptions}			onChange={handleOnChange('buyer')} />
-			<MyDropdown className="grid-item"	label="Location"	id="dropdown_2"	options={locationOptions}		onChange={handleOnChange('location')} />
+			<MyInput 			value={formState.buyers_part}	onChange={handleOnChange('buyers_part')}	className="grid-item"	labelText="Buyers part"	id="buyer_part_input"/>
+			<MyInput 			value={formState.bought_for}	onChange={handleOnChange('bought_for')}		className="grid-item"	labelText="Bought for"	id="bought_for_input"/>
+			<MyInput 			value={formState.price}			onChange={handleOnChange('price')}			className="grid-item"	labelText="Price" 		id="price_input"/>
+			<MyInput 			value={formState.sold_for}		onChange={handleOnChange('sold_for')}		className="grid-item"	labelText="Sold For"	id="sold_for_input"/>
+			<MyInput 			value={formState.size}			onChange={handleOnChange('size')}			className="grid-item"	labelText="Size"		id="size_input"/>
+
+			<MyDropdown 		options={buyerOptions}			onChange={handleOnChange('buyer')}			className="grid-item"	labelText="Buyer"		id="buyer_dropdown"/>
+			<MyDropdown			options={locationOptions}		onChange={handleOnChange('location')}		className="grid-item"	labelText="Location"	id="location_dropdown"/>
 
 
 			<MyButton labelText={'Add to database'} type="submit" onClick={handleOnSubmit}/>
+
 		</form>
 	)
 }
