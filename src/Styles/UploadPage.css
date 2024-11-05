@@ -1,6 +1,10 @@
 
+
+/*	Разделение всех полей ввода и превью базы
+	данных на странице загрузки новой вещи, */
+
 .upload_page_grid {
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 2fr 1fr;
     gap: 10px;
 }

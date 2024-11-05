@@ -1,11 +1,14 @@
-/* src/GridComponent.css */
+
+/* форма загрузки со всеми полями ввода */
 .grid-container {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 50% 50% ;
     gap: 10px;
+
 }
 
+/* конкретное поле ввода */
 .grid-item {
-    padding: 20px;
+    padding: 30px;
     text-align: center;
 }

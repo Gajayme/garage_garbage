@@ -1,15 +1,17 @@
 
+
+/* Контейнер с загруженными картинками  */
 .image-container {
     display: grid;
-	max-width: 100%;
+	max-width: auto;
 	max-height: 300px;
 	overflow-y: auto;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
 
+/* Конкретная картинка */
 .image-item {
-	width: 100%;
-	max-width: 100%;
-	border: 1px solid #000000;
+	max-width: 200px;
+	max-height: 200px;
 }
