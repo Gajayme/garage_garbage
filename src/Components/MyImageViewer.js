@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './Styles/ImageViewer.css'
+import '../Styles/ImageViewer.css'
 
 const MyImageViewer = ({ images }) => {
     return (

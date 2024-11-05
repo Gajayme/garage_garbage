@@ -1,4 +1,4 @@
-import "./Styles/LabeledElement.css";
+import "../Styles/LabeledElement.css";
 
 const MyDropdown = ({options, id, labelText, onChange}) => {
   return (

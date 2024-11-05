@@ -1,4 +1,4 @@
-import './Styles/LabeledElement.css'
+import '../Styles/LabeledElement.css'
 
 
 const MyInput = (props) => {

@@ -1,6 +1,6 @@
 import MyButton from "./MyButton.js";
 
-import './Styles/Hidden.css';
+import '../Styles/Hidden.css';
 
 const redirectToFileInput = () => {
     document.getElementById('fileInput').click(); // Программно открыть диалог выбора файлов

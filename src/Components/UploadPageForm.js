@@ -8,7 +8,7 @@ import MyImageViewer from "./MyImageViewer.js"
 import validateUploadForm from "./ValidateUploadForm.js"
 import * as Constants from './Constants.js';
 
-import './Styles/UploadForm.css';
+import '../Styles/UploadForm.css';
 
 
 

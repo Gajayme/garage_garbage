@@ -1,5 +1,5 @@
-import "./Styles/FixedTextArea.css";
-import "./Styles/LabeledElement.css";
+import "../Styles/FixedTextArea.css";
+import "../Styles/LabeledElement.css";
 
 const MyTextArea = ({type = "text", name = "name", labelText = "name", id, ...rest}) => {
 
