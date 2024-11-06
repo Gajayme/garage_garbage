@@ -1,9 +1,9 @@
 .labeled_element {
     display: grid;
-    grid-template-rows: auto 3fr;
-	grid-auto-rows: 50px;
-    gap: 10px;
-    margin-bottom: 15px;
+    grid-template-rows: auto auto;
+    gap: 10px; /*расстояние между элементами грида */
+     margin-bottom: 20px; /* отступ от дна элемента */
+	align-self: start; /* центрируем по верхнему краю грида */
 }
 
 .labeled_element label {
