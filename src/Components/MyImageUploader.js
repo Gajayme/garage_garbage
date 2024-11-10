@@ -1,4 +1,4 @@
-import MyButton from "./common/MyButton.js";
+import {MyButton} from "./common/MyButton.js";
 
 import '../Styles/Hidden.css';
 
@@ -15,8 +15,8 @@ const MyImageUploader = ({value, onChange, onDelete}) => {
 			  <p>Загружено изображений: {value.length}</p>
 			</div>
 
-			<MyButton labelText={'UploadImage'} type="button" onClick={redirectToFileInput}/>
-			<MyButton labelText={'Delete all images'} type="button" onClick={onDelete}/>
+			<MyButton labelText={'UploadImage'}			onClick={redirectToFileInput}/>
+			<MyButton labelText={'Delete all images'}	onClick={onDelete}/>
 
 
 	  </div>

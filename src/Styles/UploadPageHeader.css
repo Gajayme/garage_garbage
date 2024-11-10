@@ -1,0 +1,10 @@
+
+.upload_page_header {
+    display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+
+	padding: 8px;
+    border: 1px solid #000000;
+	background-color: rgb(6, 18, 250);
+}

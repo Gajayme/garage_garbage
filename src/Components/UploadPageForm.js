@@ -1,5 +1,5 @@
 import { useState } from "react"
-import MyButton from "./common/MyButton.js"
+import { MyButton } from "./common/MyButton.js"
 import MyInput from "./MyInput.js"
 import MyTextArea from "./MyTextArea.js"
 import MyDropdown from "./MyDropDown.js"
