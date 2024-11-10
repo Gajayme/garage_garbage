@@ -5,7 +5,6 @@ import MyTextArea from "./MyTextArea.js"
 import MyDropdown from "./MyDropDown.js"
 import MyImageUploader from "./MyImageUploader.js"
 import MyImageViewer from "./MyImageViewer.js"
-import validateUploadForm from "./ValidateUploadForm.js"
 import * as Constants from './Constants.js';
 
 import '../Styles/UploadForm.css';
@@ -31,10 +30,6 @@ export const UploadPageForm = () => {
 
 	// обработать нажатие на кнопку подтверждения
 	const handleOnSubmit = (event) => {
-		//Validation
-		let err_msg = ''
-		validateUploadForm(formState, err_msg)
-
 		event.preventDefault()
 		console.log(formState)
 
