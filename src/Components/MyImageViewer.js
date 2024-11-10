@@ -10,7 +10,7 @@ const MyImageViewer = ({ images }) => {
                 <p>Нет загруженных изображений.</p>
             ) : (
                 images.map((image, index) => (
-                	<img className="image-item" src={image} alt={image.alt || `Image ${index}`} />
+                	<img  key={index} className="image-item" src={image} alt={image.alt || `Image ${index}`} />
                 ))
             )}
         </div>
