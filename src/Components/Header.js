@@ -1,23 +1,37 @@
 
 // Компонент для навигации
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { MyButton } from './common/MyButton';
+import { ButtonActivated } from './common/ButtonActivated.js';
 
 import '../Styles/UploadPageHeader.css'
 
 export const Header = () => {
 	const navigate = useNavigate(); // Хук для навигации
 
+	const uploadTitle = "Upload"
+	const postTitle = "Post"
+
 	// Функции для навигации
-	const goToUpload = () => navigate('/');
-	const goToPost = () => navigate('/Post');
+	const goToUpload = () => {
+		navigate('/');
+		setActiveButton(uploadTitle);
+	}
+
+	const goToPost = () => {
+		navigate('/Post');
+		setActiveButton(postTitle);
+	}
+
+	const [activeButton, setActiveButton] = useState(uploadTitle)
 
 	return (
 		<nav className='upload_page_header'>
-			<MyButton labelText = "Upload"	onClick={goToUpload}/>
-			<MyButton labelText = "Post"	onClick={goToPost}/>
-        </nav>
+
+			<ButtonActivated	labelText = {uploadTitle}	onClick={goToUpload}	isActive={activeButton===uploadTitle}/>
+			<ButtonActivated	labelText = {postTitle}		onClick={goToPost}		isActive={activeButton==="Post"}/>
+
+		</nav>
 	);
 };
