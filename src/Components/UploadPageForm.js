@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { MyButton } from "./common/MyButton.js"
-import MyInput from "./MyInput.js"
-import MyTextArea from "./MyTextArea.js"
-import MyDropdown from "./MyDropDown.js"
+import {LabeledInput} from "./LabeledInput.js"
+import {LabeledTextArea} from "./LabeledTextArea.js"
+import {LabeledDropdown} from "./LabeledDropDown.js"
 import MyImageUploader from "./MyImageUploader.js"
 import MyImageViewer from "./MyImageViewer.js"
 import * as Constants from './Constants.js';
@@ -91,18 +91,18 @@ export const UploadPageForm = () => {
 		<form onSubmit={handleOnSubmit} className="grid-container">
 
 			<MyImageViewer 		images={formState.images}/>
-			<MyImageUploader	value={formState.images} 		onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages('images')}/>
+			<MyImageUploader	value={formState.images} 			onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages('images')}/>
 
-			<MyTextArea			value={formState.item_name}		onChange={handleOnChange('item_name')} 		className="grid-item"	labelText={Constants.item_name}		id="item_name_textArea"	rows='2' cols='30'/>
+			<LabeledTextArea	value={formState.item_name}			onChange={handleOnChange('item_name')}		className="grid-item"	labelText={Constants.item_name}		id="item_name_textArea"	rows='2' cols='30'/>
 
-			<MyInput 			value={formState.buyers_part}	onChange={handleOnChange('buyers_part')}	className="grid-item"	labelText={Constants.buyer_part}	id="buyer_part_input"		maxLength={10}/>
-			<MyInput 			value={formState.bought_for}	onChange={handleOnChange('bought_for')}		className="grid-item"	labelText={Constants.bought_for}	id="bought_for_input"		maxLength={10}/>
-			<MyInput 			value={formState.price}			onChange={handleOnChange('price')}			className="grid-item"	labelText={Constants.price} 		id="price_input"			maxLength={10}/>
-			<MyInput 			value={formState.sold_for}		onChange={handleOnChange('sold_for')}		className="grid-item"	labelText={Constants.sold_for}		id="sold_for_input"			maxLength={10}/>
-			<MyInput 			value={formState.size}			onChange={handleOnChange('size')}			className="grid-item"	labelText={Constants.item_size}		id="size_input"				maxLength={10}/>
+			<LabeledInput 		value={formState.buyers_part}		onChange={handleOnChange('buyers_part')}	className="grid-item"	labelText={Constants.buyer_part}	id="buyer_part_input"		maxLength={10}/>
+			<LabeledInput 		value={formState.bought_for}		onChange={handleOnChange('bought_for')}		className="grid-item"	labelText={Constants.bought_for}	id="bought_for_input"		maxLength={10}/>
+			<LabeledInput 		value={formState.price}				onChange={handleOnChange('price')}			className="grid-item"	labelText={Constants.price} 		id="price_input"			maxLength={10}/>
+			<LabeledInput 		value={formState.sold_for}			onChange={handleOnChange('sold_for')}		className="grid-item"	labelText={Constants.sold_for}		id="sold_for_input"			maxLength={10}/>
+			<LabeledInput 		value={formState.size}				onChange={handleOnChange('size')}			className="grid-item"	labelText={Constants.item_size}		id="size_input"				maxLength={10}/>
 
-			<MyDropdown 		options={buyerOptions}			onChange={handleOnChange('buyer')}			className="grid-item"	labelText={Constants.buyer}			id="buyer_dropdown"/>
-			<MyDropdown			options={locationOptions}		onChange={handleOnChange('location')}		className="grid-item"	labelText={Constants.location}		id="location_dropdown"/>
+			<LabeledDropdown 		options={buyerOptions}			onChange={handleOnChange('buyer')}			className="grid-item"	labelText={Constants.buyer}			id="buyer_dropdown"/>
+			<LabeledDropdown		options={locationOptions}		onChange={handleOnChange('location')}		className="grid-item"	labelText={Constants.location}		id="location_dropdown"/>
 
 
 			<MyButton labelText={'Add to database'} type="submit" onClick={handleOnSubmit}/>

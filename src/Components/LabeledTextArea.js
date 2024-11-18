@@ -1,7 +1,7 @@
 import "../Styles/FixedTextArea.css";
 import "../Styles/LabeledElement.css";
 
-const MyTextArea = ({type = "text", name, labelText, id, ...rest}) => {
+export const LabeledTextArea = ({type = "text", name, labelText, id, ...rest}) => {
 
 	return (
 		<div className="labeled_element">
@@ -10,5 +10,3 @@ const MyTextArea = ({type = "text", name, labelText, id, ...rest}) => {
 		</div>
 	)
 }
-
-export default MyTextArea;

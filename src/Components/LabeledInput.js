@@ -1,7 +1,7 @@
 import '../Styles/LabeledElement.css'
 
 
-const MyInput = (props) => {
+export const LabeledInput = (props) => {
 	const {labelText, type, id,  ...rest} = props
 
 	return (
@@ -16,5 +16,3 @@ const MyInput = (props) => {
 		</div>
 	)
 }
-
-export default MyInput;

@@ -1,6 +1,6 @@
 import "../Styles/LabeledElement.css";
 
-const MyDropdown = ({options, id, labelText, onChange}) => {
+export const LabeledDropdown = ({options, id, labelText, onChange}) => {
   return (
     <div className="labeled_element">
 		<label> {labelText} </label>
@@ -12,5 +12,3 @@ const MyDropdown = ({options, id, labelText, onChange}) => {
     </div>
   );
 };
-
-export default MyDropdown;
