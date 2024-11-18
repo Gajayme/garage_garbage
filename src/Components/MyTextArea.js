@@ -1,7 +1,7 @@
 import "../Styles/FixedTextArea.css";
 import "../Styles/LabeledElement.css";
 
-const MyTextArea = ({type = "text", name = "name", labelText = "name", id, ...rest}) => {
+const MyTextArea = ({type = "text", name, labelText, id, ...rest}) => {
 
 	return (
 		<div className="labeled_element">

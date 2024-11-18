@@ -93,7 +93,7 @@ export const UploadPageForm = () => {
 			<MyImageViewer 		images={formState.images}/>
 			<MyImageUploader	value={formState.images} 		onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages('images')}/>
 
-			<MyTextArea			value={formState.item_name}		onChange={handleOnChange('item_name')} 		className="grid-item"	labelText={Constants.item_name}		id="item_name_textArea_1"	rows='2' cols='30'/>
+			<MyTextArea			value={formState.item_name}		onChange={handleOnChange('item_name')} 		className="grid-item"	labelText={Constants.item_name}		id="item_name_textArea"	rows='2' cols='30'/>
 
 			<MyInput 			value={formState.buyers_part}	onChange={handleOnChange('buyers_part')}	className="grid-item"	labelText={Constants.buyer_part}	id="buyer_part_input"		maxLength={10}/>
 			<MyInput 			value={formState.bought_for}	onChange={handleOnChange('bought_for')}		className="grid-item"	labelText={Constants.bought_for}	id="bought_for_input"		maxLength={10}/>

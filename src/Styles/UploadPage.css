@@ -2,9 +2,16 @@
 
 /*	Разделение всех полей ввода и превью базы
 	данных на странице загрузки новой вещи, */
+.upload_page {
+	display: flex;
+	width: 100%;
+	gap: 20px;
+  }
 
-.upload_page_grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 10px;
-}
+  .upload_page > *:first-child {
+	flex: 2; /* Первый элемент занимает в 2 раза больше места */
+  }
+
+  .upload_page > *:last-child {
+	flex: 1; /* Второй элемент занимает в 2 раза меньше места */
+  }
