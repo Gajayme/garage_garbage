@@ -1,5 +1,5 @@
 
-import '../../Styles/ButtonActivated.css'
+import '../Styles/ButtonActivated.css'
 
 
 export const ButtonActivated = ({labelText, type = "button", isActive, ...props}) => {

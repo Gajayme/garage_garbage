@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { MyButton } from "./common/MyButton.js"
+import { DefaultButton } from "./Button.js"
 import {LabeledInput} from "./LabeledInput.js"
 import {LabeledTextArea} from "./LabeledTextArea.js"
 import {LabeledDropdown} from "./LabeledDropDown.js"
@@ -105,7 +105,7 @@ export const UploadPageForm = () => {
 			<LabeledDropdown		options={locationOptions}		onChange={handleOnChange('location')}		className="grid-item"	labelText={Constants.location}		id="location_dropdown"/>
 
 
-			<MyButton labelText={'Add to database'} type="submit" onClick={handleOnSubmit}/>
+			<DefaultButton labelText={'Add to database'} type="submit" onClick={handleOnSubmit}/>
 
 		</form>
 	)

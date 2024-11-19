@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ButtonActivated } from './common/ButtonActivated.js';
+import { ButtonActivated } from './ButtonActivated.js';
 
 import '../Styles/UploadPageHeader.css'
 

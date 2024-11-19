@@ -1,5 +1,6 @@
 
-export const MyButton = ({labelText, type = "button", ...props}) => {
+
+export const DefaultButton = ({labelText, type = "button", ...props}) => {
 	return (
 		<button {...props} type={type}>
 			{labelText}
