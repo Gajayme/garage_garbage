@@ -1,4 +1,5 @@
 import "../Styles/LabeledElement.css";
+import "../Styles/CenteredOption.css";
 
 export const LabeledDropdown = ({options, id, labelText, onChange}) => {
   return (
@@ -6,7 +7,7 @@ export const LabeledDropdown = ({options, id, labelText, onChange}) => {
 		<label> {labelText} </label>
 		<select id={id} onChange={onChange}>
 			{Object.entries(options).map(([key, value], index) => (
-				<option key={index} value={value} label={key}/>
+				<option className="centered_option"  key={index} value={value} label={key}/>
 			))}
 		</select>
     </div>
