@@ -1,0 +1,13 @@
+
+.image-manager {
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+
+	border: 2px solid black;
+	border-radius: 5px;
+	padding: 10px;
+
+	gap: 10px; /* Расстояние между элементами флексбокса */
+}

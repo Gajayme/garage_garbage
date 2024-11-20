@@ -4,7 +4,6 @@
 	flex-direction: column;
 	gap: 10px;
 	margin-bottom: 20px; /* отступ от дна элемента */
-	align-self: start; /* центрируем по верхнему краю грида */
 }
 
 

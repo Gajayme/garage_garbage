@@ -1,0 +1,24 @@
+
+
+/* Контейнер с загруженными картинками  */
+.image-container {
+    display: grid;
+	max-width: auto;
+	max-height: 300px;
+	overflow-y: auto;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+/* Стили для текста при отсутствии изображений */
+.image-container p {
+    grid-column: 1 / -1; /* Растягивает текст на всю ширину контейнера */
+    margin: 0;          /* Убирает отступы текста */
+    text-align: center;   /* Текст по левому краю */
+}
+
+/* Конкретная картинка */
+.image-item {
+	max-width: 200px;
+	max-height: 200px;
+}

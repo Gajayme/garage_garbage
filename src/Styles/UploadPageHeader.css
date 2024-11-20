@@ -4,7 +4,8 @@
 	flex-direction: row;
 	justify-content: space-evenly;
 
-	padding: 8px;
+	padding: 10px;
+	margin-bottom: 20px; /* отступ от дна элемента */
     border: 1px solid #000000;
 	background-color: rgb(6, 18, 250);
 }
