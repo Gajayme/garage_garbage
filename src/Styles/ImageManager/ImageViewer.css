@@ -4,6 +4,8 @@
 .image-container {
     display: grid;
 	max-width: auto;
+	justify-items: center; /* Центрирует содержимое ячеек по горизонтали */
+	align-items: center;   /* Центрирует содержимое ячеек по вертикали */
 	max-height: 300px;
 	overflow-y: auto;
     grid-template-columns: repeat(2, 1fr);
