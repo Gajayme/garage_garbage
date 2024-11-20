@@ -3,8 +3,7 @@ import { DefaultButton } from "./Button.js"
 import {LabeledInput} from "./LabeledInput.js"
 import {LabeledTextArea} from "./LabeledTextArea.js"
 import {LabeledDropdown} from "./LabeledDropDown.js"
-import MyImageUploader from "./MyImageUploader.js"
-import MyImageViewer from "./MyImageViewer.js"
+import {ImageManager} from "./ImageManager/ImageManager.js"
 import * as Constants from './Constants.js';
 
 import '../Styles/UploadForm.css';
@@ -90,8 +89,7 @@ export const UploadPageForm = () => {
 	return (
 		<form onSubmit={handleOnSubmit} className="grid-container">
 
-			<MyImageViewer 		images={formState.images}/>
-			<MyImageUploader	value={formState.images} 			onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages('images')}/>
+			<ImageManager		images={formState.images} 			onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages('images')}/>
 
 			<LabeledTextArea	value={formState.item_name}			onChange={handleOnChange('item_name')}		className="grid-item"	labelText={Constants.item_name}		id="item_name_textArea"	rows='2' cols='30'/>
 

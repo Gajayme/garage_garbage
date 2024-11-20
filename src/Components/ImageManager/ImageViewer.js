@@ -1,8 +1,8 @@
 import React from 'react';
 
-import '../Styles/ImageViewer.css'
+import '../../Styles/ImageViewer.css'
 
-const MyImageViewer = ({ images }) => {
+export const ImageViewer = ({ images }) => {
     return (
         <div className='image-container'>
 
@@ -16,5 +16,3 @@ const MyImageViewer = ({ images }) => {
         </div>
     );
 };
-
-export default MyImageViewer;
