@@ -3,21 +3,4 @@
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
-	margin-bottom: 20px; /* отступ от дна элемента */
 }
-
-
-/* Удалить потом */
-/*
-
-.labeled_element input,
-.labeled_element textarea,
-.labeled_element select {
-    padding: 8px;
-    border: 1px solid #000000;
-	background-color: lightblue;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-*/

@@ -1,13 +1,18 @@
 
 /* форма загрузки со всеми полями ввода */
-.grid-container {
+.upload-form {
     display: grid;
     grid-template-columns: 1fr 1fr ;
     gap: 10px;
 }
 
 /* конкретное поле ввода */
-.grid-item {
-    padding: 30px;
-    text-align: center;
+.upload-form-item input,
+.upload-form-item textarea,
+.upload-form-item select {
+    background-color: #3dbef1; /* Единый фоновый цвет */
+    border: 1px solid #000000; /* Для визуального выделения */
+    border-radius: 5px; /* Закругленные углы (опционально) */
+    height: 40px; /* Устанавливаем одинаковую высоту */
 }
+
