@@ -12,6 +12,7 @@ export const Header = () => {
 
 	const uploadTitle = "Upload"
 	const postTitle = "Post"
+	const databaseTitle = "Database"
 
 	// Функции для навигации
 	const goToUpload = () => {
@@ -24,6 +25,12 @@ export const Header = () => {
 		setActiveButton(postTitle);
 	}
 
+	const goToDatabase = () => {
+		navigate('/Database');
+		setActiveButton(databaseTitle);
+	}
+
+
 	const [activeButton, setActiveButton] = useState(uploadTitle)
 
 	return (
@@ -31,6 +38,7 @@ export const Header = () => {
 
 			<ButtonActivated	labelText = {uploadTitle}	onClick={goToUpload}	isActive={activeButton===uploadTitle}/>
 			<ButtonActivated	labelText = {postTitle}		onClick={goToPost}		isActive={activeButton==="Post"}/>
+			<ButtonActivated	labelText = {databaseTitle}	onClick={goToDatabase}			isActive={activeButton==="Database"}/>
 
 		</nav>
 	);
