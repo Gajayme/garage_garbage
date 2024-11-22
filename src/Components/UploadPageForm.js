@@ -6,6 +6,7 @@ import {ImageManager} from "./ImageManager/ImageManager.js"
 import * as Constants from './Constants.js';
 
 import '../Styles/UploadForm.css';
+import '../Styles/UploadPageMarginBottom.css';
 
 
 
@@ -88,9 +89,9 @@ export const UploadPageForm = () => {
 	return (
 		<form onSubmit={handleOnSubmit}>
 
-			<ImageManager		images={formState.images} 			onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages('images')}/>
+			<ImageManager		images={formState.images} 				onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages('images')} className="upload_page_margin-bottom" />
 
-			<div className="upload-form">
+			<div className="upload-form upload_page_margin-bottom">
 
 				<LabeledInput		value={formState.item_name}			onChange={handleOnChange('item_name')}		className="upload-form-item"	labelText={Constants.item_name}		id="item_name_input"		maxLength={50}/>
 				<LabeledInput 		value={formState.buyers_part}		onChange={handleOnChange('buyers_part')}	className="upload-form-item"	labelText={Constants.buyer_part}	id="buyer_part_input"		maxLength={10}/>

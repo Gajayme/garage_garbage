@@ -2,10 +2,10 @@
 // Компонент для навигации
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { ButtonActivated } from './ButtonActivated.js';
 
 import '../Styles/UploadPageHeader.css'
+import '../Styles/UploadPageMarginBottom.css'
 
 export const Header = () => {
 	const navigate = useNavigate(); // Хук для навигации
@@ -34,7 +34,7 @@ export const Header = () => {
 	const [activeButton, setActiveButton] = useState(uploadTitle)
 
 	return (
-		<nav className='upload_page_header'>
+		<nav className='upload_page_header upload_page_margin-bottom'>
 
 			<ButtonActivated	labelText = {uploadTitle}	onClick={goToUpload}	isActive={activeButton===uploadTitle}/>
 			<ButtonActivated	labelText = {postTitle}		onClick={goToPost}		isActive={activeButton==="Post"}/>
