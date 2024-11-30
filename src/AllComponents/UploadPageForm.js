@@ -7,8 +7,11 @@ import * as Constants from './Constants.js'
 
 
 //Validations
-import {NumbersOnly} from './Validations/InputValidations.js'
+import {NumbersOnly} from './Validations/Validations.js'
+import {NonEmpty} from './Validations/Validations.js'
+import {UploadFormValidation} from './Validations/Validations.js'
 
+// Styles
 import '../Styles/UploadForm.css'
 import '../Styles/UploadPageMarginBottom.css'
 
@@ -16,8 +19,7 @@ import '../Styles/UploadPageMarginBottom.css'
 
 export const UploadPageForm = () => {
 
-
-	// все стейты
+	// стейты со значениями полей
 	const [formState, setFormState] = useState({
 		item_name: '',
 		bought_for: '',
@@ -31,13 +33,63 @@ export const UploadPageForm = () => {
 		images: [],
 	})
 
+	// стейты с ошибками для всех полей
+	const [errorState, setErrorState] = useState({
+		item_name: [],
+		bought_for: [],
+		price: [],
+		buyers_part: [],
+		sold_for: [],
+		size: [],
+		buyer: [],
+		location: [],
+		images: [],
+	})
+
+	// маппер стейтов и валидаций для них
+	const validationMapper = {
+		item_name: [NonEmpty, ],
+		bought_for: [NonEmpty, ],
+		price: [NonEmpty, ],
+		buyers_part: [NonEmpty, ],
+		sold_for: [NonEmpty, ],
+		size: [],
+		buyer: [NonEmpty, ],
+		location: [NonEmpty, ],
+		images: [NonEmpty, ],
+	}
+
 	// обработать нажатие на кнопку подтверждения
 	const handleOnSubmit = (event) => {
 		event.preventDefault()
+		const errorsLocal = UploadFormValidation(formState, errorState, validationMapper)
+		handleOnErrorChange(errorsLocal)
+
+		console.log("ErrorState:")
+		console.log(errorsLocal)
+		console.log("FormState:")
 		console.log(formState)
-
-
 	}
+
+
+	const handleOnErrorChange = (newErrorState) => {
+		setErrorState(newErrorState); // Обновляем ошибки разом
+	};
+	// TODO старая версия
+	// // обработать изменение ошибок
+	// const handleOnErrorChange = (key) => {
+	// 	return (errTxt) => {
+	// 		console.log("handleOnErrorChange", errTxt, key)
+	// 		if (errTxt) {
+	// 			setErrorState((prevState) => ({
+	// 				...prevState,
+	// 				[key]: [...(prevState[key] || []), errTxt], // Добавляем ошибку к существующему массиву
+	// 			}));
+	// 		}
+	// 		console.log("errorState:", errorState)
+	// 	};
+	// };
+
 
 	// обработать изменение всех полей (кроме загрузки изображений)
 	const handleOnChange = (key) => {
@@ -98,9 +150,9 @@ export const UploadPageForm = () => {
 			<div className="upload-form upload_page_margin-bottom">
 
 				<LabeledInput		value={formState.item_name}			onChange={handleOnChange('item_name')}		className="upload-form-item"	labelText={Constants.item_name}		id="item_name_input"	maxLength={50}/>
-				<LabeledInput 		value={formState.buyers_part}		onChange={handleOnChange('buyers_part')}	className="upload-form-item"	labelText={Constants.buyer_part}	id="buyer_part_input"	maxLength={10}	Validation={NumbersOnly}/>
+				<LabeledInput 		value={formState.buyers_part}		onChange={handleOnChange('buyers_part')}	className="upload-form-item"	labelText={Constants.buyer_part}	id="buyer_part_input"	maxLength={10}		Validation={NumbersOnly}/>
 				<LabeledInput 		value={formState.bought_for}		onChange={handleOnChange('bought_for')}		className="upload-form-item"	labelText={Constants.bought_for}	id="bought_for_input"	maxLength={10}	Validation={NumbersOnly}/>
-				<LabeledInput 		value={formState.price}				onChange={handleOnChange('price')}			className="upload-form-item"	labelText={Constants.price} 		id="price_input"		maxLength={10}	Validation={NumbersOnly}/>
+				<LabeledInput 		value={formState.price}				onChange={handleOnChange('price')}			className="upload-form-item"	labelText={Constants.price} 		id="price_input"			maxLength={10}	Validation={NumbersOnly}/>
 				<LabeledInput 		value={formState.sold_for}			onChange={handleOnChange('sold_for')}		className="upload-form-item"	labelText={Constants.sold_for}		id="sold_for_input"		maxLength={10}/>
 				<LabeledInput 		value={formState.size}				onChange={handleOnChange('size')}			className="upload-form-item"	labelText={Constants.item_size}		id="size_input"			maxLength={10}/>
 
