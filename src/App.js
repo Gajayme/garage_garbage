@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import {Header} from './components/Header';
-import { UploadPage } from './components/UploadPage.js';
-import { PostPage } from './components/PostPage.js';
-import { DatabasePage } from './components/DatabasePage.js';
+import {Header} from './Components/Header.js';
+import { UploadPage } from './Components/UploadPage.js';
+import { PostPage } from './Components/PostPage.js';
+import { DatabasePage } from './Components/DatabasePage.js';
 
 const App = () => {
 	return (
