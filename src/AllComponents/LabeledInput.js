@@ -1,4 +1,4 @@
-import '../Styles/LabeledElement.css'
+import '../Styles/Labeled.css'
 import "../Styles/CenteredText.css";
 import { none } from './Constants';
 
@@ -14,7 +14,7 @@ export const LabeledInput = ({value, onChange, id, labelText="", className="", m
 	}
 
 	return (
-        <div className={`labeled_element ${className}`}>
+        <div className={`labeled ${className}`}>
 			<label htmlFor={id}> {labelText} </label>
 
 			<input

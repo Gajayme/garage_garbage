@@ -13,6 +13,10 @@ export const NonEmpty = (value) => {
 	return value ? "" : "Field is required";
 }
 
+export const NonEmptyImages = (value) => {
+	return (value.length > 0) ? "" : "It should be at least one image";
+}
+
 export const UploadFormValidation = (formValues, errorValues, validationMapper) => {
 	const newErrorState = { ...errorValues }; // Копируем текущее состояние ошибок
 

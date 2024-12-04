@@ -7,7 +7,7 @@ export const ImageViewer = ({ images }) => {
         <div className='image-container'>
 
 			{images.length === 0 ? (
-                <p>Нет загруженных изображений.</p>
+                <p>No uploaded images.</p>
             ) : (
                 images.map((image, index) => (
                 	<img  key={index} className="image-item" src={image} alt={image.alt || `Image ${index}`} />

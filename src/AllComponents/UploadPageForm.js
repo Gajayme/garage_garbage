@@ -8,7 +8,7 @@ import * as Constants from './Constants.js'
 
 //Validations
 import {NumbersOnly} from './Validations/Validations.js'
-import {NonEmpty} from './Validations/Validations.js'
+import {NonEmpty, NonEmptyImages} from './Validations/Validations.js'
 import {UploadFormValidation} from './Validations/Validations.js'
 
 // Styles
@@ -56,7 +56,7 @@ export const UploadPageForm = () => {
 		size: [],
 		buyer: [NonEmpty, ],
 		location: [NonEmpty, ],
-		images: [NonEmpty, ],
+		images: [NonEmptyImages, ],
 	}
 
 	// обработать нажатие на кнопку подтверждения
@@ -145,13 +145,13 @@ export const UploadPageForm = () => {
 	return (
 		<form onSubmit={handleOnSubmit}>
 
-			<ImageManager		images={formState.images} 				onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages('images')} className="upload_page_margin-bottom" />
+			<ImageManager			images={formState.images}	errors={errorState.images}	onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages('images')} className="upload_page_margin-bottom" />
 
 			<div className="upload-form upload_page_margin-bottom">
 
 				<LabeledInput		value={formState.item_name}			onChange={handleOnChange('item_name')}		className="upload-form-item"	labelText={Constants.item_name}		id="item_name_input"	maxLength={50}/>
 				<LabeledInput 		value={formState.buyers_part}		onChange={handleOnChange('buyers_part')}	className="upload-form-item"	labelText={Constants.buyer_part}	id="buyer_part_input"	maxLength={10}		Validation={NumbersOnly}/>
-				<LabeledInput 		value={formState.bought_for}		onChange={handleOnChange('bought_for')}		className="upload-form-item"	labelText={Constants.bought_for}	id="bought_for_input"	maxLength={10}	Validation={NumbersOnly}/>
+				<LabeledInput 		value={formState.bought_for}		onChange={handleOnChange('bought_for')}	className="upload-form-item"	labelText={Constants.bought_for}	id="bought_for_input"	maxLength={10}	Validation={NumbersOnly}/>
 				<LabeledInput 		value={formState.price}				onChange={handleOnChange('price')}			className="upload-form-item"	labelText={Constants.price} 		id="price_input"			maxLength={10}	Validation={NumbersOnly}/>
 				<LabeledInput 		value={formState.sold_for}			onChange={handleOnChange('sold_for')}		className="upload-form-item"	labelText={Constants.sold_for}		id="sold_for_input"		maxLength={10}/>
 				<LabeledInput 		value={formState.size}				onChange={handleOnChange('size')}			className="upload-form-item"	labelText={Constants.item_size}		id="size_input"			maxLength={10}/>

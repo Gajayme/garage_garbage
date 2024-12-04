@@ -1,9 +1,9 @@
-import "../Styles/LabeledElement.css";
+import "../Styles/Labeled.css";
 import "../Styles/CenteredText.css";
 
 export const LabeledDropdown = ({options, id, labelText, onChange, className=""}) => {
   return (
-    <div className={`labeled_element ${className}`}>
+    <div className={`labeled ${className}`}>
 		<label htmlFor={id} > {labelText } </label>
 
 		<select id={id} onChange={onChange}>
