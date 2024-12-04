@@ -18,7 +18,8 @@ export const NonEmptyImages = (value) => {
 }
 
 export const UploadFormValidation = (formValues, errorValues, validationMapper) => {
-	const newErrorState = { ...errorValues }; // Копируем текущее состояние ошибок
+	// const newErrorState = { ...errorValues }; // Копируем текущее состояние ошибок
+	const newErrorState = { }; // Копируем текущее состояние ошибок
 
 	for (const [formKey, formVal] of Object.entries(formValues)) {
 		for (const validator of validationMapper[formKey]) {

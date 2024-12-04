@@ -1,17 +1,12 @@
 import '../Styles/Labeled.css'
 import "../Styles/CenteredText.css";
-import { none } from './Constants';
+import "../Styles/ErrorText.css";
+
+import React from "react";
 
 
-export const LabeledInput = ({value, onChange, id, labelText="", className="", maxLength=0, Validation=none}) => {
+export const LabeledInput = ({value, errors=null, onChange, id, labelText="", className="", maxLength=0}) => {
 
-	const onChangeWithValidation = (event) => {
-		if (Validation !== none) {
-			Validation(event, onChange)
-		} else {
-			onChange(event)
-		}
-	}
 
 	return (
         <div className={`labeled ${className}`}>
@@ -22,8 +17,9 @@ export const LabeledInput = ({value, onChange, id, labelText="", className="", m
 				className='centered-text'
 				id = {id}
 				maxLength={maxLength}
-				onChange={onChangeWithValidation}
+				onChange={onChange}
 			/>
+			{(errors && errors.length > 0) && <p className={"error-text"}>{errors[0]}</p>}
 		</div>
 	)
 }

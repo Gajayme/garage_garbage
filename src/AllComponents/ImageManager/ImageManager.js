@@ -17,7 +17,7 @@ export const ImageManager = ({images, errors, onChange, onDelete, className=""})
 		</div>
 
 		<div>
-			{(errors.length > 0) && <p className={"error-text"}>{errors[0]}</p>}
+			{( errors && errors.length > 0) && <p className={"error-text"}>{errors[0]}</p>}
 		</div>
 	</div>
 }
