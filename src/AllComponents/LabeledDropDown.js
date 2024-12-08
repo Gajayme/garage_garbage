@@ -13,7 +13,7 @@ export const LabeledDropdown = ({options, errors, id, labelText, onChange, class
 			))}
 		</select>
 
-        {(errors.length > 0) && <p className={"error-text"}>{errors[0]}</p>}
+        {(errors && errors.length > 0) && <p className={"error-text"}>{errors[0]}</p>}
 
     </div>
   );

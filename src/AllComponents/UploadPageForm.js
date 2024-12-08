@@ -65,11 +65,29 @@ export const UploadPageForm = () => {
 		const errorsLocal = UploadFormValidation(formState, errorState, validationMapper)
 		handleOnErrorChange(errorsLocal)
 
-		console.log("ErrorState:")
 		console.log(errorsLocal)
-		console.log("FormState:")
-		console.log(formState)
+		const hasNoErrors = Object.values(errorsLocal).every((errorArray) => errorArray.length === 0);
+		if (!hasNoErrors) {
+		}
+
+		fetch('https://run.mocky.io/v3/fefb29a4-0865-44b4-b6e4-22cafe57cbfa', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				title: 'React Fetch Example',
+				body: 'This is an example of POST request using fetch in React.',
+				userId: 1,
+			}),
+		})
+			.then((response) => response.json())
+			.then((data) => console.log(data))
+			.catch((error) => console.error('Ошибка:', error));
+
+
 	}
+
 
 
 	const handleOnErrorChange = (newErrorState) => {
