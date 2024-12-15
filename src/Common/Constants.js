@@ -19,4 +19,15 @@ export const sold_for = "Sold for"
 export const item_size = "Size"
 export const buyer = "Buyer"
 export const location = "Location"
+export const adding_date_time = "Date-Time of adding"
 
+export const upload_server_url = "http://tatarin.fun:5000/post/upload"
+
+export const http_methods = {
+    GET: 'GET',
+    POST: 'POST',
+    DELETE: 'DELETE',
+    PATCH: 'PATCH',
+    OPTIONS: 'OPTIONS',
+    HEAD: 'HEAD',
+};

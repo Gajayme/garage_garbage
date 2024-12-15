@@ -1,4 +1,4 @@
-import {DefaultButton} from "../Button.js";
+import {DefaultButton} from "../../Common/Button.js";
 
 import '../../Styles/Hidden.css';
 import '../../Styles/ImageManager/ImageUploader.css'
@@ -8,7 +8,7 @@ const redirectToFileInput = () => {
     document.getElementById('fileInput').click(); // Программно открыть диалог выбора файлов
 };
 
-export const ImageUploader = ({images, onChange, onDelete}) => {
+export const ImageUploader = ({onChange, onDelete}) => {
 	return (
 		<div className="image-uploader-buttons">
 			{/* Реальный инпут. Скрыт, так как для него нельзя настроить внешний вид. Поэтому сделано костылем */}

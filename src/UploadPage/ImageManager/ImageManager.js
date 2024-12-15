@@ -4,7 +4,7 @@ import {ImageUploader} from "./ImageUploader.js";
 import {ImageViewer} from "./ImageViewer.js";
 
 import '../../Styles/ImageManager/ImageManager.css'
-import '../../Styles/UploadPageMarginBottom.css'
+import '../../Styles/MarginBottom.css'
 import '../../Styles/Bordered.css'
 import '../../Styles/ErrorText.css'
 
@@ -13,7 +13,7 @@ export const ImageManager = ({images, errors, onChange, onDelete, className=""})
 	return <div className={className}>
 		<div className={`image-manager bordered`}>
 			<ImageViewer images={images}/>
-			<ImageUploader images={images} onChange={onChange} onDelete={onDelete}/>
+			<ImageUploader onChange={onChange} onDelete={onDelete}/>
 		</div>
 
 		<div>

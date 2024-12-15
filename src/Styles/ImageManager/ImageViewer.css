@@ -3,7 +3,7 @@
 /* Контейнер с загруженными картинками  */
 .image-container {
     display: flex;
-	max-width: auto;
+	width: auto;
 	align-items: center;   /* Центрирует содержимое ячеек по вертикали */
 	max-height: 300px;
 	overflow-x: auto;
