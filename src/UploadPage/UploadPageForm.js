@@ -110,11 +110,11 @@ export const UploadPageForm = () => {
 
 	// обработать изменение превью изображений
 	const handleOnChangeImages = (key) => {
+		console.log(key);
 		return (event) => {
 			if (event && event.target) {
 				const images = Array.from(event.target.files);
 				const newImages = images.map(image => URL.createObjectURL(image));
-				console.log(newImages)
 				setFormState((prevState) => ({
 						...prevState, [key]: [...prevState[key], ...newImages]} ))
 				}

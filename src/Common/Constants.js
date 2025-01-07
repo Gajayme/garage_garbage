@@ -24,6 +24,7 @@ export const location = "locationId"
 export const adding_date_time = "Date-Time of adding"
 
 export const upload_server_url = "http://tatarin.fun:5000/post/upload"
+export const get_items_url = "http://tatarin.fun:5000/post/all"
 
 export const http_methods = {
     GET: 'GET',

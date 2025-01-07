@@ -1,31 +1,47 @@
 
-import React, { useEffect } from 'react';
-
+import React, {useEffect, useState} from 'react';
 import {Item} from './Item';
+import * as Constants from "../Common/Constants";
 
 import "../Styles/DatabaseItems.css"
-
-//TODO удалить
-import TestImg from './carhartt.png'
-
 
 
 export const DatabaseViewPage = () => {
 
+    // стейт для сохранения полученных с сервера объектов
+    const [databaseState, setDatabaseState] = useState([])
+
+    const parseServerData = (data) => {
+        const newItems = data.map((item) => ({
+            image: null, // TODO: переделать на нормальное значение
+            itemName: item.itemName,
+            price: item.price,
+            adding_date_time: 0, // TODO: переделать на нормальное значение
+        }));
+        setDatabaseState((prevState) => [...prevState, ...newItems]);
+        console.log(newItems)
+    }
+
     useEffect(() => {
         console.log('Страница отрендерилась');
-    })
+
+        fetch(Constants.get_items_url, {
+            method: Constants.http_methods.GET,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => parseServerData(data.data))
+            .catch((error) => console.error('Ошибка:', error));
+
+    }, [])
 
     return (
         <div className={"database-items"}>
-            <Item img={null} name={"Carhartt jacket"} price={10000} adding_date_time={"1"} />
-            <Item img={TestImg} name={"Carhartt jacket"} price={10000} adding_date_time={"1"} />
-            <Item img={TestImg} name={"Carhartt"} price={10000} adding_date_time={"1"} />
-            <Item img={TestImg} name={"Carhartt jacket"} price={10000} adding_date_time={"1"} />
-            <Item img={TestImg} name={"Carhartt jacket"} price={10000} adding_date_time={"1"} />
-            <Item img={TestImg} name={"Carhartt jacket"} price={10000} adding_date_time={"1"} />
-            <Item img={TestImg} name={"Carhartt jacket black super flex downshifting"} price={10000} adding_date_time={"1"} />
-            <Item img={TestImg} name={"Carhartt jacket black"} price={10000} adding_date_time={"1"} />
+            {databaseState.map((item, index) => (
+                <Item key={index} img={item.image} name={item.itemName} price={item.price} adding_date_time={item.adding_date_time} />
+            ))}
         </div>
     )
 }

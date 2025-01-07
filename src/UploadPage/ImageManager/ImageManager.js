@@ -9,7 +9,6 @@ import '../../Styles/Bordered.css'
 import '../../Styles/ErrorText.css'
 
 export const ImageManager = ({images, errors, onChange, onDelete, className=""}) => {
-	console.log(className)
 	return <div className={className}>
 		<div className={`image-manager bordered`}>
 			<ImageViewer images={images}/>
