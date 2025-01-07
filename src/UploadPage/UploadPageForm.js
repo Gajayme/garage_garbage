@@ -83,8 +83,8 @@ export const UploadPageForm = () => {
 				[Constants.buyer_part]: parseInt(formState.buyers_part, 10),
 				[Constants.sold_for]: parseInt(formState.sold_for, 10),
 				[Constants.item_size]: formState.size,
-				[Constants.buyer]: formState.buyer,
-				[Constants.location]: formState.location,
+				[Constants.buyer]: parseInt(formState.buyer),
+				[Constants.location]: parseInt(formState.location),
 		}),
 		})
 			.then((response) => response.json())
@@ -132,21 +132,13 @@ export const UploadPageForm = () => {
 
 	// TODO собрать все пропсы отдельно, а потом декомпозировать
 	const buyerOptions = {
-		[Constants.chooseBuyer]: "",
-		[Constants.rail]: [Constants.rail],
-		[Constants.ljuba]: [Constants.ljuba],
-		[Constants.igor]: [Constants.igor],
-		[Constants.gosha]: [Constants.gosha],
-		[Constants.oleg]: [Constants.oleg],
-		[Constants.unknown]: [Constants.unknown] };
-
+		[Constants.chooseBuyer]: 0,
+		"test": 1,
+	}
 
 	const locationOptions = {
-		[Constants.chooseLocation]: "",
-		[Constants.plava]: [Constants.plava],
-		[Constants.gosha]: [Constants.gosha],
-		[Constants.oleg]: [Constants.oleg],
-		[Constants.unknown]: [Constants.unknown]
+		[Constants.chooseLocation]: 0,
+		"test": 1,
 	};
 
 	return (
@@ -156,15 +148,15 @@ export const UploadPageForm = () => {
 
 			<div className="upload-form margin-bottom">
 
-				<LabeledInput		value={formState.item_name}		errors={errorState.item_name}		onChange={handleOnChange('item_name')}		className="upload-form-item"	labelText={Constants.item_name}		id="item_name_input"	maxLength={50}/>
-				<LabeledInput 		value={formState.buyers_part}	errors={errorState.buyers_part}		onChange={handleOnChange('buyers_part')}	className="upload-form-item"	labelText={Constants.buyer_part}	id="buyer_part_input"	maxLength={10}		inputValidator={NumbersOnly}/>
-				<LabeledInput 		value={formState.bought_for}	errors={errorState.bought_for}		onChange={handleOnChange('bought_for')}	className="upload-form-item"	labelText={Constants.bought_for}	id="bought_for_input"	maxLength={10}		inputValidator={NumbersOnly}/>
-				<LabeledInput 		value={formState.price}			errors={errorState.price}			onChange={handleOnChange('price')}			className="upload-form-item"	labelText={Constants.price} 		id="price_input"		maxLength={10}		inputValidator={NumbersOnly}/>
-				<LabeledInput 		value={formState.sold_for}		errors={errorState.sold_for}		onChange={handleOnChange('sold_for')}		className="upload-form-item"	labelText={Constants.sold_for}		id="sold_for_input"		maxLength={10}		inputValidator={NumbersOnly}/>
-				<LabeledInput 		value={formState.size}												onChange={handleOnChange('size')}			className="upload-form-item"	labelText={Constants.item_size}		id="size_input"			maxLength={10}/>
+				<LabeledInput		value={formState.item_name}		errors={errorState.item_name}		onChange={handleOnChange('item_name')}		className="upload-form-item"	labelText="Item Name"	id="item_name_input"	maxLength={50}/>
+				<LabeledInput 		value={formState.buyers_part}	errors={errorState.buyers_part}		onChange={handleOnChange('buyers_part')}	className="upload-form-item"	labelText="Buyer Part"	id="buyer_part_input"	maxLength={10}		inputValidator={NumbersOnly}/>
+				<LabeledInput 		value={formState.bought_for}	errors={errorState.bought_for}		onChange={handleOnChange('bought_for')}	className="upload-form-item"	labelText="Bought for"	id="bought_for_input"	maxLength={10}		inputValidator={NumbersOnly}/>
+				<LabeledInput 		value={formState.price}			errors={errorState.price}			onChange={handleOnChange('price')}			className="upload-form-item"	labelText="Price"		id="price_input"		maxLength={10}		inputValidator={NumbersOnly}/>
+				<LabeledInput 		value={formState.sold_for}		errors={errorState.sold_for}		onChange={handleOnChange('sold_for')}		className="upload-form-item"	labelText="Sold for"	id="sold_for_input"		maxLength={10}		inputValidator={NumbersOnly}/>
+				<LabeledInput 		value={formState.size}												onChange={handleOnChange('size')}			className="upload-form-item"	labelText="Size"		id="size_input"			maxLength={10}/>
 
-				<LabeledDropdown	options={locationOptions}		errors={errorState.location}		onChange={handleOnChange('location')}		className="upload-form-item"	labelText={Constants.location}		id="location_dropdown"/>
-				<LabeledDropdown 	options={buyerOptions}			errors={errorState.buyer}			onChange={handleOnChange('buyer')}			className="upload-form-item"	labelText={Constants.buyer}			id="buyer_dropdown"/>
+				<LabeledDropdown	options={locationOptions}		errors={errorState.location}		onChange={handleOnChange('location')}		className="upload-form-item"	labelText="Location"	id="location_dropdown"/>
+				<LabeledDropdown 	options={buyerOptions}			errors={errorState.buyer}			onChange={handleOnChange('buyer')}			className="upload-form-item"	labelText="Buyer"		id="buyer_dropdown"/>
 
 			</div>
 
