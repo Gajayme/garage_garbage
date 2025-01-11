@@ -8,10 +8,10 @@ import '../../Styles/MarginBottom.css'
 import '../../Styles/Bordered.css'
 import '../../Styles/ErrorText.css'
 
-export const ImageManager = ({images, errors, onChange, onDelete, className=""}) => {
+export const ImageManager = ({images, errors, onChange, onDelete, onDeleteSpecific, className=""}) => {
 	return <div className={className}>
 		<div className={`image-manager bordered-round-2`}>
-			<ImageViewer images={images}/>
+			<ImageViewer onDeleteSpecific={onDeleteSpecific} images={images}/>
 			<ImageUploader onChange={onChange} onDelete={onDelete}/>
 		</div>
 

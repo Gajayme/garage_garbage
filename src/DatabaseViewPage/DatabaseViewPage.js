@@ -19,12 +19,9 @@ export const DatabaseViewPage = () => {
             adding_date_time: 0, // TODO: переделать на нормальное значение
         }));
         setDatabaseState((prevState) => [...prevState, ...newItems]);
-        console.log(newItems)
     }
 
     useEffect(() => {
-        console.log('Страница отрендерилась');
-
         fetch(Constants.get_items_url, {
             method: Constants.http_methods.GET,
             headers: {

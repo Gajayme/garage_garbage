@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { v4 as uuidv4 } from 'uuid';
 import { DefaultButton } from "../Common/Button.js"
 import {LabeledInput} from "./LabeledInput.js"
 import {LabeledDropdown} from "./LabeledDropDown.js"
@@ -110,25 +111,46 @@ export const UploadPageForm = () => {
 
 	// обработать изменение превью изображений
 	const handleOnChangeImages = (key) => {
-		console.log(key);
 		return (event) => {
 			if (event && event.target) {
 				const images = Array.from(event.target.files);
-				const newImages = images.map(image => URL.createObjectURL(image));
+
+				const newImages = images.map(image => ({
+					id: uuidv4(),
+					src: URL.createObjectURL(image),
+				}));
 				setFormState((prevState) => ({
 						...prevState, [key]: [...prevState[key], ...newImages]} ))
 				}
+			event.target.value = null
 		}
 	}
 
 	// удалить все изображения
-	const handleOnDeleteAllImages = (key) => {
-		return () => {
-			setFormState((prevState) => ({
-					...prevState, [key]: []} ))
-			}
+	const handleOnDeleteAllImages = () => {
+		console.log(formState['images'])
+		setFormState((prevState) => ({
+			...prevState, images: []} ))
 	}
 
+	// удалить конкретное изображения
+	// const handleOnDeleteSpecificImage = (id) => {
+	// 	setFormState((prevState) => ({
+	// 		...prevState, images: prevState['images'].filter(image => image.id !== id)} ))
+	// }
+
+	const handleOnDeleteSpecificImage = (id) => {
+		setFormState((prevState) => {
+			const updatedImages = prevState['images'].filter((image) => image.id !== id);
+
+			// Освобождаем URL только после полного удаления
+			if (updatedImages.length === 0) {
+				prevState['images'].forEach((image) => URL.revokeObjectURL(image.src));
+			}
+
+			return { ...prevState, 'images': updatedImages };
+		});
+	};
 
 	// TODO собрать все пропсы отдельно, а потом декомпозировать
 	const buyerOptions = {
@@ -144,7 +166,7 @@ export const UploadPageForm = () => {
 	return (
 		<form onSubmit={handleOnSubmit}>
 
-			<ImageManager			images={formState.images}		errors={errorState.images}	onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages('images')} className="margin-bottom" />
+			<ImageManager			images={formState.images}		errors={errorState.images}	onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages} onDeleteSpecific={handleOnDeleteSpecificImage} className="margin-bottom" />
 
 			<div className="upload-form margin-bottom">
 
