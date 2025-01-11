@@ -10,7 +10,7 @@ import '../../Styles/ErrorText.css'
 
 export const ImageManager = ({images, errors, onChange, onDelete, className=""}) => {
 	return <div className={className}>
-		<div className={`image-manager bordered`}>
+		<div className={`image-manager bordered-round-2`}>
 			<ImageViewer images={images}/>
 			<ImageUploader onChange={onChange} onDelete={onDelete}/>
 		</div>
