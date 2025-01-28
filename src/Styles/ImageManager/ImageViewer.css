@@ -6,7 +6,7 @@
 	width: auto;
 	align-items: center;   /* Центрирует содержимое ячеек по вертикали */
 	max-height: 300px;
-	overflow-x: auto;
+	overflow-x:auto;
     gap: 10px;
 }
 
@@ -14,10 +14,4 @@
 .image-container p {
 	flex-grow: 1;
     text-align: center;
-}
-
-/* Конкретная картинка */
-.image-item {
-	max-width: 200px;
-	max-height: 200px;
 }
