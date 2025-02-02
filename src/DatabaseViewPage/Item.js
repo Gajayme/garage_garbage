@@ -5,9 +5,9 @@ import "../Styles/DatabaseItem.css"
 import "../Styles/Bordered.css"
 import DefaultImg from "../Imgs/tshirt_stub.svg"
 
-export const Item = ({img, name, price, adding_date_time}) => {
+export const Item = ({img, name, price, adding_date_time, onClick}) => {
     return (
-        <div className={"bordered-round-2 database-item"}>
+        <div className={"bordered-round-2 database-item"} onClick={onClick}>
             <img src={img ? img : DefaultImg} alt={"item"}/>
             <p title={name}> <strong> {Constants.item_name}: </strong> {name}</p>
             <p title={price}> <strong> {Constants.price}: </strong> {price}</p>
