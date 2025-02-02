@@ -41,11 +41,20 @@ export const DatabaseViewPage = () => {
     }, [databaseState.length]);
 
     useEffect(() => {
+
+        // Функция для обработки клика вне item
+        const handleOutsideClick = (event) => {
+            // Проверяем, был ли клик внутри модального окна
+            if (chosenItem && !event.target.closest(".modal-overlay") && !event.target.closest(".database-item")) {
+                setChosenItem(null);
+            }
+        };
+
         document.addEventListener("click", handleOutsideClick);
         return () => {
             document.removeEventListener("click", handleOutsideClick);
         };
-    }, []);
+    }, [chosenItem]);
 
     const handleItemClick = (item) => {
         if (chosenItem) {
@@ -54,13 +63,6 @@ export const DatabaseViewPage = () => {
             setChosenItem(item);
         }
     }
-
-    // Функция для обработки клика вне item
-    const handleOutsideClick = (event) => {
-        if (!event.target.closest(".database-item")) {
-            setChosenItem(null);
-        }
-    };
 
     return (
         <div>

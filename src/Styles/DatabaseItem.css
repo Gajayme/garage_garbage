@@ -1,7 +1,7 @@
 
 .database-item {
     width: 200px;
-    /*height: 320px;*/
+    z-index: 1;
 }
 
 
