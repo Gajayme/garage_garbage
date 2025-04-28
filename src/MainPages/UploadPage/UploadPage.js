@@ -1,5 +1,5 @@
 import { UploadPageForm } from './UploadPageForm';
-import '../Styles/UploadPage.css'
+import '../../Styles/UploadPage.css'
 
 export const UploadPage = () => {
 	return (

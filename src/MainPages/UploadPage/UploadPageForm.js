@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
-import { DefaultButton } from "../Common/Button.js"
-import {LabeledInput} from "./LabeledInput.js"
-import {LabeledDropdown} from "./LabeledDropDown.js"
+import { DefaultButton } from "../../Components/Button.js"
+import {LabeledInput} from "../../Components/LabeledInput.js"
+import {LabeledDropdown} from "../../Components/LabeledDropDown.js"
 import {ImageManager} from "./ImageManager/ImageManager.js"
-import * as Constants from '../Common/Constants.js'
+import * as Constants from '../../Constants.js'
 
 
 //Validations
@@ -13,8 +13,8 @@ import {NonEmpty, NonEmptyImages} from './Validations/Validations.js'
 import {UploadFormValidation} from './Validations/Validations.js'
 
 // Styles
-import '../Styles/UploadForm.css'
-import '../Styles/MarginBottom.css'
+import '../../Styles/UploadForm.css'
+import '../../Styles/MarginBottom.css'
 
 
 
@@ -134,11 +134,6 @@ export const UploadPageForm = () => {
 	}
 
 	// удалить конкретное изображения
-	// const handleOnDeleteSpecificImage = (id) => {
-	// 	setFormState((prevState) => ({
-	// 		...prevState, images: prevState['images'].filter(image => image.id !== id)} ))
-	// }
-
 	const handleOnDeleteSpecificImage = (id) => {
 		setFormState((prevState) => {
 			const updatedImages = prevState['images'].filter((image) => image.id !== id);
@@ -152,7 +147,6 @@ export const UploadPageForm = () => {
 		});
 	};
 
-	// TODO собрать все пропсы отдельно, а потом декомпозировать
 	const buyerOptions = {
 		[Constants.chooseBuyer]: 0,
 		"test": 1,

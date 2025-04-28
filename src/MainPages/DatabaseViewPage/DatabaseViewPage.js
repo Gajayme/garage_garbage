@@ -1,11 +1,11 @@
 
 import React, {useEffect, useState} from 'react';
-import {Item} from './Item';
-import {ModalWindow} from "./ModalWindow";
-import * as Constants from "../Common/Constants";
+import {Item} from '../../Components/Item';
+import {ModalWindow} from "../../Components/ModalWindow";
+import * as Constants from "../../Constants";
 
-import "../Styles/DatabaseItems.css"
-import "../Styles/Bordered.css"
+import "../../Styles/DatabaseItems.css"
+import "../../Styles/Bordered.css"
 
 
 export const DatabaseViewPage = () => {

@@ -2,7 +2,7 @@
 // Компонент для навигации
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ButtonActivated } from './ButtonActivated.js';
+import { ButtonActivated } from '../Components/ButtonActivated.js';
 
 import '../Styles/Header.css'
 import '../Styles/MarginBottom.css'
