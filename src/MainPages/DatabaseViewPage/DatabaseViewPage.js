@@ -15,9 +15,10 @@ export const DatabaseViewPage = () => {
     const [chosenItem, setChosenItem] = useState(null)
 
     const parseServerData = (data) => {
+        console.log(data)
         const newItems = data.map((item) => ({
             id: item.id, // TODO: переделать на нормальное значение
-            image: null, // TODO: переделать на нормальное значение
+            image:  Array.isArray(item.images) && item.images.length && item.images[0].image_url, // TODO: переделать на нормальное значение
             itemName: item.itemName,
             price: item.price,
             adding_date_time: 0, // TODO: переделать на нормальное значение
@@ -28,7 +29,7 @@ export const DatabaseViewPage = () => {
     // Запрос к серверу
     useEffect(() => {
         if (!databaseState.length) {
-            fetch(Constants.get_items_url, {
+            fetch(Constants.base_server_url + Constants.post_all, {
                 method: Constants.http_methods.GET,
                 headers: {
                     'Content-Type': 'application/json',

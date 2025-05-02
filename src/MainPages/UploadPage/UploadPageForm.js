@@ -5,7 +5,7 @@ import {LabeledInput} from "../../Components/LabeledInput.js"
 import {LabeledDropdown} from "../../Components/LabeledDropDown.js"
 import {ImageManager} from "./ImageManager/ImageManager.js"
 import * as Constants from '../../Constants.js'
-
+import DefaultImg from "../../Imgs/tshirt_stub.svg"
 
 //Validations
 import {NumbersOnly} from './Validations/Validations.js'
@@ -72,21 +72,28 @@ export const UploadPageForm = () => {
 			return
 		}
 
-		fetch(Constants.upload_server_url, {
+		// Создаем объект formData
+		const formData = new FormData();
+		// Добавляем текстовые поля
+		formData.append(Constants.item_name, formState.item_name);
+		formData.append(Constants.bought_for, parseInt(formState.bought_for, 10));
+		formData.append(Constants.price, parseInt(formState.price, 10));
+		formData.append(Constants.buyer_part, parseInt(formState.buyers_part, 10));
+		formData.append(Constants.sold_for, parseInt(formState.sold_for, 10));
+		formData.append(Constants.item_size, formState.size);
+		formData.append(Constants.buyer, parseInt(formState.buyer, 10));
+		formData.append(Constants.location, parseInt(formState.location, 10));
+
+		// Добавляем изображения (если есть)
+		console.log(formState.images);
+		console.log(formState.images[0].file instanceof File);
+		formState.images.forEach((image, _) => {
+			formData.append(Constants.files, image.file);
+		});
+
+		fetch(Constants.base_server_url + Constants.post_upload, {
 			method: Constants.http_methods.POST,
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				[Constants.item_name]: formState.item_name,
-				[Constants.bought_for]: parseInt(formState.bought_for, 10),
-				[Constants.price]: parseInt(formState.price, 10),
-				[Constants.buyer_part]: parseInt(formState.buyers_part, 10),
-				[Constants.sold_for]: parseInt(formState.sold_for, 10),
-				[Constants.item_size]: formState.size,
-				[Constants.buyer]: parseInt(formState.buyer),
-				[Constants.location]: parseInt(formState.location),
-		}),
+			body: formData,
 		})
 			.then((response) => response.json())
 			.then((data) => console.log(data))
@@ -114,9 +121,9 @@ export const UploadPageForm = () => {
 		return (event) => {
 			if (event && event.target) {
 				const images = Array.from(event.target.files);
-
 				const newImages = images.map(image => ({
 					id: uuidv4(),
+					file: image,
 					src: URL.createObjectURL(image),
 				}));
 				setFormState((prevState) => ({
@@ -147,6 +154,28 @@ export const UploadPageForm = () => {
 		});
 	};
 
+	// Автозаполнение всех полей для теста
+	const handleOnTestAutofill = () => {
+
+		// TODO тут не хватает самого изображения. Нужно сделать изображение из урла
+		const img = {
+			id: uuidv4(),
+			src: DefaultImg,
+		};
+
+		setFormState({
+			item_name: 'Кроссовки Adidas',
+			bought_for: '5000',
+			price: '8500',
+			buyers_part: '50',
+			sold_for: '8000',
+			size: '42',
+			buyer: 1,
+			location: 1,
+			images: [img]  // Можно добавить тестовые объекты, если нужно
+		});
+	};
+
 	const buyerOptions = {
 		[Constants.chooseBuyer]: 0,
 		"test": 1,
@@ -171,8 +200,12 @@ export const UploadPageForm = () => {
 				<LabeledInput 		value={formState.sold_for}		errors={errorState.sold_for}		onChange={handleOnChange('sold_for')}		className="upload-form-item"	labelText="Sold for"	id="sold_for_input"		maxLength={10}		inputValidator={NumbersOnly}/>
 				<LabeledInput 		value={formState.size}												onChange={handleOnChange('size')}			className="upload-form-item"	labelText="Size"		id="size_input"			maxLength={10}/>
 
-				<LabeledDropdown	options={locationOptions}		errors={errorState.location}		onChange={handleOnChange('location')}		className="upload-form-item"	labelText="Location"	id="location_dropdown"/>
-				<LabeledDropdown 	options={buyerOptions}			errors={errorState.buyer}			onChange={handleOnChange('buyer')}			className="upload-form-item"	labelText="Buyer"		id="buyer_dropdown"/>
+				<LabeledDropdown	value={formState.location}		errors={errorState.location}		onChange={handleOnChange('location')}		className="upload-form-item"	labelText="Location"	id="location_dropdown" 	options={locationOptions}/>
+				<LabeledDropdown 	value={formState.buyer}			errors={errorState.buyer}			onChange={handleOnChange('buyer')}			className="upload-form-item"	labelText="Buyer"		id="buyer_dropdown" 	options={buyerOptions}/>
+
+				{/*TODO тестовая кнопка для автозаполнения*/}
+				<DefaultButton labelText={'TEST AUTO FILL'} type="button" onClick={handleOnTestAutofill}/>
+
 
 			</div>
 

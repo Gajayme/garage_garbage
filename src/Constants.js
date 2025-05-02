@@ -1,18 +1,10 @@
 
 export const none = ''
 
-// TODO это потом будет приходить от Султана
-// export const rail = 'rail'
-// export const gosha = 'gosha'
-// export const ljuba = 'ljuba'
-// export const igor = 'igor'
-// export const oleg = 'oleg'
-// export const plava = 'plava'
-// export const unknown = 'unknown'
-
 export const chooseBuyer = 'Choose Buyer'
 export const chooseLocation = 'Choose Location'
 
+export const files = "files"
 export const item_name = "itemName"
 export const buyer_part = "buyersPart"
 export const bought_for = "boughtFor"
@@ -23,8 +15,11 @@ export const buyer = "buyerId"
 export const location = "locationId"
 export const adding_date_time = "Date-Time of adding"
 
-export const upload_server_url = "http://tatarin.fun:5000/post/upload"
-export const get_items_url = "http://tatarin.fun:5000/post/all"
+export const base_server_url = "http://138.124.18.179:5000/"
+export const post_upload = "post/upload"
+export const post_all = "post/all"
+export const post_delete = "post/delete"
+
 
 export const http_methods = {
     GET: 'GET',

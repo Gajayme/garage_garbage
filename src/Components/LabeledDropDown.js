@@ -14,12 +14,12 @@ import React from "react";
  * - onChange (function): Функция-обработчик изменений.
  * - className (string): Имя класса.
  */
-export const LabeledDropdown = ({options, errors, id, labelText, onChange, className=""}) => {
+export const LabeledDropdown = ({value, options, errors, id, labelText, onChange, className=""}) => {
   return (
     <div className={`labeled ${className}`}>
 		<label htmlFor={id} > {labelText } </label>
 
-		<select id={id} onChange={onChange}>
+		<select value={value} id={id} onChange={onChange}>
 			{Object.entries(options).map(([key, value], index) => (
 				<option className="centered-text"  key={index} value={value} label={key}> {key} </option>
 			))}

@@ -10,7 +10,6 @@ export const ImageViewer = ({ images, onDeleteSpecific }) => {
             ) : (
                 images.map((image, _) => (
                     <DeletableImage image={image} onDeleteSpecific={onDeleteSpecific}/>
-                    // <img key={image.id} className="image-item" src={image.src} alt={image.alt || `Image ${image.id}`} onClick={() => onDeleteSpecific(image.id)} />
                 ))
             )}
         </div>
