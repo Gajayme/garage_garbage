@@ -37,8 +37,8 @@ export const Header = () => {
 		<nav className='header margin-bottom'>
 
 			<ButtonActivated	labelText = {uploadTitle}	onClick={goToUpload}	isActive={activeButton===uploadTitle}/>
-			<ButtonActivated	labelText = {postTitle}		onClick={goToPost}		isActive={activeButton==="Post"}/>
-			<ButtonActivated	labelText = {databaseTitle}	onClick={goToDatabase}	isActive={activeButton==="Database"}/>
+			<ButtonActivated	labelText = {postTitle}		onClick={goToPost}		isActive={activeButton===postTitle}/>
+			<ButtonActivated	labelText = {databaseTitle}	onClick={goToDatabase}	isActive={activeButton===databaseTitle}/>
 
 		</nav>
 	);

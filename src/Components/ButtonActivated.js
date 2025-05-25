@@ -14,7 +14,7 @@ import '../Styles/ButtonActivated.css'
 export const ButtonActivated = ({labelText, type = "button", isActive, onClick}) => {
 
 	return (
-		<button onClick = {onClick} type = {type} className={isActive ? "button activated" : "button"}>
+		<button onClick = {onClick} type = {type} className={"button "  + (isActive ? "activated" : "inactive")}>
 			{labelText}
 		</button>
 	);
