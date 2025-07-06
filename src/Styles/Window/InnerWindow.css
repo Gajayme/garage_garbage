@@ -1,0 +1,6 @@
+.inner-window {
+    flex-grow: 1;
+    background-color: #ffffff;
+    border-top: 2px solid #B2B4B5;
+    border-left: 2px solid #B2B4B5;
+}

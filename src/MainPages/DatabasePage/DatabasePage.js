@@ -8,7 +8,7 @@ import "../../Styles/DatabaseItems.css"
 import "../../Styles/Bordered.css"
 
 
-export const DatabaseViewPage = () => {
+export const DatabasePage = () => {
 
     // стейт для сохранения полученных с сервера объектов
     const [databaseState, setDatabaseState] = useState([])

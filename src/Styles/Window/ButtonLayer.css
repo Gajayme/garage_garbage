@@ -1,0 +1,6 @@
+.button-layer {
+    display: flex;
+    gap: 5px;
+    flex-grow: 1;
+    align-items: center;
+}
