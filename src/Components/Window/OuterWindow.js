@@ -5,6 +5,7 @@ import React from 'react';
  *
  * Props:
  * - className (string): Имя класса для стилей.
+ * - children (react component): Компоненты, которые будут отображены во внутренней части окна.
  */
 export const OuterWindow = ({className, children}) => {
     const [header, buttonLayer, innerWindow ] = React.Children.toArray(children);

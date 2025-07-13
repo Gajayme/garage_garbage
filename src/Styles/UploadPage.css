@@ -1,6 +1,0 @@
-.upload_page {
-    display: flex; /* Для выравнивания содержимого */
-    flex-direction: column; /* Вертикальное размещение дочерних элементов */
-    padding: 0 15%; /* Отступы только по бокам */
-    box-sizing: border-box; /* Учитывать padding в ширине */
-}

@@ -18,7 +18,8 @@ import '../../Styles/MarginBottom.css'
 
 
 
-export const UploadPageForm = () => {
+export const UploadPageForm = ({className}) => {
+
 
 	// стейты со значениями полей
 	const [formState, setFormState] = useState({
@@ -187,30 +188,29 @@ export const UploadPageForm = () => {
 	};
 
 	return (
-		<form onSubmit={handleOnSubmit}>
+		<div className={className}>
+			<form onSubmit={handleOnSubmit}>
 
-			<ImageManager			images={formState.images}		errors={errorState.images}	onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages} onDeleteSpecific={handleOnDeleteSpecificImage} className="margin-bottom" />
+				<ImageManager			images={formState.images}		errors={errorState.images}	onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages} onDeleteSpecific={handleOnDeleteSpecificImage} className="margin-bottom" />
 
-			<div className="upload-form margin-bottom">
+				<div className="upload-form margin-bottom">
 
-				<LabeledInput		value={formState.item_name}		errors={errorState.item_name}		onChange={handleOnChange('item_name')}		className="upload-form-item"	labelText="Item Name"	id="item_name_input"	maxLength={50}/>
-				<LabeledInput 		value={formState.buyers_part}	errors={errorState.buyers_part}		onChange={handleOnChange('buyers_part')}	className="upload-form-item"	labelText="Buyer Part"	id="buyer_part_input"	maxLength={10}		inputValidator={NumbersOnly}/>
-				<LabeledInput 		value={formState.bought_for}	errors={errorState.bought_for}		onChange={handleOnChange('bought_for')}	className="upload-form-item"	labelText="Bought for"	id="bought_for_input"	maxLength={10}		inputValidator={NumbersOnly}/>
-				<LabeledInput 		value={formState.price}			errors={errorState.price}			onChange={handleOnChange('price')}			className="upload-form-item"	labelText="Price"		id="price_input"		maxLength={10}		inputValidator={NumbersOnly}/>
-				<LabeledInput 		value={formState.sold_for}		errors={errorState.sold_for}		onChange={handleOnChange('sold_for')}		className="upload-form-item"	labelText="Sold for"	id="sold_for_input"		maxLength={10}		inputValidator={NumbersOnly}/>
-				<LabeledInput 		value={formState.size}												onChange={handleOnChange('size')}			className="upload-form-item"	labelText="Size"		id="size_input"			maxLength={10}/>
+					<LabeledInput		value={formState.item_name}		errors={errorState.item_name}		onChange={handleOnChange('item_name')}		className="upload-form-item"	labelText="Item Name"	id="item_name_input"	maxLength={50}/>
+					<LabeledInput 		value={formState.buyers_part}	errors={errorState.buyers_part}		onChange={handleOnChange('buyers_part')}	className="upload-form-item"	labelText="Buyer Part"	id="buyer_part_input"	maxLength={10}		inputValidator={NumbersOnly}/>
+					<LabeledInput 		value={formState.bought_for}	errors={errorState.bought_for}		onChange={handleOnChange('bought_for')}	className="upload-form-item"	labelText="Bought for"	id="bought_for_input"	maxLength={10}		inputValidator={NumbersOnly}/>
+					<LabeledInput 		value={formState.price}			errors={errorState.price}			onChange={handleOnChange('price')}			className="upload-form-item"	labelText="Price"		id="price_input"		maxLength={10}		inputValidator={NumbersOnly}/>
+					<LabeledInput 		value={formState.sold_for}		errors={errorState.sold_for}		onChange={handleOnChange('sold_for')}		className="upload-form-item"	labelText="Sold for"	id="sold_for_input"		maxLength={10}		inputValidator={NumbersOnly}/>
+					<LabeledInput 		value={formState.size}												onChange={handleOnChange('size')}			className="upload-form-item"	labelText="Size"		id="size_input"			maxLength={10}/>
+					<LabeledDropdown	value={formState.location}		errors={errorState.location}		onChange={handleOnChange('location')}		className="upload-form-item"	labelText="Location"	id="location_dropdown" 	options={locationOptions}/>
+					<LabeledDropdown 	value={formState.buyer}			errors={errorState.buyer}			onChange={handleOnChange('buyer')}			className="upload-form-item"	labelText="Buyer"		id="buyer_dropdown" 	options={buyerOptions}/>
 
-				<LabeledDropdown	value={formState.location}		errors={errorState.location}		onChange={handleOnChange('location')}		className="upload-form-item"	labelText="Location"	id="location_dropdown" 	options={locationOptions}/>
-				<LabeledDropdown 	value={formState.buyer}			errors={errorState.buyer}			onChange={handleOnChange('buyer')}			className="upload-form-item"	labelText="Buyer"		id="buyer_dropdown" 	options={buyerOptions}/>
+					{/*TODO тестовая кнопка для автозаполнения*/}
+					<DefaultButton labelText={'TEST AUTO FILL'} type="button" onClick={handleOnTestAutofill}/>
+				</div>
 
-				{/*TODO тестовая кнопка для автозаполнения*/}
-				<DefaultButton labelText={'TEST AUTO FILL'} type="button" onClick={handleOnTestAutofill}/>
+				<DefaultButton labelText={'Add to database'} type="submit" onClick={handleOnSubmit}/>
 
-
-			</div>
-
-			<DefaultButton labelText={'Add to database'} type="submit" onClick={handleOnSubmit}/>
-
-		</form>
+			</form>
+		</div>
 	)
 }

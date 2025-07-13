@@ -3,10 +3,12 @@
  *
  * Props:
  * - className (string): Имя класса для стилей.
+ * - children (react component): Компоненты, которые будут отображены во внутренней части окна.
  */
-export const InnerWindow = ({className}) => {
+export const InnerWindow = ({className, children}) => {
     return (
         <div className={className}>
+            {children}
         </div>
     )
 }
