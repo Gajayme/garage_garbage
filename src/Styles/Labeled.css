@@ -1,8 +1,5 @@
 .labeled {
 	display: flex;
 	flex-direction: column;
-}
-
-.labeled label {
-	margin-bottom: 10px;
+	gap: 10px;
 }

@@ -9,9 +9,6 @@
 .upload-form-item input,
 .upload-form-item textarea,
 .upload-form-item select {
-    background-color: #3dbef1; /* Единый фоновый цвет */
-    border: 1px solid #000000; /* Для визуального выделения */
-    border-radius: 5px; /* Закругленные углы (опционально) */
     height: 40px; /* Устанавливаем одинаковую высоту */
 }
 

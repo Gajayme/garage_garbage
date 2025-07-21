@@ -25,7 +25,9 @@ export const LabeledInput = ({value, errors=null, onChange, id, labelText="", cl
 
 	return (
         <div className={`labeled ${className}`}>
-			<label htmlFor={id}> {labelText} </label>
+			<label htmlFor={id}>
+				{labelText}
+			</label>
 
 			<input
 				value={value}

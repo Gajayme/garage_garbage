@@ -9,6 +9,9 @@
     max-height: 200px; /* Изображение не будет больше 200px по высоте */
     width: auto;
     height: auto;
+
+    border-top: 2px solid #B2B4B5;
+    border-left: 2px solid #B2B4B5;
 }
 
 .delete-icon {
