@@ -13,6 +13,22 @@
     border: 2px solid #B2B4B5;
 }
 
+.outer-window-image-manager {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-evenly;
+    gap: 10px;
+
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 7px;
+
+    background-color: #D9D9D9;
+    border: 2px solid #B2B4B5;
+}
+
 .header-part {
     height: 4%;
     display: flex;

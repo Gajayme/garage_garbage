@@ -1,5 +1,12 @@
 /* форма загрузки со всеми полями ввода */
-.upload-form {
+
+.upload-page-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.upload-form-texts {
     display: grid;
     grid-template-columns: 1fr 1fr ;
     gap: 20px;

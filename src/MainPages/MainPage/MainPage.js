@@ -13,18 +13,24 @@ import '../../Styles/Window/InnerWindow.css'
 import '../../Styles/WindowNavigateButton.css'
 
 export const MainPage = () => {
+
+	const header = <WindowHeader className="window-header"/>
+
+	const buttonLayer = <ButtonLayer className="button-layer">
+		<DefaultButton className="window-navigate-button" labelText="button_1"/>
+		<DefaultButton className="window-navigate-button" labelText="button_2"/>
+		<DefaultButton className="window-navigate-button" labelText="button_3"/>
+	</ButtonLayer>
+
+	const innerWindow = <InnerWindow className="inner-window"/>
+
 	return (
 		<div>
-			<OuterWindow className="outer-window">
-				<WindowHeader className="window-header"/>
-
-				<ButtonLayer className="button-layer">
-						<DefaultButton className="window-navigate-button" labelText="button_1"/>
-						<DefaultButton className="window-navigate-button" labelText="button_2"/>
-						<DefaultButton className="window-navigate-button" labelText="button_3"/>
-				</ButtonLayer>
-
-				<InnerWindow className="inner-window"/>
+			<OuterWindow
+				className="outer-window"
+				header={header}
+				buttonLayer={buttonLayer}
+				innerWindow={innerWindow}>
 			</OuterWindow>
 		</div>
 	)

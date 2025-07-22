@@ -13,11 +13,8 @@ export const ImageUploader = ({onChange, onDelete}) => {
 		<div className="image-uploader-buttons">
 			{/* Реальный инпут. Скрыт, так как для него нельзя настроить внешний вид. Поэтому сделано костылем */}
 			<input className="hidden" id="fileInput" type="file" accept="image/*" multiple onChange={onChange} />
-
 			<DefaultButton labelText={'UploadImage'}		onClick={redirectToFileInput}/>
 			<DefaultButton labelText={'Delete all images'}	onClick={onDelete}/>
-
-
 	  </div>
 	);
   };

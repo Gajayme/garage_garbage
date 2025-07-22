@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { DefaultButton } from "../../Components/Button.js"
 import {LabeledInput} from "../../Components/LabeledInput.js"
 import {LabeledDropdown} from "../../Components/LabeledDropDown.js"
-import {ImageManager} from "./ImageManager/ImageManager.js"
+import {ImageManagerWindow} from "./ImageManager/ImageManagerWindow.js"
 import * as Constants from '../../Constants.js'
 import DefaultImg from "../../Imgs/tshirt_stub.svg"
 
@@ -189,11 +189,11 @@ export const UploadPageForm = ({className}) => {
 
 	return (
 		<div className={className}>
-			<form onSubmit={handleOnSubmit}>
+			<form className="upload-page-form" onSubmit={handleOnSubmit}>
 
-				<ImageManager			images={formState.images}		errors={errorState.images}	onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages} onDeleteSpecific={handleOnDeleteSpecificImage} className="margin-bottom" />
+				<ImageManagerWindow		images={formState.images}		errors={errorState.images}	onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages} onDeleteSpecific={handleOnDeleteSpecificImage} className="margin-bottom" />
 
-				<div className="upload-form margin-bottom">
+				<div className="upload-form-texts">
 
 					<LabeledInput		value={formState.item_name}		errors={errorState.item_name}		onChange={handleOnChange('item_name')}		className="upload-form-item"	labelText="Item Name"	id="item_name_input"	maxLength={50}/>
 					<LabeledInput 		value={formState.buyers_part}	errors={errorState.buyers_part}		onChange={handleOnChange('buyers_part')}	className="upload-form-item"	labelText="Buyer Part"	id="buyer_part_input"	maxLength={10}		inputValidator={NumbersOnly}/>

@@ -5,15 +5,16 @@ import React from 'react';
  *
  * Props:
  * - className (string): Имя класса для стилей.
- * - children (react component): Компоненты, которые будут отображены во внутренней части окна.
+ * - header (component): Компонент с заголовком окна.
+ * - buttonLayer (component): Компонент с управляющими кнопками внутри окна.
+ * - innerWindow (component): Компонент внутренней части окна.
  */
-export const OuterWindow = ({className, children}) => {
-    const [header, buttonLayer, innerWindow ] = React.Children.toArray(children);
+export const OuterWindow = ({className, header, buttonLayer, innerWindow}) => {
     return (
         <div className={className}>
-            <div className="header-part">{header}</div>
-            <div className="button-layer-part">{buttonLayer}</div>
-            <div className="inner-window-part">{innerWindow}</div>
+            {header && <div className="header-part">{header}</div>}
+            {buttonLayer && <div className="button-layer-part">{buttonLayer}</div>}
+            {innerWindow && <div className="inner-window-part">{innerWindow}</div>}
         </div>
     )
 }

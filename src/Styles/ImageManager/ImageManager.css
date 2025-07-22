@@ -1,8 +1,11 @@
 
 .image-manager {
-
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
-	gap: 10px; /* Расстояние между элементами флексбокса */
+	gap: 17px;
+	margin-top: 4%;
+	margin-left: 4%;
+	margin-right: 4%;
+	margin-bottom: 3%;
 }
