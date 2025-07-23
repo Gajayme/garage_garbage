@@ -1,6 +1,9 @@
+import React from "react";
+import {UploadPageError} from "./UploadPageError.js"
+
 import "../Styles/Labeled.css";
 import "../Styles/CenteredText.css";
-import React from "react";
+import "../Styles/UploadPageInput.css";
 
 
 /**
@@ -19,14 +22,13 @@ export const LabeledDropdown = ({value, options, errors, id, labelText, onChange
     <div className={`labeled ${className}`}>
 		<label htmlFor={id} > {labelText } </label>
 
-		<select value={value} id={id} onChange={onChange}>
+		<select className='upload-page-input' value={value} id={id} onChange={onChange}>
 			{Object.entries(options).map(([key, value], index) => (
 				<option className="centered-text"  key={index} value={value} label={key}> {key} </option>
 			))}
 		</select>
 
-        {(errors && errors.length > 0) && <p className={"error-text"}>{errors[0]}</p>}
-
+        <UploadPageError errors={errors} />
     </div>
   );
 };

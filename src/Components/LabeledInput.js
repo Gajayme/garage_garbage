@@ -1,6 +1,10 @@
+
+import {UploadPageError} from "./UploadPageError.js"
+
 import '../Styles/Labeled.css'
-import "../Styles/CenteredText.css";
 import "../Styles/ErrorText.css";
+import "../Styles/UploadPageInput.css";
+
 
 import React from "react";
 
@@ -29,14 +33,8 @@ export const LabeledInput = ({value, errors=null, onChange, id, labelText="", cl
 				{labelText}
 			</label>
 
-			<input
-				value={value}
-				className='centered-text'
-				id={id}
-				maxLength={maxLength}
-				onChange={handleInput}
-			/>
-			{(errors && errors.length > 0) && <p className={"error-text"}>{errors[0]}</p>}
+			<input value={value} className='upload-page-input' id={id} maxLength={maxLength} onChange={handleInput}/>
+			<UploadPageError errors={errors}/>
 		</div>
 	)
 }
