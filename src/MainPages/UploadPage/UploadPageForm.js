@@ -31,6 +31,8 @@ export const UploadPageForm = ({className}) => {
 		size: '',
 		buyer: '',
 		location: '',
+		brand: '',
+		type: '',
 
 		images: [],
 	})
@@ -45,6 +47,9 @@ export const UploadPageForm = ({className}) => {
 		size: [],
 		buyer: [],
 		location: [],
+		brand: [],
+		type: [],
+
 		images: [],
 	})
 
@@ -58,6 +63,8 @@ export const UploadPageForm = ({className}) => {
 		size: [],
 		buyer: [NonEmpty, ],
 		location: [NonEmpty, ],
+		brand: [NonEmpty, ],
+		type: [NonEmpty, ],
 		images: [NonEmptyImages, ],
 	}
 
@@ -84,6 +91,8 @@ export const UploadPageForm = ({className}) => {
 		formData.append(Constants.item_size, formState.size);
 		formData.append(Constants.buyer, parseInt(formState.buyer, 10));
 		formData.append(Constants.location, parseInt(formState.location, 10));
+		formData.append(Constants.brand, parseInt(formState.brand, 10));
+		formData.append(Constants.type, parseInt(formState.type, 10));
 
 		// Добавляем изображения (если есть)
 		console.log(formState.images);
@@ -173,6 +182,8 @@ export const UploadPageForm = ({className}) => {
 			size: '42',
 			buyer: 1,
 			location: 1,
+			brand: 1,
+			type: 1,
 			images: [img]  // Можно добавить тестовые объекты, если нужно
 		});
 	};
@@ -184,6 +195,16 @@ export const UploadPageForm = ({className}) => {
 
 	const locationOptions = {
 		[Constants.chooseLocation]: 0,
+		"test": 1,
+	};
+
+	const brandOptions = {
+		[Constants.chooseBrand]: 0,
+		"test": 1,
+	};
+
+	const typeOptions = {
+		[Constants.chooseType]: 0,
 		"test": 1,
 	};
 
@@ -203,11 +224,13 @@ export const UploadPageForm = ({className}) => {
 					<LabeledInput 		value={formState.size}												onChange={handleOnChange('size')}			className="upload-form-item"	labelText="Size"		id="size_input"			maxLength={10}/>
 					<LabeledDropdown	value={formState.location}		errors={errorState.location}		onChange={handleOnChange('location')}		className="upload-form-item"	labelText="Location"	id="location_dropdown" 	options={locationOptions}/>
 					<LabeledDropdown 	value={formState.buyer}			errors={errorState.buyer}			onChange={handleOnChange('buyer')}			className="upload-form-item"	labelText="Buyer"		id="buyer_dropdown" 	options={buyerOptions}/>
+					<LabeledDropdown 	value={formState.brand}			errors={errorState.brand}			onChange={handleOnChange('brand')}			className="upload-form-item"	labelText="Brand"		id="brand_dropdown" 	options={brandOptions}/>
+					<LabeledDropdown 	value={formState.type}			errors={errorState.type}			onChange={handleOnChange('type')}			className="upload-form-item"	labelText="Type"		id="type_dropdown" 		options={typeOptions}/>
 
 					{/*TODO тестовая кнопка для автозаполнения*/}
-					<DefaultButton labelText={'TEST AUTO FILL'} type="button" onClick={handleOnTestAutofill}/>
 				</div>
 
+				<DefaultButton labelText={'TEST AUTO FILL'} type="button" onClick={handleOnTestAutofill}/>
 				<DefaultButton labelText={'Add to database'} type="submit" onClick={handleOnSubmit}/>
 
 			</form>

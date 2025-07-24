@@ -3,6 +3,8 @@ export const none = ''
 
 export const chooseBuyer = 'Choose Buyer'
 export const chooseLocation = 'Choose Location'
+export const chooseBrand = 'Choose Brand'
+export const chooseType = 'Choose Type'
 
 export const files = "files"
 export const item_name = "itemName"
@@ -13,6 +15,8 @@ export const sold_for = "soldFor"
 export const item_size = "size"
 export const buyer = "buyerId"
 export const location = "locationId"
+export const brand = "brandId"
+export const type = "typeId"
 export const adding_date_time = "Date-Time of adding"
 
 export const base_server_url = "http://138.124.18.179:5000/"

@@ -7,15 +7,13 @@
 }
 
 .upload-form-texts {
-    display: grid;
-    grid-template-columns: 1fr 1fr ;
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    row-gap: 20px;
 }
 
-/* конкретное поле ввода */
-.upload-form-item input,
-.upload-form-item textarea,
-.upload-form-item select {
-    height: 40px; /* Устанавливаем одинаковую высоту */
+.upload-form-item {
+    width: 40%; /* занимает 30% ширины родителя */
+    min-width: 150px; /* чтобы не схлопнулся на узких экранах */
 }
-
