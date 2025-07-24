@@ -2,6 +2,7 @@ import {DefaultButton} from "../../../Components/Button.js";
 
 import '../../../Styles/Hidden.css';
 import '../../../Styles/ImageManager/ImageUploader.css'
+import '../../../Styles/ImageManager/ImageUploaderButton.css'
 
 // Часть костыля, перенаправляющего нажатие кнопки на теальный (но скрытый) инпут.
 const redirectToFileInput = () => {
@@ -13,8 +14,8 @@ export const ImageUploader = ({onChange, onDelete}) => {
 		<div className="image-uploader-buttons">
 			{/* Реальный инпут. Скрыт, так как для него нельзя настроить внешний вид. Поэтому сделано костылем */}
 			<input className="hidden" id="fileInput" type="file" accept="image/*" multiple onChange={onChange} />
-			<DefaultButton labelText={'UploadImage'}		onClick={redirectToFileInput}/>
-			<DefaultButton labelText={'Delete all images'}	onClick={onDelete}/>
+			<DefaultButton className={"image-uploader-button"}	labelText={'Upload'}		onClick={redirectToFileInput}/>
+			<DefaultButton className={"image-uploader-button"}	labelText={'Delete all'}	onClick={onDelete}/>
 	  </div>
 	);
   };

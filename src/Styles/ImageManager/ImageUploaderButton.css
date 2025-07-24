@@ -1,0 +1,9 @@
+
+.image-uploader-button {
+    width: 40%;
+    padding: 5px;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #1E2526;
+    border: solid 2px #B2B4B5;
+}
