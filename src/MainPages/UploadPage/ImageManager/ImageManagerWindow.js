@@ -9,7 +9,6 @@ import '../../../Styles/ErrorText.css'
 import '../../../Styles/Window/WindowHeader.css'
 import '../../../Styles/Window/ButtonLayer.css'
 import '../../../Styles/Window/InnerWindow.css'
-import '../../../Styles/WindowNavigateButton.css'
 import '../../../Styles/Window/OuterWindow.css'
 
 export const ImageManagerWindow = ({images, errors, onChange, onDelete, onDeleteSpecific}) => {

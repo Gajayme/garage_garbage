@@ -1,24 +1,24 @@
 import {UploadPageForm} from './UploadPageForm';
-import {DefaultButton} from "../../Components/Button";
 import {OuterWindow} from "../../Components/Window/OuterWindow";
 import {WindowHeader} from "../../Components/Window/WindowHeader";
 import {ButtonLayer} from "../../Components/Window/ButtonLayer";
 import {InnerWindow} from "../../Components/Window/InnerWindow";
+import {DefaultNavButtons} from "../../Components/Navigation/DefaultNavButtons";
 
 import '../../Styles/UploadPageContent.css'
+import '../../Styles/Navigation/DefaultNavButtons.css'
+
 
 export const UploadPage = () => {
 
 	const header = <WindowHeader className="window-header"/>
 
 	const buttonLayer = <ButtonLayer className="button-layer">
-		<DefaultButton className="window-navigate-button" labelText="button_1"/>
-		<DefaultButton className="window-navigate-button" labelText="button_2"/>
-		<DefaultButton className="window-navigate-button" labelText="button_3"/>
+		<DefaultNavButtons className="default-nav-buttons"/>
 	</ButtonLayer>
 
 	const innerWindow = <InnerWindow className="inner-window">
-		<UploadPageForm className="upload-page-content"/>
+		<UploadPageForm className="upload-page-form"/>
 	</InnerWindow>
 
 	return (
