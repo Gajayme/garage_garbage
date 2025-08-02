@@ -1,8 +1,8 @@
 
 export const root = "/"
-export const post = "Post"
+export const upload = "Upload"
 export const database = "Database"
 
-export const rootLabel = "Upload"
-export const postLabel = "Post"
+export const rootLabel = "Main"
+export const uploadLabel = "Upload"
 export const databaseLabel = "Database"

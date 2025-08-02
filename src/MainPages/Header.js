@@ -10,19 +10,19 @@ import '../Styles/MarginBottom.css'
 export const Header = () => {
 	const navigate = useNavigate(); // Хук для навигации
 
+	const mainTitle = "Main"
 	const uploadTitle = "Upload"
-	const postTitle = "Post"
 	const databaseTitle = "Database"
 
 	// Функции для навигации
 	const goToUpload = () => {
-		navigate('/');
+		navigate('/Upload');
 		setActiveButton(uploadTitle);
 	}
 
-	const goToPost = () => {
-		navigate('/Post');
-		setActiveButton(postTitle);
+	const goToMain = () => {
+		navigate('/');
+		setActiveButton(mainTitle);
 	}
 
 	const goToDatabase = () => {
@@ -36,8 +36,8 @@ export const Header = () => {
 	return (
 		<nav className='header margin-bottom'>
 
+			<ButtonActivated	labelText = {mainTitle}		onClick={goToMain}		isActive={activeButton===mainTitle}/>
 			<ButtonActivated	labelText = {uploadTitle}	onClick={goToUpload}	isActive={activeButton===uploadTitle}/>
-			<ButtonActivated	labelText = {postTitle}		onClick={goToPost}		isActive={activeButton===postTitle}/>
 			<ButtonActivated	labelText = {databaseTitle}	onClick={goToDatabase}	isActive={activeButton===databaseTitle}/>
 
 		</nav>

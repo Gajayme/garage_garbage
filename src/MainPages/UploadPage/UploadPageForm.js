@@ -225,8 +225,6 @@ export const UploadPageForm = ({className}) => {
 				<LabeledDropdown 	value={formState.buyer}			errors={errorState.buyer}			onChange={handleOnChange('buyer')}			className="upload-form-item"	labelText="Buyer"		id="buyer_dropdown" 	options={buyerOptions}/>
 				<LabeledDropdown 	value={formState.brand}			errors={errorState.brand}			onChange={handleOnChange('brand')}			className="upload-form-item"	labelText="Brand"		id="brand_dropdown" 	options={brandOptions}/>
 				<LabeledDropdown 	value={formState.type}			errors={errorState.type}			onChange={handleOnChange('type')}			className="upload-form-item"	labelText="Type"		id="type_dropdown" 		options={typeOptions}/>
-
-				{/*TODO тестовая кнопка для автозаполнения*/}
 			</div>
 
 			<DefaultButton labelText={'TEST AUTO FILL'} type="button" onClick={handleOnTestAutofill}/>
