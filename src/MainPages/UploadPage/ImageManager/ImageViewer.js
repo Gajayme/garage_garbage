@@ -9,7 +9,7 @@ export const ImageViewer = ({ images, onDeleteSpecific }) => {
                 <p>No uploaded images.</p>
             ) : (
                 images.map((image, _) => (
-                    <DeletableImage image={image} onDeleteSpecific={onDeleteSpecific}/>
+                    <DeletableImage image={image} key={image.id} onDeleteSpecific={onDeleteSpecific}/>
                 ))
             )}
         </div>
