@@ -5,7 +5,6 @@ import {ButtonLayer} from "../../Components/Window/ButtonLayer";
 import {InnerWindow} from "../../Components/Window/InnerWindow";
 import {DefaultNavButtons} from "../../Components/Navigation/DefaultNavButtons";
 
-import '../../Styles/UploadPageContent.css'
 import '../../Styles/Navigation/DefaultNavButtons.css'
 
 
@@ -18,7 +17,7 @@ export const UploadPage = () => {
 	</ButtonLayer>
 
 	const innerWindow = <InnerWindow className="inner-window">
-		<UploadPageForm className="upload-page-form"/>
+		<UploadPageForm/>
 	</InnerWindow>
 
 	return (
