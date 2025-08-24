@@ -11,7 +11,7 @@ import {UploadFormValidation} from './Validations/Validations.js'
 import 'Styles/UploadForm.css'
 
 import 'Styles/MarginBottom.css'
-import DefaultImg from "Imgs/tshirt_stub.svg"
+import DefaultImg from "Images/tshirt_stub.svg"
 
 
 

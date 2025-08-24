@@ -1,7 +1,7 @@
 import React from 'react';
 
 import "Styles/ImageManager/DeletableImage.css"
-import DeleteIcon from "Imgs/delete_image_cross.png"
+import DeleteIcon from "Images/delete_image_cross.png"
 
 
 export const DeletableImage = ({ image, onDeleteSpecific}) => {

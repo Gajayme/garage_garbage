@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { MainPage } from 'MainPages/MainPage/MainPage.js';
-import { UploadPage } from 'MainPages/UploadPage/UploadPage.js';
-import { DatabasePage } from 'MainPages/DatabasePage/DatabasePage.js';
+import { MainPage } from 'Components/MainPages/MainPage/MainPage.js';
+import { UploadPage } from 'Components/MainPages/UploadPage/UploadPage.js';
+import { DatabasePage } from 'Components/MainPages/DatabasePage/DatabasePage.js';
 import { CenteredWindow } from 'Components/CenteredWindow';
 
 const App = () => {

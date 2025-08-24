@@ -6,7 +6,7 @@ import {InnerWindow} from "Components/Window/InnerWindow";
 import {OuterWindow} from "Components/Window/OuterWindow";
 import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons";
 
-import '../../Styles/Navigation/DefaultNavButtons.css'
+import 'Styles/Navigation/DefaultNavButtons.css'
 
 export const DatabasePage = () => {
 
