@@ -18,7 +18,7 @@ import '../../Styles/MarginBottom.css'
 
 
 
-export const UploadPageForm = ({className}) => {
+export const UploadPageForm = () => {
 
 
 	// стейты со значениями полей

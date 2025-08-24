@@ -1,8 +1,6 @@
 
 import React from 'react';
 
-import "../../Styles/DatabaseItems.css"
-import "../../Styles/Bordered.css"
 import {DatabasePageContent} from "./DatabasePageContent";
 import {WindowHeader} from "../../Components/Window/WindowHeader";
 import {ButtonLayer} from "../../Components/Window/ButtonLayer";
@@ -10,6 +8,7 @@ import {DefaultNavButtons} from "../../Components/Navigation/DefaultNavButtons";
 import {InnerWindow} from "../../Components/Window/InnerWindow";
 import {OuterWindow} from "../../Components/Window/OuterWindow";
 
+import '../../Styles/Navigation/DefaultNavButtons.css'
 
 export const DatabasePage = () => {
 
@@ -20,7 +19,7 @@ export const DatabasePage = () => {
     </ButtonLayer>
 
     const innerWindow = <InnerWindow className="inner-window">
-        <DatabasePageContent/>
+        <DatabasePageContent className="database-page-content"/>
     </InnerWindow>
 
     return (

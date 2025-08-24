@@ -1,0 +1,19 @@
+.nav-icon {
+    width: 20%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.2s;
+}
+
+.nav-icon-image {
+    width: 70%;          /* 70% ширины родителя */
+    height: 70%;         /* 70% высоты родителя */
+    object-fit: contain; /* Сохраняем пропорции, вписываем в блок */
+    margin-bottom: 8px;
+}

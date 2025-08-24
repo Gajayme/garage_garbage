@@ -2,7 +2,8 @@ import {OuterWindow} from "../../Components/Window/OuterWindow.js"
 import {InnerWindow} from "../../Components/Window/InnerWindow.js"
 import {ButtonLayer} from "../../Components/Window/ButtonLayer.js"
 import {WindowHeader} from "../../Components/Window/WindowHeader.js"
-import {DefaultNavButtons} from "../../Components/Navigation/DefaultNavButtons";
+import {DefaultNavButtons} from "../../Components/Navigation/DefaultNavButtons.js";
+import {NavIcons} from "./Icons.js"
 
 
 import '../../Styles/Window/OuterWindow.css'
@@ -19,7 +20,9 @@ export const MainPage = () => {
 		<DefaultNavButtons className="default-nav-buttons"/>
 	</ButtonLayer>
 
-	const innerWindow = <InnerWindow className="inner-window"/>
+	const innerWindow = <InnerWindow className="inner-window">
+		<NavIcons/>
+	</InnerWindow>
 
 	return (
 		<div>
