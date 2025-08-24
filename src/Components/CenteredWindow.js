@@ -1,5 +1,5 @@
 
-import "../Styles/CenteredWindow.css"
+import "Styles/CenteredWindow.css"
 
 export const CenteredWindow = ({window}) => {
     return (

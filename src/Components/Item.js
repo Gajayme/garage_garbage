@@ -1,9 +1,10 @@
 
-import * as Constants from '../Constants.js'
+import * as Constants from 'Constants.js'
 
-import "../Styles/DatabaseItem.css"
-import "../Styles/Bordered.css"
-import DefaultImg from "../Imgs/tshirt_stub.svg"
+import "Styles/DatabaseItem.css"
+import "Styles/Bordered.css"
+
+import DefaultImg from "Imgs/tshirt_stub.svg"
 
 /**
  * Компонент для отображения одной вещи с краткой информацией по ней.

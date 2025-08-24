@@ -1,11 +1,11 @@
 import {UploadPageForm} from './UploadPageForm';
-import {OuterWindow} from "../../Components/Window/OuterWindow";
-import {WindowHeader} from "../../Components/Window/WindowHeader";
-import {ButtonLayer} from "../../Components/Window/ButtonLayer";
-import {InnerWindow} from "../../Components/Window/InnerWindow";
-import {DefaultNavButtons} from "../../Components/Navigation/DefaultNavButtons";
+import {OuterWindow} from "Components/Window/OuterWindow";
+import {WindowHeader} from "Components/Window/WindowHeader";
+import {ButtonLayer} from "Components/Window/ButtonLayer";
+import {InnerWindow} from "Components/Window/InnerWindow";
+import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons";
 
-import '../../Styles/Navigation/DefaultNavButtons.css'
+import 'Styles/Navigation/DefaultNavButtons.css'
 
 
 export const UploadPage = () => {

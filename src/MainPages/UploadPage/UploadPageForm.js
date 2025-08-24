@@ -1,20 +1,17 @@
 import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
-import { DefaultButton } from "../../Components/Button.js"
-import {LabeledInput} from "../../Components/LabeledInput.js"
-import {LabeledDropdown} from "../../Components/LabeledDropDown.js"
+import * as Constants from 'Constants.js'
+import { DefaultButton } from "Components/Button.js"
+import {LabeledInput} from "Components/LabeledInput.js"
+import {LabeledDropdown} from "Components/LabeledDropDown.js"
 import {ImageManagerWindow} from "./ImageManager/ImageManagerWindow.js"
-import * as Constants from '../../Constants.js'
-import DefaultImg from "../../Imgs/tshirt_stub.svg"
-
-//Validations
 import {NumbersOnly} from './Validations/Validations.js'
 import {NonEmpty, NonEmptyImages} from './Validations/Validations.js'
 import {UploadFormValidation} from './Validations/Validations.js'
+import 'Styles/UploadForm.css'
 
-// Styles
-import '../../Styles/UploadForm.css'
-import '../../Styles/MarginBottom.css'
+import 'Styles/MarginBottom.css'
+import DefaultImg from "Imgs/tshirt_stub.svg"
 
 
 

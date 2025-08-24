@@ -1,12 +1,10 @@
-
 import React from 'react';
-
 import {DatabasePageContent} from "./DatabasePageContent";
-import {WindowHeader} from "../../Components/Window/WindowHeader";
-import {ButtonLayer} from "../../Components/Window/ButtonLayer";
-import {DefaultNavButtons} from "../../Components/Navigation/DefaultNavButtons";
-import {InnerWindow} from "../../Components/Window/InnerWindow";
-import {OuterWindow} from "../../Components/Window/OuterWindow";
+import {WindowHeader} from "Components/Window/WindowHeader";
+import {ButtonLayer} from "Components/Window/ButtonLayer";
+import {InnerWindow} from "Components/Window/InnerWindow";
+import {OuterWindow} from "Components/Window/OuterWindow";
+import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons";
 
 import '../../Styles/Navigation/DefaultNavButtons.css'
 

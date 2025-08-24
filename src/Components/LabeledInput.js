@@ -1,9 +1,8 @@
-
 import {UploadPageError} from "./UploadPageError.js"
 
-import '../Styles/Labeled.css'
-import "../Styles/ErrorText.css";
-import "../Styles/UploadPageInput.css";
+import 'Styles/Labeled.css'
+import "Styles/ErrorText.css";
+import "Styles/UploadPageInput.css";
 
 
 import React from "react";

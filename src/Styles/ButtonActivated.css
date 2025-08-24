@@ -1,9 +1,0 @@
-.button.inactive {
-	background-color: #f0f0f0;
-	color: #000;
-}
-
-.button.activated {
-	background-color: #000000;
-	color: white;
-}

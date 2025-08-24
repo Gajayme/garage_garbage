@@ -1,8 +1,7 @@
-
 import {NavButton} from "./NavButton";
 import * as Constants from './Constants.js'
 
-import '../../Styles/Navigation/NavButton.css'
+import 'Styles/Navigation/NavButton.css'
 
 
 export const DefaultNavButtons = ({className=""}) => {

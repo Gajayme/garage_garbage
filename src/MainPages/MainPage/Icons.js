@@ -1,13 +1,12 @@
+import {NavIcon} from "Components/Navigation/NavIcon";
+import * as Constants from "Components/Navigation/Constants";
 
-import {NavIcon} from "../../Components/Navigation/NavIcon";
-import * as Constants from "../../Components/Navigation/Constants";
+import Icon1 from "Imgs/NavIcons/icon_1.png"
+import Icon2 from "Imgs/NavIcons/icon_2.png"
+import Icon3 from "Imgs/NavIcons/icon_3.png"
 
-import Icon1 from "../../Imgs/NavIcons/icon_1.png"
-import Icon2 from "../../Imgs/NavIcons/icon_2.png"
-import Icon3 from "../../Imgs/NavIcons/icon_3.png"
-
-import '../../Styles/Navigation/NavIcon.css'
-import '../../Styles/MainPageNavIcons.css'
+import 'Styles/Navigation/NavIcon.css'
+import 'Styles/MainPageNavIcons.css'
 
 
 export const NavIcons = () => {
