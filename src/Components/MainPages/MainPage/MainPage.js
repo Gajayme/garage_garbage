@@ -5,7 +5,7 @@ import {WindowHeader} from "Components/Window/WindowHeader.js"
 import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons.js";
 import {NavIcons} from "./Icons.js"
 
-
+import 'Styles/MainPageNavIcons.css'
 import 'Styles/Window/OuterWindow.css'
 import 'Styles/Window/WindowHeader.css'
 import 'Styles/Window/ButtonLayer.css'
@@ -21,7 +21,7 @@ export const MainPage = () => {
 	</ButtonLayer>
 
 	const innerWindow = <InnerWindow className="inner-window">
-		<NavIcons/>
+		<NavIcons className="main-page-nav-icons"/>
 	</InnerWindow>
 
 	return (

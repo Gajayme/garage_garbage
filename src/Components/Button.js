@@ -2,11 +2,10 @@
 /**
  * Компонент кнопки.
  *
- * Props:
- * - className (string): Имя класса.
- * - labelText (string): Заголовок.
- * - type (string): Тип кнопки.
- * - onClick (function): Функция обработки клика по элементу.
+ * @param {string} className - Имя класса для стилей.
+ * @param {string} labelText - Заголовок кнопки.
+ * @param {"button" | "submit" | "reset"} type - Тип кнопки.
+ * @param {Function} onClick - Функция для обработки клика по кнопке.
  */
 export const DefaultButton = ({className, labelText, type = "button", onClick}) => {
 	return (

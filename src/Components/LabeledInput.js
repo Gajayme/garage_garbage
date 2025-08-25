@@ -1,4 +1,4 @@
-import {UploadPageError} from "./UploadPageError.js"
+import {ErrorMessage} from "./MainPages/UploadPage/Validations/ErrorMessage.js"
 
 import 'Styles/Labeled.css'
 import "Styles/ErrorText.css";
@@ -33,7 +33,7 @@ export const LabeledInput = ({value, errors=null, onChange, id, labelText="", cl
 			</label>
 
 			<input value={value} className='upload-page-input' id={id} maxLength={maxLength} onChange={handleInput}/>
-			<UploadPageError errors={errors}/>
+			<ErrorMessage errors={errors}/>
 		</div>
 	)
 }

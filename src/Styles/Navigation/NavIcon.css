@@ -5,10 +5,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     cursor: pointer;
-    border-radius: 10px;
-    transition: background-color 0.2s;
 }
 
 .nav-icon-image {

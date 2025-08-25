@@ -9,12 +9,11 @@ import DefaultImg from "Images/tshirt_stub.svg"
 /**
  * Компонент для отображения одной вещи с краткой информацией по ней.
  *
- * Props:
- * - img (image): Изображение (фото вещи).
- * - name (string): Название вещи.
- * - price (string): цена вещи
- * - adding_date_time (string): Дата добавления вещь в БД.
- * - onClick (function): Функция-обработчик клика на элемент.
+ * @param {string} img - Изображение вещи.
+ * @param {string} name - Название вещи.
+ * @param {string} price - Цена вещи
+ * @param {string} adding_date_time - Дата добавления вещь в БД.
+ * @param {Function} onClick - Функция-обработчик клика на элемент.
  */
 export const Item = ({img, name, price, adding_date_time, onClick}) => {
     return (

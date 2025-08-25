@@ -1,5 +1,5 @@
 import React from "react";
-import {UploadPageError} from "./UploadPageError.js"
+import {ErrorMessage} from "./MainPages/UploadPage/Validations/ErrorMessage.js"
 
 import "Styles/Labeled.css";
 import "Styles/CenteredText.css";
@@ -28,7 +28,7 @@ export const LabeledDropdown = ({value, options, errors, id, labelText, onChange
 			))}
 		</select>
 
-        <UploadPageError errors={errors} />
+        <ErrorMessage errors={errors} />
     </div>
   );
 };

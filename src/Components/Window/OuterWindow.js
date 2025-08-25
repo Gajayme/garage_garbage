@@ -1,13 +1,11 @@
-import React from 'react';
 
 /**
  * Компонент внешней (фоновой) части базового окна страницы.
  *
- * Props:
- * - className (string): Имя класса для стилей.
- * - header (component): Компонент с заголовком окна.
- * - buttonLayer (component): Компонент с управляющими кнопками внутри окна.
- * - innerWindow (component): Компонент внутренней части окна.
+ * @param {string} className - Имя класса для стилей.
+ * @param {React.ReactNode} header - Компонент с заголовком окна.
+ * @param {React.ReactNode} buttonLayer - Компонент с управляющими кнопками внутри окна.
+ * @param {React.ReactNode} innerWindow - Компонент внутренней части окна.
  */
 export const OuterWindow = ({className, header, buttonLayer, innerWindow}) => {
     return (

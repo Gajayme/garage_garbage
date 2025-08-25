@@ -4,7 +4,12 @@ import * as Constants from './Constants.js'
 import 'Styles/Navigation/NavButton.css'
 
 
-export const DefaultNavButtons = ({className=""}) => {
+/**
+ * Компонент стандартного слоя навигационных кнопок.
+ *
+ * @param {string} className - Имя класса для стилей.
+ */
+export const DefaultNavButtons = ({className}) => {
     return (
         <div className={className}>
             <NavButton className="nav-button" labelText={Constants.rootLabel} destination={Constants.root}/>

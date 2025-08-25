@@ -1,9 +1,9 @@
+
 /**
  * Компонент слоя навигационных кнопок страницы.
  *
- * Props:
- * - className (string): Имя класса для стилей.
- * - children (react component): Компоненты, которые будут отображены внутри слоя (предполагается что это будут кнопки).
+ * @param {string} className - Имя класса для стилей.
+ * @param {React.ReactNode} children - Компоненты, которые будут отображены внутри слоя (предполагается, что это кнопки).
  */
 export const ButtonLayer = ({className, children}) => {
     return (
