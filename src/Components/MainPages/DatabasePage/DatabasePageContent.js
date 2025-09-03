@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {Item} from 'Components/Item';
-import {ModalWindow} from "Components/ModalWindow";
+import {Item} from 'Components/MainPages/DatabasePage/Item';
+import {ModalWindow} from "Components/MainPages/DatabasePage/ModalWindow";
 import * as Constants from "Constants";
 
 import "Styles/DatabaseItems.css"

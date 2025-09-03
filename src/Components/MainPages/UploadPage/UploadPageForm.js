@@ -2,8 +2,8 @@ import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
 import * as Constants from 'Constants.js'
 import { DefaultButton } from "Components/Button.js"
-import {LabeledInput} from "Components/LabeledInput.js"
-import {LabeledDropdown} from "Components/LabeledDropDown.js"
+import {LabeledInput} from "Components/MainPages/UploadPage/LabeledInput.js"
+import {LabeledDropdown} from "Components/MainPages/UploadPage/LabeledDropDown.js"
 import {ImageManagerWindow} from "./ImageManager/ImageManagerWindow.js"
 import {NumbersOnly} from './Validations/Validations.js'
 import {NonEmpty, NonEmptyImages} from './Validations/Validations.js'
