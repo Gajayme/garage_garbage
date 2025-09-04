@@ -8,8 +8,8 @@ import {ImageManagerWindow} from "./ImageManager/ImageManagerWindow.js"
 import {NumbersOnly} from './Validations/Validations.js'
 import {NonEmpty, NonEmptyImages} from './Validations/Validations.js'
 import {UploadFormValidation} from './Validations/Validations.js'
-import 'Styles/MainPages/UploadPage/UploadPageForm.css'
 
+import 'Styles/MainPages/UploadPage/UploadPageForm.css'
 import 'Styles/MarginBottom.css'
 import DefaultImg from "Images/tshirt_stub.svg"
 

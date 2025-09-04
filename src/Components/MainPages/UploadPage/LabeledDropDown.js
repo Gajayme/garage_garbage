@@ -1,5 +1,5 @@
 import {ErrorMessage} from "./Validations/ErrorMessage.js"
-import {Dropdown} from "../../DropDown.js"
+import {Dropdown} from "Components/DropDown.js"
 
 import "Styles/MainPages/UploadPage/Labeled.css";
 import "Styles/CenteredText.css";
