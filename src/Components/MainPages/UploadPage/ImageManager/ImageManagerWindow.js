@@ -4,7 +4,7 @@ import {OuterWindow} from "Components/Window/OuterWindow.js"
 import {InnerWindow} from "Components/Window/InnerWindow.js"
 import {ButtonLayer} from "Components/Window/ButtonLayer.js"
 
-import 'Styles/ErrorText.css'
+import 'Styles/MainPages/UploadPage/Validations/ErrorText.css'
 import 'Styles/Window/WindowHeader.css'
 import 'Styles/Window/ButtonLayer.css'
 import 'Styles/Window/InnerWindow.css'

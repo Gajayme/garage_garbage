@@ -3,8 +3,8 @@ import {ImageUploader} from "./ImageUploader.js";
 import {ImageViewer} from "./ImageViewer.js";
 import {ErrorMessage} from "Components/MainPages/UploadPage/Validations/ErrorMessage.js"
 
-import 'Styles/ErrorText.css'
-import 'Styles/ImageManager/ImageManager.css'
+import 'Styles/MainPages/UploadPage/Validations/ErrorText.css'
+import 'Styles/MainPages/UploadPage/ImageManager/ImageManager.css'
 
 export const ImageManager = ({images, errors, onChange, onDelete, onDeleteSpecific}) => {
 	return (

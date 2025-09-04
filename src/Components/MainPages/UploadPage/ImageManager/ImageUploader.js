@@ -1,8 +1,8 @@
 import {DefaultButton} from "Components/Button.js";
 
 import 'Styles/Hidden.css';
-import 'Styles/ImageManager/ImageUploader.css'
-import 'Styles/ImageManager/ImageUploaderButton.css'
+import 'Styles/MainPages/UploadPage/ImageManager/ImageUploader.css'
+import 'Styles/MainPages/UploadPage/ImageManager/ImageUploaderButton.css'
 
 // Часть костыля, перенаправляющего нажатие кнопки на теальный (но скрытый) инпут.
 const redirectToFileInput = () => {

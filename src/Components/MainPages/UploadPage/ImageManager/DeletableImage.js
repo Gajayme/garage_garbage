@@ -1,6 +1,6 @@
 import React from 'react';
 
-import "Styles/ImageManager/DeletableImage.css"
+import "Styles/MainPages/UploadPage/ImageManager/DeletableImage.css"
 import DeleteIcon from "Images/delete_image_cross.png"
 
 

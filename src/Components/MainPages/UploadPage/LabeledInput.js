@@ -1,8 +1,8 @@
 import {ErrorMessage} from "./Validations/ErrorMessage.js"
 
-import 'Styles/Labeled.css'
-import "Styles/ErrorText.css";
-import "Styles/UploadPageInput.css";
+import 'Styles/MainPages/UploadPage/Labeled.css'
+import "Styles/MainPages/UploadPage/Validations/ErrorText.css";
+import "Styles/MainPages/UploadPage/UploadPageInput.css";
 
 
 /**

@@ -3,8 +3,7 @@ import {Item} from 'Components/MainPages/DatabasePage/Item';
 import {ModalWindow} from "Components/MainPages/DatabasePage/ModalWindow";
 import * as Constants from "Constants";
 
-import "Styles/DatabaseItems.css"
-import "Styles/Bordered.css"
+import "Styles/MainPages/DatabasePage/DatabaseItems.css"
 
 
 export const DatabasePageContent = () => {
@@ -69,7 +68,7 @@ export const DatabasePageContent = () => {
 
             {chosenItem && (
                 <ModalWindow
-                    className={"bordered-round-2 modal-overlay"}
+                    className={"modal-overlay"}
                     itemId={chosenItem.id}/>
             )}
 

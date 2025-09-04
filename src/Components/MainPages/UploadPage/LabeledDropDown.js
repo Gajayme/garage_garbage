@@ -1,9 +1,9 @@
 import {ErrorMessage} from "./Validations/ErrorMessage.js"
 import {Dropdown} from "../../DropDown.js"
 
-import "Styles/Labeled.css";
+import "Styles/MainPages/UploadPage/Labeled.css";
 import "Styles/CenteredText.css";
-import "Styles/UploadPageInput.css";
+import "Styles/MainPages/UploadPage/UploadPageInput.css";
 
 
 /**

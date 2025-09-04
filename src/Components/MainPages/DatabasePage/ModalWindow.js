@@ -3,7 +3,7 @@ import { DefaultButton } from "../../Button.js"
 import * as Constants from "Constants.js";
 import {post_delete} from "Constants.js";
 
-import "Styles/ModalWindow.css"
+import "Styles/MainPages/DatabasePage/ModalWindow.css"
 
 /**
  * Компонент модального окна.

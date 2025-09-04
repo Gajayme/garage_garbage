@@ -1,8 +1,7 @@
 
 import * as Constants from 'Constants.js'
 
-import "Styles/DatabaseItem.css"
-import "Styles/Bordered.css"
+import "Styles/MainPages/DatabasePage/DatabaseItem.css"
 
 import DefaultImg from "Images/tshirt_stub.svg"
 
@@ -17,7 +16,7 @@ import DefaultImg from "Images/tshirt_stub.svg"
  */
 export const Item = ({img, name, price, adding_date_time, onClick}) => {
     return (
-        <div className={"bordered-round-2 database-item"} onClick={onClick}>
+        <div className={"database-item"} onClick={onClick}>
             <img src={img ? img : DefaultImg} alt={"item"}/>
             <p title={name}> <strong> {Constants.item_name}: </strong> {name}</p>
             <p title={price}> <strong> {Constants.price}: </strong> {price}</p>
