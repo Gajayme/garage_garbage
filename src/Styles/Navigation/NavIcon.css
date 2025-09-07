@@ -8,6 +8,16 @@
     cursor: pointer;
 }
 
+.nav-icon:hover {
+    background-color: #B2B4B5;
+}
+
+.nav-icon:active {
+    background: #B2B4B5;
+    border-top: 3px solid #1E2526;
+    border-left: 3px solid #1E2526;
+}
+
 .nav-icon-image {
     width: 70%;          /* 70% ширины родителя */
     height: 70%;         /* 70% высоты родителя */

@@ -10,3 +10,7 @@
     border-top: 2px solid #1E2526;
     border-left: 2px solid #1E2526;
 }
+
+.nav-button:hover {
+    background-color: #B2B4B5;
+}
