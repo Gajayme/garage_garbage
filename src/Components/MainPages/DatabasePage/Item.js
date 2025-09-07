@@ -2,6 +2,7 @@
 import * as Constants from 'Constants.js'
 
 import "Styles/MainPages/DatabasePage/DatabaseItem.css"
+import "Styles/BorderedImage.css"
 
 import DefaultImg from "Images/tshirt_stub.svg"
 
@@ -14,13 +15,12 @@ import DefaultImg from "Images/tshirt_stub.svg"
  * @param {string} adding_date_time - Дата добавления вещь в БД.
  * @param {Function} onClick - Функция-обработчик клика на элемент.
  */
-export const Item = ({img, name, price, adding_date_time, onClick}) => {
+export const Item = ({img, name, price, onClick}) => {
     return (
         <div className={"database-item"} onClick={onClick}>
-            <img src={img ? img : DefaultImg} alt={"item"}/>
-            <p title={name}> <strong> {Constants.item_name}: </strong> {name}</p>
-            <p title={price}> <strong> {Constants.price}: </strong> {price}</p>
-            <p title={adding_date_time}> <strong> {Constants.adding_date_time}: </strong> {adding_date_time}</p>
+            <img className={"bordered-image"} src={img ? img : DefaultImg} alt={"item"}/>
+            <p title={name}> {name}</p>
+            <p title={price}> {price}</p>
         </div>
     )
 }

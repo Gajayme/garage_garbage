@@ -4,22 +4,24 @@
     z-index: 1;
 }
 
-
-.database-item:hover {
-    background-color: #717171;
-    transform: scale(1.1); /* Увеличение объекта */
-}
-
 .database-item img {
-    object-fit: contain;
-    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
+    max-height: 200px; /* Изображение не будет больше 200px по высоте */
+    width: auto;
+    height: auto;
 }
 
 
 .database-item p {
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+
     display: -webkit-box;          /* Устанавливаем flex-контейнер */
     -webkit-box-orient: vertical;  /* Задаём вертикальную ориентацию */
     overflow: hidden;              /* Обрезаем текст, если он превышает заданные строки */
     text-overflow: ellipsis;       /* Добавляем троеточие (...) */
     -webkit-line-clamp: 2;         /* Ограничиваем количество строк (2) */
+    line-height: 20px;
 }
