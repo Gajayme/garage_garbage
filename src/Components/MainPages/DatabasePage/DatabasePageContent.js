@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Item} from 'Components/MainPages/DatabasePage/Item';
+import {DefaultButton} from 'Components/Button.js';
 import {ModalWindow} from "Components/MainPages/DatabasePage/ModalWindow";
 import * as Constants from "Constants";
 
 import "Styles/MainPages/DatabasePage/DatabaseItems.css"
+import "Styles/MainPages/DatabasePage/FiltersActivationButton.css"
 
 import DefaultImg from "Images/tshirt_stub.svg"
 import {click} from "@testing-library/user-event/dist/click";
@@ -16,7 +18,11 @@ export const DatabasePageContent = () => {
 
     return (
         <div>
-            <Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
+            <DefaultButton className={"filter-activation-button"} labelText={"Filters"} onClick={onClick}></DefaultButton>
+
+            <div>
+                <Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
+            </div>
         </div>
     )
 

@@ -6,11 +6,11 @@
 }
 
 .nav-button:active {
-    background: #B2B4B5;
-    border-top: 2px solid #1E2526;
-    border-left: 2px solid #1E2526;
+    background: var(--dark-grey);
+    border-top: 2px solid var(--black);
+    border-left: 2px solid var(--black);
 }
 
 .nav-button:hover {
-    background-color: #B2B4B5;
+    background-color: var(--dark-grey);
 }

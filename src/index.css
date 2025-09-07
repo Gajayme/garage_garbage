@@ -1,4 +1,6 @@
 
+@import './Styles/Colors.css';
+
 /*базовый файл со стилями для проекта*/
 body {
     font-family: "Press Start 2P", sans-serif;

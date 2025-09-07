@@ -1,5 +1,5 @@
 .window-header {
-    background-color: #1E2526;
+    background-color: var(--black);
     flex-grow: 1;
 }
 

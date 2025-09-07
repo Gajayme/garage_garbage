@@ -10,6 +10,7 @@ import {NonEmpty, NonEmptyImages} from './Validations/Validations.js'
 import {UploadFormValidation} from './Validations/Validations.js'
 
 import 'Styles/MainPages/UploadPage/UploadPageForm.css'
+import 'Styles/MainPages/UploadPage/UploadPageButton.css'
 import 'Styles/MarginBottom.css'
 import DefaultImg from "Images/tshirt_stub.svg"
 
@@ -206,6 +207,7 @@ export const UploadPageForm = () => {
 	};
 
 	return (
+
 		<form className="upload-page-form" onSubmit={handleOnSubmit}>
 
 			<ImageManagerWindow		images={formState.images}		errors={errorState.images}	onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages} onDeleteSpecific={handleOnDeleteSpecificImage} className="margin-bottom" />
@@ -224,8 +226,9 @@ export const UploadPageForm = () => {
 				<LabeledDropdown 	value={formState.type}			errors={errorState.type}			onChange={handleOnChange('type')}			className="upload-form-item"	labelText="Type"		id="type_dropdown" 		options={typeOptions}/>
 			</div>
 
+			<DefaultButton className={"upload-page-button"} labelText={'upload'} type="submit" onClick={handleOnSubmit}/>
+
 			<DefaultButton labelText={'TEST AUTO FILL'} type="button" onClick={handleOnTestAutofill}/>
-			<DefaultButton labelText={'Add to database'} type="submit" onClick={handleOnSubmit}/>
 
 		</form>
 	)

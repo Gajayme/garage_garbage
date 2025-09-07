@@ -1,0 +1,15 @@
+
+.filter-activation-button {
+
+    /*TODO удалить*/
+    margin: 10px;
+
+    padding: 10px;
+    cursor: pointer;
+    color: var(--white);
+    background-color: var(--black);
+
+    border: 2px solid var(--dark-grey);
+}
+
+
