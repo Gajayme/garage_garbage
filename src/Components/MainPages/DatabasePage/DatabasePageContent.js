@@ -1,33 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import {Item} from 'Components/MainPages/DatabasePage/Item';
+
+import {Items} from 'Components/MainPages/DatabasePage/Items.js'
 import {DefaultButton} from 'Components/Button.js';
-import {ModalWindow} from "Components/MainPages/DatabasePage/ModalWindow";
 import * as Constants from "Constants";
 
 import "Styles/MainPages/DatabasePage/DatabaseItems.css"
+import "Styles/MainPages/DatabasePage/DatabasePage.css"
 import "Styles/MainPages/DatabasePage/FiltersActivationButton.css"
 
-import DefaultImg from "Images/tshirt_stub.svg"
+import DefaultImg from "Images/сложенная-пустая-одежда-на-белом-фоне-329728970.webp"
+
 import {click} from "@testing-library/user-event/dist/click";
 
 export const DatabasePageContent = () => {
 
-    const onClick = () => {
-        console.log("clicked");
-    }
+	const onFilterClicked = () => {
+	}
 
-    return (
-        <div>
-            <DefaultButton className={"filter-activation-button"} labelText={"Filters"} onClick={onClick}></DefaultButton>
-
-            <div>
-                <Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
-            </div>
-        </div>
-    )
-
-
-    //
+	    //
     // // стейт для сохранения полученных с сервера объектов
     // const [databaseState, setDatabaseState] = useState([])
     // const [chosenItem, setChosenItem] = useState(null)
@@ -44,6 +34,16 @@ export const DatabasePageContent = () => {
     //     setDatabaseState((prevState) => [...prevState, ...newItems]);
     // }
     //
+
+
+    return (
+        <div className="database-page">
+            <DefaultButton className={"filter-activation-button"} labelText={"Filters"} onClick={onFilterClicked}></DefaultButton>
+			<Items/>
+        </div>
+    )
+
+
     // // Запрос к серверу
     // useEffect(() => {
     //     if (!databaseState.length) {
