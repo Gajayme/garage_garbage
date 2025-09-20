@@ -1,10 +1,9 @@
 name: Deploy React Frontend
 
-# Запуск при пуше в master или вручную
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 jobs:
