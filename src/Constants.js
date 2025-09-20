@@ -19,7 +19,7 @@ export const brand = "brandId"
 export const type = "typeId"
 export const adding_date_time = "Date-Time of adding"
 
-export const base_server_url = "http://138.124.18.179:5000/"
+export const base_server_url = "http://72.60.133.178:5000/"
 export const post_upload = "post/upload"
 export const post_all = "post/all"
 export const post_delete = "post/delete"
