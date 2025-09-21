@@ -19,7 +19,6 @@ export const DatabasePageContent = () => {
     const [databaseState, setDatabaseState] = useState([])
 
     const parseServerData = (data) => {
-        console.log(data)
         const newItems = data.map((item) => ({
             id: item.id, // TODO: переделать на нормальное значение
             image:  Array.isArray(item.images) && item.images.length && item.images[0].image_url, // TODO: переделать на нормальное значение
@@ -50,7 +49,7 @@ export const DatabasePageContent = () => {
     return (
         <div className="database-page">
             <DefaultButton className={"filter-activation-button"} labelText={"Filters"} onClick={onFilterClicked}></DefaultButton>
-			<Items databaseState/>
+			<Items databaseState={databaseState}/>
         </div>
     )
 }

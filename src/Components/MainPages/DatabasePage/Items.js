@@ -10,16 +10,29 @@ export const Items = ({databaseState}) => {
     }
 
 	return (
-
 		<div className="database-items">
-			<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
-			<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
-			<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
-			<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
-			<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
-			<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
-			<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
-			<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
+			{databaseState.length === 0 ? (
+                <p>No uploaded items.</p>
+            ) : (
+                databaseState.map((value, index) => {
+					const img = value.image ? value.image : DefaultImg;
+					return (
+						<Item key={index} img={img} name={value.itemName} price={value.price} onClick={onClick}/>
+					)
+				})
+            )}
 		</div>
+
+
+		// TODO for the tests
+		// <div className="database-items">
+		// 	<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
+		// 	<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
+		// 	<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
+		// 	<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
+		// 	<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
+		// 	<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
+		// 	<Item img={DefaultImg} name={"Super Item"} price={"999"} onClick={onClick}/>
+		// </div>
 	)
 }
