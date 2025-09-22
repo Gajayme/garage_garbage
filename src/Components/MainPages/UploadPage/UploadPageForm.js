@@ -23,12 +23,28 @@ export const UploadPageForm = () => {
 
 	// стейты с брендами, получаемыми от сервера
 	const [brandState, setBrandState] = useState({
-		[Constants.chooseBrand]: 0
+		[UploadConstants.chooseBrand]: UploadConstants.defaultID
 	})
 
-	const updateBrands = (serverBrandsRawData) => {
+	// стейты с типами вещей, получаемыми от сервера
+	const [typeState, setTypeState] = useState({
+		[UploadConstants.chooseType]: UploadConstants.defaultID
+	})
 
-		const brandsObj = serverBrandsRawData.reduce((acc, brand) => {
+	// стейты с приобретателями вещей, получаемыми от сервера
+	const [buyerState, setBuyerState] = useState({
+		[UploadConstants.chooseBuyer]: UploadConstants.defaultID
+	})
+
+	// стейты с местонахождением вещиейч, получаемыми от сервера
+	const [locationState, setLocationState] = useState({
+		[UploadConstants.chooseLocation]: UploadConstants.defaultID
+	})
+
+
+	const updateBrands = (brandsData) => {
+
+		const brandsObj = brandsData.reduce((acc, brand) => {
 			acc[brand.title] = brand.id;
 			return acc;
 		  }, {});
@@ -38,17 +54,65 @@ export const UploadPageForm = () => {
 		)
 	}
 
+	const updateTypes = (typesData) => {
+
+		const typesObj = typesData.reduce((acc, type) => {
+			acc[type.title] = type.id;
+			return acc;
+		  }, {});
+
+		setTypeState((prevState) => ({
+			...prevState, ...typesObj})
+		)
+	}
+
+	const updateByuers = (byuersData) => {
+
+		const byuersObj = byuersData.reduce((acc, byuer) => {
+			acc[byuer.title] = byuer.id;
+			return acc;
+		  }, {});
+
+		setBuyerState((prevState) => ({
+			...prevState, ...byuersObj})
+		)
+	}
+
+	const updateLocations = (locationsData) => {
+
+		const locationsObj = locationsData.reduce((acc, location) => {
+			acc[location.title] = location.id;
+			return acc;
+		  }, {});
+
+		setLocationState((prevState) => ({
+			...prevState, ...locationsObj})
+		)
+	}
+
 	useEffect(() => {
 		const loadData = async () => {
-		  try {
-			const response = await fetch(UploadConstants.brandsApi);
-			const data = await response.json();
-			console.log(data.data)
-			updateBrands(data.data)
+			try {
+				const [brandsResponse, typesResponse, byuersResponce, locationsResponce] = await Promise.all([
+					fetch(UploadConstants.baseApi + UploadConstants.brandApi),
+					fetch(UploadConstants.baseApi + UploadConstants.typeApi),
+					fetch(UploadConstants.baseApi + UploadConstants.byuerApi),
+					fetch(UploadConstants.baseApi + UploadConstants.locationApi),
+				]);
 
-		  } catch (error) {
-			console.error('Error while getting brands:', error);
-		  }
+				const brandsData = await brandsResponse.json();
+				const typesData = await typesResponse.json();
+				const byuersData = await byuersResponce.json();
+				const locationsData = await locationsResponce.json();
+
+				updateBrands(brandsData.data);
+				updateTypes(typesData.data);
+				updateByuers(byuersData.data);
+				updateLocations(locationsData.data);
+
+			} catch (error) {
+				console.error('Ошибка при получении данных:', error);
+			}
 		};
 
 		loadData();
@@ -105,6 +169,10 @@ export const UploadPageForm = () => {
 	// обработать нажатие на кнопку подтверждения
 	const handleOnSubmit = (event) => {
 		console.log("brand state: ", brandState)
+		console.log("type state: ", typeState)
+		console.log("byuer state: ", buyerState)
+		console.log("location state: ", locationState)
+
 
 		event.preventDefault()
 		const errorsLocal = UploadFormValidation(formState, errorState, validationMapper)
@@ -224,26 +292,6 @@ export const UploadPageForm = () => {
 		});
 	};
 
-	const buyerOptions = {
-		[Constants.chooseBuyer]: 0,
-		"test": 1,
-	}
-
-	const locationOptions = {
-		[Constants.chooseLocation]: 0,
-		"test": 1,
-	};
-
-	const brandOptions = {
-		[Constants.chooseBrand]: 0,
-		"test": 1,
-	};
-
-	const typeOptions = {
-		[Constants.chooseType]: 0,
-		"test": 1,
-	};
-
 	return (
 
 		<form className="upload-page-form" onSubmit={handleOnSubmit}>
@@ -258,10 +306,10 @@ export const UploadPageForm = () => {
 				<LabeledInput 		value={formState.price}			errors={errorState.price}			onChange={handleOnChange('price')}			className="upload-form-item"	labelText="Price"		id="price_input"		maxLength={10}		inputValidator={NumbersOnly}/>
 				<LabeledInput 		value={formState.sold_for}		errors={errorState.sold_for}		onChange={handleOnChange('sold_for')}		className="upload-form-item"	labelText="Sold for"	id="sold_for_input"		maxLength={10}		inputValidator={NumbersOnly}/>
 				<LabeledInput 		value={formState.size}												onChange={handleOnChange('size')}			className="upload-form-item"	labelText="Size"		id="size_input"			maxLength={10}/>
-				<LabeledDropdown	value={formState.location}		errors={errorState.location}		onChange={handleOnChange('location')}		className="upload-form-item"	labelText="Location"	id="location_dropdown" 	options={locationOptions}/>
-				<LabeledDropdown 	value={formState.buyer}			errors={errorState.buyer}			onChange={handleOnChange('buyer')}			className="upload-form-item"	labelText="Buyer"		id="buyer_dropdown" 	options={buyerOptions}/>
 				<LabeledDropdown 	value={formState.brand}			errors={errorState.brand}			onChange={handleOnChange('brand')}			className="upload-form-item"	labelText="Brand"		id="brand_dropdown" 	options={brandState}/>
-				<LabeledDropdown 	value={formState.type}			errors={errorState.type}			onChange={handleOnChange('type')}			className="upload-form-item"	labelText="Type"		id="type_dropdown" 		options={typeOptions}/>
+				<LabeledDropdown 	value={formState.type}			errors={errorState.type}			onChange={handleOnChange('type')}			className="upload-form-item"	labelText="Type"		id="type_dropdown" 		options={typeState}/>
+				<LabeledDropdown 	value={formState.buyer}			errors={errorState.buyer}			onChange={handleOnChange('buyer')}			className="upload-form-item"	labelText="Buyer"		id="buyer_dropdown" 	options={buyerState}/>
+				<LabeledDropdown	value={formState.location}		errors={errorState.location}		onChange={handleOnChange('location')}		className="upload-form-item"	labelText="Location"	id="location_dropdown" 	options={locationState}/>
 			</div>
 
 			<DefaultButton className={"upload-page-button"} labelText={'upload'} type="submit" onClick={handleOnSubmit}/>

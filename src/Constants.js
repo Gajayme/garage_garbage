@@ -1,10 +1,6 @@
 
 export const none = ''
 
-export const chooseBuyer = 'Choose Buyer'
-export const chooseLocation = 'Choose Location'
-export const chooseBrand = 'Choose Brand'
-export const chooseType = 'Choose Type'
 
 export const files = "files"
 export const item_name = "itemName"
