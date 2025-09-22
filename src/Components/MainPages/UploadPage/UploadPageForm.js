@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { v4 as uuidv4 } from 'uuid';
-import * as Constants from 'Constants.js'
+
 import { DefaultButton } from "Components/Button.js"
 import {LabeledInput} from "Components/MainPages/UploadPage/LabeledInput.js"
 import {LabeledDropdown} from "Components/MainPages/UploadPage/LabeledDropDown.js"
@@ -8,6 +8,9 @@ import {ImageManagerWindow} from "./ImageManager/ImageManagerWindow.js"
 import {NumbersOnly} from './Validations/Validations.js'
 import {NonEmpty, NonEmptyImages} from './Validations/Validations.js'
 import {UploadFormValidation} from './Validations/Validations.js'
+import * as Constants from 'Constants.js'
+import * as UploadConstants from './UploadPageConstants.js'
+
 
 import 'Styles/MainPages/UploadPage/UploadPageForm.css'
 import 'Styles/MainPages/UploadPage/UploadPageButton.css'
@@ -17,6 +20,39 @@ import DefaultImg from "Images/tshirt_stub.svg"
 
 
 export const UploadPageForm = () => {
+
+	// стейты с брендами, получаемыми от сервера
+	const [brandState, setBrandState] = useState({
+		[Constants.chooseBrand]: 0
+	})
+
+	const updateBrands = (serverBrandsRawData) => {
+
+		const brandsObj = serverBrandsRawData.reduce((acc, brand) => {
+			acc[brand.title] = brand.id;
+			return acc;
+		  }, {});
+
+		setBrandState((prevState) => ({
+			...prevState, ...brandsObj})
+		)
+	}
+
+	useEffect(() => {
+		const loadData = async () => {
+		  try {
+			const response = await fetch(UploadConstants.brandsApi);
+			const data = await response.json();
+			console.log(data.data)
+			updateBrands(data.data)
+
+		  } catch (error) {
+			console.error('Error while getting brands:', error);
+		  }
+		};
+
+		loadData();
+	  }, []);
 
 
 	// стейты со значениями полей
@@ -68,6 +104,8 @@ export const UploadPageForm = () => {
 
 	// обработать нажатие на кнопку подтверждения
 	const handleOnSubmit = (event) => {
+		console.log("brand state: ", brandState)
+
 		event.preventDefault()
 		const errorsLocal = UploadFormValidation(formState, errorState, validationMapper)
 		handleOnErrorChange(errorsLocal)
@@ -222,7 +260,7 @@ export const UploadPageForm = () => {
 				<LabeledInput 		value={formState.size}												onChange={handleOnChange('size')}			className="upload-form-item"	labelText="Size"		id="size_input"			maxLength={10}/>
 				<LabeledDropdown	value={formState.location}		errors={errorState.location}		onChange={handleOnChange('location')}		className="upload-form-item"	labelText="Location"	id="location_dropdown" 	options={locationOptions}/>
 				<LabeledDropdown 	value={formState.buyer}			errors={errorState.buyer}			onChange={handleOnChange('buyer')}			className="upload-form-item"	labelText="Buyer"		id="buyer_dropdown" 	options={buyerOptions}/>
-				<LabeledDropdown 	value={formState.brand}			errors={errorState.brand}			onChange={handleOnChange('brand')}			className="upload-form-item"	labelText="Brand"		id="brand_dropdown" 	options={brandOptions}/>
+				<LabeledDropdown 	value={formState.brand}			errors={errorState.brand}			onChange={handleOnChange('brand')}			className="upload-form-item"	labelText="Brand"		id="brand_dropdown" 	options={brandState}/>
 				<LabeledDropdown 	value={formState.type}			errors={errorState.type}			onChange={handleOnChange('type')}			className="upload-form-item"	labelText="Type"		id="type_dropdown" 		options={typeOptions}/>
 			</div>
 
