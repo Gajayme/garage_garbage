@@ -4,7 +4,7 @@ import * as Constants from 'Constants.js'
 import "Styles/MainPages/DatabasePage/DatabaseItem.css"
 import "Styles/BorderedImage.css"
 
-import DefaultImg from "Images/tshirt_stub.svg"
+import DefaultImg from "Images/default.jpg"
 
 /**
  * Компонент для отображения одной вещи с краткой информацией по ней.

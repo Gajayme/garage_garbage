@@ -1,7 +1,7 @@
 
 import {Item} from 'Components/MainPages/DatabasePage/Item';
 
-import DefaultImg from "Images/сложенная-пустая-одежда-на-белом-фоне-329728970.webp"
+import DefaultImg from "Images/default.jpg"
 
 export const Items = ({databaseState}) => {
 

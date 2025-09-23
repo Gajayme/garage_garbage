@@ -8,6 +8,7 @@ import {ImageManagerWindow} from "./ImageManager/ImageManagerWindow.js"
 import {NumbersOnly} from './Validations/Validations.js'
 import {NonEmpty, NonEmptyImages} from './Validations/Validations.js'
 import {UploadFormValidation} from './Validations/Validations.js'
+import { FormDataLogger } from "Components/FormDataLogger.js";
 import * as Constants from 'Constants.js'
 import * as UploadConstants from './UploadPageConstants.js'
 
@@ -15,7 +16,7 @@ import * as UploadConstants from './UploadPageConstants.js'
 import 'Styles/MainPages/UploadPage/UploadPageForm.css'
 import 'Styles/MainPages/UploadPage/UploadPageButton.css'
 import 'Styles/MarginBottom.css'
-import DefaultImg from "Images/tshirt_stub.svg"
+import DefaultImg from "Images/default.jpg"
 
 
 
@@ -93,7 +94,7 @@ export const UploadPageForm = () => {
 	useEffect(() => {
 		const loadData = async () => {
 			try {
-				const [brandsResponse, typesResponse, byuersResponce, locationsResponce] = await Promise.all([
+				const [brandsResponse, typesResponse, byuersResponse, locationsResponse] = await Promise.all([
 					fetch(UploadConstants.baseApi + UploadConstants.brandApi),
 					fetch(UploadConstants.baseApi + UploadConstants.typeApi),
 					fetch(UploadConstants.baseApi + UploadConstants.byuerApi),
@@ -102,8 +103,8 @@ export const UploadPageForm = () => {
 
 				const brandsData = await brandsResponse.json();
 				const typesData = await typesResponse.json();
-				const byuersData = await byuersResponce.json();
-				const locationsData = await locationsResponce.json();
+				const byuersData = await byuersResponse.json();
+				const locationsData = await locationsResponse.json();
 
 				updateBrands(brandsData.data);
 				updateTypes(typesData.data);
@@ -167,18 +168,11 @@ export const UploadPageForm = () => {
 	}
 
 	// обработать нажатие на кнопку подтверждения
-	const handleOnSubmit = (event) => {
-		console.log("brand state: ", brandState)
-		console.log("type state: ", typeState)
-		console.log("byuer state: ", buyerState)
-		console.log("location state: ", locationState)
-
-
+	const handleOnSubmit =  async (event) => {
 		event.preventDefault()
 		const errorsLocal = UploadFormValidation(formState, errorState, validationMapper)
 		handleOnErrorChange(errorsLocal)
 
-		console.log(errorsLocal)
 		const hasNoErrors = Object.values(errorsLocal).every((errorArray) => errorArray.length === 0);
 		if (!hasNoErrors) {
 			return
@@ -198,22 +192,23 @@ export const UploadPageForm = () => {
 		formData.append(Constants.brand, parseInt(formState.brand, 10));
 		formData.append(Constants.type, parseInt(formState.type, 10));
 
-		// Добавляем изображения (если есть)
-		console.log(formState.images);
-		console.log(formState.images[0].file instanceof File);
+		FormDataLogger(formData)
+		// console.log(formState.images);
+		// console.log(formState.images[0].file instanceof File);
 		formState.images.forEach((image, _) => {
 			formData.append(Constants.files, image.file);
 		});
 
-		fetch(Constants.base_server_url + Constants.post_upload, {
-			method: Constants.http_methods.POST,
-			body: formData,
-		})
-			.then((response) => response.json())
-			.then((data) => console.log(data))
-			.catch((error) => console.error('Ошибка:', error));
-
-
+		try {
+			const response = await fetch(Constants.base_server_url + Constants.post_upload, {
+				method: Constants.http_methods.POST,
+				body: formData,
+			})
+			const responseJson = await response.json()
+			console.log(responseJson)
+		} catch (error) {
+				console.error('Ошибка при загрузке данных:', error);
+		}
 	}
 
 	const handleOnErrorChange = (newErrorState) => {
@@ -268,13 +263,20 @@ export const UploadPageForm = () => {
 		});
 	};
 
-	// Автозаполнение всех полей для теста
-	const handleOnTestAutofill = () => {
+	const urlToFile = async (url, filename, mimeType) => {
+		const res = await fetch(url);
+		const blob = await res.blob();
+		return new File([blob], filename, { type: mimeType });
+	  };
 
-		// TODO тут не хватает самого изображения. Нужно сделать изображение из урла
-		const img = {
+	// Автозаполнение всех полей для теста
+	const handleOnTestAutofill = async () => {
+
+		const imgFile = await urlToFile(DefaultImg, 'default.jpg', 'image/jpg')
+		const imageObject = {
 			id: uuidv4(),
 			src: DefaultImg,
+			file: imgFile,
 		};
 
 		setFormState({
@@ -288,7 +290,7 @@ export const UploadPageForm = () => {
 			location: 1,
 			brand: 1,
 			type: 1,
-			images: [img]  // Можно добавить тестовые объекты, если нужно
+			images: [imageObject]
 		});
 	};
 
