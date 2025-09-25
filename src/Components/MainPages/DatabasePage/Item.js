@@ -1,8 +1,6 @@
 
-import * as Constants from 'Constants.js'
-
 import "Styles/MainPages/DatabasePage/DatabaseItem.css"
-import "Styles/BorderedImage.css"
+import "Styles/BorderedImageContainer.css"
 
 import DefaultImg from "Images/default.jpg"
 
@@ -18,7 +16,9 @@ import DefaultImg from "Images/default.jpg"
 export const Item = ({img, name, price, onClick}) => {
     return (
         <div className={"database-item"} onClick={onClick}>
-            <img className={"bordered-image"} src={img ? img : DefaultImg} alt={"item"}/>
+			<div className="database-image-container bordered-image-container" >
+            	<img className={"database-item-image"} src={img ? img : DefaultImg} alt={"item"}/>
+			</div>
             <p title={name}> {name}</p>
             <p title={price}> {price}</p>
         </div>

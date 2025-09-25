@@ -193,8 +193,6 @@ export const UploadPageForm = () => {
 		formData.append(Constants.type, parseInt(formState.type, 10));
 
 		FormDataLogger(formData)
-		// console.log(formState.images);
-		// console.log(formState.images[0].file instanceof File);
 		formState.images.forEach((image, _) => {
 			formData.append(Constants.files, image.file);
 		});
