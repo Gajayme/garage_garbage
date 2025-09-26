@@ -16,7 +16,9 @@ export const NotificationWindow = ({className, mainTextClassName, notificationDa
 	</ButtonLayer>
 
 	const innerWindow = <InnerWindow className="inner-window">
-		<span className= {notificationData.mainTextColorClassName}>{notificationData.mainText}</span>
+		<span className= {[mainTextClassName, notificationData.mainTextColorClassName].join(" ")}>
+			{notificationData.mainText}
+		</span>
 	</InnerWindow>
 
 	return (

@@ -9,7 +9,6 @@ import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons";
 import {UploadNotificationState} from './UploadPageNotificationWindow'
 import { UploadPageNotificationWindow } from "./UploadPageNotificationWindow";
 
-import 'Styles/MainPages/UploadPage/UploadNotificationWindow.css'
 import 'Styles/Navigation/DefaultNavButtons.css'
 
 

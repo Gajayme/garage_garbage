@@ -215,6 +215,8 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 
 			const responseJson = await response.json();
 			console.log("Успешно отправлено:", responseJson);
+			resetForm()
+
 
 		} catch (error) {
 			console.error("Ошибка при загрузке данных:", error);
@@ -224,6 +226,23 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 	const handleOnErrorChange = (newErrorState) => {
 		setErrorState(newErrorState); // Обновляем ошибки разом
 	};
+
+	// сбросить все окна ввода
+	const resetForm = () => {
+		setFormState({
+		item_name: '',
+		bought_for: '',
+		price: '',
+		buyers_part: '',
+		sold_for: '',
+		size: '',
+		buyer: '',
+		location: '',
+		brand: '',
+		type: '',
+		})
+		handleOnDeleteAllImages()
+	}
 
 	// обработать изменение всех полей (кроме загрузки изображений)
 	const handleOnChange = (key) => {
