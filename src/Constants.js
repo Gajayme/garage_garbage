@@ -1,7 +1,6 @@
 
 export const none = ''
 
-
 export const files = "files"
 export const item_name = "itemName"
 export const buyer_part = "buyersPart"

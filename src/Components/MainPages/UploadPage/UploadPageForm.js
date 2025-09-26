@@ -9,8 +9,11 @@ import {NumbersOnly} from './Validations/Validations.js'
 import {NonEmpty, NonEmptyImages} from './Validations/Validations.js'
 import {UploadFormValidation} from './Validations/Validations.js'
 import { FormDataLogger } from "Components/FormDataLogger.js";
-import * as Constants from 'Constants.js'
+import {UploadNotificationState} from './UploadPageNotificationWindow.js'
+
 import * as UploadConstants from './UploadPageConstants.js'
+import * as Constants from 'Constants.js'
+
 
 
 import 'Styles/MainPages/UploadPage/UploadPageForm.css'
@@ -20,7 +23,7 @@ import DefaultImg from "Images/default.jpg"
 
 
 
-export const UploadPageForm = () => {
+export const UploadPageForm = ({notificationStateSetter}) => {
 
 	// стейты с брендами, получаемыми от сервера
 	const [brandState, setBrandState] = useState({
@@ -199,13 +202,22 @@ export const UploadPageForm = () => {
 
 		try {
 			const response = await fetch(Constants.base_server_url + Constants.post_upload, {
-				method: Constants.http_methods.POST,
-				body: formData,
-			})
-			const responseJson = await response.json()
-			console.log(responseJson)
+			method: Constants.http_methods.POST,
+			body: formData,
+			});
+
+
+			const notificationState = response.ok ? UploadNotificationState.SUCCESS: UploadNotificationState.ERROR
+			notificationStateSetter(notificationState);
+			if (!response.ok) {
+				throw new Error(`Ошибка сервера: ${response.status}`);
+			}
+
+			const responseJson = await response.json();
+			console.log("Успешно отправлено:", responseJson);
+
 		} catch (error) {
-				console.error('Ошибка при загрузке данных:', error);
+			console.error("Ошибка при загрузке данных:", error);
 		}
 	}
 
@@ -302,7 +314,7 @@ export const UploadPageForm = () => {
 
 				<LabeledInput		value={formState.item_name}		errors={errorState.item_name}		onChange={handleOnChange('item_name')}		className="upload-form-item"	labelText="Item Name"	id="item_name_input"	maxLength={50}/>
 				<LabeledInput 		value={formState.buyers_part}	errors={errorState.buyers_part}		onChange={handleOnChange('buyers_part')}	className="upload-form-item"	labelText="Buyer Part"	id="buyer_part_input"	maxLength={10}		inputValidator={NumbersOnly}/>
-				<LabeledInput 		value={formState.bought_for}	errors={errorState.bought_for}		onChange={handleOnChange('bought_for')}	className="upload-form-item"	labelText="Bought for"	id="bought_for_input"	maxLength={10}		inputValidator={NumbersOnly}/>
+				<LabeledInput 		value={formState.bought_for}	errors={errorState.bought_for}		onChange={handleOnChange('bought_for')}		className="upload-form-item"	labelText="Bought for"	id="bought_for_input"	maxLength={10}		inputValidator={NumbersOnly}/>
 				<LabeledInput 		value={formState.price}			errors={errorState.price}			onChange={handleOnChange('price')}			className="upload-form-item"	labelText="Price"		id="price_input"		maxLength={10}		inputValidator={NumbersOnly}/>
 				<LabeledInput 		value={formState.sold_for}		errors={errorState.sold_for}		onChange={handleOnChange('sold_for')}		className="upload-form-item"	labelText="Sold for"	id="sold_for_input"		maxLength={10}		inputValidator={NumbersOnly}/>
 				<LabeledInput 		value={formState.size}												onChange={handleOnChange('size')}			className="upload-form-item"	labelText="Size"		id="size_input"			maxLength={10}/>

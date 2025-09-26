@@ -1,0 +1,16 @@
+
+.upload-notification-window {
+	width: 200px;
+	height: 200px;
+	position: fixed; /* или absolute — см. ниже пояснение */
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 9999; /* больше, чем у всего остального */
+	padding: 20px;
+	border-radius: 10px;
+}
+
+.upload-page-notification-main-text {
+	padding: 20%;
+}
