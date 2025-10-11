@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 import {Items} from 'Components/MainPages/DatabasePage/Items.js'
+import { FiltersWindow } from './Filters/FiltesWindow';
 import {DefaultButton} from 'Components/Button.js';
 import * as Constants from "Constants";
 
@@ -11,12 +12,10 @@ import "Styles/MainPages/DatabasePage/FiltersActivationButton.css"
 
 export const DatabasePageContent = () => {
 
-	const onFilterClicked = () => {
-
-	}
-
-    // стейт для сохранения полученных с сервера объектов
-    const [databaseState, setDatabaseState] = useState([])
+	// стейт для сохранения полученных с сервера объектов
+	const [databaseState, setDatabaseState] = useState([])
+	// стейт для отображения/скрытия окна фильтров
+	const [isFiltersVisible, setIsFiltersVisible] = useState([])
 
     const parseServerData = (data) => {
         const newItems = data.map((item) => ({
@@ -46,10 +45,11 @@ export const DatabasePageContent = () => {
     }, [databaseState.length]);
 
 
-    return (
-        <div className="database-page">
-            <DefaultButton className={"filter-activation-button"} labelText={"Filters"} onClick={onFilterClicked}></DefaultButton>
+	return (
+		<div className="database-page">
+			<DefaultButton className={"filter-activation-button"} labelText={"Filters"} onClick={() => setIsFiltersVisible(prev => !prev)}></DefaultButton>
+			{isFiltersVisible && <FiltersWindow/>}
 			<Items databaseState={databaseState}/>
-        </div>
-    )
+		</div>
+	)
 }

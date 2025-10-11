@@ -1,17 +1,8 @@
-/* .database-items {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin: 2% 5% 2% 5%;
-	overflow-y: auto;
-	justify-content: space-between;
-} */
 
 .database-items {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 1fr позволяет равномерно делить пространство */
     gap: 20px; /* Задает и горизонтальный, и вертикальный промежуток */
-    margin: 2% 5%;
+    margin: 0% 5%;
     overflow-y: auto;
 }
