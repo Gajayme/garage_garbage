@@ -1,14 +1,15 @@
 
 .filter-activation-button {
 
-    margin: 2% 5%;
+	margin: 2% 5%;
 
-    padding: 10px;
-    cursor: pointer;
-    color: var(--white);
-    background-color: var(--black);
+	padding: 10px;
+	cursor: pointer;
 
-    border: 2px solid var(--dark-grey);
+
+	color: var(--white);
+	background-color: var(--black);
+	border: 2px solid var(--dark-grey);
 }
 
 

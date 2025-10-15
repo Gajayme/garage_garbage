@@ -1,0 +1,26 @@
+
+.filter-button {
+
+	/* height: 20%; */
+	max-width: 85%;
+	padding: 5%;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	color: var(--white);
+	background-color: var(--black);
+	border: 2px solid var(--dark-grey);
+}
+
+.filter-button p {
+	font-size: 20px;
+	margin: 0%;
+}
+
+.filter-button img {
+	align-items: right;
+	width: 20%;
+	height: 20%;
+}
