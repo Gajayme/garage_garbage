@@ -1,7 +1,7 @@
 
 .filter-button {
 
-	/* height: 20%; */
+	max-width: 20%;
 	max-width: 85%;
 	padding: 5%;
 
@@ -15,12 +15,11 @@
 }
 
 .filter-button p {
-	font-size: 20px;
 	margin: 0%;
 }
 
 .filter-button img {
 	align-items: right;
-	width: 20%;
-	height: 20%;
+	max-width: 70%;
+	max-height: 70%;
 }

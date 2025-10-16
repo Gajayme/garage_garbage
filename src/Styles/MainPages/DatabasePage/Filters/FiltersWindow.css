@@ -1,6 +1,9 @@
 
 .outer-window-filters {
 
+	z-index: 10; /* Чтобы было перед списком вещей */
+	position: absolute;
+
 	margin: 0% 5%;
 
     display: flex;

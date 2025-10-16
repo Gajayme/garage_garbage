@@ -8,7 +8,7 @@ import * as Constants from "Constants";
 import "Styles/MainPages/DatabasePage/DatabaseItems.css"
 import "Styles/MainPages/DatabasePage/DatabasePage.css"
 import "Styles/MainPages/DatabasePage/FiltersActivationButton.css"
-
+import "Styles/MainPages/DatabasePage/FiltersItemsWrapper.css"
 
 export const DatabasePageContent = () => {
 
@@ -48,8 +48,10 @@ export const DatabasePageContent = () => {
 	return (
 		<div className="database-page">
 			<DefaultButton className={"filter-activation-button"} labelText={"Filters"} onClick={() => setIsFiltersVisible(prev => !prev)}></DefaultButton>
-			{isFiltersVisible && <FiltersWindow/>}
-			<Items databaseState={databaseState}/>
+			<div className="filters-items-wrapper">
+				{isFiltersVisible && <FiltersWindow/>}
+				<Items databaseState={databaseState}/>
+			</div>
 		</div>
 	)
 }

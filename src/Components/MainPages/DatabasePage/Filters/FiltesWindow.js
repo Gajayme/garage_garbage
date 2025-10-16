@@ -33,9 +33,9 @@ export const FiltersWindow = () => {
 	};
 
 	const filters = <div className="outer-window-filters">
-		<ButtonWithIcon labelText = {Constants.Brand} className="filter-button" iconClassName="filter-arrow-icon" iconInactive={arrowUp} iconActive={arrowDown} onClick={() => toggleFilterButton(Constants.Brand)} altImg="Brand" isActive={filtersState.BRAND} ></ButtonWithIcon>
-		<ButtonWithIcon labelText = {Constants.Size} className="filter-button" iconClassName="filter-arrow-icon" iconInactive={arrowUp} iconActive={arrowDown} onClick={() => toggleFilterButton(Constants.Size)} altImg="Size" isActive={filtersState.SIZE} ></ButtonWithIcon>
-		<ButtonWithIcon labelText = {Constants.Price} className="filter-button" iconClassName="filter-arrow-icon" iconInactive={arrowUp} iconActive={arrowDown} onClick={() => toggleFilterButton(Constants.Price)} altImg="Price" isActive={filtersState.PRICE} ></ButtonWithIcon>
+		<ButtonWithIcon labelText = {Constants.Brand} className="filter-button" iconClassName="filter-arrow-icon" iconInactive={arrowUp} iconActive={arrowDown} onClick={() => toggleFilterButton(Constants.Brand)} altImg={Constants.Brand} isActive={filtersState.BRAND} ></ButtonWithIcon>
+		<ButtonWithIcon labelText = {Constants.Size} className="filter-button" iconClassName="filter-arrow-icon" iconInactive={arrowUp} iconActive={arrowDown} onClick={() => toggleFilterButton(Constants.Size)} altImg={Constants.Size} isActive={filtersState.SIZE} ></ButtonWithIcon>
+		<ButtonWithIcon labelText = {Constants.Price} className="filter-button" iconClassName="filter-arrow-icon" iconInactive={arrowUp} iconActive={arrowDown} onClick={() => toggleFilterButton(Constants.Price)} altImg={Constants.Price} isActive={filtersState.PRICE} ></ButtonWithIcon>
 	</div>
 
 	return (
