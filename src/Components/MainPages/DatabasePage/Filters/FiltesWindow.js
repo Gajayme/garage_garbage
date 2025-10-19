@@ -2,10 +2,11 @@
 import React, {useState} from 'react';
 
 import {OuterWindow} from "Components/Window/OuterWindow.js"
-import {ButtonWithIcon} from 'Components/ButtonWithIcon.js';
+import {FilterWrapper} from './FilterWrapper.js';
 
 import 'Styles/MainPages/DatabasePage/Filters/FiltersWindow.css'
 import 'Styles/MainPages/DatabasePage/Filters/FilterButton.css'
+import 'Styles/MainPages/DatabasePage/Filters/FilterWrapper.css'
 
 import * as Constants from './Constants.js'
 
@@ -15,7 +16,7 @@ import arrowDown from 'Images/Filters/arrow_down.svg';
 
 export const FiltersWindow = () => {
 
-
+	// TODO все фильтры нужно получать с бэка
 	const filterOptions = [Constants.Brand, Constants.Size, Constants.Price];
 
 	const initialFilterState = filterOptions.reduce((acc, key) => {
@@ -26,6 +27,7 @@ export const FiltersWindow = () => {
 	const [filtersState, setFiltersState] = useState(initialFilterState);
 
 	const toggleFilterButton = (filterName) => {
+
 		setFiltersState(prev => ({
 			...prev,
 			[filterName]: !prev[filterName]
@@ -33,9 +35,23 @@ export const FiltersWindow = () => {
 	};
 
 	const filters = <div className="outer-window-filters">
-		<ButtonWithIcon labelText = {Constants.Brand} className="filter-button" iconClassName="filter-arrow-icon" iconInactive={arrowUp} iconActive={arrowDown} onClick={() => toggleFilterButton(Constants.Brand)} altImg={Constants.Brand} isActive={filtersState.BRAND} ></ButtonWithIcon>
+		<FilterWrapper
+			filter={<p>Stub</p>}
+			labelText = {Constants.Brand}
+			className = "filter-wrapper"
+			buttonClassName="filter-button"
+			iconClassName="filter-arrow-icon"
+			iconInactive={arrowUp}
+			iconActive={arrowDown}
+			onClick={() => toggleFilterButton(Constants.Brand)} altImg={Constants.Brand}
+			isActive={filtersState.BRAND}
+		/>
+
+
+		{/* <ButtonWithIcon labelText = {Constants.Brand} className="filter-button" iconClassName="filter-arrow-icon" iconInactive={arrowUp} iconActive={arrowDown} onClick={() => toggleFilterButton(Constants.Brand)} altImg={Constants.Brand} isActive={filtersState.BRAND} ></ButtonWithIcon>
 		<ButtonWithIcon labelText = {Constants.Size} className="filter-button" iconClassName="filter-arrow-icon" iconInactive={arrowUp} iconActive={arrowDown} onClick={() => toggleFilterButton(Constants.Size)} altImg={Constants.Size} isActive={filtersState.SIZE} ></ButtonWithIcon>
-		<ButtonWithIcon labelText = {Constants.Price} className="filter-button" iconClassName="filter-arrow-icon" iconInactive={arrowUp} iconActive={arrowDown} onClick={() => toggleFilterButton(Constants.Price)} altImg={Constants.Price} isActive={filtersState.PRICE} ></ButtonWithIcon>
+		<ButtonWithIcon labelText = {Constants.Price} className="filter-button" iconClassName="filter-arrow-icon" iconInactive={arrowUp} iconActive={arrowDown} onClick={() => toggleFilterButton(Constants.Price)} altImg={Constants.Price} isActive={filtersState.PRICE} ></ButtonWithIcon> */}
+
 	</div>
 
 	return (
