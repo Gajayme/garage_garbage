@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 
 import {OuterWindow} from "Components/Window/OuterWindow.js"
 import {FilterWrapper} from './FilterWrapper.js';
+import { CheckboxMultiFilter } from './CheckboxMultiFilter.js';
 
 import 'Styles/MainPages/DatabasePage/Filters/FiltersWindow.css'
 import 'Styles/MainPages/DatabasePage/Filters/FilterButton.css'
@@ -26,6 +27,7 @@ export const FiltersWindow = () => {
 
 	const [filtersState, setFiltersState] = useState(initialFilterState);
 
+	// TODO все фильтры нужно получать с бэка
 	const toggleFilterButton = (filterName) => {
 
 		setFiltersState(prev => ({
@@ -34,17 +36,25 @@ export const FiltersWindow = () => {
 		}));
 	};
 
+	// BRAND FILTER
+	const brandFilterOptions = ["option_1", "option_2", "option3"]
+
+	const brandCheckbox = <CheckboxMultiFilter allOptions = {brandFilterOptions} />
+
+
 	const filters = <div className="outer-window-filters">
+
+
 		<FilterWrapper
-			filter={<p>Stub</p>}
+			filter={brandCheckbox}
 			labelText = {Constants.Brand}
 			className = "filter-wrapper"
-			buttonClassName="filter-button"
-			iconClassName="filter-arrow-icon"
-			iconInactive={arrowUp}
-			iconActive={arrowDown}
-			onClick={() => toggleFilterButton(Constants.Brand)} altImg={Constants.Brand}
-			isActive={filtersState.BRAND}
+			buttonClassName = "filter-button"
+			iconClassName = "filter-arrow-icon"
+			iconInactive = {arrowUp}
+			iconActive = {arrowDown}
+			onClick = {() => toggleFilterButton(Constants.Brand)} altImg={Constants.Brand}
+			isActive = {filtersState.BRAND}
 		/>
 
 

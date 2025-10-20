@@ -14,7 +14,6 @@ export const FilterWrapper = ({filter, labelText, className, buttonClassName, ic
 				onClick = {onClick}
 				isActive = {isActive}
 			/>
-
 			{isActive && filter}
 		</div>
 	)
