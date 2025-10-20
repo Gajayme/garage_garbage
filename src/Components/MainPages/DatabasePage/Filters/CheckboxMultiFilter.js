@@ -13,9 +13,9 @@ export const CheckboxMultiFilter = ({ allOptions, selectedOptions, onChange }) =
 
 	return (
 		<div>
-			{allOptions.map(option => (
-				<div>
-					<label key={option}>
+			{allOptions.map((option, idx) => (
+				<div key={idx}>
+					<label>
 					<input
 						type="checkbox"
 						// checked={selectedOptions.includes(option)}
