@@ -1,27 +1,18 @@
 
+import { CustomCheckbox } from "Components/CustomCheckbox";
 
-export const CheckboxMultiFilter = ({ allOptions, selectedOptions, onChange }) => {
-	const handleCheckboxChange = (option) => {
-	// 	if (selectedOptions.includes(option)) {
-	// 		onChange(selectedOptions.filter(b => b !== option));
-	// 	} else {
-	// 		onChange([...selectedOptions, option]);
-	// 	}
-	};
-
-	console.log(allOptions)
+export const CheckboxMultiFilter = ({ allValues, checkedOptions, onChange}) => {
 
 	return (
 		<div>
-			{allOptions.map((option, idx) => (
+			{allValues.map((value, idx) => (
 				<div key={idx}>
-					<label>
-					<input
-						type="checkbox"
-						// checked={selectedOptions.includes(option)}
-						onChange={() => handleCheckboxChange(option)}
-					/> {option} </label>
+					<CustomCheckbox
+						isChecked={checkedOptions.includes(value)}
+						value={value}
+						onChange={onChange}/>
 				</div>
+
 			))}
 		</div>
 	);
