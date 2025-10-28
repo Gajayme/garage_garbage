@@ -1,0 +1,33 @@
+
+.filter-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 5%;
+}
+
+.filter-checkbox input[type="checkbox"] {
+	/* убрать дефолтный вид */
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+
+	width: 1.6em;
+	height: 1.6em;
+
+	border: 3px solid var(--dark-grey);
+	background-color: transparent;
+
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+input.checked::before {
+	content: "\2714";
+	font-size: 1.5em;
+	color: var(--black);
+	position: absolute;
+	right: 1px;
+	top: -5px;
+}

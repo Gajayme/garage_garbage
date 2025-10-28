@@ -2,7 +2,7 @@
 import {ButtonWithIcon} from 'Components/ButtonWithIcon.js';
 
 
-export const FilterWrapper = ({filter, labelText, className, buttonClassName, iconClassName, iconInactive, iconActive, onClick, isActive}) => {
+export const FilterWithButton = ({filter, labelText, className, buttonClassName, iconClassName, iconInactive, iconActive, onClick, isActive}) => {
 	return (
 		<div className={className}>
 			<ButtonWithIcon

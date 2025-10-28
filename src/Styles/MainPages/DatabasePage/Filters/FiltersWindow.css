@@ -15,6 +15,6 @@
 	width: 20%;
     padding: 1%;
 
-    background-color: #D9D9D9;
+    background-color: var(--middle-grey);
     border: 2px solid var(--dark-grey);
 }

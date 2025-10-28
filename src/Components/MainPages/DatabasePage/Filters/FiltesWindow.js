@@ -2,14 +2,13 @@
 import React, {useState} from 'react';
 
 import {OuterWindow} from "Components/Window/OuterWindow.js"
-import {FilterWrapper} from './FilterWrapper.js';
+import {FilterWithButton} from './FilterWithButton.js';
 import { CheckboxMultiFilter } from './CheckboxMultiFilter.js';
+import * as Constants from './Constants.js'
 
 import 'Styles/MainPages/DatabasePage/Filters/FiltersWindow.css'
 import 'Styles/MainPages/DatabasePage/Filters/FilterButton.css'
-import 'Styles/MainPages/DatabasePage/Filters/FilterWrapper.css'
-
-import * as Constants from './Constants.js'
+import 'Styles/MainPages/DatabasePage/Filters/FilterWithButton.css'
 
 import arrowUp from 'Images/Filters/arrow_up.svg';
 import arrowDown from 'Images/Filters/arrow_down.svg';
@@ -71,10 +70,10 @@ export const FiltersWindow = () => {
 	const filters = <div className="outer-window-filters">
 
 
-		<FilterWrapper
+		<FilterWithButton
 			filter={brandCheckbox}
 			labelText = {Constants.Brand}
-			className = "filter-wrapper"
+			className = "filter-with-button"
 			buttonClassName = "filter-button"
 			iconClassName = "filter-arrow-icon"
 			iconInactive = {arrowUp}
