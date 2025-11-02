@@ -1,15 +1,21 @@
 
-export const Checkbox = ({className, isChecked, value, onChange}) => {
+export const Checkbox = ({className, isChecked, value, checkmarkImg, onChange}) => {
 	return (
-		
+
 		<label className={className}>
+
 			<input
-				className={isChecked ? "checked" : ""}
 				type="checkbox"
 				checked={isChecked}
 				onChange={() => onChange(value)}
 			/>
-			{value}
+
+			<span className="checkbox-box">
+				{isChecked && <img src={checkmarkImg} alt="✓" className="checkmark" />}
+			</span>
+
+			<span> {value} </span>
+
 		</label>
 	);
 };

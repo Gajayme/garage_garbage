@@ -12,6 +12,7 @@ import 'Styles/MainPages/DatabasePage/Filters/FilterWithButton.css'
 
 import arrowUp from 'Images/Filters/arrow_up.svg';
 import arrowDown from 'Images/Filters/arrow_down.svg';
+import checkmark from 'Images/checkmark.svg';
 
 
 export const FiltersWindow = () => {
@@ -64,6 +65,7 @@ export const FiltersWindow = () => {
 							allValues = {brandFilterValues}
 							checkedOptions={filtersState.BRAND}
 							onChange={toggleMultipleCheckboxFilter(Constants.Brand)}
+							checkmarkImg = {checkmark}
 						/>
 
 

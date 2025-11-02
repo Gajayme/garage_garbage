@@ -5,7 +5,8 @@ import 'Styles/MainPages/DatabasePage/Filters/FilterCheckbox.css'
 import 'Styles/MainPages/DatabasePage/Filters/CheckboxMultiFilter.css'
 
 
-export const CheckboxMultiFilter = ({ allValues, checkedOptions, onChange}) => {
+
+export const CheckboxMultiFilter = ({ allValues, checkedOptions, onChange, checkmarkImg}) => {
 
 	return (
 		<div className="checkbox-multifilter">
@@ -15,6 +16,7 @@ export const CheckboxMultiFilter = ({ allValues, checkedOptions, onChange}) => {
 						className = {'filter-checkbox'}
 						isChecked={checkedOptions.includes(value)}
 						value={value}
+						checkmarkImg={checkmarkImg}
 						onChange={onChange}/>
 				</div>
 			))}
