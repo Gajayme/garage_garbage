@@ -2,6 +2,7 @@
 import {ButtonWithIcon} from 'Components/ButtonWithIcon.js';
 
 
+// компонет, объединяющий кнопку и фильтр, который активируется этой кнопкой
 export const FilterWithButton = ({filter, labelText, className, buttonClassName, iconClassName, iconInactive, iconActive, onClick, isActive}) => {
 	return (
 		<div className={className}>

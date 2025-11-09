@@ -1,0 +1,38 @@
+/* скрытие дефолтных стрелочек - переключалок */
+input[type="number"] {
+	-moz-appearance: textfield;      /* Firefox */
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;        /* Chrome, Safari, Edge */
+	margin: 0;
+}
+
+.price-range-container {
+  display: flex;
+  align-items: center;
+  gap: 5%; /* Расстояние между элементами */
+}
+
+
+.price-input {
+	display: flex;
+	align-items: center;
+	max-width: 40%;
+	/* padding: 6px 10px; */
+	/* должен быть общий сдругим фильтром */
+	font-size: 14px;
+	border: 2px solid var(--dark-grey);
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+.price-input::placeholder {
+	color: var(--middle-grey);
+}
+
+.price-icon {
+	width: 20px;
+	height: 20px;
+}

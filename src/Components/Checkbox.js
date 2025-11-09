@@ -1,4 +1,6 @@
 
+
+// Компонент чекбокса с кастомной галочкой
 export const Checkbox = ({className, isChecked, value, checkmarkImg, onChange}) => {
 	return (
 
