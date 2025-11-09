@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 import {Items} from 'Components/MainPages/DatabasePage/Items.js'
-import { FiltersWindow } from './Filters/FiltesWindow';
+import { FiltersWindow } from './Filters/FiltresWindow';
 import {DefaultButton} from 'Components/Button.js';
 import * as Constants from "Constants";
 

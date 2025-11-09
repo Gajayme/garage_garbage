@@ -24,7 +24,7 @@ export const FiltersWindow = () => {
 	const filterOptions = [Constants.Brand, Constants.Size, Constants.Price];
 
 
-	// АКТИВНОСТЬ ФИЛЬТРОВ
+	// стейт активности фильтров
 	const initialFiltersActivityState = filterOptions.reduce((acc, key) => {
 		acc[key] = false;
 		return acc;
@@ -41,7 +41,6 @@ export const FiltersWindow = () => {
 	};
 
 
-	// ФИЛЬТРЫ
 	// TODO все значения тоже получаем с бэка
 	const initialFiltersState = filterOptions.reduce((acc, key) => {
 		acc[key] = [];
@@ -64,6 +63,7 @@ export const FiltersWindow = () => {
 
 	const brandFilterValues = ["option_1", "option_2", "option_3"]
 
+	// непосредственно фильтры
 	const brandFilter = <CheckboxMultiFilter
 							allValues = {brandFilterValues}
 							checkedOptions={filtersState.BRAND}
@@ -77,7 +77,6 @@ export const FiltersWindow = () => {
 						image = {rangeArrow}
 						currentValues = {initialPriceRange}
 					/>
-
 
 	const filters = <div className="outer-window-filters">
 
@@ -106,11 +105,6 @@ export const FiltersWindow = () => {
 			altImg={Constants.Price}
 			isActive = {filtersActivityState.PRICE}
 		/>
-
-		{/* <ButtonWithIcon labelText = {Constants.Brand} className="filter-button" iconClassName="filter-arrow-icon" iconInactive={arrowUp} iconActive={arrowDown} onClick={() => toggleFilterButton(Constants.Brand)} altImg={Constants.Brand} isActive={filtersActivityState.BRAND} ></ButtonWithIcon>
-		<ButtonWithIcon labelText = {Constants.Size} className="filter-button" iconClassName="filter-arrow-icon" iconInactive={arrowUp} iconActive={arrowDown} onClick={() => toggleFilterButton(Constants.Size)} altImg={Constants.Size} isActive={filtersActivityState.SIZE} ></ButtonWithIcon>
-		<ButtonWithIcon labelText = {Constants.Price} className="filter-button" iconClassName="filter-arrow-icon" iconInactive={arrowUp} iconActive={arrowDown} onClick={() => toggleFilterButton(Constants.Price)} altImg={Constants.Price} isActive={filtersActivityState.PRICE} ></ButtonWithIcon> */}
-
 	</div>
 
 	return (
