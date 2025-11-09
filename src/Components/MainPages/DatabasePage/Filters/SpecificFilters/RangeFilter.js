@@ -1,16 +1,22 @@
 import React from 'react';
 
+import {NumbersOnly} from 'Components/MainPages/UploadPage/Validations/Validations.js'
+import {CustomInput} from 'Components/CustomInput.js';
+
+import {priceMaxLength} from '../Constants.js'
+
 import 'Styles/MainPages/DatabasePage/Filters/SpecificFilters/PriceRangeFilter.css'
 
-
-export const RangeFilter = ({image, setValue}) => {
+export const RangeFilter = ({image, currentValues}) => {
 	return (
 	<div className='price-range-container'>
-		<input
+		<CustomInput
+			value={currentValues.min}
 			className='price-input'
-			type="number"
+			type="text"
 			placeholder="min"
-			value={setValue.min}
+			maxLength = {priceMaxLength}
+			inputValidator={NumbersOnly}
 		/>
 
 		<img
@@ -19,11 +25,13 @@ export const RangeFilter = ({image, setValue}) => {
 			alt="to"
 		/>
 
-		<input
+		<CustomInput
 			className='price-input'
-			type="number"
+			type="text"
 			placeholder="max"
-			value={setValue.max}
+			value={currentValues.max}
+			maxLength = {priceMaxLength}
+			inputValidator={NumbersOnly}
 		/>
 	</div>
 	);

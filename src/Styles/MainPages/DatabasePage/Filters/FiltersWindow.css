@@ -12,9 +12,9 @@
 
 	max-height: 30%;
 
-	width: 20%;
-    padding: 1%;
+	width: 23%;
+	padding: 1%;
 
-    background-color: var(--middle-grey);
-    border: 2px solid var(--dark-grey);
+	background-color: var(--middle-grey);
+	border: 2px solid var(--dark-grey);
 }

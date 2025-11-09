@@ -75,7 +75,7 @@ export const FiltersWindow = () => {
 
 	const priceRangeFilter = <RangeFilter
 						image = {rangeArrow}
-						setValue = {initialPriceRange}
+						currentValues = {initialPriceRange}
 					/>
 
 

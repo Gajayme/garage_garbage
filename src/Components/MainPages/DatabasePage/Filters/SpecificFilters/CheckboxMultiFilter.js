@@ -1,7 +1,7 @@
 
 import { Checkbox } from "Components/Checkbox";
 
-import 'Styles/MainPages/DatabasePage/Filters/FilterCheckbox.css'
+import 'Styles/MainPages/DatabasePage/Filters/SpecificFilters/FilterCheckbox.css'
 import 'Styles/MainPages/DatabasePage/Filters/SpecificFilters/CheckboxMultiFilter.css'
 
 
