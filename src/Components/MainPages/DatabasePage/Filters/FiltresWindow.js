@@ -18,7 +18,7 @@ import checkmark from 'Images/checkmark.svg';
 
 
 // Компонет со всеми фильтрами
-export const FiltersWindow = () => {
+export const FiltersWindow = (availableFilters) => {
 
 	// TODO все фильтры нужно получать с бэка
 	const filterOptions = [Constants.Brand, Constants.Size, Constants.Price];
