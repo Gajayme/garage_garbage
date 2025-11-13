@@ -20,8 +20,6 @@ export const DatabasePageContent = () => {
 	const [isFiltersVisible, setIsFiltersVisible] = useState([])
 
 	const parseItemsData = (itemsData) => {
-		console.log("parsing items data")
-		console.log(itemsData)
 		const newItems = itemsData.map((item) => ({
 			id: item.id, // TODO: переделать на нормальное значение
 			image:  Array.isArray(item.images) && item.images.length && item.images[0].image_url, // TODO: переделать на нормальное значение
@@ -33,17 +31,17 @@ export const DatabasePageContent = () => {
 	}
 
 	const parseFiltersData = (filtersData) => {
+		console.log(filtersData)
 		const newFilters = filtersData.map((filter) => (
 			{
-			id: filter.fields.length() === 1 ? filter.fields[0] : "price",
-			type: filter.values.length() > 0 ? "multiCheckbox" : "range",
+			name: filter.name,
 			values: filter.values,
+			type: filter.type,
 		}));
 		setFiltersState((prevState) => [...prevState, ...newFilters]);
 	}
 
 	const parseServerData = useCallback((data) => {
-		console.log(data)
 		parseItemsData(data.data)
 		parseFiltersData(data.filters)
 	}, []);

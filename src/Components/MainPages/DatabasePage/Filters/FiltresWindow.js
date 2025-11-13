@@ -18,15 +18,12 @@ import checkmark from 'Images/checkmark.svg';
 
 
 // Компонет со всеми фильтрами
-export const FiltersWindow = (availableFilters) => {
-
-	// TODO все фильтры нужно получать с бэка
-	const filterOptions = [Constants.Brand, Constants.Size, Constants.Price];
-
+export const FiltersWindow = ({availableFilters}) => {
 
 	// стейт активности фильтров
-	const initialFiltersActivityState = filterOptions.reduce((acc, key) => {
-		acc[key] = false;
+	const initialFiltersActivityState =
+	availableFilters.reduce((acc, filterData) => {
+		acc[filterData.name] = false;
 		return acc;
 	}, {});
 
@@ -40,12 +37,18 @@ export const FiltersWindow = (availableFilters) => {
 		}));
 	};
 
-
-	// TODO все значения тоже получаем с бэка
-	const initialFiltersState = filterOptions.reduce((acc, key) => {
-		acc[key] = [];
+	const initialFiltersState = availableFilters.reduce((acc, filterData) => {
+		const key = filterData.name
+		if (filterData.type === Constants.FilterType.multiCheckbox) {
+			acc[key] = [];
+		} else if (filterData.type === Constants.FilterType.range)
+			acc[key] = {
+				min: undefined,
+				max:undefined
+			}
 		return acc;
 	}, {});
+
 
 	const [filtersState, setfilterState] = useState(initialFiltersState)
 
@@ -54,7 +57,7 @@ export const FiltersWindow = (availableFilters) => {
 			setfilterState(prevState => {
 				const currentList = prevState[filterName] || [];
 				const updatedList = currentList.includes(newVal)
-					? currentList.filter(item => item !== newVal) // удалить
+					? currentList.filter(item => item !== newVal) // удалить выбок
 					: [...currentList, newVal];  // добавить
 				return {...prevState, [filterName]: updatedList};
 			})
