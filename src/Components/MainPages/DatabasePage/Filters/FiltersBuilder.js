@@ -8,7 +8,7 @@ import arrowDown from 'Images/Filters/arrow_down.svg';
 import checkmark from 'Images/checkmark.svg';
 import rangeArrow from 'Images/Filters/price_range_arrow.svg';
 
-import * as Constants from './SpecificFilters/Constants';
+import * as Constants from './Constants';
 
 export const FilterBuilder = ({
   availableFilters,
@@ -17,22 +17,22 @@ export const FilterBuilder = ({
   toggleFilterVisibility,
   filtersVisibility
 }) => {
-  const renderFilter = (filter) => {
-    switch (filter.type) {
-      case Constants.FilterType.MultiCheckbox:
+  const renderFilter = (filterData) => {
+    switch (filterData.type) {
+      case Constants.FilterType.multiCheckbox:
         return (
           <CheckboxMultiFilter
-            allValues={filter.values}
-            checkedOptions={filtersState[filter.id] || []}
-            onChange={toggleCheckboxFilter(filter.id)}
+            allValues={filterData.values}
+            checkedOptions={filtersState[filterData.name] || []}
+            onChange={toggleCheckboxFilter(filterData.name)}
             checkmarkImg={checkmark}
           />
         );
-      case Constants.FilterType.Range:
+      case Constants.FilterType.range:
         return (
           <RangeFilter
             image={rangeArrow}
-            currentValues={filtersState[filter.id] || { min: '', max: '' }}
+            currentValues={filtersState[filterData.name] || { min: '', max: '' }}
           />
         );
       default:
@@ -42,19 +42,19 @@ export const FilterBuilder = ({
 
   return (
     <div className="outer-window-filters">
-      {availableFilters.map((filter) => (
+      {availableFilters.map((filterData) => (
         <FilterWithButton
-          key={filter.id}
-          filter={renderFilter(filter)}
-          labelText={filter.id}
+          key={filterData.name}
+          filter={renderFilter(filterData)}
+          labelText={filterData.name}
           className="filter-with-button"
           buttonClassName="filter-button"
           iconClassName="filter-arrow-icon"
           iconInactive={arrowUp}
           iconActive={arrowDown}
-          onClick={() => toggleFilterVisibility(filter.id)}
-          altImg={filter.id}
-          isActive={filtersVisibility[filter.id]}
+          onClick={() => toggleFilterVisibility(filterData.name)}
+          altImg={filterData.name}
+          isActive={filtersVisibility[filterData.name]}
         />
       ))}
     </div>

@@ -7,15 +7,15 @@ import 'Styles/MainPages/DatabasePage/Filters/SpecificFilters/CheckboxMultiFilte
 
 // фильтр с чекбоксами с доступным мультивыбором
 export const CheckboxMultiFilter = ({ allValues, checkedOptions, onChange, checkmarkImg}) => {
-
 	return (
 		<div className="checkbox-multifilter">
-			{allValues.map((value, idx) => (
-				<div key={idx}>
+			{Object.entries(allValues).map(([id, name]) => (
+				<div key={id}>
 					<Checkbox
 						className = {'filter-checkbox'}
-						isChecked={checkedOptions.includes(value)}
-						value={value}
+						isChecked={checkedOptions.includes(id)}
+						name={name}
+						value={id}
 						checkmarkImg={checkmarkImg}
 						onChange={onChange}/>
 				</div>

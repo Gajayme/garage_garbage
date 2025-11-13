@@ -1,7 +1,7 @@
 
 
 // Компонент чекбокса с кастомной галочкой
-export const Checkbox = ({className, isChecked, value, checkmarkImg, onChange}) => {
+export const Checkbox = ({className, isChecked, name, value, checkmarkImg, onChange}) => {
 	return (
 
 		<label className={className}>
@@ -16,7 +16,7 @@ export const Checkbox = ({className, isChecked, value, checkmarkImg, onChange}) 
 				{isChecked && <img src={checkmarkImg} alt="✓" className="checkmark" />}
 			</span>
 
-			<span> {value} </span>
+			<span> {name} </span>
 
 		</label>
 	);

@@ -31,7 +31,6 @@ export const DatabasePageContent = () => {
 	}
 
 	const parseFiltersData = (filtersData) => {
-		console.log(filtersData)
 		const newFilters = filtersData.map((filter) => (
 			{
 			name: filter.name,
