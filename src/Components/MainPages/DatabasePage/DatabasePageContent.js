@@ -18,6 +18,8 @@ export const DatabasePageContent = () => {
 	const [filtersState, setFiltersState] = useState([])
 	// стейт для отображения/скрытия окна фильтров
 	const [isFiltersVisible, setIsFiltersVisible] = useState([])
+	// происходит ли первичная загрузка вещей с бека
+	const [isLoading, setIsLoading] = useState(true);
 
 	const parseItemsData = (itemsData) => {
 		const newItems = itemsData.map((item) => ({
@@ -47,33 +49,53 @@ export const DatabasePageContent = () => {
 
 
 	// Запрос к серверу
-    useEffect(() => {
-        if (!databaseState.length) {
+	useEffect(() => {
+		if (!databaseState.length) {
 			fetch(Constants.base_server_url + Constants.post_all, {
-                method: Constants.http_methods.GET,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-                .then((response) => response.json())
-                .then((data) => parseServerData(data))
-                .catch((error) => console.error('Ошибка:', error));
-
-			}
+				method: Constants.http_methods.GET,
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			})
+			.then((response) => response.json())
+			.then((data) => {
+				parseServerData(data);
+				setIsLoading(false); // 🔹 Фикс: загрузка завершена
+			})
+			.catch((error) => {
+				console.error('Ошибка:', error);
+				setIsLoading(false); // даже при ошибке снимаем isLoading
+			});
+		}
 	}, [databaseState.length, parseServerData]);
 
 
+
+	const renderContent = () => {
+		if (isLoading) {
+			return <p>Loading...</p>; // или null, или спиннер
+		}
+		if (databaseState.length === 0) {
+			return <p>No uploaded items</p>;
+		}
+		return (
+			<div>
+				<DefaultButton className={"filter-activation-button"}
+					labelText={"Filters"}
+					onClick={() => setIsFiltersVisible((prev) => !prev)}>
+				</DefaultButton>
+
+				<div className="filters-items-wrapper">
+					{isFiltersVisible && <FiltersWindow availableFilters={filtersState}/>}
+					<Items databaseState={databaseState}/>
+				</div>
+			</div>
+		)
+	}
+
 	return (
 		<div className="database-page">
-			<DefaultButton className={"filter-activation-button"}
-				labelText={"Filters"}
-				onClick={() => setIsFiltersVisible((prev) => !prev)}>
-			</DefaultButton>
-
-			<div className="filters-items-wrapper">
-				{isFiltersVisible && <FiltersWindow availableFilters={filtersState}/>}
-				<Items databaseState={databaseState}/>
-			</div>
+			{renderContent()}
 		</div>
 	)
 }
