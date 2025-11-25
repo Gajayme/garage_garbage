@@ -2,7 +2,6 @@
 import React, {useState} from 'react';
 
 import {OuterWindow} from "Components/Window/OuterWindow.js"
-import * as Constants from './Constants.js'
 
 import 'Styles/MainPages/DatabasePage/Filters/FiltersWindow.css'
 import 'Styles/MainPages/DatabasePage/Filters/FilterButton.css'
@@ -12,7 +11,7 @@ import { FilterBuilder } from './FiltersBuilder.js';
 
 
 // Компонет со всеми фильтрами
-export const FiltersWindow = ({availableFilters}) => {
+export const FiltersWindow = ({availableFilters, filtersState, onFilterStateChanged}) => {
 
 	// начальный стейт активности фильтров
 	const initialFiltersActivityState =
@@ -21,6 +20,7 @@ export const FiltersWindow = ({availableFilters}) => {
 		return acc;
 	}, {});
 
+	// стейт активности фильтров
 	const [filtersActivityState, setfiltersActivityState] = useState(initialFiltersActivityState);
 
 	// переключение активности фильтров
@@ -31,41 +31,11 @@ export const FiltersWindow = ({availableFilters}) => {
 		}));
 	};
 
-	// начальный стейт со значениями фильтров
-	const initialFiltersState = availableFilters.reduce((acc, filterData) => {
-		const key = filterData.name
-		if (filterData.type === Constants.FilterType.multiCheckbox) {
-			acc[key] = [];
-		} else if (filterData.type === Constants.FilterType.range)
-			acc[key] = {
-				min: undefined,
-				max:undefined
-			}
-		return acc;
-	}, {});
-
-
-	const [filtersState, setfilterState] = useState(initialFiltersState)
-
-	// изменение значений чекбокс
-	const toggleMultipleCheckboxFilter = (filterName) => {
-		return (newVal) => {
-			setfilterState(prevState => {
-				const currentList = prevState[filterName] || [];
-				const updatedList = currentList.includes(newVal)
-					? currentList.filter(item => item !== newVal) // удалить выбок
-					: [...currentList, newVal];  // добавить
-				return {...prevState, [filterName]: updatedList};
-			})
-		}
-	}
-
-
 	const filters = <FilterBuilder
 		availableFilters={availableFilters}
 		filtersState={filtersState}
-		toggleCheckboxFilter={toggleMultipleCheckboxFilter}
 		toggleFilterVisibility={toggleFilterButton}
+		onFilterStateChanged={onFilterStateChanged}
 		filtersVisibility={filtersActivityState}
 	/>
 

@@ -13,8 +13,8 @@ import * as Constants from './Constants';
 export const FilterBuilder = ({
   availableFilters,
   filtersState,
-  toggleCheckboxFilter,
   toggleFilterVisibility,
+  onFilterStateChanged,
   filtersVisibility
 }) => {
   const renderFilter = (filterData) => {
@@ -24,7 +24,7 @@ export const FilterBuilder = ({
           <CheckboxMultiFilter
             allValues={filterData.values}
             checkedOptions={filtersState[filterData.name] || []}
-            onChange={toggleCheckboxFilter(filterData.name)}
+            onChange={onFilterStateChanged(filterData.name)}
             checkmarkImg={checkmark}
           />
         );
@@ -32,6 +32,7 @@ export const FilterBuilder = ({
         return (
           <RangeFilter
             image={rangeArrow}
+			onChange={onFilterStateChanged(filterData.name)}
             currentValues={filtersState[filterData.name] || { min: '', max: '' }}
           />
         );

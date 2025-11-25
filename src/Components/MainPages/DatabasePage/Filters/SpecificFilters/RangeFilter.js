@@ -8,7 +8,19 @@ import 'Styles/MainPages/DatabasePage/Filters/SpecificFilters/PriceRangeFilter.c
 
 
 // фильтр с двумя окнами ввода минимального и максимального значений для фильтрации
-export const RangeFilter = ({image, currentValues}) => {
+export const RangeFilter = ({image, onChange, currentValues}) => {
+
+	const handleMinChange = (newMin) => {
+		const value = newMin.target.value;
+		onChange({ ...currentValues, min: value });
+	};
+
+	const handleMaxChange = (newMax) => {
+		const value = newMax.target.value;
+		onChange({ ...currentValues, max: value });
+	};
+
+
 	return (
 	<div className='price-range-container'>
 		<CustomInput
@@ -18,6 +30,7 @@ export const RangeFilter = ({image, currentValues}) => {
 			placeholder="min"
 			maxLength = {priceMaxLength}
 			inputValidator={NumbersOnly}
+			onChange={handleMinChange}
 		/>
 
 		<img
@@ -33,6 +46,7 @@ export const RangeFilter = ({image, currentValues}) => {
 			value={currentValues.max}
 			maxLength = {priceMaxLength}
 			inputValidator={NumbersOnly}
+			onChange={handleMaxChange}
 		/>
 	</div>
 	);

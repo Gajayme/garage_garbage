@@ -3,7 +3,8 @@ import React, {useEffect, useState, useCallback} from 'react';
 import {Items} from 'Components/MainPages/DatabasePage/Items.js'
 import { FiltersWindow } from './Filters/FiltresWindow';
 import {DefaultButton} from 'Components/Button.js';
-import * as Constants from "Constants";
+import * as Constants from "Constants.js";
+import * as FilterConstatns from "./Filters/Constants.js"
 
 import "Styles/MainPages/DatabasePage/DatabaseItems.css"
 import "Styles/MainPages/DatabasePage/DatabasePage.css"
@@ -12,15 +13,18 @@ import "Styles/MainPages/DatabasePage/FiltersItemsWrapper.css"
 
 export const DatabasePageContent = () => {
 
-	// стейт для сохранения полученных с сервера 34
+	// стейт для сохранения полученных с сервера данных
 	const [databaseState, setDatabaseState] = useState([])
-	// стейт для сохранения полученных с сервера данных о фитртах (какие фильтры есть, какие в них есть опции)
-	const [filtersState, setFiltersState] = useState([])
+	// стейт для сохранения полученных с сервера данных о фильтрах (какие фильтры есть, какие в них есть опции)
+	const [allFilters, setAllFilters] = useState([])
 	// стейт для отображения/скрытия окна фильтров
 	const [isFiltersVisible, setIsFiltersVisible] = useState([])
 	// происходит ли первичная загрузка вещей с бека
 	const [isLoading, setIsLoading] = useState(true);
+	// стейт с текущими значениями фильтров
+	const [filtersState, setFilterState] = useState([])
 
+	// Парсим объекты для отображения, которые пришли с сервера
 	const parseItemsData = (itemsData) => {
 		const newItems = itemsData.map((item) => ({
 			id: item.id, // TODO: переделать на нормальное значение
@@ -32,14 +36,23 @@ export const DatabasePageContent = () => {
 		setDatabaseState((prevState) => [...prevState, ...newItems]);
 	}
 
+	// Парсим информацио о фильтрах с сервера
 	const parseFiltersData = (filtersData) => {
-		const newFilters = filtersData.map((filter) => (
-			{
-			name: filter.name,
-			values: filter.values,
-			type: filter.type,
-		}));
-		setFiltersState((prevState) => [...prevState, ...newFilters]);
+		const allFilters = [];
+		const filtersInitialState = {};
+
+		filtersData.forEach((filter) => {
+			const { name, values, type } = filter;
+			allFilters.push({ name, values, type });
+
+			if (type === FilterConstatns.FilterType.multiCheckbox) {
+				filtersInitialState[name] = [];
+			} else if (type === FilterConstatns.FilterType.range) {
+				filtersInitialState[name] = { min: '', max: '' };
+			}
+		});
+		setAllFilters(allFilters);
+		setFilterState(filtersInitialState);
 	}
 
 	const parseServerData = useCallback((data) => {
@@ -60,7 +73,7 @@ export const DatabasePageContent = () => {
 			.then((response) => response.json())
 			.then((data) => {
 				parseServerData(data);
-				setIsLoading(false); // 🔹 Фикс: загрузка завершена
+				setIsLoading(false);
 			})
 			.catch((error) => {
 				console.error('Ошибка:', error);
@@ -69,6 +82,42 @@ export const DatabasePageContent = () => {
 		}
 	}, [databaseState.length, parseServerData]);
 
+
+	const onFilterStateChanged = (filterName) => (newState) => {
+		setFilterState(prevState => ({
+			...prevState,
+			[filterName]: newState,
+		}));
+	};
+
+	// const onFiltersChanged = useCallback((selectedFilters) => {
+	// 	console.log("onFiltersChanged")
+	// 	console.log("selected filters:", selectedFilters)
+
+
+	// 	return
+
+	// 	const queryString = new URLSearchParams({
+	// 		selectedFilters
+	// 	}).toString();
+
+	// 	fetch(`${Constants.base_server_url}${Constants.post_all}?${queryString}`, {
+	// 		method: Constants.http_methods.GET,
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 		}
+	// 	}
+	// )
+	// 		.then((response) => response.json())
+	// 		.then((data) => {
+	// 			parseServerData(data);
+	// 			setIsLoading(false);
+	// 		})
+	// 		.catch((error) => {
+	// 			console.error('Ошибка:', error);
+	// 			setIsLoading(false); // даже при ошибке снимаем isLoading
+	// 		});
+	// }, [parseServerData]);
 
 
 	const renderContent = () => {
@@ -86,7 +135,13 @@ export const DatabasePageContent = () => {
 				</DefaultButton>
 
 				<div className="filters-items-wrapper">
-					{isFiltersVisible && <FiltersWindow availableFilters={filtersState}/>}
+
+					{isFiltersVisible && <FiltersWindow
+						availableFilters={allFilters}
+						filtersState={filtersState}
+						onFilterStateChanged={onFilterStateChanged}
+					/>}
+
 					<Items databaseState={databaseState}/>
 				</div>
 			</div>

@@ -31,12 +31,3 @@ export const UploadFormValidation = (formValues, errorValues, validationMapper) 
 	}
 	return(newErrorState);
 };
-
-// export const UploadFormValidation = (formValues, errorValues, validationMapper, handleOnErrorChange) => {
-//
-// 	for (const [formKey, formVal] of Object.entries(formValues)) {
-// 		for (const validator of Object.values(validationMapper[formKey])) {
-// 			handleOnErrorChange(formKey)(validator(formVal))
-// 		}
-// 	}
-// }
