@@ -1,4 +1,5 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, {useEffect,useState, useCallback} from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import {Items} from 'Components/MainPages/DatabasePage/Items.js'
 import { FiltersWindow } from './Filters/FiltresWindow';
@@ -19,16 +20,41 @@ export const DatabasePageContent = () => {
 	const [allFilters, setAllFilters] = useState([])
 	// стейт для отображения/скрытия окна фильтров
 	const [isFiltersVisible, setIsFiltersVisible] = useState([])
-	// происходит ли первичная загрузка вещей с бека
-	const [isLoading, setIsLoading] = useState(true);
 	// стейт с текущими значениями фильтров
 	const [filtersState, setFilterState] = useState([])
+
+	const initialFetchItems = async () => {
+		const resp = await fetch(Constants.base_server_url + Constants.post_all, {
+				method: Constants.http_methods.GET,
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+		if (!resp.ok) throw new Error("Failed to fetch");
+		return resp.json();
+	};
+
+
+	const { data, isLoading, error } = useQuery({
+		queryKey: ["items"],
+		queryFn: initialFetchItems,
+		enabled: !databaseState.length,
+	});
+
+
+	useEffect(() => {
+		if (allFilters.length === 0 && data) {
+			console.log("parsingfilters data 1", data)
+			parseFiltersData(data.filters)
+		}
+	}, [data, allFilters.length]);
+
 
 	// Парсим объекты для отображения, которые пришли с сервера
 	const parseItemsData = (itemsData) => {
 		const newItems = itemsData.map((item) => ({
 			id: item.id, // TODO: переделать на нормальное значение
-			image:  Array.isArray(item.images) && item.images.length && item.images[0].image_url, // TODO: переделать на нормальное значение
+			image:  Array.isArray(item.images) && item.images.length && item.images[0].image_url,
 			itemName: item.itemName,
 			price: item.price,
 			adding_date_time: 0, // TODO: переделать на нормальное значение
@@ -61,53 +87,16 @@ export const DatabasePageContent = () => {
 	}, []);
 
 
+
 	// Запрос к серверу
-	useEffect(() => {
-		if (!databaseState.length) {
-			fetch(Constants.base_server_url + Constants.post_all, {
-				method: Constants.http_methods.GET,
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			})
-			.then((response) => response.json())
-			.then((data) => {
-				parseServerData(data);
-				setIsLoading(false);
-			})
-			.catch((error) => {
-				console.error('Ошибка:', error);
-				setIsLoading(false); // даже при ошибке снимаем isLoading
-			});
-		}
-	}, [databaseState.length, parseServerData]);
-
-
-	const onFilterStateChanged = (filterName) => (newState) => {
-		setFilterState(prevState => ({
-			...prevState,
-			[filterName]: newState,
-		}));
-	};
-
-	// const onFiltersChanged = useCallback((selectedFilters) => {
-	// 	console.log("onFiltersChanged")
-	// 	console.log("selected filters:", selectedFilters)
-
-
-	// 	return
-
-	// 	const queryString = new URLSearchParams({
-	// 		selectedFilters
-	// 	}).toString();
-
-	// 	fetch(`${Constants.base_server_url}${Constants.post_all}?${queryString}`, {
-	// 		method: Constants.http_methods.GET,
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		}
-	// 	}
-	// )
+	// useEffect(() => {
+	// 	if (!databaseState.length) {
+	// 		fetch(Constants.base_server_url + Constants.post_all, {
+	// 			method: Constants.http_methods.GET,
+	// 			headers: {
+	// 				'Content-Type': 'application/json',
+	// 			},
+	// 		})
 	// 		.then((response) => response.json())
 	// 		.then((data) => {
 	// 			parseServerData(data);
@@ -117,14 +106,22 @@ export const DatabasePageContent = () => {
 	// 			console.error('Ошибка:', error);
 	// 			setIsLoading(false); // даже при ошибке снимаем isLoading
 	// 		});
-	// }, [parseServerData]);
+	// 	}
+	// }, [databaseState.length, parseServerData]);
 
+
+	const onFilterStateChanged = (filterName) => (newState) => {
+		setFilterState(prevState => ({
+			...prevState,
+			[filterName]: newState,
+		}));
+	};
 
 	const renderContent = () => {
 		if (isLoading) {
 			return <p>Loading...</p>; // или null, или спиннер
 		}
-		if (databaseState.length === 0) {
+		if (data.data.length === 0) {
 			return <p>No uploaded items</p>;
 		}
 		return (
@@ -142,7 +139,7 @@ export const DatabasePageContent = () => {
 						onFilterStateChanged={onFilterStateChanged}
 					/>}
 
-					<Items databaseState={databaseState}/>
+					<Items databaseState={data.data}/>
 				</div>
 			</div>
 		)
