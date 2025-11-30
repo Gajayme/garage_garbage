@@ -1,0 +1,7 @@
+
+.database-items {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 1fr позволяет равномерно делить пространство */
+	gap: 20px; /* Задает и горизонтальный, и вертикальный промежуток */
+	overflow-y: auto;
+}

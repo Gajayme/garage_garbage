@@ -1,5 +1,5 @@
 
-import "Styles/MainPages/DatabasePage/DatabaseItem.css"
+import "Styles/MainPages/DatabasePage/Items/DatabaseItem.css"
 import "Styles/BorderedImageContainer.css"
 
 import DefaultImg from "Images/default.jpg"
