@@ -1,8 +1,7 @@
 
 .outer-window-filters {
 
-	z-index: 999; /* Чтобы было перед списком вещей */
-	position: absolute;
+	overflow-y: auto;
 
     display: flex;
     flex-direction: column;

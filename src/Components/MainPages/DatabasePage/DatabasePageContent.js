@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react';
+import React, {useEffect,useState, useCallback} from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import {Items} from 'Components/MainPages/DatabasePage/Items/Items.js'
@@ -26,7 +26,9 @@ export const DatabasePageContent = () => {
 	const [filtersState, setFilterState] = useState([])
 
 	const fetchItems = async () => {
+		console.log("Filters:", filtersState)
 		const query = buildQueryString(filtersState);
+		console.log("query", query)
 		const url = `${GlobalConstants.base_server_url + GlobalConstants.post_all}?${query}`;
 		const resp = await fetch(url, {
 			method: GlobalConstants.http_methods.GET,
