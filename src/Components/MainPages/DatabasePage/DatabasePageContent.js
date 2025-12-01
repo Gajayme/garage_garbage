@@ -1,4 +1,4 @@
-import React, {useEffect,useState, useCallback} from 'react';
+import React, {useEffect,useState} from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import {Items} from 'Components/MainPages/DatabasePage/Items/Items.js'
@@ -7,7 +7,7 @@ import {DefaultButton} from 'Components/Button.js';
 import {buildQueryString} from './Utils.js'
 
 import * as GlobalConstants from "Constants.js";
-import * as FilterConstatns from "./Filters/Constants.js"
+import * as FilterConstants from "./Filters/Constants.js"
 import * as Constants from "./Constatns.js"
 
 import "Styles/MainPages/DatabasePage/Items/DatabaseItems.css"
@@ -26,20 +26,20 @@ export const DatabasePageContent = () => {
 	const [filtersState, setFilterState] = useState({})
 
 	const fetchItems = async ({signal}) => {
+
 		const query = buildQueryString(filtersState);
 		const url = `${GlobalConstants.base_server_url + GlobalConstants.post_all}?${query}`;
 		const resp = await fetch(url, {
 			method: GlobalConstants.http_methods.GET,
-			headers: {
-				'Content-Type': 'application/json',
-			},
+			headers: { "Content-Type": "application/json" },
+			signal,
 		});
 
 		if (!resp.ok) throw new Error("Failed to fetch");
 		return resp.json();
 	};
 
-	const { data, isLoading, error } = useQuery({
+	const {data, isLoading, error} = useQuery({
 		queryKey: ["items", filtersState],
 		queryFn: fetchItems,
 	});
@@ -48,7 +48,7 @@ export const DatabasePageContent = () => {
 		if (data?.filters && allFilters.length === 0) {
 			parseFiltersData(data.filters);
 		}
-	}, [data]);
+	}, [data, allFilters.length]);
 
 
 	// Парсим информацио о фильтрах с сервера
@@ -60,9 +60,9 @@ export const DatabasePageContent = () => {
 			const { name, values, type } = filter;
 			allFilters.push({ name, values, type });
 
-			if (type === FilterConstatns.FilterType.multiCheckbox) {
+			if (type === FilterConstants.FilterType.multiCheckbox) {
 				filtersInitialState[name] = [];
-			} else if (type === FilterConstatns.FilterType.range) {
+			} else if (type === FilterConstants.FilterType.range) {
 				filtersInitialState[name] = { min: '', max: '' };
 			}
 		});
@@ -77,33 +77,46 @@ export const DatabasePageContent = () => {
 		}));
 	};
 
-	const renderContent = () => {
-		if (isLoading) {
-			return <p className='centered-text'>{Constants.loading}</p>; // Загрузка
-		}
 
+	// Все еще загружаем контент
+	if (isLoading) {
 		return (
-			<div>
-				<DefaultButton className={"filter-activation-button"}
-					labelText={"Filters"}
-					onClick={() => setIsFiltersVisible((prev) => !prev)}>
-				</DefaultButton>
-
-				<div className="filters-items-wrapper">
-					{isFiltersVisible && <FiltersWindow
-						availableFilters={allFilters}
-						filtersState={filtersState}
-						onFilterStateChanged={onFilterStateChanged}
-					/>}
-					<Items databaseState={data.data}/>
-				</div>
+			<div className="database-page">
+				<p className="centered-text">{Constants.loading}</p>
 			</div>
-		)
+		);
+	}
+
+	// Ошибка запроса
+	if (error) {
+		return (
+			<div className="database-page">
+				<p className="centered-text">Ошибка загрузки данных</p>
+			</div>
+		);
 	}
 
 	return (
 		<div className="database-page">
-			{renderContent()}
+			{/* Кнопка открытия фильтров */}
+			<DefaultButton
+				className="filter-activation-button"
+				labelText="Filters"
+				onClick={() => setIsFiltersVisible(prev => !prev)}
+			/>
+
+			{/* Блок фильтров и items */}
+			<div className="filters-items-wrapper">
+				{isFiltersVisible && (
+				<FiltersWindow
+					availableFilters={allFilters}
+					filtersState={filtersState}
+					onFilterStateChanged={onFilterStateChanged}
+				/>
+				)}
+
+				<Items databaseState={data.data} />
+			</div>
 		</div>
-	)
-}
+	);
+};
