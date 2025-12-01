@@ -1,19 +1,12 @@
 
-.outer-window-filters {
+.filters-content {
 
 	overflow-y: auto;
-
     display: flex;
     flex-direction: column;
-
     justify-content: space-evenly;
     gap: 10px;
 
-	max-height: 30%;
 
-	width: 23%;
 	padding: 1%;
-
-	background-color: var(--middle-grey);
-	border: 2px solid var(--dark-grey);
 }

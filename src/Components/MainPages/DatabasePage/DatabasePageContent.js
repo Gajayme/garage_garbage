@@ -21,14 +21,12 @@ export const DatabasePageContent = () => {
 	// стейт для сохранения полученных с сервера данных о фильтрах (какие фильтры есть, какие в них есть опции)
 	const [allFilters, setAllFilters] = useState([])
 	// стейт для отображения/скрытия окна фильтров
-	const [isFiltersVisible, setIsFiltersVisible] = useState([])
+	const [isFiltersVisible, setIsFiltersVisible] = useState(false)
 	// стейт с текущими значениями фильтров
-	const [filtersState, setFilterState] = useState([])
+	const [filtersState, setFilterState] = useState({})
 
-	const fetchItems = async () => {
-		console.log("Filters:", filtersState)
+	const fetchItems = async ({signal}) => {
 		const query = buildQueryString(filtersState);
-		console.log("query", query)
 		const url = `${GlobalConstants.base_server_url + GlobalConstants.post_all}?${query}`;
 		const resp = await fetch(url, {
 			method: GlobalConstants.http_methods.GET,
@@ -44,14 +42,13 @@ export const DatabasePageContent = () => {
 	const { data, isLoading, error } = useQuery({
 		queryKey: ["items", filtersState],
 		queryFn: fetchItems,
-		// enabled: !allFilters.length,
 	});
 
 	useEffect(() => {
-		if (allFilters.length === 0 && data) {
-			parseFiltersData(data.filters)
+		if (data?.filters && allFilters.length === 0) {
+			parseFiltersData(data.filters);
 		}
-	}, [data, allFilters.length]);
+	}, [data]);
 
 
 	// Парсим информацио о фильтрах с сервера

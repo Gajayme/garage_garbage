@@ -7,3 +7,10 @@
     border-top: 2px solid var(--dark-grey);
     border-left: 2px solid var(--dark-grey);
 }
+
+.inner-window-filters {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}

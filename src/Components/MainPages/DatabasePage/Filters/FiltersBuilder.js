@@ -10,6 +10,9 @@ import rangeArrow from 'Images/Filters/price_range_arrow.svg';
 
 import * as Constants from './Constants';
 
+import 'Styles/MainPages/DatabasePage/Filters/FiltersContent.css'
+
+
 export const FilterBuilder = ({
   availableFilters,
   filtersState,
@@ -42,7 +45,7 @@ export const FilterBuilder = ({
   };
 
   return (
-    <div className="outer-window-filters">
+    <div className="filters-content">
       {availableFilters.map((filterData) => (
         <FilterWithButton
           key={filterData.name}

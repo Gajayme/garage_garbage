@@ -2,10 +2,13 @@
 import React, {useState} from 'react';
 
 import {OuterWindow} from "Components/Window/OuterWindow.js"
+import {InnerWindow} from "Components/Window/InnerWindow.js"
 
-import 'Styles/MainPages/DatabasePage/Filters/FiltersWindow.css'
 import 'Styles/MainPages/DatabasePage/Filters/FilterButton.css'
 import 'Styles/MainPages/DatabasePage/Filters/FilterWithButton.css'
+import 'Styles/Window/OuterWindow.css'
+import 'Styles/Window/InnerWindow.css'
+
 
 import { FilterBuilder } from './FiltersBuilder.js';
 
@@ -31,17 +34,23 @@ export const FiltersWindow = ({availableFilters, filtersState, onFilterStateChan
 		}));
 	};
 
-	const filters = <FilterBuilder
-		availableFilters={availableFilters}
-		filtersState={filtersState}
-		toggleFilterVisibility={toggleFilterButton}
-		onFilterStateChanged={onFilterStateChanged}
-		filtersVisibility={filtersActivityState}
-	/>
+	const innerWindow = <InnerWindow
+			className="inner-window-filters">
+		<FilterBuilder
+			availableFilters={availableFilters}
+			filtersState={filtersState}
+			toggleFilterVisibility={toggleFilterButton}
+			onFilterStateChanged={onFilterStateChanged}
+			filtersVisibility={filtersActivityState}
+		/>
+		</InnerWindow>
+
 
 	return (
-		<div>
-			<OuterWindow innerWindow={filters}>
+		<div style={{width:'100%'}}>
+			<OuterWindow
+				className="outer-window-filters"
+				innerWindow={innerWindow}>
 			</OuterWindow>
 		</div>
 	)
