@@ -1,7 +1,7 @@
 
 import {Item} from 'Components/MainPages/DatabasePage/Items/Item';
 import DefaultImg from "Images/default.jpg"
-import * as Constants from "Components/MainPages/DatabasePage/Constatns.js"
+import * as Constants from "Components/MainPages/DatabasePage/Constants.js"
 
 export const Items = ({databaseState}) => {
 	return (
