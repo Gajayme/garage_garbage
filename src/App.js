@@ -5,22 +5,15 @@ import { DatabasePage } from 'Components/MainPages/DatabasePage/DatabasePage.js'
 import { CenteredWindow } from 'Components/CenteredWindow';
 
 const App = () => {
-
-	const mainPage = MainPage()
-	const uploadPage = UploadPage()
-	const databasePage = DatabasePage()
-
-	return (
-	<Router>
-		<div>
-			<Routes>
-				<Route path="/" element={<CenteredWindow window={mainPage} />} />
-				<Route path="/Upload" element={<CenteredWindow window={uploadPage} />} />
-				<Route path="/Database" element={<CenteredWindow window={databasePage} />} />
-			</Routes>
-		</div>
-	</Router>
-	)
-}
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<CenteredWindow window={<MainPage />} />} />
+        <Route path="/Upload" element={<CenteredWindow window={<UploadPage />} />} />
+        <Route path="/Database" element={<CenteredWindow window={<DatabasePage />} />} />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App

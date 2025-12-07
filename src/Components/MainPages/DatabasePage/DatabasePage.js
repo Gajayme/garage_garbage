@@ -9,24 +9,22 @@ import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons";
 import 'Styles/Navigation/DefaultNavButtons.css'
 
 export const DatabasePage = () => {
-
-    const header = <WindowHeader className="window-header"/>
-
-    const buttonLayer = <ButtonLayer className="button-layer">
-        <DefaultNavButtons className="default-nav-buttons"/>
-    </ButtonLayer>
-
-    const innerWindow = <InnerWindow className="inner-window">
-        <DatabasePageContent className="database-page-content"/>
-    </InnerWindow>
-
-    return (
-        <div>
-            <OuterWindow className="outer-window"
-                         header={header}
-                         buttonLayer={buttonLayer}
-                         innerWindow={innerWindow}>
-            </OuterWindow>
-        </div>
-    )
-}
+  return (
+    <div>
+      <OuterWindow
+        className="outer-window"
+        header={<WindowHeader className="window-header" />}
+        buttonLayer={
+          <ButtonLayer className="button-layer">
+            <DefaultNavButtons className="default-nav-buttons" />
+          </ButtonLayer>
+        }
+        innerWindow={
+          <InnerWindow className="inner-window">
+            <DatabasePageContent className="database-page-content" />
+          </InnerWindow>
+        }
+      />
+    </div>
+  );
+};

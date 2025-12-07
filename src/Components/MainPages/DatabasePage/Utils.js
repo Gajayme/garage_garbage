@@ -1,5 +1,8 @@
 
-// компоновщие query строки для фильтров
+
+import * as FilterConstants from "./Filters/Constants.js"
+
+// компоновщик query строки для фильтров
 export const buildQueryString = (filters) => {
 	const params = new URLSearchParams();
 
@@ -24,4 +27,26 @@ export const buildQueryString = (filters) => {
 		}
 	});
 	return params.toString(); // "category=food&category=drinks&min=10&max=50"
+};
+
+// Парсим фильтры из URL
+export const parseFiltersFromUrl = (searchParams, filterDefinitions) => {
+  const state = {};
+
+  filterDefinitions.forEach(filter => {
+    const { name, type } = filter;
+
+    if (type === FilterConstants.FilterType.multiCheckbox) {
+      state[name] = searchParams.getAll(name) || [];
+    }
+
+    if (type === FilterConstants.FilterType.range) {
+      state[name] = {
+        min: searchParams.get(`${name}_min`) || "",
+        max: searchParams.get(`${name}_max`) || "",
+      };
+    }
+  });
+
+  return state;
 };

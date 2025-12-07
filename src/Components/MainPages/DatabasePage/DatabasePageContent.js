@@ -1,10 +1,13 @@
-import React, {useEffect,useState} from 'react';
+import React, { useEffect,useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import {Items} from 'Components/MainPages/DatabasePage/Items/Items.js'
+import { Items } from 'Components/MainPages/DatabasePage/Items/Items.js'
+
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { FiltersWindow } from './Filters/FiltresWindow';
-import {DefaultButton} from 'Components/Button.js';
-import {buildQueryString} from './Utils.js'
+import { DefaultButton } from 'Components/Button.js';
+import { buildQueryString, parseFiltersFromUrl } from './Utils.js'
 
 import * as GlobalConstants from "Constants.js";
 import * as FilterConstants from "./Filters/Constants.js"
@@ -17,6 +20,8 @@ import "Styles/MainPages/DatabasePage/FiltersItemsWrapper.css"
 import "Styles/CenteredText.css"
 
 export const DatabasePageContent = () => {
+
+	const navigate = useNavigate();
 
 	// стейт для сохранения полученных с сервера данных о фильтрах (какие фильтры есть, какие в них есть опции)
 	const [allFilters, setAllFilters] = useState([])
@@ -44,31 +49,63 @@ export const DatabasePageContent = () => {
 		queryFn: fetchItems,
 	});
 
+
+
+
+	const location = useLocation();
+
 	useEffect(() => {
-		if (data?.filters && allFilters.length === 0) {
-			parseFiltersData(data.filters);
-		}
-	}, [data, allFilters.length]);
+		// Ждём данные с бэка
+		if (!data?.filters) return;
 
+		// Инициализируем фильтры только один раз
+		if (allFilters.length !== 0) return;
 
-	// Парсим информацио о фильтрах с сервера
-	const parseFiltersData = (filtersData) => {
-		const allFilters = [];
-		const filtersInitialState = {};
+		const filters = data.filters;
+		// 1. сохраняем список всех фильтров
+		setAllFilters(filters);
 
-		filtersData.forEach((filter) => {
-			const { name, values, type } = filter;
-			allFilters.push({ name, values, type });
-
-			if (type === FilterConstants.FilterType.multiCheckbox) {
-				filtersInitialState[name] = [];
-			} else if (type === FilterConstants.FilterType.range) {
-				filtersInitialState[name] = { min: '', max: '' };
+		// 2. создаём дефолтное состояние
+		const defaultState = {};
+		filters.forEach((f) => {
+			if (f.type === FilterConstants.FilterType.multiCheckbox) {
+				defaultState[f.name] = [];
+			} else if (f.type === FilterConstants.FilterType.range) {
+				defaultState[f.name] = { min: "", max: "" };
 			}
 		});
-		setAllFilters(allFilters);
-		setFilterState(filtersInitialState);
-	}
+
+		// 3. читаем фильтры из URL
+		const params = new URLSearchParams(location.search);
+		const restoredState = parseFiltersFromUrl(params, filters);
+
+		// 4. комбинируем дефолты + URL
+		const finalState = {
+			...defaultState,
+			...restoredState,
+		};
+
+		setFilterState(finalState);
+
+	}, [data, location.search, allFilters.length]);
+
+	// Модификация ссылки (при выборе фильтров)
+	useEffect(() => {
+		// 1. Фильтры с бэка ещё не пришли → нельзя менять URL
+		if (!allFilters.length) return;
+
+		// 2. filtersState ещё пустой → нельзя менять URL
+		if (!Object.keys(filtersState).length) return;
+
+		// 3. filtersState совпадает с URL → тоже ничего не делаем
+		const urlParams = new URLSearchParams(location.search);
+		const built = buildQueryString(filtersState);
+		if (urlParams.toString() === built) return;
+
+		// 4. Теперь можно обновлять URL
+		navigate(`?${built}`, { replace: true });
+	}, [navigate, filtersState, allFilters.length, location.search]);
+
 
 	const onFilterStateChanged = (filterName) => (newState) => {
 		setFilterState(prevState => ({
