@@ -24,7 +24,7 @@ import DefaultImg from "Images/default.jpg"
 export const UploadPageForm = ({notificationStateSetter}) => {
 
 	// хук, который занимается загрузкой инпут параметров с сервера
-	const { brandState, typeState, buyerState, locationState } = useInputParams();
+	const { brandState, typeState, buyerState, locationState, isLoading } = useInputParams();
 
 	// стейты со значениями полей
 	const [formState, setFormState] = useState({
@@ -224,6 +224,9 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 			images: [imageObject]
 		});
 	};
+
+	if (isLoading)
+		return (<p>loading...</p>)
 
 	return (
 

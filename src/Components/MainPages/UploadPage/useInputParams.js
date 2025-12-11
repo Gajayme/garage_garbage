@@ -1,102 +1,66 @@
-import { useState, useEffect } from "react"
+import { useQuery } from "@tanstack/react-query";
+import * as UploadConstants from "./UploadPageConstants.js";
 
-import * as UploadConstants from './UploadPageConstants.js'
+const fetchDictionary = async (url) => {
+	const resp = await fetch(url);
+	if (!resp.ok) throw new Error("Ошибка загрузки");
+	const data = await resp.json();
+	return data.data;
+};
 
-
+const convertArrayToMap = (array) =>
+	array.reduce((acc, item) => {
+		acc[item.title] = item.id;
+		return acc;
+	}, {});
 
 export const useInputParams = () => {
+	const { data: brands, isLoading: brandsLoading } = useQuery({
+		queryKey: ["brands"],
+		queryFn: () => fetchDictionary(UploadConstants.baseApi + UploadConstants.brandApi),
+	});
 
-	// стейты с брендами, получаемыми от сервера
-	const [brandState, setBrandState] = useState({[UploadConstants.chooseBrand]: UploadConstants.defaultID})
-	// стейты с типами вещей, получаемыми от сервера
-	const [typeState, setTypeState] = useState({[UploadConstants.chooseType]: UploadConstants.defaultID})
-	// стейты с приобретателями вещей, получаемыми от сервера
-	const [buyerState, setBuyerState] = useState({[UploadConstants.chooseBuyer]: UploadConstants.defaultID})
-	// стейты с местонахождением вещей, получаемыми от сервера
-	const [locationState, setLocationState] = useState({[UploadConstants.chooseLocation]: UploadConstants.defaultID})
+	const { data: types, isLoading: typesLoading } = useQuery({
+		queryKey: ["types"],
+		queryFn: () => fetchDictionary(UploadConstants.baseApi + UploadConstants.typeApi),
+	});
 
+	const { data: buyers, isLoading: buyersLoading } = useQuery({
+		queryKey: ["buyers"],
+		queryFn: () => fetchDictionary(UploadConstants.baseApi + UploadConstants.byuerApi),
+	});
 
-	const updateBrands = (brandsData) => {
+	const { data: locations, isLoading: locationsLoading } = useQuery({
+		queryKey: ["locations"],
+		queryFn: () => fetchDictionary(UploadConstants.baseApi + UploadConstants.locationApi),
+	});
 
-		const brandsObj = brandsData.reduce((acc, brand) => {
-			acc[brand.title] = brand.id;
-			return acc;
-		  }, {});
+	const brandState = {
+		[UploadConstants.chooseBrand]: UploadConstants.defaultID,
+		...(brands ? convertArrayToMap(brands) : {}),
+	};
 
-		setBrandState((prevState) => ({
-			...prevState, ...brandsObj})
-		)
-	}
+	const typeState = {
+		[UploadConstants.chooseType]: UploadConstants.defaultID,
+		...(types ? convertArrayToMap(types) : {}),
+	};
 
-	const updateTypes = (typesData) => {
+	const buyerState = {
+		[UploadConstants.chooseBuyer]: UploadConstants.defaultID,
+		...(buyers ? convertArrayToMap(buyers) : {}),
+	};
 
-		const typesObj = typesData.reduce((acc, type) => {
-			acc[type.title] = type.id;
-			return acc;
-		  }, {});
-
-		setTypeState((prevState) => ({
-			...prevState, ...typesObj})
-		)
-	}
-
-	const updateByuers = (byuersData) => {
-
-		const byuersObj = byuersData.reduce((acc, byuer) => {
-			acc[byuer.title] = byuer.id;
-			return acc;
-		  }, {});
-
-		setBuyerState((prevState) => ({
-			...prevState, ...byuersObj})
-		)
-	}
-
-	const updateLocations = (locationsData) => {
-
-		const locationsObj = locationsData.reduce((acc, location) => {
-			acc[location.title] = location.id;
-			return acc;
-		  }, {});
-
-		setLocationState((prevState) => ({
-			...prevState, ...locationsObj})
-		)
-	}
-
-
-	useEffect(() => {
-		const loadData = async () => {
-			try {
-				const [brandsResponse, typesResponse, byuersResponse, locationsResponse] = await Promise.all([
-					fetch(UploadConstants.baseApi + UploadConstants.brandApi),
-					fetch(UploadConstants.baseApi + UploadConstants.typeApi),
-					fetch(UploadConstants.baseApi + UploadConstants.byuerApi),
-					fetch(UploadConstants.baseApi + UploadConstants.locationApi),
-				]);
-
-				const brandsData = await brandsResponse.json();
-				const typesData = await typesResponse.json();
-				const byuersData = await byuersResponse.json();
-				const locationsData = await locationsResponse.json();
-
-				updateBrands(brandsData.data);
-				updateTypes(typesData.data);
-				updateByuers(byuersData.data);
-				updateLocations(locationsData.data);
-
-			} catch (error) {
-				console.error('Ошибка при получении данных:', error);
-			}
-		};
-
-		loadData();
-	}, []);
+	const locationState = {
+		[UploadConstants.chooseLocation]: UploadConstants.defaultID,
+		...(locations ? convertArrayToMap(locations) : {}),
+	};
 
 	return {
 		brandState,
 		typeState,
 		buyerState,
-		locationState
+		locationState,
+		isLoading:
+			brandsLoading || typesLoading || buyersLoading || locationsLoading,
 	};
-}
+};
