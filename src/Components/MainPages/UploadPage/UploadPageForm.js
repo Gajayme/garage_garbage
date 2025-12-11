@@ -1,20 +1,18 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
 
 import { DefaultButton } from "Components/Button.js"
-import {LabeledInput} from "Components/MainPages/UploadPage/LabeledInput.js"
-import {LabeledDropdown} from "Components/MainPages/UploadPage/LabeledDropDown.js"
-import {ImageManagerWindow} from "./ImageManager/ImageManagerWindow.js"
-import {NumbersOnly} from './Validations/Validations.js'
-import {NonEmpty, NonEmptyImages} from './Validations/Validations.js'
-import {UploadFormValidation} from './Validations/Validations.js'
+import { NumbersOnly } from './Validations/Validations.js'
 import { FormDataLogger } from "Components/FormDataLogger.js";
-import {UploadNotificationState} from './UploadPageNotificationWindow.js'
+import { UploadFormValidation } from './Validations/Validations.js'
+import { NonEmpty, NonEmptyImages } from './Validations/Validations.js'
+import { ImageManagerWindow } from "./ImageManager/ImageManagerWindow.js"
+import { UploadNotificationState } from './UploadPageNotificationWindow.js'
+import { LabeledInput } from "Components/MainPages/UploadPage/LabeledInput.js"
+import { LabeledDropdown } from "Components/MainPages/UploadPage/LabeledDropDown.js"
+import { useInputParams } from "Components/MainPages/UploadPage/useInputParams.js"
 
-import * as UploadConstants from './UploadPageConstants.js'
 import * as Constants from 'Constants.js'
-
-
 
 import 'Styles/MainPages/UploadPage/UploadPageForm.css'
 import 'Styles/MainPages/UploadPage/UploadPageButton.css'
@@ -25,103 +23,8 @@ import DefaultImg from "Images/default.jpg"
 
 export const UploadPageForm = ({notificationStateSetter}) => {
 
-	// стейты с брендами, получаемыми от сервера
-	const [brandState, setBrandState] = useState({
-		[UploadConstants.chooseBrand]: UploadConstants.defaultID
-	})
-
-	// стейты с типами вещей, получаемыми от сервера
-	const [typeState, setTypeState] = useState({
-		[UploadConstants.chooseType]: UploadConstants.defaultID
-	})
-
-	// стейты с приобретателями вещей, получаемыми от сервера
-	const [buyerState, setBuyerState] = useState({
-		[UploadConstants.chooseBuyer]: UploadConstants.defaultID
-	})
-
-	// стейты с местонахождением вещиейч, получаемыми от сервера
-	const [locationState, setLocationState] = useState({
-		[UploadConstants.chooseLocation]: UploadConstants.defaultID
-	})
-
-
-	const updateBrands = (brandsData) => {
-
-		const brandsObj = brandsData.reduce((acc, brand) => {
-			acc[brand.title] = brand.id;
-			return acc;
-		  }, {});
-
-		setBrandState((prevState) => ({
-			...prevState, ...brandsObj})
-		)
-	}
-
-	const updateTypes = (typesData) => {
-
-		const typesObj = typesData.reduce((acc, type) => {
-			acc[type.title] = type.id;
-			return acc;
-		  }, {});
-
-		setTypeState((prevState) => ({
-			...prevState, ...typesObj})
-		)
-	}
-
-	const updateByuers = (byuersData) => {
-
-		const byuersObj = byuersData.reduce((acc, byuer) => {
-			acc[byuer.title] = byuer.id;
-			return acc;
-		  }, {});
-
-		setBuyerState((prevState) => ({
-			...prevState, ...byuersObj})
-		)
-	}
-
-	const updateLocations = (locationsData) => {
-
-		const locationsObj = locationsData.reduce((acc, location) => {
-			acc[location.title] = location.id;
-			return acc;
-		  }, {});
-
-		setLocationState((prevState) => ({
-			...prevState, ...locationsObj})
-		)
-	}
-
-	useEffect(() => {
-		const loadData = async () => {
-			try {
-				const [brandsResponse, typesResponse, byuersResponse, locationsResponse] = await Promise.all([
-					fetch(UploadConstants.baseApi + UploadConstants.brandApi),
-					fetch(UploadConstants.baseApi + UploadConstants.typeApi),
-					fetch(UploadConstants.baseApi + UploadConstants.byuerApi),
-					fetch(UploadConstants.baseApi + UploadConstants.locationApi),
-				]);
-
-				const brandsData = await brandsResponse.json();
-				const typesData = await typesResponse.json();
-				const byuersData = await byuersResponse.json();
-				const locationsData = await locationsResponse.json();
-
-				updateBrands(brandsData.data);
-				updateTypes(typesData.data);
-				updateByuers(byuersData.data);
-				updateLocations(locationsData.data);
-
-			} catch (error) {
-				console.error('Ошибка при получении данных:', error);
-			}
-		};
-
-		loadData();
-	  }, []);
-
+	// хук, который занимается загрузкой инпут параметров с сервера
+	const { brandState, typeState, buyerState, locationState } = useInputParams();
 
 	// стейты со значениями полей
 	const [formState, setFormState] = useState({
@@ -273,7 +176,6 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 
 	// удалить все изображения
 	const handleOnDeleteAllImages = () => {
-		console.log(formState['images'])
 		setFormState((prevState) => ({
 			...prevState, images: []} ))
 	}
