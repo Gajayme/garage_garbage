@@ -1,50 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { parseFiltersFromUrl, buildQueryString } from "./Utils"
 import * as FilterConstants from "./Filters/Constants";
 
-// ------------------------------------------------------------
-// Парсим фильтры из URL → объект filtersState
-// ------------------------------------------------------------
-const parseFiltersFromUrl = (params, filtersDefinition) => {
-	const state = {};
-
-	filtersDefinition.forEach(filter => {
-		const name = filter.name;
-
-		if (filter.type === FilterConstants.FilterType.multiCheckbox) {
-			const values = params.getAll(name);
-			state[name] = values ?? [];
-		}
-
-		if (filter.type === FilterConstants.FilterType.range) {
-			const min = params.get(`${name}_min`) || "";
-			const max = params.get(`${name}_max`) || "";
-			state[name] = { min, max };
-		}
-	});
-
-	return state;
-};
-
-// ------------------------------------------------------------
-// Генерация QueryString из filtersState
-// ------------------------------------------------------------
-const buildQueryString = (filtersState) => {
-	const params = new URLSearchParams();
-
-	Object.entries(filtersState).forEach(([name, value]) => {
-		if (Array.isArray(value)) {
-			value.forEach(v => {
-				if (v !== "") params.append(name, v);
-			});
-		} else if (typeof value === "object" && value !== null) {
-			if (value.min !== "") params.set(`${name}_min`, value.min);
-			if (value.max !== "") params.set(`${name}_max`, value.max);
-		}
-	});
-
-	return params.toString();
-};
 
 // ------------------------------------------------------------
 // ХУК useUrlFilters

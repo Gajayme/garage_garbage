@@ -2,12 +2,16 @@
 
 import * as FilterConstants from "./Filters/Constants.js"
 
-// компоновщик query строки для фильтров
+
+// ------------------------------------------------------------
+// Генерация QueryString из filtersState
+// ------------------------------------------------------------
 export const buildQueryString = (filters) => {
 	const params = new URLSearchParams();
 
 	Object.entries(filters).forEach(([key, value]) => {
 		// если массив → добавляем несколько параметров: &category=a&category=b
+
 		if (Array.isArray(value)) {
 			value.forEach(v => params.append(key, v));
 		}
@@ -29,24 +33,28 @@ export const buildQueryString = (filters) => {
 	return params.toString(); // "category=food&category=drinks&min=10&max=50"
 };
 
-// Парсим фильтры из URL
+// ------------------------------------------------------------
+// Парсим фильтры из URL → объект filtersState
+// ------------------------------------------------------------
 export const parseFiltersFromUrl = (searchParams, filterDefinitions) => {
-  const state = {};
+	const state = {};
 
-  filterDefinitions.forEach(filter => {
-    const { name, type } = filter;
+	filterDefinitions.forEach(filter => {
+		const { name, type } = filter;
 
-    if (type === FilterConstants.FilterType.multiCheckbox) {
-      state[name] = searchParams.getAll(name) || [];
-    }
+		// multichackbox фильтры
+		if (type === FilterConstants.FilterType.multiCheckbox) {
+			state[name] = searchParams.getAll(name) || [];
+		}
 
-    if (type === FilterConstants.FilterType.range) {
-      state[name] = {
-        min: searchParams.get(`${name}_min`) || "",
-        max: searchParams.get(`${name}_max`) || "",
-      };
-    }
-  });
+		// range фильтр цены
+		else if (type === FilterConstants.FilterType.range) {
+			state[name] = {
+				min: searchParams.get(`${name}_min`) || "",
+				max: searchParams.get(`${name}_max`) || "",
+			};
+		}
+	});
 
-  return state;
+	return state;
 };
