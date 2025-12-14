@@ -1,12 +1,10 @@
 
 
-export const baseApi = 'http://72.60.133.178:5000/'
 
 export const brandApi = 'brand/all'
 export const typeApi = 'type/all'
 export const byuerApi = 'buyer/all'
 export const locationApi = 'location/all'
-
 
 export const chooseBuyer = 'Choose Buyer'
 export const chooseLocation = 'Choose Location'

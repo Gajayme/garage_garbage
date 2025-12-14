@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react"
-
-import {UploadPageForm} from './UploadPageForm';
-import {OuterWindow} from "Components/Window/OuterWindow";
-import {WindowHeader} from "Components/Window/WindowHeader";
-import {ButtonLayer} from "Components/Window/ButtonLayer";
-import {InnerWindow} from "Components/Window/InnerWindow";
-import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons";
-import {UploadNotificationState} from './UploadPageNotificationWindow'
+import { UploadPageForm } from './UploadPageForm';
+import { OuterWindow } from "Components/Window/OuterWindow";
+import { WindowHeader } from "Components/Window/WindowHeader";
+import { ButtonLayer } from "Components/Window/ButtonLayer";
+import { InnerWindow } from "Components/Window/InnerWindow";
+import { DefaultNavButtons } from "Components/Navigation/DefaultNavButtons";
+import { UploadNotificationState } from './UploadPageNotificationWindow'
 import { UploadPageNotificationWindow } from "./UploadPageNotificationWindow";
+import { useResetStateWithTimeout } from "Components/useResetStateWithTimeout";
 
 import 'Styles/Navigation/DefaultNavButtons.css'
 
@@ -20,24 +19,14 @@ export const UploadPage = () => {
 		<DefaultNavButtons className="default-nav-buttons"/>
 	</ButtonLayer>
 
-	//#region uplpad notification logic
-	const [notificationState, setNotificationState] = useState(UploadNotificationState.IDLE)
 
 	const notificationWindowLifetime = 2000
-
-	useEffect(() => {
-		if (notificationState === UploadNotificationState.IDLE) {
-			return
-		}
-
-		const timeout = setTimeout(() => {
-			setNotificationState(UploadNotificationState.IDLE);
-		}, notificationWindowLifetime);
-
-		return () => clearTimeout(timeout); // очистка таймера при размонтировании/перерендере
-	}, [notificationState]);
-
-	//#endregion
+	const [notificationState, setNotificationState] =
+		useResetStateWithTimeout(
+			UploadNotificationState.IDLE,
+			UploadNotificationState.IDLE,
+			notificationWindowLifetime
+		);
 
 	const innerWindow = <InnerWindow className="inner-window">
 		<UploadPageForm notificationStateSetter={setNotificationState}/>
@@ -45,12 +34,10 @@ export const UploadPage = () => {
 	</InnerWindow>
 
 	return (
-		<div>
-			<OuterWindow className="outer-window"
-				header={header}
-				buttonLayer={buttonLayer}
-				innerWindow={innerWindow}>
-			</OuterWindow>
-		</div>
-)
+		<OuterWindow className="outer-window"
+			header={header}
+			buttonLayer={buttonLayer}
+			innerWindow={innerWindow}>
+		</OuterWindow>
+	)
 }

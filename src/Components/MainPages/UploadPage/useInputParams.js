@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import * as UploadConstants from "./UploadPageConstants.js";
+import * as GlobalConstanst from "Constants.js"
 
 const fetchDictionary = async (url) => {
 	const resp = await fetch(url);
@@ -17,22 +18,22 @@ const convertArrayToMap = (array) =>
 export const useInputParams = () => {
 	const { data: brands, isLoading: brandsLoading } = useQuery({
 		queryKey: ["brands"],
-		queryFn: () => fetchDictionary(UploadConstants.baseApi + UploadConstants.brandApi),
+		queryFn: () => fetchDictionary(GlobalConstanst.base_server_url + UploadConstants.brandApi),
 	});
 
 	const { data: types, isLoading: typesLoading } = useQuery({
 		queryKey: ["types"],
-		queryFn: () => fetchDictionary(UploadConstants.baseApi + UploadConstants.typeApi),
+		queryFn: () => fetchDictionary(GlobalConstanst.base_server_url + UploadConstants.typeApi),
 	});
 
 	const { data: buyers, isLoading: buyersLoading } = useQuery({
 		queryKey: ["buyers"],
-		queryFn: () => fetchDictionary(UploadConstants.baseApi + UploadConstants.byuerApi),
+		queryFn: () => fetchDictionary(GlobalConstanst.base_server_url + UploadConstants.byuerApi),
 	});
 
 	const { data: locations, isLoading: locationsLoading } = useQuery({
 		queryKey: ["locations"],
-		queryFn: () => fetchDictionary(UploadConstants.baseApi + UploadConstants.locationApi),
+		queryFn: () => fetchDictionary(GlobalConstanst.base_server_url + UploadConstants.locationApi),
 	});
 
 	const brandState = {

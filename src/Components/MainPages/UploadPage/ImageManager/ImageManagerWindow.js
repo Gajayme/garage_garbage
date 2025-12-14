@@ -12,20 +12,20 @@ import 'Styles/Window/OuterWindow.css'
 
 export const ImageManagerWindow = ({images, errors, onChange, onDelete, onDeleteSpecific}) => {
 
-    const buttonLayer = <ButtonLayer className="button-layer">
-        <span>images</span>
-    </ButtonLayer>
+	const buttonLayer = <ButtonLayer className="button-layer">
+		<span>images</span>
+	</ButtonLayer>
 
-    const innerWindow = <InnerWindow className="inner-window">
-        <ImageManager images={images} errors={errors} onChange={onChange} onDelete={onDelete} onDeleteSpecific={onDeleteSpecific}/>
-    </InnerWindow>
+	const innerWindow = <InnerWindow className="inner-window">
+		<ImageManager images={images} errors={errors} onChange={onChange} onDelete={onDelete} onDeleteSpecific={onDeleteSpecific}/>
+	</InnerWindow>
 
-    return (
-        <div>
-            <OuterWindow className="outer-window-image-manager"
-                         buttonLayer={buttonLayer}
-                         innerWindow={innerWindow}>
-            </OuterWindow>
-        </div>
-    )
+	return (
+		<div>
+			<OuterWindow className="outer-window-image-manager"
+						 buttonLayer={buttonLayer}
+						 innerWindow={innerWindow}>
+			</OuterWindow>
+		</div>
+	)
 }

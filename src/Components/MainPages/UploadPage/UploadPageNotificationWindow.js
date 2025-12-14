@@ -46,19 +46,6 @@ export const UploadPageNotificationWindow = ({notificationState}) => {
 
 	}
 
-
-	// const getNotificationDataTEST = () => {
-	// 	let notificationData = {
-	// 		headerText: "",
-	// 		mainText: "",
-	// 		mainTextColorClassName: ""
-	// 	}
-	// 	notificationData.mainText = mainTextSucess;
-	// 	notificationData.headerText = headerTextSucess;
-	// 	notificationData.mainTextColorClassName = 'green-text '
-	// 	return notificationData
-	// }
-
 	return (
 		isShowingNotification() && (<NotificationWindow
 			className="upload-notification-window"

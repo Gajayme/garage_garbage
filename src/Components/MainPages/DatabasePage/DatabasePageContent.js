@@ -61,13 +61,14 @@ export const DatabasePageContent = () => {
 		);
 	}
 
-	if (error) {
+	else if (error) {
 		return (
 			<div className="database-page">
 				<p className="centered-text">{Constants.loadError}</p>
 			</div>
 		);
 	}
+
 
 	return (
 		<div className="database-page">
