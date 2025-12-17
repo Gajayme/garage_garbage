@@ -26,37 +26,29 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 	// хук, который занимается загрузкой инпут параметров с сервера
 	const { brandState, typeState, buyerState, locationState, isLoading } = useInputParams();
 
-	// стейты со значениями полей
-	const [formState, setFormState] = useState({
+	// Происходит ли отправка формы прямо сейчас
+	const [isSubmitting, setIsSubmitting] = useState(false);
+
+	const FORM_FIELDS = {
 		item_name: '',
 		bought_for: '',
 		price: '',
 		buyers_part: '',
 		sold_for: '',
 		size: '',
-		buyer: '',
-		location: '',
-		brand: '',
-		type: '',
+		buyer: null,
+		location: null,
+		brand: null,
+		type: null,
+		images: []
+	};
 
-		images: [],
-	})
-
+	// стейты со значениями полей
+	const [formState, setFormState] = useState(FORM_FIELDS);
 	// стейты с ошибками для всех полей
-	const [errorState, setErrorState] = useState({
-		item_name: [],
-		bought_for: [],
-		price: [],
-		buyers_part: [],
-		sold_for: [],
-		size: [],
-		buyer: [],
-		location: [],
-		brand: [],
-		type: [],
-
-		images: [],
-	})
+	const [errorState, setErrorState] = useState(
+		Object.fromEntries(Object.keys(FORM_FIELDS).map(k => [k, []]))
+	);
 
 	// маппер стейтов и валидаций для них
 	const validationMapper = {
@@ -73,35 +65,17 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 		images: [NonEmptyImages, ],
 	}
 
+
 	// обработать нажатие на кнопку подтверждения
 	const handleOnSubmit =  async (event) => {
 		event.preventDefault()
-		const errorsLocal = UploadFormValidation(formState, errorState, validationMapper)
-		handleOnErrorChange(errorsLocal)
 
-		const hasNoErrors = Object.values(errorsLocal).every((errorArray) => errorArray.length === 0);
-		if (!hasNoErrors) {
-			return
-		}
+		if (isSubmitting) return;
+		setIsSubmitting(true);
 
-		// Создаем объект formData
-		const formData = new FormData();
-		// Добавляем текстовые поля
-		formData.append(Constants.item_name, formState.item_name);
-		formData.append(Constants.bought_for, parseInt(formState.bought_for, 10));
-		formData.append(Constants.price, parseInt(formState.price, 10));
-		formData.append(Constants.buyer_part, parseInt(formState.buyers_part, 10));
-		formData.append(Constants.sold_for, parseInt(formState.sold_for, 10));
-		formData.append(Constants.item_size, formState.size);
-		formData.append(Constants.buyer, parseInt(formState.buyer, 10));
-		formData.append(Constants.location, parseInt(formState.location, 10));
-		formData.append(Constants.brand, parseInt(formState.brand, 10));
-		formData.append(Constants.type, parseInt(formState.type, 10));
+		if (!validateForm()) return
 
-		FormDataLogger(formData)
-		formState.images.forEach((image, _) => {
-			formData.append(Constants.files, image.file);
-		});
+		const formData = buildFormData()
 
 		try {
 			const response = await fetch(Constants.base_server_url + Constants.post_upload, {
@@ -123,6 +97,8 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 
 		} catch (error) {
 			console.error("Ошибка при загрузке данных:", error);
+		} finally {
+			setIsSubmitting(false);
 		}
 	}
 
@@ -130,7 +106,42 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 		setErrorState(newErrorState); // Обновляем ошибки разом
 	};
 
-	// сбросить все окна ввода
+	// dfkblfwbz ajhvs
+	const validateForm = () => {
+		const errorsLocal = UploadFormValidation(
+			formState,
+			errorState,
+			validationMapper
+		);
+
+		handleOnErrorChange(errorsLocal);
+		return Object.values(errorsLocal).every(
+			(errorArray) => errorArray.length === 0
+		);
+	};
+
+	// компоновка данных для отправки на сервер
+	const buildFormData = () => {
+		const formData = new FormData();
+		formData.append(Constants.item_name, formState.item_name);
+		formData.append(Constants.bought_for, parseInt(formState.bought_for, 10));
+		formData.append(Constants.price, parseInt(formState.price, 10));
+		formData.append(Constants.buyer_part, parseInt(formState.buyers_part, 10));
+		formData.append(Constants.sold_for, parseInt(formState.sold_for, 10));
+		formData.append(Constants.item_size, formState.size);
+		formData.append(Constants.buyer, parseInt(formState.buyer, 10));
+		formData.append(Constants.location, parseInt(formState.location, 10));
+		formData.append(Constants.brand, parseInt(formState.brand, 10));
+		formData.append(Constants.type, parseInt(formState.type, 10));
+
+		formState.images.forEach((image, _) => {
+			formData.append(Constants.files, image.file);
+		});
+
+		FormDataLogger(formData)
+	}
+
+	// сброс формы
 	const resetForm = () => {
 		setFormState({
 		item_name: '',
@@ -182,21 +193,20 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 
 	// удалить все изображения
 	const handleOnDeleteAllImages = () => {
-		setFormState((prevState) => ({
-			...prevState, images: []} ))
-	}
+		formState.images.forEach(img => URL.revokeObjectURL(img.src));
+		setFormState(prev => ({ ...prev, images: [] }));
+	};
 
 	// удалить конкретное изображения
 	const handleOnDeleteSpecificImage = (id) => {
-		setFormState((prevState) => {
-			const updatedImages = prevState['images'].filter((image) => image.id !== id);
+		setFormState(prev => {
+			const image = prev.images.find(img => img.id === id);
+			if (image) URL.revokeObjectURL(image.src);
 
-			// Освобождаем URL только после полного удаления
-			if (updatedImages.length === 0) {
-				prevState['images'].forEach((image) => URL.revokeObjectURL(image.src));
-			}
-
-			return { ...prevState, 'images': updatedImages };
+			return {
+				...prev,
+				images: prev.images.filter(img => img.id !== id)
+			};
 		});
 	};
 
@@ -254,7 +264,7 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 				<LabeledDropdown	value={formState.location}		errors={errorState.location}		onChange={handleOnChangeDropDown('location')}	className="upload-form-item"	labelText="Location"	id="location_dropdown" 	options={locationState}/>
 			</div>
 
-			<DefaultButton className={"upload-page-button"} labelText={'upload'} type="submit" onClick={handleOnSubmit}/>
+			<DefaultButton className={"upload-page-button"} labelText={'upload'} disabled={isSubmitting} type="submit" onClick={handleOnSubmit}/>
 
 			<DefaultButton labelText={'TEST AUTO FILL'} type="button" onClick={handleOnTestAutofill}/>
 
