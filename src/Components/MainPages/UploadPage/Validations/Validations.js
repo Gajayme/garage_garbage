@@ -1,13 +1,10 @@
 
-export const NumbersOnly = (event, valueSetter) => {
+export const NumbersOnly = (event) => {
 	const value = event.target.value;
-	if (/^\d*$/.test(value)) {
-		// Устанавливаем значение, если только числа
-		valueSetter(event);
-	} else {
-		event.preventDefault();
-	}
-};
+	if (/^\d*$/.test(value))
+		return event
+	return null
+}
 
 export const NonEmpty = (value) => {
 	return value ? "" : "Field is required";

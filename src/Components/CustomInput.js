@@ -27,7 +27,7 @@ export const CustomInput = ({
 
 	const handleInput = (event) => {
 		inputValidator ? inputValidator(event, onChange) : onChange(event);
-	};
+};
 
 	return (
 		<input

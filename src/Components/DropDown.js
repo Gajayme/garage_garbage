@@ -10,11 +10,22 @@
  * @param {string} optionClassName - Имя класса опции внутри выпадающего списка.
  */
 export const Dropdown = ({value, options, id, onChange, className, optionClassName}) => {
-    return (
-        <select className={className} value={value} id={id} onChange={onChange}>
-            {Object.entries(options).map(([key, value], index) => (
-                <option className={optionClassName}  key={index} value={value} label={key}> {key} </option>
-            ))}
-        </select>
-    );
+	return (
+		<select className={className}
+			// Защита от null
+			value={value ?? ''}
+			id={id}
+			// Если пустая строка (дефолтное значение) то отправляем на валидацию null
+			onChange={(e) => onChange(e.target.value || null)}>
+			{Object.entries(options).map(([key, value], index) => (
+				<option
+					className={optionClassName}
+					key={index}
+					value={value}
+					label={key}>
+					{key}
+					</option>
+			))}
+		</select>
+	);
 };

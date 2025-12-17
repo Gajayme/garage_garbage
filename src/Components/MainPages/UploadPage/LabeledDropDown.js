@@ -19,11 +19,11 @@ import "Styles/MainPages/UploadPage/UploadPageInput.css";
  * @param {string} className - имя класса для стилизации.
  */
 export const LabeledDropdown = ({value, options, errors, id, labelText, onChange, className=""}) => {
-  return (
-    <div className={`labeled ${className}`}>
-		<label htmlFor={id} > {labelText } </label>
-		<Dropdown value={value} options={options} id={id} onChange={onChange} className='upload-page-input' optionClassName= "centered-text" />
-        <ErrorMessage errors={errors} />
-    </div>
-  );
+	return (
+		<div className={`labeled ${className}`}>
+			<label htmlFor={id} > {labelText } </label>
+			<Dropdown value={value} options={options} id={id} onChange={onChange} className='upload-page-input' optionClassName= "centered-text" />
+			<ErrorMessage errors={errors} />
+		</div>
+	);
 };
