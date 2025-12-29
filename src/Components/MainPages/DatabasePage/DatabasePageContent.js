@@ -40,9 +40,13 @@ export const DatabasePageContent = () => {
 		return resp.json();
 	};
 
-	const { data, isLoading, error } = useQuery({
-		queryKey: ["items", filtersState],
-		queryFn: fetchItems,
+	const {
+			data,
+			error
+		} = useQuery({
+			queryKey: ["items", filtersState],
+			queryFn: fetchItems,
+			keepPreviousData: true,
 	});
 
 	// один раз берём filters с бэка и сохраняем в allFilters
@@ -53,7 +57,7 @@ export const DatabasePageContent = () => {
 	}, [data, allFilters.length]);
 
 	// пока либо запрос идёт, либо фильтры ещё не инициализированы
-	if (isLoading || !initialized) {
+	if (!initialized) {
 		return (
 			<div className="database-page">
 				<p className="centered-text">{Constants.loading}</p>
@@ -69,6 +73,7 @@ export const DatabasePageContent = () => {
 		);
 	}
 
+	const items = data?.data ?? [];
 
 	return (
 		<div className="database-page">
@@ -87,7 +92,7 @@ export const DatabasePageContent = () => {
 					/>
 				)}
 
-				<Items databaseState={data.data} />
+				<Items databaseState={items} />
 			</div>
 		</div>
 	);
