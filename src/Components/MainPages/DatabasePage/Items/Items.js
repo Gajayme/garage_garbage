@@ -1,7 +1,11 @@
 
-import {Item} from 'Components/MainPages/DatabasePage/Items/Item';
+import { Link } from "react-router-dom";
+
+import { Item } from 'Components/MainPages/DatabasePage/Items/Item';
 import DefaultImg from "Images/default.jpg"
 import * as Constants from "Components/MainPages/DatabasePage/Constants.js"
+
+import "Styles/NoTextDecorationLink.css";
 
 export const Items = ({databaseState}) => {
 	return (
@@ -12,7 +16,17 @@ export const Items = ({databaseState}) => {
 				databaseState.map((value, index) => {
 					const img = value.images ? value.images[0].image_url : DefaultImg;
 					return (
-						<Item key={index} img={img} name={value.itemName} price={value.price}/>
+						<Link
+							key={index}
+							className="no-text-decoration-link"
+							to={`/Database/${value.id}`}>
+
+							<Item
+								img={img}
+								name={value.itemName}
+								price={value.price}/>
+
+						</Link>
 					)
 				})
 			)}
