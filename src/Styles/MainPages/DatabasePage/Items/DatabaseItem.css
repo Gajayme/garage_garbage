@@ -4,11 +4,16 @@
     z-index: 1;
 }
 
+.database-item:hover {
+	transform: scale(1.07);
+	z-index: 1;
+}
+
 
 .database-image-container {
 	width: 200px;
     height: 200px;
-	background-color: white;
+	background-color: var(--white);
     position: relative;
     display: inline-block;
 }
