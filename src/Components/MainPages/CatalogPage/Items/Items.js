@@ -1,25 +1,25 @@
 
 import { Link } from "react-router-dom";
 
-import { Item } from 'Components/MainPages/DatabasePage/Items/Item';
+import { Item } from 'Components/MainPages/CatalogPage/Items/Item';
 import DefaultImg from "Images/default.jpg"
-import * as Constants from "Components/MainPages/DatabasePage/Constants.js"
+import * as Constants from "Components/MainPages/CatalogPage/Constants.js"
 
 import "Styles/NoTextDecorationLink.css";
 
-export const Items = ({databaseState}) => {
+export const Items = ({catalogState}) => {
 	return (
-		<div className="database-items">
-			{databaseState.length === 0 ? (
+		<div className="catalog-items">
+			{catalogState.length === 0 ? (
 				<p className='centered-text'>{Constants.noItems}</p>
 			) : (
-				databaseState.map((value, index) => {
+				catalogState.map((value, index) => {
 					const img = value.images ? value.images[0].image_url : DefaultImg;
 					return (
 						<Link
 							key={index}
 							className="no-text-decoration-link"
-							to={`/Database/${value.id}`}>
+							to={`/Catalog/${value.id}`}>
 
 							<Item
 								img={img}

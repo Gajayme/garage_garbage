@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { Items } from "Components/MainPages/DatabasePage/Items/Items.js";
+import { Items } from "Components/MainPages/CatalogPage/Items/Items.js";
 import { FiltersWindow } from "./Filters/FiltresWindow";
 import { DefaultButton } from "Components/Button.js";
 import { buildQueryString } from "./Utils.js";
@@ -10,13 +10,13 @@ import { useUrlFilters } from "./useUrlFilters";
 import * as GlobalConstants from "Constants.js";
 import * as Constants from "./Constants.js";
 
-import "Styles/MainPages/DatabasePage/Items/DatabaseItems.css";
-import "Styles/MainPages/DatabasePage/DatabasePage.css";
-import "Styles/MainPages/DatabasePage/FiltersActivationButton.css";
-import "Styles/MainPages/DatabasePage/FiltersItemsWrapper.css";
+import "Styles/MainPages/CatalogPage/Items/CatalogItems.css";
+import "Styles/MainPages/CatalogPage/CatalogPage.css";
+import "Styles/MainPages/CatalogPage/FiltersActivationButton.css";
+import "Styles/MainPages/CatalogPage/FiltersItemsWrapper.css";
 import "Styles/CenteredText.css";
 
-export const DatabasePageContent = () => {
+export const CatalogPageContent = () => {
 	// какие фильтры вообще существуют (приходят с бэка)
 	const [allFilters, setAllFilters] = useState([]);
 	// окно фильтров открыто/закрыто
@@ -59,7 +59,7 @@ export const DatabasePageContent = () => {
 	// пока либо запрос идёт, либо фильтры ещё не инициализированы
 	if (!initialized) {
 		return (
-			<div className="database-page">
+			<div className="catalog-page">
 				<p className="centered-text">{Constants.loading}</p>
 			</div>
 		);
@@ -67,7 +67,7 @@ export const DatabasePageContent = () => {
 
 	else if (error) {
 		return (
-			<div className="database-page">
+			<div className="catalog-page">
 				<p className="centered-text">{Constants.loadError}</p>
 			</div>
 		);
@@ -76,7 +76,7 @@ export const DatabasePageContent = () => {
 	const items = data?.data ?? [];
 
 	return (
-		<div className="database-page">
+		<div className="catalog-page">
 			<DefaultButton
 				className="filter-activation-button"
 				labelText="Filters"
@@ -92,7 +92,7 @@ export const DatabasePageContent = () => {
 					/>
 				)}
 
-				<Items databaseState={items} />
+				<Items catalogState={items} />
 			</div>
 		</div>
 	);

@@ -12,7 +12,7 @@ export const ItemPage = () => {
 	// Получение id вещи для запроса
 	const { id } = useParams();
 	console.log(id)
-	// id === "123" для /Database/123
+	// id === "123" для /Catalog/123
 
 	const header = <WindowHeader className="window-header"/>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {DatabasePageContent} from "./DatabasePageContent";
+import {CatalogPageContent} from "./CatalogPageContent";
 import {WindowHeader} from "Components/Window/WindowHeader";
 import {ButtonLayer} from "Components/Window/ButtonLayer";
 import {InnerWindow} from "Components/Window/InnerWindow";
@@ -8,7 +8,7 @@ import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons";
 
 import 'Styles/Navigation/DefaultNavButtons.css'
 
-export const DatabasePage = () => {
+export const CatalogPage = () => {
   return (
     <div>
       <OuterWindow
@@ -21,7 +21,7 @@ export const DatabasePage = () => {
         }
         innerWindow={
           <InnerWindow className="inner-window">
-            <DatabasePageContent className="database-page-content" />
+            <CatalogPageContent className="catalog-page-content" />
           </InnerWindow>
         }
       />

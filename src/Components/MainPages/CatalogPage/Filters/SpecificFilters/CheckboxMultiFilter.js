@@ -1,8 +1,8 @@
 
 import { Checkbox } from "Components/Checkbox";
 
-import 'Styles/MainPages/DatabasePage/Filters/SpecificFilters/FilterCheckbox.css'
-import 'Styles/MainPages/DatabasePage/Filters/SpecificFilters/CheckboxMultiFilter.css'
+import 'Styles/MainPages/CatalogPage/Filters/SpecificFilters/FilterCheckbox.css'
+import 'Styles/MainPages/CatalogPage/Filters/SpecificFilters/CheckboxMultiFilter.css'
 
 
 // фильтр с чекбоксами с доступным мультивыбором

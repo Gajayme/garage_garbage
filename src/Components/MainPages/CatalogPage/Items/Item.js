@@ -1,5 +1,5 @@
 
-import "Styles/MainPages/DatabasePage/Items/DatabaseItem.css"
+import "Styles/MainPages/CatalogPage/Items/CatalogItem.css"
 import "Styles/BorderedImageContainer.css"
 
 import DefaultImg from "Images/default.jpg"
@@ -15,9 +15,9 @@ import DefaultImg from "Images/default.jpg"
  */
 export const Item = ({img, name, price, onClick}) => {
     return (
-        <div className={"database-item"} onClick={onClick}>
-			<div className="database-image-container bordered-image-container" >
-            	<img className={"database-item-image"} src={img ? img : DefaultImg} alt={"item"}/>
+        <div className={"catalog-item"} onClick={onClick}>
+			<div className="catalog-image-container bordered-image-container" >
+            	<img className={"catalog-item-image"} src={img ? img : DefaultImg} alt={"item"}/>
 			</div>
             <p title={name}> {name}</p>
             <p title={price}> {price}</p>

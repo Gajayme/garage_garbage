@@ -12,7 +12,7 @@ export const NavIcons = ({className}) => {
         <div className={className}>
             <NavIcon image = {Icon1} labelText={Constants.rootLabel} destination={Constants.root}/>
             <NavIcon image = {Icon2} labelText={Constants.uploadLabel} destination={Constants.root + Constants.upload}/>
-            <NavIcon image = {Icon3} labelText={Constants.databaseLabel} destination={Constants.root + Constants.database}/>
+            <NavIcon image = {Icon3} labelText={Constants.catalogLabel} destination={Constants.root + Constants.catalog}/>
         </div>
     )
 
