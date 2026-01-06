@@ -18,6 +18,7 @@ export const base_server_url = "http://72.60.133.178:5000/"
 export const post_upload = "post/upload"
 export const post_all = "post/all"
 export const post_delete = "post/delete"
+export const post_detail = "post/detail/"
 
 
 export const http_methods = {
@@ -28,3 +29,11 @@ export const http_methods = {
     OPTIONS: 'OPTIONS',
     HEAD: 'HEAD',
 };
+
+// query namespaces
+export const itemDetailsQuery = "itemDetails"
+export const itemsQuery = "items"
+export const uploadBrandQuery = "uploadBrand"
+export const uploadTypesQuery = "uploadTypes"
+export const uploadBuyersQuery = "uploadBuyers"
+export const uploadLocationsQuery = "uploadLocations"

@@ -241,8 +241,13 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 		});
 	};
 
-	if (isLoading)
-		return (<p>loading...</p>)
+	if (isLoading) {
+		return (
+			<div className="catalog-page">
+				<p className="centered-text">{"Loading..."}</p>
+			</div>
+		);
+	}
 
 	return (
 

@@ -17,22 +17,22 @@ const convertArrayToMap = (array) =>
 
 export const useInputParams = () => {
 	const { data: brands, isLoading: brandsLoading } = useQuery({
-		queryKey: ["brands"],
+		queryKey: [GlobalConstanst.uploadBrandQuery],
 		queryFn: () => fetchDictionary(GlobalConstanst.base_server_url + UploadConstants.brandApi),
 	});
 
 	const { data: types, isLoading: typesLoading } = useQuery({
-		queryKey: ["types"],
+		queryKey: [GlobalConstanst.uploadTypesQuery],
 		queryFn: () => fetchDictionary(GlobalConstanst.base_server_url + UploadConstants.typeApi),
 	});
 
 	const { data: buyers, isLoading: buyersLoading } = useQuery({
-		queryKey: ["buyers"],
+		queryKey: [GlobalConstanst.uploadBuyersQuery],
 		queryFn: () => fetchDictionary(GlobalConstanst.base_server_url + UploadConstants.byuerApi),
 	});
 
 	const { data: locations, isLoading: locationsLoading } = useQuery({
-		queryKey: ["locations"],
+		queryKey: [GlobalConstanst.uploadLocationsQuery],
 		queryFn: () => fetchDictionary(GlobalConstanst.base_server_url + UploadConstants.locationApi),
 	});
 

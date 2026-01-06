@@ -8,7 +8,6 @@ import { buildQueryString } from "./Utils.js";
 import { useUrlFilters } from "./useUrlFilters";
 
 import * as GlobalConstants from "Constants.js";
-import * as Constants from "./Constants.js";
 
 import "Styles/MainPages/CatalogPage/Items/CatalogItems.css";
 import "Styles/MainPages/CatalogPage/CatalogPage.css";
@@ -44,7 +43,7 @@ export const CatalogPageContent = () => {
 			data,
 			error
 		} = useQuery({
-			queryKey: ["items", filtersState],
+			queryKey: [GlobalConstants.itemsQuery, filtersState],
 			queryFn: fetchItems,
 			keepPreviousData: true,
 	});
@@ -60,7 +59,7 @@ export const CatalogPageContent = () => {
 	if (!initialized) {
 		return (
 			<div className="catalog-page">
-				<p className="centered-text">{Constants.loading}</p>
+				<p className="centered-text">Loading...</p>
 			</div>
 		);
 	}
@@ -68,7 +67,7 @@ export const CatalogPageContent = () => {
 	else if (error) {
 		return (
 			<div className="catalog-page">
-				<p className="centered-text">{Constants.loadError}</p>
+				<p className="centered-text">Error happened</p>
 			</div>
 		);
 	}
