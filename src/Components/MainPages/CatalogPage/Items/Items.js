@@ -7,28 +7,33 @@ import DefaultImg from "Images/default.jpg"
 import "Styles/NoTextDecorationLink.css";
 
 export const Items = ({catalogState}) => {
+
+	if (catalogState.length === 0) {
+		return (
+			<div className="catalog-page">
+				<p className="centered-text">{"Loading..."}</p>
+			</div>
+		);
+	}
+
 	return (
-		<div className="catalog-items">
-			{catalogState.length === 0 ? (
-				<p className='centered-text'>There are no items here</p>
-			) : (
-				catalogState.map((value, index) => {
-					const img = value.images ? value.images[0].image_url : DefaultImg;
-					return (
-						<Link
-							key={index}
-							className="no-text-decoration-link"
-							to={`/Database/${value.id}`}>
+		<div className="catalog-items"> {
+			catalogState.map((value, index) => {
+				const img = value.images ? value.images[0].image_url : DefaultImg;
+				return (
+					<Link
+						key={index}
+						className="no-text-decoration-link"
+						to={`/Database/${value.id}`}>
 
-							<Item
-								img={img}
-								name={value.itemName}
-								price={value.price}/>
+						<Item
+							img={img}
+							name={value.itemName}
+							price={value.price}/>
 
-						</Link>
-					)
-				})
-			)}
-		</div>
+					</Link>
+				)
+			})
+		} </div>
 	)
 }
