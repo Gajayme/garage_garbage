@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 
 import { Item } from 'Components/MainPages/CatalogPage/Items/Item';
+import * as NavigationConstants from "Components/Navigation/Constants";
 import DefaultImg from "Images/default.jpg"
 
 import "Styles/NoTextDecorationLink.css";
@@ -24,7 +25,7 @@ export const Items = ({catalogState}) => {
 					<Link
 						key={index}
 						className="no-text-decoration-link"
-						to={`/Database/${value.id}`}>
+						to={`/${NavigationConstants.catalog}/${value.id}`}>
 
 						<Item
 							img={img}
