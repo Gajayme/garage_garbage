@@ -12,8 +12,10 @@ export const buildItemData = (data) => {
 	}
 
 	return {
-		name: [data.itemName, false],
-		size: [data.size, true],
-		price: [data.price, true],
+		title: data.itemName,
+		restData: {
+			size: data.size,
+			price: data.price,
+		}
 	}
 }

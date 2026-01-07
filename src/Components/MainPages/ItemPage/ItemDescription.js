@@ -1,23 +1,19 @@
-
 export const ItemDescription = ({ data, delimiter = ": " }) => {
-	console.log(data)
-
 	if (!data) return null;
 
-	return Object.entries(data).map(([key, pair]) => {
-		if (!Array.isArray(pair) || pair.length < 2) return null;
+	const { title, restData } = data;
 
-		const [value, isShowingKey] = pair;
+	return (
+		<>
+			{/* Заголовок (имя вещи) */}
+			<p>{title}</p>
 
-		return (
-			<p key={key}>
-				{isShowingKey && (
-					<>
-						{key}{delimiter}
-					</>
-				)}
-				{String(value)}
-			</p>
-		);
-	});
+			{/* Остальная информация */}
+			{Object.entries(restData).map(([key, value], index) => (
+				<p key={index}>
+					{key}{delimiter}{String(value)}
+				</p>
+			))}
+		</>
+	);
 };
