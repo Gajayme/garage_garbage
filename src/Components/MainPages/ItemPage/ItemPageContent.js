@@ -1,6 +1,9 @@
 
 import { useQuery } from "@tanstack/react-query";
 
+import { ItemDescription } from "./ItemDescription.js"
+import { buildItemData } from "./Utils.js";
+
 import * as GlobalConstants from "Constants.js";
 
 
@@ -44,7 +47,9 @@ export const ItemPageContent = ({itemID}) => {
 		);
 	}
 
+	const itemData = buildItemData(data ? data.data: null)
+
 	return (
-		<p>{data? data.data.itemName : "puk"}</p>
+		<ItemDescription data={itemData}/>
 	)
 }
