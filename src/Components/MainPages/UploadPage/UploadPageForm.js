@@ -139,6 +139,7 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 		});
 
 		FormDataLogger(formData)
+		return formData
 	}
 
 	// сброс формы
