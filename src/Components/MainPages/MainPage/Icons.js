@@ -7,7 +7,6 @@ import Icon3 from "Images/NavIcons/icon_3.png"
 
 
 export const NavIcons = ({className}) => {
-    console.log(className)
     return (
         <div className={className}>
             <NavIcon image = {Icon1} labelText={Constants.rootLabel} destination={Constants.root}/>

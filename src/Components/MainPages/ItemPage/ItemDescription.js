@@ -1,10 +1,11 @@
-export const ItemDescription = ({ data, delimiter = ": " }) => {
+
+export const ItemDescription = ({ className, data, delimiter = ": " }) => {
 	if (!data) return null;
 
 	const { title, restData } = data;
 
 	return (
-		<>
+		<div className={className}>
 			{/* Заголовок (имя вещи) */}
 			<p>{title}</p>
 
@@ -14,6 +15,6 @@ export const ItemDescription = ({ data, delimiter = ": " }) => {
 					{key}{delimiter}{String(value)}
 				</p>
 			))}
-		</>
+		</div>
 	);
 };

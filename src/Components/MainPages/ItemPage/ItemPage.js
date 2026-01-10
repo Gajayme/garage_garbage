@@ -6,7 +6,7 @@ import { InnerWindow } from "Components/Window/InnerWindow.js"
 import { ButtonLayer } from "Components/Window/ButtonLayer.js"
 import { WindowHeader } from "Components/Window/WindowHeader.js"
 import { DefaultNavButtons } from "Components/Navigation/DefaultNavButtons.js";
-import { ItemPageContent } from "./ItemPageContent";
+import { ItemPageContent } from "./ItemPageContent.js";
 
 
 export const ItemPage = () => {

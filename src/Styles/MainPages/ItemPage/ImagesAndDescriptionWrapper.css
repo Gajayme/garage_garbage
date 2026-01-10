@@ -1,0 +1,13 @@
+
+.images-and-description-wrapper {
+	display: flex;
+	justify-content: space-around;
+}
+
+.images {
+	flex-grow: 3;
+}
+
+.description {
+	flex-grow: 1;
+}

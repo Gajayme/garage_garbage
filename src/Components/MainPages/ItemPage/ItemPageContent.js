@@ -1,10 +1,13 @@
 
 import { useQuery } from "@tanstack/react-query";
 
+import { ItemImages } from "./ItemImages.js"
 import { ItemDescription } from "./ItemDescription.js"
 import { buildItemData } from "./Utils.js";
 
 import * as GlobalConstants from "Constants.js";
+
+import "Styles/MainPages/ItemPage/ImagesAndDescriptionWrapper.css"
 
 
 export const ItemPageContent = ({itemID}) => {
@@ -48,8 +51,17 @@ export const ItemPageContent = ({itemID}) => {
 	}
 
 	const itemData = buildItemData(data ? data.data: null)
+	const images = data ? data.data.images: null
 
 	return (
-		<ItemDescription data={itemData}/>
+		<div className="images-and-description-wrapper">
+			<ItemImages
+				className = "images"
+				images = {images}/>
+
+			<ItemDescription
+				className = "description"
+				data = {itemData}/>
+		</div>
 	)
 }
