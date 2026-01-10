@@ -1,11 +1,19 @@
 
+import DefaultImg from "Images/default.jpg"
+
 export const ItemImages = ({className, images}) => {
-	console.log(images)
+
 	return (
 		<div className={className}>
-			<p>
-				Images
-			</p>
+
+			{images.map((imageData, index) => (
+				<img
+					src={imageData ? imageData.image_url : DefaultImg}
+					alt={"item"}
+					key={index}
+				/>
+			)
+		)}
 
 		</div>
 	)

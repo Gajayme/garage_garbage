@@ -1,13 +1,28 @@
-
 .images-and-description-wrapper {
 	display: flex;
-	justify-content: space-around;
-}
-
-.images {
-	flex-grow: 3;
+	width: 100%;
+	min-width: 0;
 }
 
 .description {
-	flex-grow: 1;
+	flex: 1 1 0;
+	min-width: 0;
+}
+
+.images {
+	flex: 2 1 0;
+	min-width: 0;
+
+	padding: 2%;
+	box-sizing: border-box;
+
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.images img {
+	width: 100%;
+	height: auto;
+	display: block;
 }
