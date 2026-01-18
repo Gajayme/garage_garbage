@@ -1,5 +1,6 @@
 
-import DefaultImg from "Images/default.jpg"
+import { BorderedImage } from "Components/BorderedImage.js"
+
 
 export const ItemImages = ({className, images}) => {
 
@@ -7,11 +8,11 @@ export const ItemImages = ({className, images}) => {
 		<div className={className}>
 
 			{images.map((imageData, index) => (
-				<img
-					src={imageData ? imageData.image_url : DefaultImg}
+				<BorderedImage
+					image = {imageData ? imageData.image_url: null}
 					alt={"item"}
 					key={index}
-				/>
+ 				/>
 			)
 		)}
 
