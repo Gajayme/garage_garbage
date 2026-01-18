@@ -10,7 +10,6 @@ import { useUrlFilters } from "./useUrlFilters";
 import * as GlobalConstants from "Constants.js";
 
 import "Styles/MainPages/CatalogPage/Items/CatalogItems.css";
-import "Styles/MainPages/CatalogPage/CatalogPage.css";
 import "Styles/MainPages/CatalogPage/FiltersActivationButton.css";
 import "Styles/MainPages/CatalogPage/FiltersItemsWrapper.css";
 import "Styles/CenteredText.css";
@@ -58,24 +57,20 @@ export const CatalogPageContent = () => {
 	// пока либо запрос идёт, либо фильтры ещё не инициализированы
 	if (!initialized) {
 		return (
-			<div className="catalog-page">
-				<p className="centered-text">Loading...</p>
-			</div>
+			<p className="centered-text">Loading...</p>
 		);
 	}
 
 	else if (error) {
 		return (
-			<div className="catalog-page">
-				<p className="centered-text">Error happened</p>
-			</div>
+			<p className="centered-text">Error happened</p>
 		);
 	}
 
 	const items = data?.data ?? [];
 
 	return (
-		<div className="catalog-page">
+		<div>
 			<DefaultButton
 				className="filter-activation-button"
 				labelText="Filters"

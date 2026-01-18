@@ -36,17 +36,13 @@ export const ItemPageContent = ({itemID}) => {
 
 	if (isFetching) {
 		return (
-			<div className="catalog-page">
-				<p className="centered-text">{"Loading..."}</p>
-			</div>
+			<p className="centered-text">{"Loading..."}</p>
 		);
 	}
 
 	else if (error) {
 		return (
-			<div className="catalog-page">
-				<p className="centered-text">{"Error while loading item detailes"}</p>
-			</div>
+			<p className="centered-text">{"Error while loading item detailes"}</p>
 		);
 	}
 
