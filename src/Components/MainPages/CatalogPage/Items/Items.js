@@ -1,9 +1,7 @@
 
 import { Link } from "react-router-dom";
-
 import { Item } from 'Components/MainPages/CatalogPage/Items/Item';
 import * as NavigationConstants from "Components/Navigation/Constants";
-import DefaultImg from "Images/default.jpg"
 
 import "Styles/NoTextDecorationLink.css";
 
@@ -20,7 +18,7 @@ export const Items = ({catalogState}) => {
 	return (
 		<div className="catalog-items"> {
 			catalogState.map((value, index) => {
-				const img = value.images ? value.images[0].image_url : DefaultImg;
+				const imageSrc = value.images ? value.images[0].image_url : null;
 				return (
 					<Link
 						key={index}
@@ -28,7 +26,7 @@ export const Items = ({catalogState}) => {
 						to={`/${NavigationConstants.catalog}/${value.id}`}>
 
 						<Item
-							img={img}
+							imageSrc={imageSrc}
 							name={value.itemName}
 							price={value.price}/>
 

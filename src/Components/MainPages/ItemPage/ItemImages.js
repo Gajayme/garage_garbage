@@ -9,7 +9,7 @@ export const ItemImages = ({className, images}) => {
 
 			{images.map((imageData, index) => (
 				<BorderedImage
-					image = {imageData ? imageData.image_url: null}
+					imageSrc = {imageData ? imageData.image_url: null}
 					alt={"item"}
 					key={index}
  				/>
