@@ -1,6 +1,6 @@
 
 import "Styles/MainPages/CatalogPage/Items/CatalogItem.css"
-import "Styles/BorderedImageContainer.css"
+import "Styles/TopAndLeftBorders.css"
 
 import DefaultImg from "Images/default.jpg"
 
@@ -16,7 +16,7 @@ import DefaultImg from "Images/default.jpg"
 export const Item = ({img, name, price, onClick}) => {
 	return (
 		<div className={"catalog-item"} onClick={onClick}>
-			<div className="catalog-image-container bordered-image-container" >
+			<div className="catalog-image-container top-and-left-borders" >
 				<img className={"catalog-item-image"} src={img ? img : DefaultImg} alt={"item"}/>
 			</div>
 			<p title={name}> {name}</p>
