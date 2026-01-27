@@ -21,11 +21,9 @@ export const ImageManagerWindow = ({images, errors, onChange, onDelete, onDelete
 	</InnerWindow>
 
 	return (
-		<div>
-			<OuterWindow className="outer-window-image-manager"
-						 buttonLayer={buttonLayer}
-						 innerWindow={innerWindow}>
-			</OuterWindow>
-		</div>
+		<OuterWindow className="outer-window-image-manager"
+			buttonLayer={buttonLayer}
+			innerWindow={innerWindow}>
+		</OuterWindow>
 	)
 }
