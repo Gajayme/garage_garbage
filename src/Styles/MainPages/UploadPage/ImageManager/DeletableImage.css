@@ -1,30 +1,22 @@
 
 .deletable-image-container {
-	width: 200px;
-    height: 200px;
-	background-color: white;
-    position: relative;
-    display: inline-block;
+	width: 25%;
+	height: auto;
+	position: relative;
+	display: inline-block;
 }
 
 .deletable-image {
 	/* Картинка должна быть не больше контейнера */
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-
-	/* Центрируем изображение */
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	max-width: 100%;
+	max-height: 100%;
+	display: block;
 }
 
 .delete-icon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20px;
-    height: 20px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 20px;
+	height: 20px;
 }

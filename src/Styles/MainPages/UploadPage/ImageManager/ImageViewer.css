@@ -2,16 +2,13 @@
 
 /* Контейнер с загруженными картинками  */
 .image-viewer {
-    display: flex;
-	width: auto;
-	align-items: center;   /* Центрирует содержимое ячеек по вертикали */
-	max-height: 300px;
+	display: flex;
 	overflow-x:auto;
-    gap: 10px;
+	gap: 10px;
 }
 
 /* Стили для текста при отсутствии изображений */
 .image-viewer p {
 	flex-grow: 1;
-    text-align: center;
+	text-align: center;
 }
