@@ -1,7 +1,7 @@
 
 
 /* Контейнер с загруженными картинками  */
-.image-container {
+.image-viewer {
     display: flex;
 	width: auto;
 	align-items: center;   /* Центрирует содержимое ячеек по вертикали */
@@ -11,7 +11,7 @@
 }
 
 /* Стили для текста при отсутствии изображений */
-.image-container p {
+.image-viewer p {
 	flex-grow: 1;
     text-align: center;
 }

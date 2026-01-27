@@ -5,7 +5,7 @@ import 'Styles/MainPages/UploadPage/ImageManager/ImageViewer.css'
 
 export const ImageViewer = ({ images, onDeleteSpecific }) => {
 	return (
-		<div className='image-container'>
+		<div className='image-viewer'>
 			{images.length === 0 ? (
 				<p>No uploaded images.</p>
 			) : (
