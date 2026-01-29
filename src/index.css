@@ -13,3 +13,9 @@ select,
 textarea {
     font-family: inherit;
 }
+
+
+/* Глобально */
+*, *::before, *::after {
+	box-sizing: border-box;
+}

@@ -1,6 +1,6 @@
 
 .deletable-image-container {
-	width: 25%;
+	flex: 0 0 25%;
 	height: auto;
 	position: relative;
 	display: inline-block;

@@ -10,9 +10,3 @@
         height: 100%;
         padding: 5%;
 }
-
-/*для того, чтобы паддинги и границы учитывались в размере элементов и они не вылезали за границы родителя*/
-.main-page-nav-icons,
-.main-page-nav-icons * {
-        box-sizing: border-box;
-}

@@ -13,8 +13,8 @@
 }
 
 .checkbox-box {
-	width: 0.7em;
-	height: 0.7em;
+	width: 1.0em;
+	height: 1.0em;
 	border: 3px solid var(--dark-grey);
 	background-color: transparent;
 	display: flex;
