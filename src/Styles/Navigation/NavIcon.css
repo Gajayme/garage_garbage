@@ -1,26 +1,29 @@
 .nav-icon {
-    width: 20%;
-    height: 30%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+	display: flex;
+	flex-direction: column;
+
+	gap: 15px;
+	padding: 10px;
+
+	max-width: 130px;
+	min-width: 50px;
+
+	align-items: center;
+	justify-content: center;
+
+	cursor: pointer;
 }
 
 .nav-icon:hover {
-    background-color: var(--dark-grey);
+	background-color: var(--dark-grey);
 }
 
 .nav-icon:active {
-    background: var(--dark-grey);
-    border-top: 3px solid var(--black);
-    border-left: 3px solid var(--black);
+	background: var(--dark-grey);
+	border-top: 3px solid var(--black);
+	border-left: 3px solid var(--black);
 }
 
 .nav-icon-image {
-    width: 70%;          /* 70% ширины родителя */
-    height: 70%;         /* 70% высоты родителя */
-    object-fit: contain; /* Сохраняем пропорции, вписываем в блок */
-    margin-bottom: 8px;
+	max-width: 100%;
 }

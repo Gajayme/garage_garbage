@@ -3,8 +3,8 @@
 	display: flex;
 	flex-direction: column;
 
-	height: 100%;
 	min-height: 0;
+	padding: 30px;
 
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -15,8 +15,8 @@
 }
 
 .inner-window-filters {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
 }
