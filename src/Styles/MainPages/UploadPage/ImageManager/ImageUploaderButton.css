@@ -1,9 +1,8 @@
 
 .image-uploader-button {
-    width: 30%;
-    padding: 5px;
-    cursor: pointer;
-    color: var(--white);
-    background-color: var(--black);
-    border: solid 2px var(--dark-grey);
+	padding: 5px 10px 5px 10px;
+	cursor: pointer;
+	color: var(--white);
+	background-color: var(--black);
+	border: solid 2px var(--dark-grey);
 }

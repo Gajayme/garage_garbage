@@ -1,7 +1,7 @@
 
 /* Кнопки загрузчика картинок */
 .image-uploader-buttons {
-    display: flex;
+	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
 }

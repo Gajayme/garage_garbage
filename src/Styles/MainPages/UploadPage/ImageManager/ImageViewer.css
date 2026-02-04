@@ -3,7 +3,7 @@
 /* Контейнер с загруженными картинками  */
 .image-viewer {
 	display: flex;
-	overflow-x:auto;
+	overflow-x: auto;
 	gap: 10px;
 }
 
