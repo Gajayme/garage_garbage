@@ -16,7 +16,6 @@ import * as Constants from 'Constants.js'
 
 import 'Styles/MainPages/UploadPage/UploadPageForm.css'
 import 'Styles/MainPages/UploadPage/UploadPageButton.css'
-import 'Styles/MarginBottom.css'
 import DefaultImg from "Images/default.jpg"
 
 
@@ -254,9 +253,9 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 
 		<form className="upload-page-form" onSubmit={handleOnSubmit}>
 
-			<ImageManagerWindow		images={formState.images}		errors={errorState.images}	onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages} onDeleteSpecific={handleOnDeleteSpecificImage} className="margin-bottom" />
+			<ImageManagerWindow		images={formState.images}		errors={errorState.images}	onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages} onDeleteSpecific={handleOnDeleteSpecificImage}/>
 
-			<div className="upload-form-texts">
+			<div className="upload-form-inputs">
 
 				<LabeledInput		value={formState.item_name}		errors={errorState.item_name}		onChange={handleOnChangeInput('item_name')}		className="upload-form-item"	labelText="Item Name"	id="item_name_input"	maxLength={50}/>
 				<LabeledInput 		value={formState.buyers_part}	errors={errorState.buyers_part}		onChange={handleOnChangeInput('buyers_part')}	className="upload-form-item"	labelText="Buyer Part"	id="buyer_part_input"	maxLength={10}		inputValidator={NumbersOnly}/>

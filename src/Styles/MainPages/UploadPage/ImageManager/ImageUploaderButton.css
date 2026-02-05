@@ -1,6 +1,8 @@
 
 .image-uploader-button {
 	padding: 5px 10px 5px 10px;
+	flex: 1;
+	max-width: 200px;
 	cursor: pointer;
 	color: var(--white);
 	background-color: var(--black);
