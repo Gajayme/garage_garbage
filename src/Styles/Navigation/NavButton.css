@@ -1,23 +1,23 @@
 .nav-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 4px;
 	text-decoration: none;
 	color: inherit;
 }
 
 .nav-button:active {
-    background: var(--dark-grey);
-    border-top: 2px solid var(--black);
-    border-left: 2px solid var(--black);
+	background: var(--dark-grey);
+	border-top: 2px solid var(--black);
+	border-left: 2px solid var(--black);
 }
 
 .nav-button:hover {
-    background-color: var(--dark-grey);
+	background-color: var(--dark-grey);
 }
 
-/* МОДИФИКАТОР */
+/* нажатая кнопка */
 .nav-button--selected {
 	border-top: 2px solid var(--black);
 	border-left: 2px solid var(--black);

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Item } from 'Components/MainPages/CatalogPage/Items/Item';
 import * as NavigationConstants from "Components/Navigation/Constants";
 
-import "Styles/NoTextDecorationLink.css";
+import "Styles/NoDecorationTextLink.css";
 
 export const Items = ({catalogState}) => {
 
@@ -22,7 +22,7 @@ export const Items = ({catalogState}) => {
 				return (
 					<Link
 						key={index}
-						className="no-text-decoration-link"
+						className="no-decoration-text-link"
 						to={`/${NavigationConstants.catalog}/${value.id}`}>
 
 						<Item

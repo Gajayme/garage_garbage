@@ -3,19 +3,26 @@
 
 
 /*базовый файл со стилями для проекта*/
+
 body {
-    font-family: "Pixelify Sans", sans-serif;
+	font-family: "Pixelify Sans", sans-serif;
 }
 
 button,
 input,
 select,
 textarea {
-    font-family: inherit;
+	font-family: inherit;
 }
 
 
-/* Глобально */
+/* Учитываем границы в размерах элементов во всем проекте */
 *, *::before, *::after {
 	box-sizing: border-box;
+}
+
+/* Убираем baseline для всех картинок в проекте */
+img {
+	display: block;
+	max-width: 100%;
 }
