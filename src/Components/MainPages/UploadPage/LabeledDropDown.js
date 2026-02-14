@@ -22,7 +22,7 @@ export const LabeledDropdown = ({value, options, errors, id, labelText, onChange
 	return (
 		<div className={`labeled ${className}`}>
 			<label htmlFor={id} > {labelText } </label>
-			<Dropdown value={value} options={options} id={id} onChange={onChange} className='upload-page-input' optionClassName= "centered-text" />
+			<Dropdown value={value} options={options} id={id} onChange={onChange} className='upload-page-input top-and-left-borders' optionClassName= "centered-text" />
 			<ErrorMessage errors={errors} />
 		</div>
 	);

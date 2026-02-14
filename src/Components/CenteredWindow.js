@@ -9,9 +9,9 @@ import "Styles/CenteredWindow.css"
  * @param {React.ReactNode} window - Компонент с окном, который будет отцентрирован.
  */
 export const CenteredWindow = ({window}) => {
-    return (
-        <div className="centered-window">
-            {window}
-        </div>
-    )
+	return (
+		<div className="centered-window">
+			{window}
+		</div>
+	)
 }
