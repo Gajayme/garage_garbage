@@ -1,5 +1,5 @@
 import React from 'react';
-import {DeletableImage} from "./DeletableImage";
+import {ImageWithCross} from "../../../ImageWithCross";
 
 import 'Styles/MainPages/UploadPage/ImageManager/ImageViewer.css'
 
@@ -10,7 +10,12 @@ export const ImageViewer = ({ images, onDeleteSpecific }) => {
 				<p>No uploaded images.</p>
 			) : (
 				images.map((image, _) => (
-					<DeletableImage image={image} key={image.id} onDeleteSpecific={onDeleteSpecific}/>
+					<ImageWithCross
+						className={"image-with-cross-deleteble"}
+						image={image}
+						key={image.id}
+						onCrossClick={onDeleteSpecific}
+					/>
 				))
 			)}
 		</div>
