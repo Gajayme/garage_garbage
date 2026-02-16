@@ -3,7 +3,7 @@
 }
 
 .catalog-item-image {
-	/* TODO Dmitriy: можно просто использовать width, а не min-width и max-width?? */
+	/* TODO DMITRIY: можно просто использовать width, а не min-width и max-width?? */
 	min-width: 100%;
 	max-width: 100%;
 }

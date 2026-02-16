@@ -11,7 +11,7 @@ export const ImageViewer = ({ images, onDeleteSpecific }) => {
 			) : (
 				images.map((image, _) => (
 					<ImageWithCross
-						className={"image-with-cross-deleteble"}
+						ImageClassName="image-with-cross-image-viewer"
 						image={image}
 						key={image.id}
 						onCrossClick={onDeleteSpecific}

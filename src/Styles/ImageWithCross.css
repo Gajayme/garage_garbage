@@ -1,0 +1,26 @@
+
+.image-with-cross-container {
+	position: relative;
+}
+
+.cross-icon-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	padding: 5px;
+	border: none;
+	background: none;
+	cursor: pointer;
+	opacity: 0.9;
+}
+
+.cross-icon-button:hover {
+	opacity: 1;
+}
+
+.cross-icon {
+	display: block;
+	width: 25px;
+	height: 25px;
+}

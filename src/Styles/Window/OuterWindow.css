@@ -19,7 +19,7 @@
 }
 
 .header-part {
-	/* TODO Dmitriy: почему это не работает? Сжимает, если использовать height */
+	/* TODO DMITRIY: почему это не работает? Сжимает, если использовать height */
 	/* height: 20px; */
 	min-height: 20px;
 	display: flex;

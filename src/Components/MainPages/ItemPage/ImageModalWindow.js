@@ -1,8 +1,15 @@
 
 import "Styles/MainPages/ItemPage/ImageModalWindow.css";
+import { ImageWithCross } from "Components/ImageWithCross";
 
 export const ImageModalWindow = ({ imageUrl, onClose }) => {
 	if (!imageUrl) return null;
+
+	const modalImage = {
+		id: "modal-image",
+		src: imageUrl,
+		alt: "Enlarged item",
+	};
 
 	return (
 		<div
@@ -13,17 +20,12 @@ export const ImageModalWindow = ({ imageUrl, onClose }) => {
 			onKeyDown={(e) => e.key === "Escape" && onClose()}
 			aria-label="Close modal"
 		>
-			<div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
-				<button
-					type="button"
-					className="image-modal-close"
-					onClick={onClose}
-					aria-label="Close"
-				>
-					×
-				</button>
-				<img src={imageUrl} alt="Enlarged item" className="image-modal-image" />
-			</div>
+			<ImageWithCross
+				ImageClassName="image-with-cross-image-modal"
+				image={modalImage}
+				onCrossClick={() => onClose()}
+				onClick={(e) => e.stopPropagation()}
+			/>
 		</div>
 	);
 };
