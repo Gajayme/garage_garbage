@@ -1,16 +1,17 @@
-
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { ItemImages } from "./ItemImages.js"
-import { ItemDescription } from "./ItemDescription.js"
+import { ItemImages } from "./ItemImages.js";
+import { ItemDescription } from "./ItemDescription.js";
+import { ImageModalWindow } from "./ImageModalWindow.js";
 import { buildItemData } from "./Utils.js";
 
 import * as GlobalConstants from "Constants.js";
 
-import "Styles/MainPages/ItemPage/ImagesAndDescriptionWrapper.css"
+import "Styles/MainPages/ItemPage/ImagesAndDescriptionWrapper.css";
 
-
-export const ItemPageContent = ({itemID}) => {
+export const ItemPageContent = ({ itemID }) => {
+	const [modalImageUrl, setModalImageUrl] = useState(null);
 
 	const fetchItemDetails = async ({ signal }) => {
 		const url = `${GlobalConstants.base_server_url + GlobalConstants.post_detail + itemID}`;
@@ -52,12 +53,18 @@ export const ItemPageContent = ({itemID}) => {
 	return (
 		<div className="images-and-description-wrapper">
 			<ItemImages
-				className = "images"
-				images = {images}/>
-
+				className="images"
+				images={images}
+				onImageClick={setModalImageUrl}
+			/>
 			<ItemDescription
-				className = "description"
-				data = {itemData}/>
+				className="description"
+				data={itemData}
+			/>
+			<ImageModalWindow
+				imageUrl={modalImageUrl}
+				onClose={() => setModalImageUrl(null)}
+			/>
 		</div>
-	)
+	);
 }
