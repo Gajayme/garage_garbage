@@ -1,26 +1,22 @@
-
-.catalog-item {
-    width: auto;
-}
-
 .catalog-item:hover {
-	transform: scale(1.07);
+	transform: scale(1.03);
 }
 
 .catalog-item-image {
-	width: 100%;
-	height: auto;
+	/* TODO Dmitriy: можно просто использовать width, а не min-width и max-width?? */
+	min-width: 100%;
+	max-width: 100%;
 }
 
 .catalog-item p {
-    margin-top: 10px;
-    margin-bottom: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 
-    display: -webkit-box;			/* Устанавливаем flex-контейнер */
-    -webkit-box-orient: vertical;	/* Задаём вертикальную ориентацию */
-    overflow: hidden;				/* Обрезаем текст, если он превышает заданные строки */
-    text-overflow: ellipsis;		/* Добавляем троеточие (...) */
+	display: -webkit-box;			/* Устанавливаем flex-контейнер */
+	-webkit-box-orient: vertical;	/* Задаём вертикальную ориентацию */
+	overflow: hidden;				/* Обрезаем текст, если он превышает заданные строки */
+	text-overflow: ellipsis;		/* Добавляем троеточие (...) */
 	line-clamp: 2;					/* Ограничиваем количество строк (2) */
-    -webkit-line-clamp: 2;			/* Ограничиваем количество строк (2) */
-    line-height: 20px;
+	-webkit-line-clamp: 2;			/* Ограничиваем количество строк (2) */
+	line-height: 20px;
 }

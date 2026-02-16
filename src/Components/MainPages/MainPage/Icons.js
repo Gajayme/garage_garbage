@@ -1,17 +1,15 @@
 import {NavIcon} from "Components/Navigation/NavIcon";
 import * as Constants from "Components/Navigation/Constants";
 
-import Icon1 from "Images/NavIcons/icon_1.png"
-import Icon2 from "Images/NavIcons/icon_2.png"
-import Icon3 from "Images/NavIcons/icon_3.png"
+import catalogLogo from "Images/NavIcons/catalog_logo.png"
 
 
 export const NavIcons = ({className}) => {
     return (
         <div className={className}>
-            <NavIcon image = {Icon1} labelText={Constants.rootLabel} destination={Constants.root}/>
-            <NavIcon image = {Icon1} labelText={Constants.uploadLabel} destination={Constants.root + Constants.upload}/>
-            <NavIcon image = {Icon1} labelText={Constants.catalogLabel} destination={Constants.root + Constants.catalog}/>
+            <NavIcon image = {catalogLogo} labelText={Constants.rootLabel} destination={Constants.root}/>
+            <NavIcon image = {catalogLogo} labelText={Constants.uploadLabel} destination={Constants.root + Constants.upload}/>
+            <NavIcon image = {catalogLogo} labelText={Constants.catalogLabel} destination={Constants.root + Constants.catalog}/>
         </div>
     )
 

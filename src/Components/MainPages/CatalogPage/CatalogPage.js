@@ -6,6 +6,10 @@ import {InnerWindow} from "Components/Window/InnerWindow";
 import {OuterWindow} from "Components/Window/OuterWindow";
 import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons";
 
+import 'Styles/Window/OuterWindow.css'
+import 'Styles/Window/WindowHeader.css'
+import 'Styles/Window/ButtonLayer.css'
+import 'Styles/Window/InnerWindow.css'
 import 'Styles/Navigation/DefaultNavButtons.css'
 
 export const CatalogPage = () => {
