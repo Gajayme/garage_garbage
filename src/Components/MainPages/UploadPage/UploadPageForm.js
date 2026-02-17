@@ -90,12 +90,12 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 			}
 
 			const responseJson = await response.json();
-			console.log("Успешно отправлено:", responseJson);
+			console.log("upload response:", responseJson);
 			resetForm()
 
 
 		} catch (error) {
-			console.error("Ошибка при загрузке данных:", error);
+			console.error("upload error:", error);
 		} finally {
 			setIsSubmitting(false);
 		}

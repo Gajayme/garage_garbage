@@ -1,9 +1,4 @@
 
-/* Стили для картинки в ImageViewer */
-.image-with-cross-image-viewer {
-	max-width: 200px;
-}
-
 /* Контейнер с загруженными картинками  */
 .image-viewer {
 	display: flex;

@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { ItemImages } from "./ItemImages.js";
 import { ItemDescription } from "./ItemDescription.js";
-import { ImageModalWindow } from "./ImageModalWindow.js";
+import { ItemModalWindow } from "./ItemModalWindow.js";
 import { buildItemData } from "./Utils.js";
 
 import * as GlobalConstants from "Constants.js";
@@ -61,7 +61,7 @@ export const ItemPageContent = ({ itemID }) => {
 				className="description"
 				data={itemData}
 			/>
-			<ImageModalWindow
+			<ItemModalWindow
 				imageUrl={modalImageUrl}
 				onClose={() => setModalImageUrl(null)}
 			/>

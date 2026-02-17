@@ -8,10 +8,3 @@
 	background-color: rgba(0, 0, 0, 0.75);
 	cursor: pointer;
 }
-
-.image-with-cross-image-modal {
-	max-width: 90vw;
-	max-height: 90vh;
-	position: relative;
-	cursor: default;
-}

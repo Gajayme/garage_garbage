@@ -1,6 +1,12 @@
 
-.image-with-cross-container {
+
+
+.deletable-image-container {
 	position: relative;
+}
+
+.deletable-image {
+	max-width: 200px;
 }
 
 .cross-icon-button {
