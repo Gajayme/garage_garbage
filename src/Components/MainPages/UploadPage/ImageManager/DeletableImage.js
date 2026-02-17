@@ -1,7 +1,8 @@
 import React from 'react';
 
+import {BorderedImage} from "Components/BorderedImage.js"
+
 import "Styles/MainPages/UploadPage/ImageManager/DeletableImage.css"
-import "Styles/TopAndLeftBorders.css"
 import CrossIcon from "Images/cross.png"
 
 
@@ -10,9 +11,9 @@ export const DeletableImage = ({image, onCrossClick}) => {
 		<div
 			className={`deletable-image-container`}
 		>
-			<img
-				className="top-and-left-borders deletable-image"
-				src={image.src}
+			<BorderedImage
+				className="deletable-image"
+				imageSrc = {image.src}
 				alt={image.alt || `Image ${image.id}`}
 			/>
 			<button

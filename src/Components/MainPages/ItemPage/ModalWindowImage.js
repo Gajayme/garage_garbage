@@ -1,6 +1,7 @@
 import React from 'react';
 
-import "Styles/TopAndLeftBorders.css"
+import {BorderedImage} from "Components/BorderedImage.js"
+
 import "Styles/MainPages/ItemPage/ModalWindowImage.css"
 import CrossIcon from "Images/cross.png"
 
@@ -11,9 +12,9 @@ export const ModalWindowImage = ({imageUrl, onCrossClick, onClick}) => {
 			className={`image-container`}
 			onClick={onClick}
 		>
-			<img
-				className={"modal-window-image top-and-left-borders"}
-				src={imageUrl}
+			<BorderedImage
+				className={"modal-window-image"}
+				imageSrc={imageUrl}
 				alt="enlarged"
 			/>
 			<button
