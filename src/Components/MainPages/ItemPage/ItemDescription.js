@@ -1,11 +1,13 @@
+import "Styles/MainPages/ItemPage/ItemDescription.css";
 
-export const ItemDescription = ({ className, data, delimiter = ": " }) => {
+
+export const ItemDescription = ({data, delimiter = ": " }) => {
 	if (!data) return null;
 
 	const { title, restData } = data;
 
 	return (
-		<div className={className}>
+		<div className="item-description">
 			{/* Заголовок (имя вещи) */}
 			<p>{title}</p>
 

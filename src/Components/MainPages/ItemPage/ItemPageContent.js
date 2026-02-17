@@ -53,12 +53,10 @@ export const ItemPageContent = ({ itemID }) => {
 	return (
 		<div className="images-and-description-wrapper">
 			<ItemImages
-				className="images"
 				images={images}
 				onImageClick={setModalImageUrl}
 			/>
 			<ItemDescription
-				className="description"
 				data={itemData}
 			/>
 			<ItemModalWindow

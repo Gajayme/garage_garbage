@@ -1,10 +1,13 @@
 import { BorderedImage } from "Components/BorderedImage.js";
 
-export const ItemImages = ({ className, images, onImageClick }) => {
+import "Styles/MainPages/ItemPage/ItemImages.css";
+
+
+export const ItemImages = ({images, onImageClick }) => {
 	if (!images) return null;
 
 	return (
-		<div className={className}>
+		<div className="item-images">
 			{images.map((imageData, index) => {
 				const imageUrl = imageData ? imageData.image_url : null;
 				return (
@@ -16,6 +19,7 @@ export const ItemImages = ({ className, images, onImageClick }) => {
 						aria-label="View image larger"
 					>
 						<BorderedImage
+							className="item-image"
 							imageSrc={imageUrl}
 							alt="item"
 						/>
