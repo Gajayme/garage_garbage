@@ -10,7 +10,7 @@ export const Items = ({catalogState}) => {
 	if (catalogState.length === 0) {
 		return (
 			<div className="catalog-page">
-				<p className="centered-text">{"Loading..."}</p>
+				<p className="centered-text">{"Nothing here ..."}</p>
 			</div>
 		);
 	}
