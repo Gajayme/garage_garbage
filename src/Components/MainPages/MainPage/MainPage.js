@@ -5,6 +5,8 @@ import {WindowHeader} from "Components/Window/WindowHeader.js"
 import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons.js";
 import {NavIcons} from "./Icons.js"
 
+import mascot from "Images/mascot.png"
+
 import 'Styles/MainPages/MainPage/MainPageNavIcons.css'
 import 'Styles/Window/OuterWindow.css'
 import 'Styles/Window/WindowHeader.css'
@@ -20,8 +22,9 @@ export const MainPage = () => {
 		<DefaultNavButtons className="default-nav-buttons"/>
 	</ButtonLayer>
 
-	const innerWindow = <InnerWindow className="inner-window">
+	const innerWindow = <InnerWindow className="inner-window main-page-inner-window">
 		<NavIcons className="main-page-nav-icons"/>
+		<img src={mascot} alt="Main Logo" className="main-page-mascot" />
 	</InnerWindow>
 
 	return (

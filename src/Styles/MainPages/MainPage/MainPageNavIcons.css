@@ -1,6 +1,22 @@
 
+.main-page-inner-window {
+	position: relative;
+}
+
+.main-page-mascot {
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	z-index: 0;
+	max-width: min(40%, 300px);
+	object-fit: contain;
+	pointer-events: none;
+}
+
 .main-page-nav-icons {
 	display: flex;
+	position: relative;
+	z-index: 1;
 
 	justify-content: flex-start;
 	align-content: flex-start;
