@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom"
+
 import {OuterWindow} from "Components/Window/OuterWindow.js"
 import {InnerWindow} from "Components/Window/InnerWindow.js"
 import {ButtonLayer} from "Components/Window/ButtonLayer.js"
 import {WindowHeader} from "Components/Window/WindowHeader.js"
 import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons.js";
 import {NavIcons} from "./Icons.js"
+import * as NavigationConstants from "Components/Navigation/Constants"
 
 import mascot from "Images/mascot.png"
 
@@ -24,7 +27,11 @@ export const MainPage = () => {
 
 	const innerWindow = <InnerWindow className="inner-window main-page-inner-window">
 		<NavIcons className="main-page-nav-icons"/>
-		<img src={mascot} alt="Main Logo" className="main-page-mascot" />
+		<Link
+			className="no-decoration-text-link main-page-mascot-link"
+			to={`/${NavigationConstants.login}`}>
+			<img src={mascot} alt="Main Logo" className="main-page-mascot" />
+		</Link>
 	</InnerWindow>
 
 	return (
