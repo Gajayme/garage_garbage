@@ -3,12 +3,15 @@ import {InnerWindow} from "Components/Window/InnerWindow.js"
 import {ButtonLayer} from "Components/Window/ButtonLayer.js"
 import {WindowHeader} from "Components/Window/WindowHeader.js"
 import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons.js"
+import { LoginWindow } from "./LoginWindow.js"
 
 import 'Styles/Window/OuterWindow.css'
 import 'Styles/Window/WindowHeader.css'
 import 'Styles/Window/ButtonLayer.css'
 import 'Styles/Window/InnerWindow.css'
 import 'Styles/Navigation/DefaultNavButtons.css'
+import 'Styles/MainPages/LoginPage/LoginPage.css'
+import "Styles/TopAndLeftBorders.css"
 
 export const LoginPage = () => {
 
@@ -18,8 +21,8 @@ export const LoginPage = () => {
 		<DefaultNavButtons className="default-nav-buttons"/>
 	</ButtonLayer>
 
-	const innerWindow = <InnerWindow className="inner-window">
-		{/* Контент страницы */}
+	const innerWindow = <InnerWindow className="inner-window login-page-inner-window">
+		<LoginWindow />
 	</InnerWindow>
 
 	return (

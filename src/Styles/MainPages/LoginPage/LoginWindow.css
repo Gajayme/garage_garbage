@@ -1,0 +1,15 @@
+.login-window {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	width: 280px;
+	align-items: center
+}
+
+.login-window__input {
+	padding: 5px;
+}
+
+.login-window__button {
+	padding: 5px;
+}

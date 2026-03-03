@@ -19,8 +19,6 @@
 }
 
 .header-part {
-	/* TODO DMITRIY: почему это не работает? Сжимает, если использовать height */
-	/* height: 20px; */
 	min-height: 20px;
 	display: flex;
 }
