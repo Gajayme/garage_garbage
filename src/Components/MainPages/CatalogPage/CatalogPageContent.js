@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 
 import { Items } from "Components/MainPages/CatalogPage/Items/Items.js";
 import { FiltersWindow } from "./Filters/FiltresWindow";
 import { DefaultButton } from "Components/Button.js";
-import { buildQueryString } from "./Utils.js";
 import { useUrlFilters } from "./useUrlFilters";
-
-import * as GlobalConstants from "Constants.js";
+import { useCatalogItems } from "./useCatalogItems";
 
 import "Styles/MainPages/CatalogPage/Items/CatalogItems.css";
 import "Styles/MainPages/CatalogPage/FiltersActivationButton.css";
@@ -23,29 +20,7 @@ export const CatalogPageContent = () => {
 	// хук, который занимается URL ↔ filtersState
 	const { filtersState, setFilter, initialized } = useUrlFilters(allFilters);
 
-	// запрос за items (+ filters на первом заходе)
-	const fetchItems = async ({ signal }) => {
-		const query = buildQueryString(filtersState);
-		const url = `${GlobalConstants.base_server_url + GlobalConstants.post_all}?${query}`;
-
-		const resp = await fetch(url, {
-			method: GlobalConstants.http_methods.GET,
-			headers: { "Content-Type": "application/json" },
-			signal,
-	});
-
-		if (!resp.ok) throw new Error("Failed to fetch");
-		return resp.json();
-	};
-
-	const {
-			data,
-			error
-		} = useQuery({
-			queryKey: [GlobalConstants.itemsQuery, filtersState],
-			queryFn: fetchItems,
-			keepPreviousData: true,
-	});
+	const { data, error } = useCatalogItems(filtersState);
 
 	// один раз берём filters с бэка и сохраняем в allFilters
 	useEffect(() => {
