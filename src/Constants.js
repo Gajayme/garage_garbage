@@ -19,6 +19,7 @@ export const post_upload = "post/upload"
 export const post_all = "post/all"
 export const post_delete = "post/delete"
 export const post_detail = "post/detail/"
+export const user_login = "user/login"
 
 
 export const http_methods = {
