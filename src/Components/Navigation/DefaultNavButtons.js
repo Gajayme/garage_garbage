@@ -1,5 +1,6 @@
 import {NavButton} from "./NavButton";
 import * as Constants from './Constants.js'
+import { AuthChecker } from 'Components/AuthChecker.js'
 
 import 'Styles/Navigation/NavButton.css'
 
@@ -13,7 +14,11 @@ export const DefaultNavButtons = ({className}) => {
 	return (
 		<div className={className}>
 			<NavButton className="nav-button" labelText={Constants.rootLabel} destination={Constants.root}/>
-			<NavButton className="nav-button" labelText={Constants.uploadLabel} destination={Constants.root + Constants.upload}/>
+
+			<AuthChecker>
+				<NavButton className="nav-button" labelText={Constants.uploadLabel} destination={Constants.root + Constants.upload}/>
+			</AuthChecker>
+
 			<NavButton className="nav-button" labelText={Constants.catalogLabel} destination={Constants.root + Constants.catalog}/>
 		</div>
 	)

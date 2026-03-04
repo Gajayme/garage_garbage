@@ -14,7 +14,6 @@ import 'Styles/MainPages/LoginPage/LoginPage.css'
 import "Styles/TopAndLeftBorders.css"
 
 export const LoginPage = () => {
-
 	const header = <WindowHeader className="window-header"/>
 
 	const buttonLayer = <ButtonLayer className="button-layer">

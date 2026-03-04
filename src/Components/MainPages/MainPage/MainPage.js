@@ -18,7 +18,6 @@ import 'Styles/Window/InnerWindow.css'
 import 'Styles/Navigation/DefaultNavButtons.css'
 
 export const MainPage = () => {
-
 	const header = <WindowHeader className="window-header"/>
 
 	const buttonLayer = <ButtonLayer className="button-layer">

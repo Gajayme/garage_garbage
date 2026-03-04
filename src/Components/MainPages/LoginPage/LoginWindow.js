@@ -1,17 +1,31 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { CustomInput } from 'Components/CustomInput.js'
 import { DefaultButton } from 'Components/Button.js'
+import { useLogin } from './useLogin.js'
+import { useAuth } from 'Components/Auth/AuthContext.js'
+import * as Nav from 'Components/Navigation/Constants'
 
 import 'Styles/MainPages/LoginPage/LoginWindow.css'
 
 export const LoginWindow = () => {
 	const [login, setLogin] = useState('')
 	const [password, setPassword] = useState('')
+	const navigate = useNavigate()
+	const { checkAuth } = useAuth()
 
+	const { mutate: doLogin, isPending, error } = useLogin()
 
 	const handleOnLogin = () => {
-		console.log('login', login)
-		console.log('password', password)
+		doLogin(
+			{ login, password },
+			{
+				onSuccess: async () => {
+					await checkAuth()
+					navigate(`/${Nav.upload}`)
+				},
+			}
+		)
 	}
 
 	return (
@@ -37,7 +51,11 @@ export const LoginWindow = () => {
 				className="login-window__button"
 				onClick={handleOnLogin}
 				labelText="Login"
+				disabled={isPending}
 			/>
+			{error && <div className="login-window__error">{error.message}</div>}
+			{isPending && <div className="login-window__sending">Sending…</div>}
+
 		</div>
 	)
 }

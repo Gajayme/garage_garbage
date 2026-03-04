@@ -7,9 +7,9 @@
  * @param {"button" | "submit" | "reset"} type - Тип кнопки.
  * @param {Function} onClick - Функция для обработки клика по кнопке.
  */
-export const DefaultButton = ({className, labelText, type = "button", onClick}) => {
+export const DefaultButton = ({className, labelText, type = "button", onClick, disabled}) => {
 	return (
-		<button className={className} onClick={onClick} type={type}>
+		<button className={className} onClick={onClick} type={type} disabled={disabled}>
 			{labelText}
 		</button>
 	)

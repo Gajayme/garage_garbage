@@ -2,5 +2,14 @@
 	background-color: var(--black);
 	flex-shrink: 0;
 	flex-grow: 1;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding-right: 8px;
+}
+
+.window-header__admin {
+	color: var(--middle-grey, #888);
+	font-size: 0.9rem;
 }
 

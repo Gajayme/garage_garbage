@@ -16,7 +16,6 @@ import 'Styles/Navigation/DefaultNavButtons.css'
 
 
 export const UploadPage = () => {
-
 	const header = <WindowHeader className="window-header"/>
 
 	const buttonLayer = <ButtonLayer className="button-layer">
