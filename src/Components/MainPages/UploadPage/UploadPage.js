@@ -4,6 +4,7 @@ import { WindowHeader } from "Components/Window/WindowHeader";
 import { ButtonLayer } from "Components/Window/ButtonLayer";
 import { InnerWindow } from "Components/Window/InnerWindow";
 import { DefaultNavButtons } from "Components/Navigation/DefaultNavButtons";
+import { useAuth } from "Components/Auth/AuthContext.js";
 import { UploadNotificationState } from './UploadPageNotificationWindow'
 import { UploadPageNotificationWindow } from "./UploadPageNotificationWindow";
 import { useResetStateWithTimeout } from "Components/useResetStateWithTimeout";
@@ -16,8 +17,8 @@ import 'Styles/Navigation/DefaultNavButtons.css'
 
 
 export const UploadPage = () => {
-
-	const header = <WindowHeader className="window-header"/>
+	const { isAdmin } = useAuth();
+	const header = <WindowHeader className="window-header" isAdmin={isAdmin}/>
 
 	const buttonLayer = <ButtonLayer className="button-layer">
 		<DefaultNavButtons className="default-nav-buttons"/>

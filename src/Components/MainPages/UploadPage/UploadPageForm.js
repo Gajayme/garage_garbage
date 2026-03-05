@@ -11,6 +11,7 @@ import { UploadNotificationState } from './UploadPageNotificationWindow.js'
 import { LabeledInput } from "Components/MainPages/UploadPage/LabeledInput.js"
 import { LabeledDropdown } from "Components/MainPages/UploadPage/LabeledDropDown.js"
 import { useInputParams } from "Components/MainPages/UploadPage/useInputParams.js"
+import { useAuth } from "Components/Auth/AuthContext.js"
 
 import * as Constants from 'Constants.js'
 
@@ -24,6 +25,7 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 
 	// хук, который занимается загрузкой инпут параметров с сервера
 	const { brandState, typeState, buyerState, locationState, isLoading } = useInputParams();
+	const { isAdmin, checkAuth } = useAuth();
 
 	// Происходит ли отправка формы прямо сейчас
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,7 +74,16 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 		if (isSubmitting) return;
 		setIsSubmitting(true);
 
-		if (!validateForm()) return
+		if (!isAdmin) {
+			notificationStateSetter(UploadNotificationState.ERROR);
+			setIsSubmitting(false);
+			return;
+		}
+
+		if (!validateForm()) {
+			setIsSubmitting(false);
+			return;
+		}
 
 		const formData = buildFormData()
 
@@ -80,8 +91,16 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 			const response = await fetch(Constants.base_server_url + Constants.post_upload, {
 			method: Constants.http_methods.POST,
 			body: formData,
+			credentials: 'include',
 			});
 
+
+			if (response.status === 401) {
+				await checkAuth();
+				notificationStateSetter(UploadNotificationState.ERROR);
+				setIsSubmitting(false);
+				return;
+			}
 
 			const notificationState = response.ok ? UploadNotificationState.SUCCESS: UploadNotificationState.ERROR
 			notificationStateSetter(notificationState);

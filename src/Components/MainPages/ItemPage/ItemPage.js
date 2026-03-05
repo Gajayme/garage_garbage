@@ -6,6 +6,7 @@ import { InnerWindow } from "Components/Window/InnerWindow.js"
 import { ButtonLayer } from "Components/Window/ButtonLayer.js"
 import { WindowHeader } from "Components/Window/WindowHeader.js"
 import { DefaultNavButtons } from "Components/Navigation/DefaultNavButtons.js";
+import { useAuth } from "Components/Auth/AuthContext.js";
 import { ItemPageContent } from "./ItemPageContent.js";
 
 import 'Styles/Window/OuterWindow.css'
@@ -18,8 +19,9 @@ export const ItemPage = () => {
 	// Получение id вещи для запроса
 	// id === "123" для /Catalog/123
 	const { id } = useParams();
+	const { isAdmin } = useAuth();
 
-	const header = <WindowHeader className="window-header"/>
+	const header = <WindowHeader className="window-header" isAdmin={isAdmin}/>
 
 	const buttonLayer = <ButtonLayer className="button-layer">
 		<DefaultNavButtons className="default-nav-buttons"/>

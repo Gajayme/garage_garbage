@@ -5,6 +5,7 @@ import {ButtonLayer} from "Components/Window/ButtonLayer";
 import {InnerWindow} from "Components/Window/InnerWindow";
 import {OuterWindow} from "Components/Window/OuterWindow";
 import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons";
+import { useAuth } from "Components/Auth/AuthContext.js";
 
 import 'Styles/Window/OuterWindow.css'
 import 'Styles/Window/WindowHeader.css'
@@ -13,11 +14,12 @@ import 'Styles/Window/InnerWindow.css'
 import 'Styles/Navigation/DefaultNavButtons.css'
 
 export const CatalogPage = () => {
+  const { isAdmin } = useAuth();
   return (
     <div>
       <OuterWindow
         className="outer-window"
-        header={<WindowHeader className="window-header" />}
+        header={<WindowHeader className="window-header" isAdmin={isAdmin} />}
         buttonLayer={
           <ButtonLayer className="button-layer">
             <DefaultNavButtons className="default-nav-buttons" />

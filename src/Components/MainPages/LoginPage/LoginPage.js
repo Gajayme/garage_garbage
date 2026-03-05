@@ -3,6 +3,7 @@ import {InnerWindow} from "Components/Window/InnerWindow.js"
 import {ButtonLayer} from "Components/Window/ButtonLayer.js"
 import {WindowHeader} from "Components/Window/WindowHeader.js"
 import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons.js"
+import { useAuth } from "Components/Auth/AuthContext.js"
 import { LoginWindow } from "./LoginWindow.js"
 
 import 'Styles/Window/OuterWindow.css'
@@ -14,8 +15,8 @@ import 'Styles/MainPages/LoginPage/LoginPage.css'
 import "Styles/TopAndLeftBorders.css"
 
 export const LoginPage = () => {
-
-	const header = <WindowHeader className="window-header"/>
+	const { isAdmin } = useAuth();
+	const header = <WindowHeader className="window-header" isAdmin={isAdmin}/>
 
 	const buttonLayer = <ButtonLayer className="button-layer">
 		<DefaultNavButtons className="default-nav-buttons"/>

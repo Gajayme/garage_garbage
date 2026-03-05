@@ -6,6 +6,7 @@ const loginRequest = async ({ login, password }) => {
 		method: Constants.http_methods.POST,
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify({ login, password }),
+		credentials: 'include',
 	});
 
 	if (!response.ok) {
