@@ -2,7 +2,7 @@ import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
 
 import { DefaultButton } from "Components/Button.js"
-import { NumbersOnly } from './Validations/Validations.js'
+import { NumbersOnly } from 'Components/InputValidators.js'
 import { FormDataLogger } from "Components/FormDataLogger.js";
 import { UploadFormValidation } from './Validations/Validations.js'
 import { NonEmpty, NonEmptyImages } from './Validations/Validations.js'

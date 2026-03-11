@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {NumbersOnly} from 'Components/MainPages/UploadPage/Validations/Validations.js'
+import {NumbersOnly} from 'Components/InputValidators.js'
 import {CustomInput} from 'Components/CustomInput.js';
 import {priceMaxLength} from './Constants.js'
 
