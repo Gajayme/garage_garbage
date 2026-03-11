@@ -262,9 +262,7 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 
 	if (isLoading) {
 		return (
-			<div className="catalog-page">
-				<p className="centered-text">{"Loading..."}</p>
-			</div>
+			<p className="centered-text">{"Loading..."}</p>
 		);
 	}
 
