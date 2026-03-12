@@ -17,11 +17,11 @@ export const useCatalogItems = (filtersState) => {
 		return resp.json();
 	};
 
-	const { data, error } = useQuery({
+	const { data, error, isLoading } = useQuery({
 		queryKey: [GlobalConstants.itemsQuery, filtersState],
 		queryFn: fetchItems,
 		keepPreviousData: true,
 	});
 
-	return { data, error };
+	return { data, error, isLoading };
 };

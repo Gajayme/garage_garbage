@@ -20,7 +20,7 @@ export const CatalogPageContent = () => {
 	// хук, который занимается URL ↔ filtersState
 	const { filtersState, setFilter, initialized } = useUrlFilters(allFilters);
 
-	const { data, error } = useCatalogItems(filtersState);
+	const { data, error, isLoading } = useCatalogItems(filtersState);
 
 	// один раз берём filters с бэка и сохраняем в allFilters
 	useEffect(() => {
@@ -29,13 +29,13 @@ export const CatalogPageContent = () => {
 		}
 	}, [data, allFilters.length]);
 
-	// пока либо запрос идёт, либо фильтры ещё не инициализированы
+	// пока фильтры ещё не инициализированы, отображаем загрузочный текст вместо всего контента
 	if (!initialized) {
 		return (
 			<p className="centered-text">Loading...</p>
 		);
 	}
-
+	// если произошла ошибка, отображаем текст ошибки
 	else if (error) {
 		return (
 			<p className="centered-text">Error happened</p>
@@ -60,8 +60,12 @@ export const CatalogPageContent = () => {
 						onFilterStateChanged={(name) => (value) => setFilter(name, value)}
 					/>
 				)}
-
-				<Items catalogState={items} />
+				{/* пока запрос идёт, отображаем загрузочный текст (только вместо карточек товаров)*/}
+				{isLoading ? (
+					<p className="centered-text">Loading...</p>
+				) : (
+					<Items catalogState={items} />
+				)}
 			</div>
 		</div>
 	);
