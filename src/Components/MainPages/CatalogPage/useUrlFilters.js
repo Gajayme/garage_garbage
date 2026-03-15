@@ -86,9 +86,24 @@ export const useUrlFilters = (filtersDefinition) => {
 		}));
 	};
 
+	const resetFilters = () => {
+		if (!filtersDefinition?.length) return;
+		const defaultState = {};
+		filtersDefinition.forEach(f => {
+			if (f.type === FilterConstants.FilterType.multiCheckbox) {
+				defaultState[f.name] = [];
+			}
+			if (f.type === FilterConstants.FilterType.range) {
+				defaultState[f.name] = { min: "", max: "" };
+			}
+		});
+		setFiltersState(defaultState);
+	};
+
 	return {
 		filtersState,
 		setFilter,
+		resetFilters,
 		initialized,
 	};
 };

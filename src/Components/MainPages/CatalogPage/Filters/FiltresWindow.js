@@ -47,11 +47,9 @@ export const FiltersWindow = ({availableFilters, filtersState, onFilterStateChan
 
 
 	return (
-		<div style={{width:'100%'}}>
-			<OuterWindow
-				className="outer-window-filters"
-				innerWindow={innerWindow}>
-			</OuterWindow>
-		</div>
+		<OuterWindow
+			className="outer-window-filters"
+			innerWindow={innerWindow}>
+		</OuterWindow>
 	)
 }

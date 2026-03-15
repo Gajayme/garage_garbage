@@ -7,7 +7,7 @@ import { useUrlFilters } from "./useUrlFilters";
 import { useCatalogItems } from "./useCatalogItems";
 
 import "Styles/MainPages/CatalogPage/Items/CatalogItems.css";
-import "Styles/MainPages/CatalogPage/FiltersActivationButton.css";
+import "Styles/MainPages/CatalogPage/FilterActivationButtons.css";
 import "Styles/MainPages/CatalogPage/FiltersItemsWrapper.css";
 import "Styles/CenteredText.css";
 
@@ -18,7 +18,7 @@ export const CatalogPageContent = () => {
 	const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
 	// хук, который занимается URL ↔ filtersState
-	const { filtersState, setFilter, initialized } = useUrlFilters(allFilters);
+	const { filtersState, setFilter, resetFilters, initialized } = useUrlFilters(allFilters);
 
 	const { data, error, isLoading } = useCatalogItems(filtersState);
 
@@ -46,11 +46,18 @@ export const CatalogPageContent = () => {
 
 	return (
 		<div>
-			<DefaultButton
-				className="filter-activation-button"
-				labelText="Filters"
-				onClick={() => setIsFiltersVisible((prev) => !prev)}
-			/>
+			<div className="filter-buttons-wrapper">
+				<DefaultButton
+					className="filter-activation-button"
+					labelText="Filters"
+					onClick={() => setIsFiltersVisible((prev) => !prev)}
+				/>
+				<DefaultButton
+					className="filter-reset-button"
+					labelText="Reset filters"
+					onClick={resetFilters}
+				/>
+			</div>
 
 			<div className="filters-items-wrapper">
 				{isFiltersVisible && (
