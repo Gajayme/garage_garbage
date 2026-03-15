@@ -8,11 +8,8 @@
 	padding-top: 5px;
 	padding-bottom: 7px;
 
-	/* TODO  DMITRIY (обязательно ли выставлять мин макс, чтобы гарантировать размер?) */
-	min-width: 90vw;
-	max-width: 90vw;
-	min-height: 90vh;
-	max-height: 90vh;
+	width: 100vw;
+	height: 100vh;
 
 	background-color: var(--middle-grey);
 	border: 2px solid var(--dark-grey);

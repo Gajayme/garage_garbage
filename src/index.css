@@ -4,6 +4,12 @@
 
 /*базовый файл со стилями для проекта*/
 
+html, body, #root {
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+}
+
 body {
 	font-family: "Pixelify Sans", sans-serif;
 }
