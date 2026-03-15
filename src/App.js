@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import { AuthProvider, useAuth } from 'Components/Auth/AuthContext.js';
 import { MainPage } from 'Components/MainPages/MainPage/MainPage.js';
 import { UploadPage } from 'Components/MainPages/UploadPage/UploadPage.js';
+import { DatabasePage } from 'Components/MainPages/DatabasePage/DatabasePage.js';
 import { CatalogPage } from 'Components/MainPages/CatalogPage/CatalogPage.js';
 import { LoginPage } from 'Components/MainPages/LoginPage/LoginPage.js';
 import { ItemPage } from 'Components/MainPages/ItemPage/ItemPage.js';
@@ -26,6 +27,7 @@ const App = () => {
 			<Route path={`/${Nav.login}`} element={<CenteredWindow window={<LoginPage />} />} />
 			<Route path={`/${Nav.catalog}`} element={<CenteredWindow window={<CatalogPage />} />} />
 			<Route path={`/${Nav.catalog}/:id`} element={<CenteredWindow window={<ItemPage />} />} />
+			<Route path={`/${Nav.database}`} element={<CenteredWindow window={<DatabasePage />} />} />
 		</Routes>
 	</Router>
 	</AuthProvider>

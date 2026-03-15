@@ -54,7 +54,7 @@ export const CatalogPageContent = () => {
 				/>
 				<DefaultButton
 					className="filter-reset-button"
-					labelText="Reset filters"
+					labelText="Reset Filters"
 					onClick={resetFilters}
 				/>
 			</div>
