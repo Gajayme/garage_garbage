@@ -8,13 +8,16 @@
 	padding-top: 5px;
 	padding-bottom: 7px;
 
-	/* На мобильных браузерах `100vh` может быть больше "видимой" области.
-	   Используем динамический viewport (dvh/dvw) с fallback. */
+	/* На Android Chrome `100vh`/иногда `100dvh` могут давать высоту больше
+	   текущей видимой области при открытой адресной строке.
+	   Используем `sv*` как "безопасный" viewport, чтобы окно точно влезало. */
 	width: 100vw;
 	width: 100dvw;
+	width: 100svw;
 
 	height: 100vh;
 	height: 100dvh;
+	height: 100svh;
 
 	background-color: var(--middle-grey);
 	border: 2px solid var(--dark-grey);
