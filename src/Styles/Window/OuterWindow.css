@@ -8,8 +8,13 @@
 	padding-top: 5px;
 	padding-bottom: 7px;
 
+	/* На мобильных браузерах `100vh` может быть больше "видимой" области.
+	   Используем динамический viewport (dvh/dvw) с fallback. */
 	width: 100vw;
+	width: 100dvw;
+
 	height: 100vh;
+	height: 100dvh;
 
 	background-color: var(--middle-grey);
 	border: 2px solid var(--dark-grey);
