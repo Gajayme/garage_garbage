@@ -23,6 +23,10 @@ export const DefaultNavButtons = ({className}) => {
 				<NavButton className="nav-button" labelText={Constants.databaseLabel} destination={Constants.root + Constants.database}/>
 			</AuthChecker>
 
+			<AuthChecker>
+				<NavButton className="nav-button" labelText={Constants.settingsLabel} destination={Constants.root + Constants.settings}/>
+			</AuthChecker>
+
 			<NavButton className="nav-button" labelText={Constants.catalogLabel} destination={Constants.root + Constants.catalog}/>
 		</div>
 	)
