@@ -19,10 +19,5 @@ const loginRequest = async ({ login, password }) => {
 export const useLogin = () => {
 	return useMutation({
 		mutationFn: loginRequest,
-
-		// TODO дебажный лог
-		onSuccess: (data) => {
-			console.log(data)
-		},
 	});
 };

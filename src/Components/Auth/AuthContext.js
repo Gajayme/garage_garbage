@@ -4,12 +4,10 @@ import * as Constants from 'Constants.js';
 const AuthContext = createContext(null);
 
 const checkSession = async () => {
-	console.log("checkSession")
 	const response = await fetch(Constants.base_server_url + Constants.user_me, {
 		method: Constants.http_methods.GET,
 		credentials: 'include',
 	});
-	console.log("response", response)
 	if (!response.ok) return { isAdmin: false };
 	const data = await response.json().catch(() => ({}));
 	const isAdmin = data?.status === true && data?.data != null;
