@@ -3,8 +3,12 @@ import { WindowHeader } from "Components/Window/WindowHeader";
 import { ButtonLayer } from "Components/Window/ButtonLayer";
 import { InnerWindow } from "Components/Window/InnerWindow";
 import { DefaultNavButtons } from "Components/Navigation/DefaultNavButtons";
+import { NavButton } from "Components/Navigation/NavButton";
 import { DatabasePageContent } from "Components/MainPages/DatabasePage/DatabasePageContent.js";
+import * as Nav from "Components/Navigation/Constants";
 
+import "Styles/MainPages/CatalogPage/FilterActivationButtons.css";
+import "Styles/Navigation/NavButton.css";
 import "Styles/Window/OuterWindow.css";
 import "Styles/Window/WindowHeader.css";
 import "Styles/Window/ButtonLayer.css";
@@ -22,7 +26,15 @@ export const DatabasePage = () => {
 
 	const innerWindow = (
 		<InnerWindow className="inner-window">
-			<DatabasePageContent />
+			<div>
+				<div className="filter-buttons-wrapper">
+					<NavButton
+						labelText="Add new"
+						destination={Nav.root + Nav.upload}
+					/>
+				</div>
+				<DatabasePageContent />
+			</div>
 		</InnerWindow>
 	);
 
