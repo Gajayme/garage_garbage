@@ -10,7 +10,7 @@ import { ImageManagerWindow } from "./ImageManager/ImageManagerWindow.js"
 import { UploadNotificationState } from './UploadPageNotificationWindow.js'
 import { LabeledInput } from "Components/MainPages/UploadPage/LabeledInput.js"
 import { LabeledDropdown } from "Components/MainPages/UploadPage/LabeledDropDown.js"
-import { useInputParams } from "Components/MainPages/UploadPage/useInputParams.js"
+import { useInputParams } from "Components/hooks/useInputParams.js";
 import { useAuth } from "Components/Auth/AuthContext.js"
 
 import * as Constants from 'Constants.js'

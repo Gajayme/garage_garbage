@@ -1,13 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import * as UploadConstants from "./UploadPageConstants.js";
-import * as GlobalConstanst from "Constants.js"
-
-const fetchDictionary = async (url) => {
-	const resp = await fetch(url);
-	if (!resp.ok) throw new Error("Ошибка загрузки");
-	const data = await resp.json();
-	return data.data;
-};
+import * as UploadConstants from "Components/MainPages/UploadPage/UploadPageConstants.js";
+import * as GlobalConstants from "Constants.js";
+import { fetchInputData } from "Components/Api/fetchInputData.js";
 
 const convertArrayToMap = (array) =>
 	array.reduce((acc, item) => {
@@ -17,23 +11,23 @@ const convertArrayToMap = (array) =>
 
 export const useInputParams = () => {
 	const { data: brands, isLoading: brandsLoading } = useQuery({
-		queryKey: [GlobalConstanst.uploadBrandQuery],
-		queryFn: () => fetchDictionary(GlobalConstanst.base_server_url + UploadConstants.brandApi),
+		queryKey: [GlobalConstants.uploadBrandQuery],
+		queryFn: () => fetchInputData(UploadConstants.brandApi),
 	});
 
 	const { data: types, isLoading: typesLoading } = useQuery({
-		queryKey: [GlobalConstanst.uploadTypesQuery],
-		queryFn: () => fetchDictionary(GlobalConstanst.base_server_url + UploadConstants.typeApi),
+		queryKey: [GlobalConstants.uploadTypesQuery],
+		queryFn: () => fetchInputData(UploadConstants.typeApi),
 	});
 
 	const { data: buyers, isLoading: buyersLoading } = useQuery({
-		queryKey: [GlobalConstanst.uploadBuyersQuery],
-		queryFn: () => fetchDictionary(GlobalConstanst.base_server_url + UploadConstants.byuerApi),
+		queryKey: [GlobalConstants.uploadBuyersQuery],
+		queryFn: () => fetchInputData(UploadConstants.byuerApi),
 	});
 
 	const { data: locations, isLoading: locationsLoading } = useQuery({
-		queryKey: [GlobalConstanst.uploadLocationsQuery],
-		queryFn: () => fetchDictionary(GlobalConstanst.base_server_url + UploadConstants.locationApi),
+		queryKey: [GlobalConstants.uploadLocationsQuery],
+		queryFn: () => fetchInputData(UploadConstants.locationApi),
 	});
 
 	const brandState = {

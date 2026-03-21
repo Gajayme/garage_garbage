@@ -6,7 +6,7 @@ import { InnerWindow } from "Components/Window/InnerWindow";
 import { DefaultNavButtons } from "Components/Navigation/DefaultNavButtons";
 import { UploadNotificationState } from './UploadPageNotificationWindow'
 import { UploadPageNotificationWindow } from "./UploadPageNotificationWindow";
-import { useResetStateWithTimeout } from "Components/useResetStateWithTimeout";
+import { useResetStateWithTimeout } from "Components/hooks/useResetStateWithTimeout.js";
 
 import 'Styles/Window/OuterWindow.css'
 import 'Styles/Window/WindowHeader.css'

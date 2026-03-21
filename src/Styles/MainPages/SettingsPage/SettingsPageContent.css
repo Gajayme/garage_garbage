@@ -1,0 +1,31 @@
+.settings-params {
+	padding: 0 8px 16px;
+}
+
+.settings-params__group {
+	margin-bottom: 24px;
+}
+
+.settings-params__title {
+	margin: 0 0 10px;
+	font-size: 1.1rem;
+	font-weight: 600;
+}
+
+.settings-params__list {
+	margin: 0;
+	padding-left: 1.25rem;
+}
+
+.settings-params__item {
+	margin-bottom: 6px;
+}
+
+.settings-params__key {
+	font-weight: 500;
+}
+
+.settings-params__id {
+	color: var(--dark-grey, #666);
+	margin-left: 0.35em;
+}
