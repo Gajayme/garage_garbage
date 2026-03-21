@@ -15,15 +15,32 @@ export const type = "typeId"
 export const adding_date_time = "Date-Time of adding"
 
 export const base_server_url = "http://72.60.133.178:5000/"
+
+// API для загрузки вещи на сервер
 export const post_upload = "post/upload"
+
+// API для получения всех вещей
 export const post_all = "post/all"
 export const post_all_private = "post/all/private"
 
+// API для удаления вещи
 export const post_delete = "post/delete"
+
+// API для получения детальной информации о вещи
 export const post_detail = "post/detail/"
+
+// API для аутентификации
 export const user_login = "user/login"
+
+// API для получения информации о текущем пользователе
 export const user_me = "user/me"
 
+// API для получения input данных
+export const brandApi = "brand/all"
+export const typeApi = "type/all"
+export const buyerApi = "buyer/all"
+export const locationApi = "location/all"
+export const statusApi = "status/all"
 
 export const http_methods = {
     GET: 'GET',

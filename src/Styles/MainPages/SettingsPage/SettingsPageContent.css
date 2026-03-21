@@ -24,8 +24,3 @@
 .settings-params__key {
 	font-weight: 500;
 }
-
-.settings-params__id {
-	color: var(--dark-grey, #666);
-	margin-left: 0.35em;
-}

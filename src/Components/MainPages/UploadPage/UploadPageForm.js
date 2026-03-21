@@ -11,7 +11,9 @@ import { UploadNotificationState } from './UploadPageNotificationWindow.js'
 import { LabeledInput } from "Components/MainPages/UploadPage/LabeledInput.js"
 import { LabeledDropdown } from "Components/MainPages/UploadPage/LabeledDropDown.js"
 import { useInputParams } from "Components/hooks/useInputParams.js";
-import { useAuth } from "Components/Auth/AuthContext.js"
+import { useAuth } from "Components/Auth/AuthContext.js";
+import * as UploadConstants from "Components/MainPages/UploadPage/UploadPageConstants.js";
+import { buildDropdownState } from "Components/MainPages/UploadPage/buildDropdownState.js";
 
 import * as Constants from 'Constants.js'
 
@@ -24,8 +26,29 @@ import DefaultImg from "Images/default.jpg"
 export const UploadPageForm = ({notificationStateSetter}) => {
 
 	// хук, который занимается загрузкой инпут параметров с сервера
-	const { brandState, typeState, buyerState, locationState, isLoading } = useInputParams();
+	const { brands, types, buyers, locations, isLoading } = useInputParams();
 	const { isAdmin, checkAuth } = useAuth();
+
+	const brandState = buildDropdownState(
+		brands,
+		UploadConstants.chooseBrand,
+		UploadConstants.defaultID
+	);
+	const typeState = buildDropdownState(
+		types,
+		UploadConstants.chooseType,
+		UploadConstants.defaultID
+	);
+	const buyerState = buildDropdownState(
+		buyers,
+		UploadConstants.chooseBuyer,
+		UploadConstants.defaultID
+	);
+	const locationState = buildDropdownState(
+		locations,
+		UploadConstants.chooseLocation,
+		UploadConstants.defaultID
+	);
 
 	// Происходит ли отправка формы прямо сейчас
 	const [isSubmitting, setIsSubmitting] = useState(false);

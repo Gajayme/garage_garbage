@@ -1,6 +1,6 @@
 import * as Constants from "Constants.js";
 
-/** GET по относительному `path`, ответ — поле `data` из JSON. */
+// Получение input данных (какие есть бренды, типы, покупатели, местоположения)
 export async function fetchInputData(path) {
 	const url = `${Constants.base_server_url}${path}`;
 	const resp = await fetch(url);
