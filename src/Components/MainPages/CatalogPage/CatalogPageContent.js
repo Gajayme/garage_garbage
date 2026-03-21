@@ -43,7 +43,6 @@ export const CatalogPageContent = () => {
 	}
 
 	const items = data?.data ?? [];
-
 	return (
 		<div>
 			<div className="filter-buttons-wrapper">

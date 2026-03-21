@@ -1,6 +1,6 @@
 import {NavIcon} from "Components/Navigation/NavIcon";
 import * as Constants from "Components/Navigation/Constants";
-import { AuthChecker } from 'Components/AuthChecker.js'
+import { AuthChecker } from "Components/Auth/AuthChecker.js";
 
 import catalogLogo from "Images/NavIcons/trash_bin.png"
 import mainLogo from "Images/NavIcons/computer.png"

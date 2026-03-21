@@ -1,6 +1,6 @@
 import {NavButton} from "./NavButton";
 import * as Constants from './Constants.js'
-import { AuthChecker } from 'Components/AuthChecker.js'
+import { AuthChecker } from "Components/Auth/AuthChecker.js";
 
 import 'Styles/Navigation/NavButton.css'
 

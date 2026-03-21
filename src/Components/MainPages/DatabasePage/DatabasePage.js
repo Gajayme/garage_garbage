@@ -22,10 +22,7 @@ export const DatabasePage = () => {
 
 	const innerWindow = (
 		<InnerWindow className="inner-window">
-			<div>
-				<h1>Database</h1>
-				<DatabasePageContent />
-			</div>
+			<DatabasePageContent />
 		</InnerWindow>
 	);
 
