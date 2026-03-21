@@ -1,6 +1,7 @@
 
 export const none = ''
 
+// Названия полей для формы загрузки вещей (такие же, как в API)
 export const files = "files"
 export const item_name = "itemName"
 export const buyer_part = "buyersPart"
@@ -12,7 +13,7 @@ export const buyer = "buyerId"
 export const location = "locationId"
 export const brand = "brandId"
 export const type = "typeId"
-export const adding_date_time = "Date-Time of adding"
+export const status = "status"
 
 export const base_server_url = "http://72.60.133.178:5000/"
 
@@ -59,3 +60,4 @@ export const uploadBrandQuery = "uploadBrand" // brands for upload page
 export const uploadTypesQuery = "uploadTypes" // types for upload page
 export const uploadBuyersQuery = "uploadBuyers" // buyers for upload page
 export const uploadLocationsQuery = "uploadLocations" // locations for upload page
+export const uploadStatusQuery = "uploadStatus" // statuses for upload page

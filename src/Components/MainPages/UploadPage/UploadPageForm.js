@@ -13,7 +13,7 @@ import { LabeledDropdown } from "Components/MainPages/UploadPage/LabeledDropDown
 import { useInputParams } from "Components/hooks/useInputParams.js";
 import { useAuth } from "Components/Auth/AuthContext.js";
 import * as UploadConstants from "Components/MainPages/UploadPage/UploadPageConstants.js";
-import { buildDropdownState } from "Components/MainPages/UploadPage/buildDropdownState.js";
+import { buildDropdownState, buildStatusDropdownState } from "Components/MainPages/UploadPage/buildDropdownState.js";
 
 import * as Constants from 'Constants.js'
 
@@ -26,7 +26,7 @@ import DefaultImg from "Images/default.jpg"
 export const UploadPageForm = ({notificationStateSetter}) => {
 
 	// хук, который занимается загрузкой инпут параметров с сервера
-	const { brands, types, buyers, locations, isLoading } = useInputParams();
+	const { brands, types, buyers, locations, statuses, isLoading } = useInputParams();
 	const { isAdmin, checkAuth } = useAuth();
 
 	const brandState = buildDropdownState(
@@ -49,6 +49,11 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 		UploadConstants.chooseLocation,
 		UploadConstants.defaultID
 	);
+	const statusState = buildStatusDropdownState(
+		statuses,
+		UploadConstants.chooseStatus,
+		UploadConstants.defaultID
+	);
 
 	// Происходит ли отправка формы прямо сейчас
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -64,6 +69,7 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 		location: null,
 		brand: null,
 		type: null,
+		status: null,
 		images: []
 	};
 
@@ -86,6 +92,7 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 		location: [NonEmpty, ],
 		brand: [NonEmpty, ],
 		type: [NonEmpty, ],
+		status: [NonEmpty, ],
 		images: [NonEmptyImages, ],
 	}
 
@@ -147,7 +154,6 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 		setErrorState(newErrorState); // Обновляем ошибки разом
 	};
 
-	// dfkblfwbz ajhvs
 	const validateForm = () => {
 		const errorsLocal = UploadFormValidation(
 			formState,
@@ -174,7 +180,7 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 		formData.append(Constants.location, parseInt(formState.location, 10));
 		formData.append(Constants.brand, parseInt(formState.brand, 10));
 		formData.append(Constants.type, parseInt(formState.type, 10));
-
+		formData.append(Constants.status, formState.status);
 		formState.images.forEach((image, _) => {
 			formData.append(Constants.files, image.file);
 		});
@@ -196,6 +202,7 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 		location: '',
 		brand: '',
 		type: '',
+		status: '',
 		})
 		handleOnDeleteAllImages()
 	}
@@ -279,6 +286,7 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 			location: 1,
 			brand: 1,
 			type: 1,
+			status: "Initiated",
 			images: [imageObject]
 		});
 	};
@@ -307,6 +315,7 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 				<LabeledDropdown 	value={formState.type}			errors={errorState.type}			onChange={handleOnChangeDropDown('type')}		className="upload-form-item"	labelText="Type"		id="type_dropdown" 		options={typeState}/>
 				<LabeledDropdown 	value={formState.buyer}			errors={errorState.buyer}			onChange={handleOnChangeDropDown('buyer')}		className="upload-form-item"	labelText="Buyer"		id="buyer_dropdown" 	options={buyerState}/>
 				<LabeledDropdown	value={formState.location}		errors={errorState.location}		onChange={handleOnChangeDropDown('location')}	className="upload-form-item"	labelText="Location"	id="location_dropdown" 	options={locationState}/>
+				<LabeledDropdown	value={formState.status}		errors={errorState.status}			onChange={handleOnChangeDropDown('status')}		className="upload-form-item"	labelText="Status"		id="status_dropdown" 	options={statusState}/>
 			</div>
 
 			<DefaultButton className={"upload-page-button"} labelText={'upload'} disabled={isSubmitting} type="submit" onClick={handleOnSubmit}/>

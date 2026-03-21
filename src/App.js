@@ -16,8 +16,7 @@ const App = () => {
 	<Router>
 		<Routes>
 			<Route path={Nav.root} element={<MainPage/>} />
-				{/* <Route path={`/${Nav.upload}`} element={<AdminRouteGuard><UploadPage /></AdminRouteGuard>} /> */}
-				<Route path={`/${Nav.upload}`} element={<UploadPage />} />
+				<Route path={`/${Nav.upload}`} element={<AdminRouteGuard><UploadPage /></AdminRouteGuard>} />
 				<Route path={`/${Nav.login}`} element={<LoginPage />} />
 				<Route path={`/${Nav.catalog}`} element={<CatalogPage />} />
 				<Route path={`/${Nav.catalog}/:id`} element={<ItemPage />} />

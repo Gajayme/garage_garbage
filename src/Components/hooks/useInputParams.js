@@ -23,12 +23,18 @@ export const useInputParams = () => {
 		queryFn: () => fetchInputData(GlobalConstants.locationApi),
 	});
 
+	const { data: statuses, isLoading: statusesLoading } = useQuery({
+		queryKey: [GlobalConstants.uploadStatusQuery],
+		queryFn: () => fetchInputData(GlobalConstants.statusApi),
+	});
+
 	return {
 		brands,
 		types,
 		buyers,
 		locations,
+		statuses,
 		isLoading:
-			brandsLoading || typesLoading || buyersLoading || locationsLoading,
+			brandsLoading || typesLoading || buyersLoading || locationsLoading || statusesLoading,
 	};
 };

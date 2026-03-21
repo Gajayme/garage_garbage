@@ -11,7 +11,6 @@ import "Styles/TopAndLeftBorders.css"
  * @param {string} imageSrc - Изображение вещи.
  * @param {string} name - Название вещи.
  * @param {string} price - Цена вещи
- * @param {string} adding_date_time - Дата добавления вещь в БД.
  * @param {Function} onClick - Функция-обработчик клика на элемент.
  */
 export const Item = ({imageSrc, name, price, onClick}) => {
