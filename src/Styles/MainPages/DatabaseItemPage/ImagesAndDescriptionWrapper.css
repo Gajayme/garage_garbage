@@ -5,3 +5,15 @@
 	min-height: 0;
 	align-items: flex-start;
 }
+
+.database-item-detail-column {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 1rem;
+	min-width: 0;
+}
+
+.database-item-delete-button {
+	cursor: pointer;
+}

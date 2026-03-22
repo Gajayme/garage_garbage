@@ -43,6 +43,7 @@ export const buyerApi = "buyer/all"
 export const locationApi = "location/all"
 export const statusApi = "status/all"
 
+
 // query namespaces
 export const itemDetailsQuery = "itemDetails"
 export const databaseItemDetailsQuery = "databaseItemDetails"
