@@ -1,4 +1,4 @@
-import "Styles/MainPages/ItemPage/ItemDescription.css";
+import "Styles/MainPages/CatalogItemPage/ItemDescription.css";
 
 
 export const ItemDescription = ({data, delimiter = ": " }) => {

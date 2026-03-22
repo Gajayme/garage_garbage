@@ -4,15 +4,15 @@ import { ItemImages } from "./ItemImages.js";
 import { ItemDescription } from "./ItemDescription.js";
 import { ItemModalWindow } from "./ItemModalWindow.js";
 import { buildItemData } from "./Utils.js";
-import { useItemDetails } from "./useItemDetails.js";
+import { useDatabaseItemDetails } from "./useDatabaseItemDetails.js";
 
-import "Styles/MainPages/ItemPage/ImagesAndDescriptionWrapper.css";
+import "Styles/MainPages/DatabaseItemPage/ImagesAndDescriptionWrapper.css";
 import "Styles/CenteredText.css";
 
-export const ItemPageContent = ({ itemID }) => {
+export const DatabaseItemPageContent = ({ itemID }) => {
 	const [modalImageUrl, setModalImageUrl] = useState(null);
 
-	const { data, isFetching, error } = useItemDetails(itemID);
+	const { data, isFetching, error } = useDatabaseItemDetails(itemID);
 
 	if (isFetching) {
 		return <p className="centered-text">Loading...</p>;

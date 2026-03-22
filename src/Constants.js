@@ -43,17 +43,9 @@ export const buyerApi = "buyer/all"
 export const locationApi = "location/all"
 export const statusApi = "status/all"
 
-export const http_methods = {
-    GET: 'GET',
-    POST: 'POST',
-    DELETE: 'DELETE',
-    PATCH: 'PATCH',
-    OPTIONS: 'OPTIONS',
-    HEAD: 'HEAD',
-};
-
 // query namespaces
 export const itemDetailsQuery = "itemDetails"
+export const databaseItemDetailsQuery = "databaseItemDetails"
 export const itemsQuery = "items" // items for catalog page
 export const itemsPrivateQuery = "itemsPrivate" // items for database page
 export const uploadBrandQuery = "uploadBrand" // brands for upload page
@@ -61,3 +53,12 @@ export const uploadTypesQuery = "uploadTypes" // types for upload page
 export const uploadBuyersQuery = "uploadBuyers" // buyers for upload page
 export const uploadLocationsQuery = "uploadLocations" // locations for upload page
 export const uploadStatusQuery = "uploadStatus" // statuses for upload page
+
+export const http_methods = {
+	GET: 'GET',
+	POST: 'POST',
+	DELETE: 'DELETE',
+	PATCH: 'PATCH',
+	OPTIONS: 'OPTIONS',
+	HEAD: 'HEAD',
+};

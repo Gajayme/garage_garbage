@@ -6,7 +6,8 @@ import { UploadPage } from 'Components/MainPages/UploadPage/UploadPage.js';
 import { DatabasePage } from 'Components/MainPages/DatabasePage/DatabasePage.js';
 import { CatalogPage } from 'Components/MainPages/CatalogPage/CatalogPage.js';
 import { LoginPage } from 'Components/MainPages/LoginPage/LoginPage.js';
-import { ItemPage } from 'Components/MainPages/ItemPage/ItemPage.js';
+import { ItemPage } from 'Components/MainPages/CatalogItemPage/ItemPage.js';
+import { DatabaseItemPage } from 'Components/MainPages/DatabaseItemPage/DatabaseItemPage.js';
 import { SettingsPage } from 'Components/MainPages/SettingsPage/SettingsPage.js';
 import * as Nav from 'Components/Navigation/Constants';
 
@@ -20,6 +21,7 @@ const App = () => {
 				<Route path={`/${Nav.login}`} element={<LoginPage />} />
 				<Route path={`/${Nav.catalog}`} element={<CatalogPage />} />
 				<Route path={`/${Nav.catalog}/:id`} element={<ItemPage />} />
+				<Route path={`/${Nav.database}/:id`} element={<AdminRouteGuard><DatabaseItemPage /></AdminRouteGuard>} />
 				<Route path={`/${Nav.database}`} element={<AdminRouteGuard><DatabasePage /></AdminRouteGuard>} />
 				<Route path={`/${Nav.settings}`} element={<AdminRouteGuard><SettingsPage /></AdminRouteGuard>} />
 		</Routes>

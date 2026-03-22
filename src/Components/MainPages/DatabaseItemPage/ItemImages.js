@@ -1,6 +1,6 @@
 import { BorderedImage } from "Components/BorderedImage.js";
 
-import "Styles/MainPages/ItemPage/ItemImages.css";
+import "Styles/MainPages/DatabaseItemPage/ItemImages.css";
 
 
 export const ItemImages = ({images, onImageClick }) => {

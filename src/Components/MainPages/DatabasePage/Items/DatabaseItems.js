@@ -19,7 +19,7 @@ export const DatabaseItems = ({ catalogState }) => {
 					<Link
 						key={index}
 						className="no-decoration-text-link"
-						to={`/${NavigationConstants.catalog}/${value.id}`}
+						to={`/${NavigationConstants.database}/${value.id}`}
 					>
 						<DatabaseItem
 							imageSrc={imageSrc}
