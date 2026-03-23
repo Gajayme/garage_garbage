@@ -12,7 +12,6 @@ export const usePrivateCatalogItems = () => {
 				path: GlobalConstants.post_all_private,
 				query: "",
 				signal,
-				credentials: "include",
 			});
 		} catch (e) {
 			if (e?.status === 401) {
