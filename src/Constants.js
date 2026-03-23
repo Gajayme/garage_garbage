@@ -30,6 +30,7 @@ export const post_delete = "post/delete"
 // API для получения детальной информации о вещи
 export const post_detail = "post/detail/"
 
+
 // API для аутентификации
 export const user_login = "user/login"
 
@@ -43,17 +44,19 @@ export const buyerApi = "buyer/all"
 export const locationApi = "location/all"
 export const statusApi = "status/all"
 
+// API для добавления новых input данных
+export const brandUploadApi = "brand/upload"
 
 // query namespaces
 export const itemDetailsQuery = "itemDetails"
 export const databaseItemDetailsQuery = "databaseItemDetails"
 export const itemsQuery = "items" // items for catalog page
 export const itemsPrivateQuery = "itemsPrivate" // items for database page
-export const uploadBrandQuery = "uploadBrand" // brands for upload page
-export const uploadTypesQuery = "uploadTypes" // types for upload page
-export const uploadBuyersQuery = "uploadBuyers" // buyers for upload page
-export const uploadLocationsQuery = "uploadLocations" // locations for upload page
-export const uploadStatusQuery = "uploadStatus" // statuses for upload page
+export const brandsQueryKey = "uploadBrand" // all brands
+export const typesQueryKey = "uploadTypes" // all types
+export const buyersQueryKey = "uploadBuyers" // all buyers
+export const locationsQueryKey = "uploadLocations" // all locations
+export const statusesQueryKey = "uploadStatus" // all statuses
 
 export const http_methods = {
 	GET: 'GET',

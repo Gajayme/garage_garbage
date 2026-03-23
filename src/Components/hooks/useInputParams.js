@@ -4,27 +4,27 @@ import { fetchInputData } from "Components/Api/fetchInputData.js";
 
 export const useInputParams = () => {
 	const { data: brands, isLoading: brandsLoading } = useQuery({
-		queryKey: [GlobalConstants.uploadBrandQuery],
+		queryKey: [GlobalConstants.brandsQueryKey],
 		queryFn: () => fetchInputData(GlobalConstants.brandApi),
 	});
 
 	const { data: types, isLoading: typesLoading } = useQuery({
-		queryKey: [GlobalConstants.uploadTypesQuery],
+		queryKey: [GlobalConstants.typesQueryKey],
 		queryFn: () => fetchInputData(GlobalConstants.typeApi),
 	});
 
 	const { data: buyers, isLoading: buyersLoading } = useQuery({
-		queryKey: [GlobalConstants.uploadBuyersQuery],
+		queryKey: [GlobalConstants.buyersQueryKey],
 		queryFn: () => fetchInputData(GlobalConstants.buyerApi),
 	});
 
 	const { data: locations, isLoading: locationsLoading } = useQuery({
-		queryKey: [GlobalConstants.uploadLocationsQuery],
+		queryKey: [GlobalConstants.locationsQueryKey],
 		queryFn: () => fetchInputData(GlobalConstants.locationApi),
 	});
 
 	const { data: statuses, isLoading: statusesLoading } = useQuery({
-		queryKey: [GlobalConstants.uploadStatusQuery],
+		queryKey: [GlobalConstants.statusesQueryKey],
 		queryFn: () => fetchInputData(GlobalConstants.statusApi),
 	});
 
