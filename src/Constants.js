@@ -46,6 +46,9 @@ export const statusApi = "status/all"
 
 // API для добавления новых input данных
 export const brandUploadApi = "brand/upload"
+export const typeUploadApi = "type/upload"
+export const buyerUploadApi = "buyer/upload"
+export const locationUploadApi = "location/upload"
 
 // query namespaces
 export const itemDetailsQuery = "itemDetails"
