@@ -14,7 +14,7 @@ export const useCatalogItems = (filtersState) => {
 	};
 
 	const { data, error, isLoading } = useQuery({
-		queryKey: [GlobalConstants.itemsQuery, filtersState],
+		queryKey: [GlobalConstants.itemsQueryKey, filtersState],
 		queryFn: fetchItems,
 		keepPreviousData: true,
 	});

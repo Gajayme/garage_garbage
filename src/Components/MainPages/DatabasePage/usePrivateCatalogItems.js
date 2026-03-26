@@ -22,7 +22,7 @@ export const usePrivateCatalogItems = () => {
 	};
 
 	return useQuery({
-		queryKey: [GlobalConstants.itemsPrivateQuery],
+		queryKey: [GlobalConstants.itemsPrivateQueryKey],
 		queryFn,
 	});
 };

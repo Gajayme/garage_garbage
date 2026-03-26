@@ -49,8 +49,8 @@ export const DatabaseItemPageContent = ({ itemID }) => {
 				return;
 			}
 			// Инвалидируем все в бд и в каталоге
-			await queryClient.invalidateQueries({ queryKey: [Constants.itemsQuery] });
-			await queryClient.invalidateQueries({queryKey: [Constants.itemsPrivateQuery],
+			await queryClient.invalidateQueries({ queryKey: [Constants.itemsQueryKey] });
+			await queryClient.invalidateQueries({queryKey: [Constants.itemsPrivateQueryKey],
 			});
 			navigate(`/${Nav.database}`);
 		} finally {
