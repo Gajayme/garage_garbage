@@ -11,19 +11,21 @@ import 'Styles/Navigation/NavIcon.css'
  * @param {string} labelText - Заголовок иконки.
  * @param {string} destination - Дестинация, куда будет перенаправлен пользователь после нажатия кнопки.
  */
-export const NavIcon = ({image, labelText, destination}) => {
-    const navigate = useNavigate();
+export const NavIcon = ({className, image, labelText, destination}) => {
+	const navigate = useNavigate();
 
-    const handleClick = () => {
-        navigate(destination);
-    }
+	const handleClick = () => {
+		navigate(destination);
+	}
 
-    return (
-        <div className={"nav-icon"} onClick={handleClick}>
-            <img className={"nav-icon-image"} src={image} alt={labelText}/>
-            <span>
-                {labelText}
-            </span>
-        </div>
-    )
+	return (
+		<div className={"nav-icon"} onClick={handleClick}>
+			<img className={"nav-icon-image"} src={image} alt={labelText}/>
+
+			
+			{labelText && <span>
+				{labelText}
+			</span>}
+		</div>
+	);
 }
