@@ -28,6 +28,8 @@ export const DefaultNavButtons = ({className}) => {
 			</AuthChecker>
 
 			<NavButton className="nav-button" labelText={Constants.catalogLabel} destination={Constants.root + Constants.catalog}/>
+
+			<NavButton className="nav-button" labelText={Constants.loginLabel} destination={Constants.root + Constants.login}/>
 		</div>
 	)
 }
