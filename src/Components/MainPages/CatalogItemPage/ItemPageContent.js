@@ -37,7 +37,10 @@ export const ItemPageContent = ({ itemID }) => {
 	return (
 		<div className={wrapperClass}>
 			{tallNarrowViewport ? (
-				<ItemImageGallery images={images} />
+				<ItemImageGallery
+					images={images}
+					onImageClick={setModalImageUrl}
+				/>
 			) : (
 				<ItemImageGrid images={images} onImageClick={setModalImageUrl} />
 			)}

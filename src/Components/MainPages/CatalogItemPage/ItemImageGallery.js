@@ -13,7 +13,7 @@ const getImageUrl = (imageData) => {
 	return imageData.image_url ?? null;
 };
 
-export const ItemImageGallery = ({ images }) => {
+export const ItemImageGallery = ({ images, onImageClick }) => {
 	const [index, setIndex] = useState(0);
 
 	const count = images?.length ?? 0;
@@ -34,11 +34,18 @@ export const ItemImageGallery = ({ images }) => {
 
 	return (
 		<div className="item-image-gallery">
-			<BorderedImage
-				className="item-image-gallery__image"
-				imageSrc={imageUrl}
-				alt={`Item image ${safeIndex + 1} of ${count}`}
-			/>
+			<button
+				type="button"
+				className="item-image-gallery__image-button"
+				onClick={() => onImageClick?.(imageUrl)}
+				aria-label="View image larger"
+			>
+				<BorderedImage
+					className="item-image-gallery__image"
+					imageSrc={imageUrl}
+					alt="item"
+				/>
+			</button>
 			<div className="item-image-gallery__controls">
 				<button
 					type="button"

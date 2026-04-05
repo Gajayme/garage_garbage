@@ -6,6 +6,16 @@
 	width: 100%;
 }
 
+.item-image-gallery__image-button {
+	display: block;
+	padding: 0;
+	border: none;
+	background: none;
+	cursor: pointer;
+	width: 100%;
+	line-height: 0;
+}
+
 .item-image-gallery__image {
 	width: 100%;
 	height: auto;
