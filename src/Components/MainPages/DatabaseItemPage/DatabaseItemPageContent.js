@@ -7,7 +7,7 @@ import { useAuth } from "Components/Auth/AuthContext.js";
 import * as Nav from "Components/Navigation/Constants.js";
 import * as Constants from "Constants.js";
 
-import { ItemImages } from "./ItemImages.js";
+import { ItemImageGrid } from "./ItemImageGrid.js";
 import { ItemDescription } from "./ItemDescription.js";
 import { ItemModalWindow } from "./ItemModalWindow.js";
 import { buildItemData } from "./Utils.js";
@@ -73,7 +73,7 @@ export const DatabaseItemPageContent = ({ itemID }) => {
 
 	return (
 		<div className="images-and-description-wrapper">
-			<ItemImages images={images} onImageClick={setModalImageUrl} />
+			<ItemImageGrid images={images} onImageClick={setModalImageUrl} />
 			<div className="database-item-detail-column">
 				<ItemDescription data={itemData} />
 				<DefaultButton

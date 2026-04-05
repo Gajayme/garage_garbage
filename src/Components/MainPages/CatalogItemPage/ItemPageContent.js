@@ -1,16 +1,19 @@
 import { useState } from "react";
 
-import { ItemImages } from "./ItemImages.js";
+import { ItemImageGrid } from "./ItemImageGrid.js";
+import { ItemImageGallery } from "./ItemImageGallery.js";
 import { ItemDescription } from "./ItemDescription.js";
 import { ItemModalWindow } from "./ItemModalWindow.js";
 import { buildItemData } from "./Utils.js";
 import { useItemDetails } from "./useItemDetails.js";
+import { useHeightGreaterThanWidth } from "./useHeightGreaterThanWidth.js";
 
 import "Styles/MainPages/CatalogItemPage/ImagesAndDescriptionWrapper.css";
 import "Styles/CenteredText.css";
 
 export const ItemPageContent = ({ itemID }) => {
 	const [modalImageUrl, setModalImageUrl] = useState(null);
+	const tallNarrowViewport = useHeightGreaterThanWidth();
 
 	const { data, isFetching, error } = useItemDetails(itemID);
 
@@ -27,9 +30,17 @@ export const ItemPageContent = ({ itemID }) => {
 	const itemData = buildItemData(data ? data.data : null);
 	const images = data ? data.data.images : null;
 
+	const wrapperClass = tallNarrowViewport
+		? "images-and-description-wrapper-narrow-screen"
+		: "images-and-description-wrapper-wide-screen";
+
 	return (
-		<div className="images-and-description-wrapper">
-			<ItemImages images={images} onImageClick={setModalImageUrl} />
+		<div className={wrapperClass}>
+			{tallNarrowViewport ? (
+				<ItemImageGallery images={images} />
+			) : (
+				<ItemImageGrid images={images} onImageClick={setModalImageUrl} />
+			)}
 			<ItemDescription data={itemData} />
 			<ItemModalWindow
 				imageUrl={modalImageUrl}

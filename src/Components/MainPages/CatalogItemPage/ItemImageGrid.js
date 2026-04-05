@@ -1,25 +1,25 @@
 import { BorderedImage } from "Components/BorderedImage.js";
 
-import "Styles/MainPages/CatalogItemPage/ItemImages.css";
+import "Styles/MainPages/CatalogItemPage/ItemImageGrid.css";
 
 
-export const ItemImages = ({images, onImageClick }) => {
+export const ItemImageGrid = ({ images, onImageClick }) => {
 	if (!images) return null;
 
 	return (
-		<div className="item-images">
+		<div className="item-image-grid">
 			{images.map((imageData, index) => {
 				const imageUrl = imageData ? imageData.image_url : null;
 				return (
 					<button
 						type="button"
 						key={index}
-						className="item-image-button"
+						className="item-image-grid-button"
 						onClick={() => onImageClick?.(imageUrl)}
 						aria-label="View image larger"
 					>
 						<BorderedImage
-							className="item-image"
+							className="item-image-grid-thumb"
 							imageSrc={imageUrl}
 							alt="item"
 						/>

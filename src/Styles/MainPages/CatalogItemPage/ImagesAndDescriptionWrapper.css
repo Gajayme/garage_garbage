@@ -1,4 +1,4 @@
-.images-and-description-wrapper {
+.images-and-description-wrapper-wide-screen {
 	display: flex;
 	flex-direction: row;
 	gap: 30px;
@@ -6,4 +6,21 @@
 	min-height: 0;
 	flex-shrink: 0;
 	align-items: flex-start;
+}
+
+.images-and-description-wrapper-narrow-screen {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	min-width: 0;
+	min-height: 0;
+	flex-shrink: 0;
+	align-items: stretch;
+}
+
+.images-and-description-wrapper-narrow-screen .item-description {
+	position: static;
+	flex: 0 1 auto;
+	align-self: stretch;
+	width: 100%;
 }
