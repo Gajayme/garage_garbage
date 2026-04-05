@@ -1,4 +1,4 @@
-import { BorderedImage } from "Components/BorderedImage.js";
+import { ItemThumbnailButton } from "Components/ItemThumbnailButton.js";
 
 import "Styles/MainPages/DatabaseItemPage/ItemImageGrid.css";
 
@@ -11,19 +11,13 @@ export const ItemImageGrid = ({ images, onImageClick }) => {
 			{images.map((imageData, index) => {
 				const imageUrl = imageData ? imageData.image_url : null;
 				return (
-					<button
-						type="button"
+					<ItemThumbnailButton
 						key={index}
-						className="item-image-grid-button"
-						onClick={() => onImageClick?.(imageUrl)}
-						aria-label="View image larger"
-					>
-						<BorderedImage
-							className="item-image-grid-thumb"
-							imageSrc={imageUrl}
-							alt="item"
-						/>
-					</button>
+						imageSrc={imageUrl}
+						onImageClick={onImageClick}
+						buttonClassName="item-image-grid-button"
+						imageClassName="item-image-grid-thumb"
+					/>
 				);
 			})}
 		</div>

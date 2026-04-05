@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { BorderedImage } from "Components/BorderedImage.js";
+import { ItemThumbnailButton } from "Components/ItemThumbnailButton.js";
 
 import leftArrow from "Images/CatalogItem/left_arrow.png";
 import rightArrow from "Images/CatalogItem/arrow_right.png";
@@ -34,18 +34,12 @@ export const ItemImageGallery = ({ images, onImageClick }) => {
 
 	return (
 		<div className="item-image-gallery">
-			<button
-				type="button"
-				className="item-image-gallery__image-button"
-				onClick={() => onImageClick?.(imageUrl)}
-				aria-label="View image larger"
-			>
-				<BorderedImage
-					className="item-image-gallery__image"
-					imageSrc={imageUrl}
-					alt="item"
-				/>
-			</button>
+			<ItemThumbnailButton
+				imageSrc={imageUrl}
+				onImageClick={onImageClick}
+				buttonClassName="item-image-gallery__image-button"
+				imageClassName="item-image-gallery__image"
+			/>
 			<div className="item-image-gallery__controls">
 				<button
 					type="button"
