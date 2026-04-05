@@ -54,8 +54,8 @@ export const FilterBuilder = ({
           className="filter-with-button"
           buttonClassName="filter-button"
           iconClassName="filter-arrow-icon"
-          iconInactive={arrowUp}
-          iconActive={arrowDown}
+          iconInactive={arrowDown}
+		  iconActive={arrowUp}
           onClick={() => toggleFilterVisibility(filterData.name)}
           altImg={filterData.name}
           isActive={filtersVisibility[filterData.name]}
