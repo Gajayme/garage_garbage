@@ -52,6 +52,12 @@ export const typeUploadApi = "type/upload"
 export const buyerUploadApi = "buyer/upload"
 export const locationUploadApi = "location/upload"
 
+// API для удаления input данных
+export const brandDeleteApi = "brand/delete"
+export const typeDeleteApi = "type/delete"
+export const buyerDeleteApi = "buyer/delete"
+export const locationDeleteApi = "location/delete"
+
 // query namespaces
 export const itemDetailsQueryKey = "itemDetails" // item details for catalog page
 export const itemDetailsPrivateQueryKey = "itemDetailsPrivate" // item details for database page

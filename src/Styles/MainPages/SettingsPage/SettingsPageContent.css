@@ -57,11 +57,37 @@
 }
 
 .settings-params__item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
 	margin-bottom: 6px;
 }
 
 .settings-params__key {
 	font-weight: 500;
+	min-width: 0;
+}
+
+.settings-params__delete-button {
+	flex-shrink: 0;
+	padding: 4px 10px;
+	font: inherit;
+	font-size: 0.85rem;
+	cursor: pointer;
+	color: #8b0000;
+	border: 1px solid #c44;
+	border-radius: 4px;
+	background: #fff5f5;
+}
+
+.settings-params__delete-button:hover:not(:disabled) {
+	background: #ffe4e4;
+}
+
+.settings-params__delete-button:disabled {
+	opacity: 0.55;
+	cursor: not-allowed;
 }
 
 .settings-params__add-row {

@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SettingsAddRow } from "Components/MainPages/SettingsPage/SettingsAddRow.js";
 import { SettingsOptionsList } from "Components/MainPages/SettingsPage/SettingsOptionsList.js";
 import { addSettingRequest } from "Components/MainPages/SettingsPage/addSettingRequest.js";
+import { deleteSettingRequest } from "Components/MainPages/SettingsPage/deleteSettingRequest.js";
 import { ToggleIconButton } from "Components/ToggleIconButton.js";
 
 import arrowUp from "Images/Filters/arrow_up.svg";
@@ -14,6 +15,7 @@ export const SettingsDictionarySection = ({
 	title,
 	items,
 	uploadApiPath,
+	deleteApiPath,
 	queryKey,
 	placeholder,
 }) => {
@@ -22,6 +24,7 @@ export const SettingsDictionarySection = ({
 	const [isExpanded, setIsExpanded] = useState(true);
 	const [value, setValue] = useState("");
 	const [error, setError] = useState(null);
+	const [deleteError, setDeleteError] = useState(null);
 
 	// Мутация для добавления нового значения в словарь
 	const mutation = useMutation({
@@ -36,6 +39,25 @@ export const SettingsDictionarySection = ({
 			setError(err.message);
 		},
 	});
+
+	const deleteMutation = useMutation({
+		mutationFn: (id) =>
+			deleteSettingRequest({ apiPath: deleteApiPath, id }),
+		onSuccess: () => {
+			setDeleteError(null);
+			queryClient.invalidateQueries({ queryKey: [queryKey] });
+		},
+		onError: (err) => {
+			setDeleteError(err.message);
+		},
+	});
+
+	const handleDeleteItem = (id, itemTitle) => {
+		if (deleteMutation.isPending) return;
+		if (!window.confirm(`Удалить «${itemTitle}»?`)) return;
+		setDeleteError(null);
+		deleteMutation.mutate(id);
+	};
 
 	// Обработчик нажатия на кнопку добавления нового значения в словарь
 	const handleSubmit = () => {
@@ -74,7 +96,16 @@ export const SettingsDictionarySection = ({
 						{error}
 					</p>
 				) : null}
-				<SettingsOptionsList items={items} />
+				<SettingsOptionsList
+					items={items}
+					onDeleteItem={handleDeleteItem}
+					isDeletePending={deleteMutation.isPending}
+				/>
+				{deleteError ? (
+					<p className="settings-params__add-error" role="alert">
+						{deleteError}
+					</p>
+				) : null}
 			</div>
 		</section>
 	);
