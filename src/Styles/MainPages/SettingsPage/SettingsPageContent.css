@@ -12,6 +12,45 @@
 	font-weight: 600;
 }
 
+.settings-params__title--collapsible {
+	margin: 0 0 10px;
+}
+
+.settings-params__section-toggle {
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0;
+	padding: 6px 4px 6px 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+	font: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	text-align: left;
+	color: inherit;
+	background: transparent;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.settings-params__section-toggle:hover {
+	background: rgba(0, 0, 0, 0.04);
+}
+
+.settings-params__section-toggle:focus-visible {
+	outline: 2px solid #333;
+	outline-offset: 2px;
+}
+
+.settings-params__section-toggle-icon {
+	flex-shrink: 0;
+	width: 22px;
+	height: auto;
+}
+
 .settings-params__list {
 	margin: 0;
 	padding-left: 1.25rem;

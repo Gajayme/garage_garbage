@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SettingsAddRow } from "Components/MainPages/SettingsPage/SettingsAddRow.js";
 import { SettingsOptionsList } from "Components/MainPages/SettingsPage/SettingsOptionsList.js";
 import { addSettingRequest } from "Components/MainPages/SettingsPage/addSettingRequest.js";
+import { ToggleIconButton } from "Components/ToggleIconButton.js";
+
+import arrowUp from "Images/Filters/arrow_up.svg";
+import arrowDown from "Images/Filters/arrow_down.svg";
 
 import "Styles/MainPages/SettingsPage/SettingsPageContent.css";
 
@@ -14,6 +18,8 @@ export const SettingsDictionarySection = ({
 	placeholder,
 }) => {
 	const queryClient = useQueryClient();
+	const panelId = useId();
+	const [isExpanded, setIsExpanded] = useState(true);
 	const [value, setValue] = useState("");
 	const [error, setError] = useState(null);
 
@@ -41,20 +47,35 @@ export const SettingsDictionarySection = ({
 
 	return (
 		<section className="settings-params__group">
-			<h2 className="settings-params__title">{title}</h2>
-			<SettingsAddRow
-				value={value}
-				onChange={(e) => setValue(e.target.value)}
-				onSubmit={handleSubmit}
-				placeholder={placeholder}
-				isPending={mutation.isPending}
-			/>
-			{error ? (
-				<p className="settings-params__add-error" role="alert">
-					{error}
-				</p>
-			) : null}
-			<SettingsOptionsList items={items} />
+			<h2 className="settings-params__title settings-params__title--collapsible">
+				<ToggleIconButton
+					labelText={title}
+					className="settings-params__section-toggle"
+					iconClassName="settings-params__section-toggle-icon"
+					iconInactive={arrowDown}
+					iconActive={arrowUp}
+					onClick={() => setIsExpanded((open) => !open)}
+					isActive={isExpanded}
+					disclosure
+					aria-controls={panelId}
+					altImg=""
+				/>
+			</h2>
+			<div id={panelId} hidden={!isExpanded} className="settings-params__section-body">
+				<SettingsAddRow
+					value={value}
+					onChange={(e) => setValue(e.target.value)}
+					onSubmit={handleSubmit}
+					placeholder={placeholder}
+					isPending={mutation.isPending}
+				/>
+				{error ? (
+					<p className="settings-params__add-error" role="alert">
+						{error}
+					</p>
+				) : null}
+				<SettingsOptionsList items={items} />
+			</div>
 		</section>
 	);
 };
