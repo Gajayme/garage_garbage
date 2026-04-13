@@ -6,6 +6,11 @@
 	width: 100%;
 }
 
+.item-image-gallery__swipe-area {
+	width: 100%;
+	touch-action: pan-y;
+}
+
 .item-image-gallery__image-button {
 	display: block;
 	padding: 0;
