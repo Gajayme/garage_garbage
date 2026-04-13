@@ -52,6 +52,12 @@ export const typeUploadApi = "type/upload"
 export const buyerUploadApi = "buyer/upload"
 export const locationUploadApi = "location/upload"
 
+// API для обновления input данных
+export const brandUpdateApi = "brand/update"
+export const typeUpdateApi = "type/update"
+export const buyerUpdateApi = "buyer/update"
+export const locationUpdateApi = "location/update"
+
 // API для удаления input данных
 export const brandDeleteApi = "brand/delete"
 export const typeDeleteApi = "type/delete"
@@ -72,6 +78,7 @@ export const statusesQueryKey = "uploadStatus" // all statuses
 export const http_methods = {
 	GET: 'GET',
 	POST: 'POST',
+	PUT: 'PUT',
 	DELETE: 'DELETE',
 	PATCH: 'PATCH',
 	OPTIONS: 'OPTIONS',

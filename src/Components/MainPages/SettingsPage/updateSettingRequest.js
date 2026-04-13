@@ -1,0 +1,22 @@
+import * as GlobalConstants from "Constants.js";
+
+export const updateSettingRequest = async ({ apiPath, id, title }) => {
+	const response = await fetch(
+		`${GlobalConstants.base_server_url}${apiPath}/${encodeURIComponent(id)}`,
+		{
+			method: GlobalConstants.http_methods.PUT,
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ title }),
+			credentials: "include",
+		}
+	);
+
+	if (!response.ok) {
+		const data = await response.json().catch(() => ({}));
+		throw new Error(data.message || `Ошибка: ${response.status}`);
+	}
+	if (response.status === 204 || response.headers.get("content-length") === "0") {
+		return null;
+	}
+	return response.json().catch(() => null);
+};

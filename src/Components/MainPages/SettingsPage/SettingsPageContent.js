@@ -18,6 +18,7 @@ export const SettingsPageContent = () => {
 				title="Brands"
 				items={brands}
 				uploadApiPath={GlobalConstants.brandUploadApi}
+				updateApiPath={GlobalConstants.brandUpdateApi}
 				deleteApiPath={GlobalConstants.brandDeleteApi}
 				queryKey={GlobalConstants.brandsQueryKey}
 				placeholder="Add brand"
@@ -26,6 +27,7 @@ export const SettingsPageContent = () => {
 				title="Types"
 				items={types}
 				uploadApiPath={GlobalConstants.typeUploadApi}
+				updateApiPath={GlobalConstants.typeUpdateApi}
 				deleteApiPath={GlobalConstants.typeDeleteApi}
 				queryKey={GlobalConstants.typesQueryKey}
 				placeholder="Add type"
@@ -34,6 +36,7 @@ export const SettingsPageContent = () => {
 				title="Buyers"
 				items={buyers}
 				uploadApiPath={GlobalConstants.buyerUploadApi}
+				updateApiPath={GlobalConstants.buyerUpdateApi}
 				deleteApiPath={GlobalConstants.buyerDeleteApi}
 				queryKey={GlobalConstants.buyersQueryKey}
 				placeholder="Add buyer"
@@ -42,6 +45,7 @@ export const SettingsPageContent = () => {
 				title="Locations"
 				items={locations}
 				uploadApiPath={GlobalConstants.locationUploadApi}
+				updateApiPath={GlobalConstants.locationUpdateApi}
 				deleteApiPath={GlobalConstants.locationDeleteApi}
 				queryKey={GlobalConstants.locationsQueryKey}
 				placeholder="Add location"
