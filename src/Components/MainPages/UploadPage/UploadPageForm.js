@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { v4 as uuidv4 } from 'uuid';
+import { useQueryClient } from "@tanstack/react-query";
 
 import { DefaultButton } from "Components/Button.js"
 import { NumbersOnly } from 'Components/InputValidators.js'
@@ -14,6 +15,12 @@ import { useInputParams } from "Components/hooks/useInputParams.js";
 import { useAuth } from "Components/Auth/AuthContext.js";
 import * as UploadConstants from "Components/MainPages/UploadPage/UploadPageConstants.js";
 import { buildDropdownState, buildStatusDropdownState } from "Components/MainPages/UploadPage/buildDropdownState.js";
+import { useDatabaseItemDetails } from "Components/MainPages/DatabaseItemPage/useDatabaseItemDetails.js";
+import {
+	mapItemDetailFields,
+	mapDetailImagesToFormImages,
+} from "Components/MainPages/UploadPage/mapItemDetailToFormState.js";
+import { normalizeFk } from "Components/MainPages/UploadPage/uploadFormNormalize.js";
 
 import * as Constants from 'Constants.js'
 
@@ -23,11 +30,25 @@ import DefaultImg from "Images/default.jpg"
 
 
 
-export const UploadPageForm = ({notificationStateSetter}) => {
+export const UploadPageForm = ({
+	notificationStateSetter,
+	mode = UploadConstants.uploadModeCreate,
+	editItemId,
+}) => {
 
 	// хук, который занимается загрузкой инпут параметров с сервера
 	const { brands, types, buyers, locations, statuses, isLoading } = useInputParams();
 	const { isAdmin, checkAuth } = useAuth();
+	const queryClient = useQueryClient();
+
+	const detailQueryId =
+		mode === UploadConstants.uploadModeEdit &&
+			editItemId != null &&
+			editItemId !== ""
+			? editItemId
+			: "";
+	const { data: detailData, isFetching: detailFetching } =
+		useDatabaseItemDetails(detailQueryId);
 
 	const brandState = buildDropdownState(
 		brands,
@@ -57,6 +78,8 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 
 	// Происходит ли отправка формы прямо сейчас
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [isUpdating, setIsUpdating] = useState(false);
+	const hydratedForItemIdRef = useRef(null);
 
 	const FORM_FIELDS = {
 		item_name: '',
@@ -96,12 +119,54 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 		images: [NonEmptyImages, ],
 	}
 
+	useEffect(() => {
+		hydratedForItemIdRef.current = null;
+	}, [editItemId, mode]);
+
+	useEffect(() => {
+		if (mode !== UploadConstants.uploadModeEdit || !editItemId || isLoading)
+			return;
+		if (detailFetching || !detailData?.data) return;
+		if (hydratedForItemIdRef.current === editItemId) return;
+
+		let cancelled = false;
+		(async () => {
+			try {
+				const d = detailData.data;
+				const fields = mapItemDetailFields(d);
+				const images = await mapDetailImagesToFormImages(d.images);
+				if (cancelled) return;
+				setFormState((prev) => ({
+					...prev,
+					...fields,
+					images,
+				}));
+				setErrorState(
+					Object.fromEntries(Object.keys(FORM_FIELDS).map((k) => [k, []]))
+				);
+				hydratedForItemIdRef.current = editItemId;
+			} catch (e) {
+				console.error("hydrate form failed:", e);
+				notificationStateSetter(UploadNotificationState.ERROR);
+			}
+		})();
+		return () => {
+			cancelled = true;
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- FORM_FIELDS — ключи полей; notificationStateSetter стабилен у родителя
+	}, [
+		mode,
+		editItemId,
+		isLoading,
+		detailFetching,
+		detailData,
+	]);
 
 	// обработать нажатие на кнопку подтверждения
 	const handleOnSubmit =  async (event) => {
 		event.preventDefault()
 
-		if (isSubmitting) return;
+		if (isSubmitting || isUpdating) return;
 		setIsSubmitting(true);
 
 		if (!isAdmin) {
@@ -150,6 +215,71 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 		}
 	}
 
+	const handleUpdateSubmit = async () => {
+		if (isSubmitting || isUpdating) return;
+		if (mode !== UploadConstants.uploadModeEdit || !editItemId) return;
+
+		setIsUpdating(true);
+
+		if (!isAdmin) {
+			notificationStateSetter(UploadNotificationState.ERROR);
+			setIsUpdating(false);
+			return;
+		}
+
+		const postIdInt = parseInt(String(editItemId), 10);
+		if (!Number.isInteger(postIdInt) || postIdInt < 1) {
+			notificationStateSetter(UploadNotificationState.ERROR);
+			setIsUpdating(false);
+			return;
+		}
+
+		if (!validateForm()) {
+			setIsUpdating(false);
+			return;
+		}
+
+		const formData = buildFormData();
+
+		try {
+			const response = await fetch(
+				`${Constants.base_server_url}${Constants.post_update}/${postIdInt}`,
+				{
+					method: Constants.http_methods.POST,
+					body: formData,
+					credentials: "include",
+				}
+			);
+
+			if (response.status === 401) {
+				await checkAuth();
+				notificationStateSetter(UploadNotificationState.ERROR);
+				setIsUpdating(false);
+				return;
+			}
+
+			const notificationState = response.ok
+				? UploadNotificationState.SUCCESS
+				: UploadNotificationState.ERROR;
+			notificationStateSetter(notificationState);
+			if (!response.ok) {
+				throw new Error(`Ошибка сервера: ${response.status}`);
+			}
+
+			await queryClient.invalidateQueries({ queryKey: [Constants.itemsQueryKey] });
+			await queryClient.invalidateQueries({
+				queryKey: [Constants.itemsPrivateQueryKey],
+			});
+			await queryClient.invalidateQueries({
+				queryKey: [Constants.itemDetailsPrivateQueryKey, editItemId],
+			});
+		} catch (error) {
+			console.error("update error:", error);
+		} finally {
+			setIsUpdating(false);
+		}
+	};
+
 	const handleOnErrorChange = (newErrorState) => {
 		setErrorState(newErrorState); // Обновляем ошибки разом
 	};
@@ -180,9 +310,11 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 		formData.append(Constants.location, parseInt(formState.location, 10));
 		formData.append(Constants.brand, parseInt(formState.brand, 10));
 		formData.append(Constants.type, parseInt(formState.type, 10));
-		formData.append(Constants.status, formState.status);
-		formState.images.forEach((image, _) => {
-			formData.append(Constants.files, image.file);
+		formData.append(Constants.status, formState.status ?? "");
+		formState.images.forEach((image) => {
+			if (image?.file) {
+				formData.append(Constants.files, image.file);
+			}
 		});
 
 		FormDataLogger(formData)
@@ -191,21 +323,29 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 
 	// сброс формы
 	const resetForm = () => {
+		formState.images.forEach((img) => {
+			if (img?.src?.startsWith("blob:")) {
+				URL.revokeObjectURL(img.src);
+			}
+		});
 		setFormState({
-		item_name: '',
-		bought_for: '',
-		price: '',
-		buyers_part: '',
-		sold_for: '',
-		size: '',
-		buyer: '',
-		location: '',
-		brand: '',
-		type: '',
-		status: '',
-		})
-		handleOnDeleteAllImages()
-	}
+			item_name: "",
+			bought_for: "",
+			price: "",
+			buyers_part: "",
+			sold_for: "",
+			size: "",
+			buyer: null,
+			location: null,
+			brand: null,
+			type: null,
+			status: null,
+			images: [],
+		});
+		setErrorState(
+			Object.fromEntries(Object.keys(FORM_FIELDS).map((k) => [k, []]))
+		);
+	};
 
 	const handleOnChangeInput = (key) => {
 		return (event) => {
@@ -219,9 +359,16 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 	const handleOnChangeDropDown = (key) => {
 		return (newVal) => {
 			setFormState((prevState) => ({
-				...prevState, [key]: newVal}))
-			}
-	}
+				...prevState,
+				[key]:
+					key === "status"
+						? newVal == null || newVal === ""
+							? null
+							: String(newVal)
+						: normalizeFk(newVal),
+			}));
+		};
+	};
 
 	// обработать изменение превью изображений
 	const handleOnChangeImages = (key) => {
@@ -242,19 +389,25 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 
 	// удалить все изображения
 	const handleOnDeleteAllImages = () => {
-		formState.images.forEach(img => URL.revokeObjectURL(img.src));
-		setFormState(prev => ({ ...prev, images: [] }));
+		formState.images.forEach((img) => {
+			if (img?.src?.startsWith("blob:")) {
+				URL.revokeObjectURL(img.src);
+			}
+		});
+		setFormState((prev) => ({ ...prev, images: [] }));
 	};
 
 	// удалить конкретное изображения
 	const handleOnDeleteSpecificImage = (id) => {
-		setFormState(prev => {
-			const image = prev.images.find(img => img.id === id);
-			if (image) URL.revokeObjectURL(image.src);
+		setFormState((prev) => {
+			const image = prev.images.find((img) => img.id === id);
+			if (image?.src?.startsWith("blob:")) {
+				URL.revokeObjectURL(image.src);
+			}
 
 			return {
 				...prev,
-				images: prev.images.filter(img => img.id !== id)
+				images: prev.images.filter((img) => img.id !== id),
 			};
 		});
 	};
@@ -318,7 +471,28 @@ export const UploadPageForm = ({notificationStateSetter}) => {
 				<LabeledDropdown	value={formState.status}		errors={errorState.status}			onChange={handleOnChangeDropDown('status')}		className="upload-form-item"	labelText="Status"		id="status_dropdown" 	options={statusState}/>
 			</div>
 
-			<DefaultButton className={"upload-page-button"} labelText={'upload'} disabled={isSubmitting} type="submit" onClick={handleOnSubmit}/>
+			<div className="upload-form-actions">
+				<DefaultButton
+					className={"upload-page-button"}
+					labelText={
+						mode === UploadConstants.uploadModeEdit
+							? "Upload as new"
+							: "upload"
+					}
+					disabled={isSubmitting || isUpdating}
+					type="submit"
+					onClick={handleOnSubmit}
+				/>
+				{mode === UploadConstants.uploadModeEdit && (
+					<DefaultButton
+						className={"upload-page-button"}
+						labelText={"Save"}
+						disabled={isSubmitting || isUpdating}
+						type="button"
+						onClick={handleUpdateSubmit}
+					/>
+				)}
+			</div>
 
 			<DefaultButton labelText={'TEST AUTO FILL'} type="button" onClick={handleOnTestAutofill}/>
 

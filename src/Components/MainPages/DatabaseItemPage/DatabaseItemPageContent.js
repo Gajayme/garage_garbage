@@ -71,17 +71,29 @@ export const DatabaseItemPageContent = ({ itemID }) => {
 	const itemData = buildItemData(data ? data.data : null);
 	const images = data ? data.data.images : null;
 
+	const handleEditItem = () => {
+		if (!itemID) return;
+		navigate(`/${Nav.upload}/edit/${encodeURIComponent(itemID)}`);
+	};
+
 	return (
 		<div className="images-and-description-wrapper">
 			<ItemImageGrid images={images} onImageClick={setModalImageUrl} />
 			<div className="database-item-detail-column">
 				<ItemDescription data={itemData} />
 				<DefaultButton
-					className="database-item-delete-button"
+					className="database-item-button"
 					type="button"
 					labelText={"Delete"}
 					disabled={isDeleting}
 					onClick={handleDeleteItem}
+				/>
+				<DefaultButton
+					className="database-item-button"
+					type="button"
+					labelText={"Edit"}
+					disabled={!itemID}
+					onClick={handleEditItem}
 				/>
 			</div>
 			<ItemModalWindow

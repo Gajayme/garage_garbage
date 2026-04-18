@@ -6,6 +6,14 @@
 	gap: 25px;
 }
 
+.upload-form-actions {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px;
+}
+
 .upload-form-inputs {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);

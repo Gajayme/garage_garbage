@@ -20,6 +20,8 @@ export const base_server_url = "http://72.60.133.178:5000/"
 // API для загрузки вещи на сервер
 export const post_upload = "post/upload"
 
+// API для редактирования вещи
+export const post_update = "post/update"
 
 // API для получения всех вещей
 export const post_all = "post/all"
