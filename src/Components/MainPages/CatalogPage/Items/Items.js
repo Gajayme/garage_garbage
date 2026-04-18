@@ -1,6 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { Item } from 'Components/MainPages/CatalogPage/Items/Item';
+import { validateItem } from 'Components/MainPages/CatalogPage/Items/validate';
 import * as NavigationConstants from "Components/Navigation/Constants";
 
 import "Styles/NoDecorationTextLink.css";
@@ -16,7 +17,11 @@ export const Items = ({catalogState}) => {
 	return (
 		<div className="catalog-items"> {
 			catalogState.map((value, index) => {
-				const imageSrc = value.images ? value.images[0].image_url : null;
+				if (!validateItem(value)) {
+					return null;
+				}
+
+				const imageSrc = value.images[0]?.image_url ?? null;
 				return (
 					<Link
 						key={index}

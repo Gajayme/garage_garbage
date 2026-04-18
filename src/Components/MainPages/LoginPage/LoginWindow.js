@@ -30,6 +30,13 @@ export const LoginWindow = () => {
 
 	return (
 		<div className="login-window">
+
+			<p
+				className="centered-text">
+					Emm... to be honest, it's only for us.
+					You're not supposed to be here....
+			</p>
+
 			<CustomInput
 				value={login}
 				onChange={(e) => setLogin(e.target.value)}
