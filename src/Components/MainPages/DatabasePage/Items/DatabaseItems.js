@@ -13,22 +13,15 @@ export const DatabaseItems = ({ catalogState }) => {
 
 	return (
 		<div className="catalog-items">
-			{catalogState.map((value, index) => {
-				const imageSrc = value.images ? value.images[0].image_url : null;
-				return (
-					<Link
-						key={index}
-						className="no-decoration-text-link"
-						to={`/${NavigationConstants.database}/${value.id}`}
-					>
-						<DatabaseItem
-							imageSrc={imageSrc}
-							name={value.itemName}
-							price={value.price}
-						/>
-					</Link>
-				);
-			})}
+			{catalogState.map((value, index) => (
+				<Link
+					key={index}
+					className="no-decoration-text-link"
+					to={`/${NavigationConstants.database}/${value.id}`}
+				>
+					<DatabaseItem value={value} />
+				</Link>
+			))}
 		</div>
 	);
 };

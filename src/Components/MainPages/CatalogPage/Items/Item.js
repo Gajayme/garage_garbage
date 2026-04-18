@@ -8,12 +8,14 @@ import "Styles/TopAndLeftBorders.css"
 /**
  * Компонент для отображения одной вещи с краткой информацией по ней.
  *
- * @param {string} imageSrc - Изображение вещи.
- * @param {string} name - Название вещи.
- * @param {string} price - Цена вещи
+ * @param {Object} value - Объект товара (itemName, price, images и т.д.).
  * @param {Function} onClick - Функция-обработчик клика на элемент.
  */
-export const Item = ({imageSrc, name, price, onClick}) => {
+export const Item = ({ value, onClick }) => {
+	const imageSrc = value.images?.[0]?.image_url ?? null;
+	const name = value.itemName;
+	const price = value.price;
+
 	return (
 		<div className={"catalog-item"} onClick={onClick}>
 			<BorderedImage

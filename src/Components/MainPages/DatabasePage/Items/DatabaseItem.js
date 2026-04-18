@@ -3,7 +3,11 @@ import { BorderedImage } from "Components/BorderedImage.js";
 import "Styles/MainPages/DatabasePage/Items/DatabaseItem.css";
 import "Styles/TopAndLeftBorders.css";
 
-export const DatabaseItem = ({ imageSrc, name, price, onClick }) => {
+export const DatabaseItem = ({ value, onClick }) => {
+	const imageSrc = value.images?.[0]?.image_url ?? null;
+	const name = value.itemName;
+	const price = value.price;
+
 	return (
 		<div className="catalog-item" onClick={onClick}>
 			<BorderedImage

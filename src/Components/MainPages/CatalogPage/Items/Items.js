@@ -21,17 +21,13 @@ export const Items = ({catalogState}) => {
 					return null;
 				}
 
-				const imageSrc = value.images[0]?.image_url ?? null;
 				return (
 					<Link
 						key={index}
 						className="no-decoration-text-link"
 						to={`/${NavigationConstants.catalog}/${value.id}`}>
 
-						<Item
-							imageSrc={imageSrc}
-							name={value.itemName}
-							price={value.price}/>
+						<Item value={value} />
 
 					</Link>
 				)
