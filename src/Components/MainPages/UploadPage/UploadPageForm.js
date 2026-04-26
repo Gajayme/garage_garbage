@@ -32,23 +32,23 @@ import DefaultImg from "Images/default.jpg"
 
 export const UploadPageForm = ({
 	notificationStateSetter,
-	mode = UploadConstants.uploadModeCreate,
 	editItemId,
 }) => {
+
+	// Режим формы выводится из наличия editItemId.
+	// Если editItemId не null, то режим редактирования, иначе создание.
+	const mode =
+		editItemId != null && editItemId !== ""
+			? UploadConstants.uploadModeEdit
+			: UploadConstants.uploadModeCreate;
 
 	// хук, который занимается загрузкой инпут параметров с сервера
 	const { brands, types, buyers, locations, statuses, isLoading } = useInputParams();
 	const { isAdmin, checkAuth } = useAuth();
 	const queryClient = useQueryClient();
 
-	const detailQueryId =
-		mode === UploadConstants.uploadModeEdit &&
-			editItemId != null &&
-			editItemId !== ""
-			? editItemId
-			: "";
 	const { data: detailData, isFetching: detailFetching } =
-		useDatabaseItemDetails(detailQueryId);
+		useDatabaseItemDetails(editItemId ?? "");
 
 	const brandState = buildDropdownState(
 		brands,
@@ -121,11 +121,10 @@ export const UploadPageForm = ({
 
 	useEffect(() => {
 		hydratedForItemIdRef.current = null;
-	}, [editItemId, mode]);
+	}, [editItemId]);
 
 	useEffect(() => {
-		if (mode !== UploadConstants.uploadModeEdit || !editItemId || isLoading)
-			return;
+		if (mode !== UploadConstants.uploadModeEdit || isLoading) return;
 		if (detailFetching || !detailData?.data) return;
 		if (hydratedForItemIdRef.current === editItemId) return;
 
@@ -217,7 +216,7 @@ export const UploadPageForm = ({
 
 	const handleUpdateSubmit = async () => {
 		if (isSubmitting || isUpdating) return;
-		if (mode !== UploadConstants.uploadModeEdit || !editItemId) return;
+		if (mode !== UploadConstants.uploadModeEdit) return;
 
 		setIsUpdating(true);
 
