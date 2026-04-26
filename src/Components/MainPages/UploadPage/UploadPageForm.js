@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useCallback, useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -15,11 +15,7 @@ import { useInputParams } from "Components/hooks/useInputParams.js";
 import { useAuth } from "Components/Auth/AuthContext.js";
 import * as UploadConstants from "Components/MainPages/UploadPage/UploadPageConstants.js";
 import { buildDropdownState, buildStatusDropdownState } from "Components/MainPages/UploadPage/buildDropdownState.js";
-import { useItemDetailsPrivate } from "Components/hooks/useItemDetailsPrivate.js";
-import {
-	mapItemDetailFields,
-	mapDetailImagesToFormImages,
-} from "Components/MainPages/UploadPage/mapItemDetailToFormState.js";
+import { useHydrateUploadForm } from "Components/MainPages/UploadPage/useHydrateUploadForm.js";
 import { normalizeFk } from "Components/MainPages/UploadPage/uploadFormNormalize.js";
 
 import * as Constants from 'Constants.js'
@@ -27,6 +23,46 @@ import * as Constants from 'Constants.js'
 import 'Styles/MainPages/UploadPage/UploadPageForm.css'
 import 'Styles/MainPages/UploadPage/UploadPageButton.css'
 import DefaultImg from "Images/default.jpg"
+
+
+// Стабильные пустые значения формы и ошибок — выносим на module scope,
+// чтобы ссылки не пересоздавались на каждом рендере и можно было передавать
+// в кастомные хуки без триггера их useEffect.
+const INITIAL_FORM = {
+	item_name: '',
+	bought_for: '',
+	price: '',
+	buyers_part: '',
+	sold_for: '',
+	size: '',
+	buyer: null,
+	location: null,
+	brand: null,
+	type: null,
+	status: null,
+	images: [],
+};
+
+const INITIAL_ERRORS = Object.fromEntries(
+	Object.keys(INITIAL_FORM).map((k) => [k, []])
+);
+
+// Маппер «поле → массив валидаторов». Зависит только от чистых функций-валидаторов,
+// поэтому тоже выносим на module scope.
+const VALIDATION_MAPPER = {
+	item_name: [NonEmpty],
+	bought_for: [NonEmpty],
+	price: [NonEmpty],
+	buyers_part: [NonEmpty],
+	sold_for: [NonEmpty],
+	size: [],
+	buyer: [NonEmpty],
+	location: [NonEmpty],
+	brand: [NonEmpty],
+	type: [NonEmpty],
+	status: [NonEmpty],
+	images: [NonEmptyImages],
+};
 
 
 
@@ -44,9 +80,6 @@ export const UploadPageForm = ({
 
 	// хук, который занимается загрузкой инпут параметров с сервера
 	const { brands, types, buyers, locations, statuses, isLoading } = useInputParams();
-	// хук, который занимается загрузкой детальной информации о вещи
-	const { data: detailData, isFetching: detailFetching } =
-		useItemDetailsPrivate(editItemId ?? "");
 	// хук, который занимается аутентификацией
 	const { isAdmin, checkAuth } = useAuth();
 
@@ -100,87 +133,26 @@ export const UploadPageForm = ({
 	// Происходит ли отправка формы прямо сейчас
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isUpdating, setIsUpdating] = useState(false);
-	const hydratedForItemIdRef = useRef(null);
 
-	const FORM_FIELDS = {
-		item_name: '',
-		bought_for: '',
-		price: '',
-		buyers_part: '',
-		sold_for: '',
-		size: '',
-		buyer: null,
-		location: null,
-		brand: null,
-		type: null,
-		status: null,
-		images: []
-	};
+	// стейты со значениями полей и ошибок (используем стабильные module-scope константы)
+	const [formState, setFormState] = useState(INITIAL_FORM);
+	const [errorState, setErrorState] = useState(INITIAL_ERRORS);
 
-	// стейты со значениями полей
-	const [formState, setFormState] = useState(FORM_FIELDS);
-	// стейты с ошибками для всех полей
-	const [errorState, setErrorState] = useState(
-		Object.fromEntries(Object.keys(FORM_FIELDS).map(k => [k, []]))
+	// Стабильный обработчик ошибок гидрации, чтобы хук не перезапускался на каждый рендер.
+	const handleHydrateError = useCallback(
+		() => notificationStateSetter(UploadNotificationState.ERROR),
+		[notificationStateSetter]
 	);
 
-	// маппер стейтов и валидаций для них
-	const validationMapper = {
-		item_name: [NonEmpty, ],
-		bought_for: [NonEmpty, ],
-		price: [NonEmpty, ],
-		buyers_part: [NonEmpty, ],
-		sold_for: [NonEmpty, ],
-		size: [],
-		buyer: [NonEmpty, ],
-		location: [NonEmpty, ],
-		brand: [NonEmpty, ],
-		type: [NonEmpty, ],
-		status: [NonEmpty, ],
-		images: [NonEmptyImages, ],
-	}
-
-	useEffect(() => {
-		hydratedForItemIdRef.current = null;
-	}, [editItemId]);
-
-	useEffect(() => {
-		if (mode !== UploadConstants.uploadModeEdit || isLoading) return;
-		if (detailFetching || !detailData?.data) return;
-		if (hydratedForItemIdRef.current === editItemId) return;
-
-		let cancelled = false;
-		(async () => {
-			try {
-				const d = detailData.data;
-				const fields = mapItemDetailFields(d);
-				const images = await mapDetailImagesToFormImages(d.images);
-				if (cancelled) return;
-				setFormState((prev) => ({
-					...prev,
-					...fields,
-					images,
-				}));
-				setErrorState(
-					Object.fromEntries(Object.keys(FORM_FIELDS).map((k) => [k, []]))
-				);
-				hydratedForItemIdRef.current = editItemId;
-			} catch (e) {
-				console.error("hydrate form failed:", e);
-				notificationStateSetter(UploadNotificationState.ERROR);
-			}
-		})();
-		return () => {
-			cancelled = true;
-		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps -- FORM_FIELDS — ключи полей; notificationStateSetter стабилен у родителя
-	}, [
-		mode,
+	// Гидрация формы данными вещи в edit-режиме — целиком в кастомном хуке.
+	useHydrateUploadForm({
 		editItemId,
-		isLoading,
-		detailFetching,
-		detailData,
-	]);
+		paramsLoading: isLoading,
+		setFormState,
+		setErrorState,
+		initialErrors: INITIAL_ERRORS,
+		onError: handleHydrateError,
+	});
 
 	// Общий каркас отправки формы: гонка-гард, isAdmin, валидация, fetch, 401, нотификации, finally.
 	// Параметры различия между upload/update:
@@ -273,7 +245,7 @@ export const UploadPageForm = ({
 		const errorsLocal = UploadFormValidation(
 			formState,
 			errorState,
-			validationMapper
+			VALIDATION_MAPPER
 		);
 
 		handleOnErrorChange(errorsLocal);
@@ -313,23 +285,8 @@ export const UploadPageForm = ({
 				URL.revokeObjectURL(img.src);
 			}
 		});
-		setFormState({
-			item_name: "",
-			bought_for: "",
-			price: "",
-			buyers_part: "",
-			sold_for: "",
-			size: "",
-			buyer: null,
-			location: null,
-			brand: null,
-			type: null,
-			status: null,
-			images: [],
-		});
-		setErrorState(
-			Object.fromEntries(Object.keys(FORM_FIELDS).map((k) => [k, []]))
-		);
+		setFormState(INITIAL_FORM);
+		setErrorState(INITIAL_ERRORS);
 	};
 
 	const handleOnChangeInput = (key) => {
