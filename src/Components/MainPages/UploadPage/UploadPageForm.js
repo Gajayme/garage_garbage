@@ -80,6 +80,23 @@ export const UploadPageForm = ({
 		UploadConstants.defaultID
 	);
 
+	// Описание полей формы (рендер ниже идёт через .map)
+	const inputFields = [
+		{ name: "item_name",   label: "Item Name",  id: "item_name_input",  maxLength: 50 },
+		{ name: "buyers_part", label: "Buyer Part", id: "buyer_part_input", maxLength: 10, inputValidator: NumbersOnly },
+		{ name: "bought_for",  label: "Bought for", id: "bought_for_input", maxLength: 10, inputValidator: NumbersOnly },
+		{ name: "price",       label: "Price",      id: "price_input",      maxLength: 10, inputValidator: NumbersOnly },
+		{ name: "sold_for",    label: "Sold for",   id: "sold_for_input",   maxLength: 10, inputValidator: NumbersOnly },
+		{ name: "size",        label: "Size",       id: "size_input",       maxLength: 10 },
+	];
+	const dropdownFields = [
+		{ name: "brand",    label: "Brand",    id: "brand_dropdown",    options: brandState },
+		{ name: "type",     label: "Type",     id: "type_dropdown",     options: typeState },
+		{ name: "buyer",    label: "Buyer",    id: "buyer_dropdown",    options: buyerState },
+		{ name: "location", label: "Location", id: "location_dropdown", options: locationState },
+		{ name: "status",   label: "Status",   id: "status_dropdown",   options: statusState },
+	];
+
 	// Происходит ли отправка формы прямо сейчас
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isUpdating, setIsUpdating] = useState(false);
@@ -460,18 +477,31 @@ export const UploadPageForm = ({
 			<ImageManagerWindow		images={formState.images}		errors={errorState.images}	onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages} onDeleteSpecific={handleOnDeleteSpecificImage}/>
 
 			<div className="upload-form-inputs">
-
-				<LabeledInput		value={formState.item_name}		errors={errorState.item_name}		onChange={handleOnChangeInput('item_name')}		className="upload-form-item"	labelText="Item Name"	id="item_name_input"	maxLength={50}/>
-				<LabeledInput 		value={formState.buyers_part}	errors={errorState.buyers_part}		onChange={handleOnChangeInput('buyers_part')}	className="upload-form-item"	labelText="Buyer Part"	id="buyer_part_input"	maxLength={10}		inputValidator={NumbersOnly}/>
-				<LabeledInput 		value={formState.bought_for}	errors={errorState.bought_for}		onChange={handleOnChangeInput('bought_for')}	className="upload-form-item"	labelText="Bought for"	id="bought_for_input"	maxLength={10}		inputValidator={NumbersOnly}/>
-				<LabeledInput 		value={formState.price}			errors={errorState.price}			onChange={handleOnChangeInput('price')}			className="upload-form-item"	labelText="Price"		id="price_input"		maxLength={10}		inputValidator={NumbersOnly}/>
-				<LabeledInput 		value={formState.sold_for}		errors={errorState.sold_for}		onChange={handleOnChangeInput('sold_for')}		className="upload-form-item"	labelText="Sold for"	id="sold_for_input"		maxLength={10}		inputValidator={NumbersOnly}/>
-				<LabeledInput 		value={formState.size}												onChange={handleOnChangeInput('size')}			className="upload-form-item"	labelText="Size"		id="size_input"			maxLength={10}/>
-				<LabeledDropdown 	value={formState.brand}			errors={errorState.brand}			onChange={handleOnChangeDropDown('brand')}		className="upload-form-item"	labelText="Brand"		id="brand_dropdown" 	options={brandState}/>
-				<LabeledDropdown 	value={formState.type}			errors={errorState.type}			onChange={handleOnChangeDropDown('type')}		className="upload-form-item"	labelText="Type"		id="type_dropdown" 		options={typeState}/>
-				<LabeledDropdown 	value={formState.buyer}			errors={errorState.buyer}			onChange={handleOnChangeDropDown('buyer')}		className="upload-form-item"	labelText="Buyer"		id="buyer_dropdown" 	options={buyerState}/>
-				<LabeledDropdown	value={formState.location}		errors={errorState.location}		onChange={handleOnChangeDropDown('location')}	className="upload-form-item"	labelText="Location"	id="location_dropdown" 	options={locationState}/>
-				<LabeledDropdown	value={formState.status}		errors={errorState.status}			onChange={handleOnChangeDropDown('status')}		className="upload-form-item"	labelText="Status"		id="status_dropdown" 	options={statusState}/>
+				{inputFields.map(({ name, label, id, maxLength, inputValidator }) => (
+					<LabeledInput
+						key={name}
+						value={formState[name]}
+						errors={errorState[name]}
+						onChange={handleOnChangeInput(name)}
+						className="upload-form-item"
+						labelText={label}
+						id={id}
+						maxLength={maxLength}
+						inputValidator={inputValidator}
+					/>
+				))}
+				{dropdownFields.map(({ name, label, id, options }) => (
+					<LabeledDropdown
+						key={name}
+						value={formState[name]}
+						errors={errorState[name]}
+						onChange={handleOnChangeDropDown(name)}
+						className="upload-form-item"
+						labelText={label}
+						id={id}
+						options={options}
+					/>
+				))}
 			</div>
 
 			<div className="upload-form-actions">
