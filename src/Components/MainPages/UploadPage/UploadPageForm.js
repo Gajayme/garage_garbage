@@ -15,7 +15,7 @@ import { useInputParams } from "Components/hooks/useInputParams.js";
 import { useAuth } from "Components/Auth/AuthContext.js";
 import * as UploadConstants from "Components/MainPages/UploadPage/UploadPageConstants.js";
 import { buildDropdownState, buildStatusDropdownState } from "Components/MainPages/UploadPage/buildDropdownState.js";
-import { useDatabaseItemDetails } from "Components/MainPages/DatabaseItemPage/useDatabaseItemDetails.js";
+import { useItemDetailsPrivate } from "Components/hooks/useItemDetailsPrivate.js";
 import {
 	mapItemDetailFields,
 	mapDetailImagesToFormImages,
@@ -35,21 +35,25 @@ export const UploadPageForm = ({
 	editItemId,
 }) => {
 
-	// Режим формы выводится из наличия editItemId.
 	// Если editItemId не null, то режим редактирования, иначе создание.
 	const mode =
 		editItemId != null && editItemId !== ""
 			? UploadConstants.uploadModeEdit
 			: UploadConstants.uploadModeCreate;
 
+
 	// хук, который занимается загрузкой инпут параметров с сервера
 	const { brands, types, buyers, locations, statuses, isLoading } = useInputParams();
+	// хук, который занимается загрузкой детальной информации о вещи
+	const { data: detailData, isFetching: detailFetching } =
+		useItemDetailsPrivate(editItemId ?? "");
+	// хук, который занимается аутентификацией
 	const { isAdmin, checkAuth } = useAuth();
+
+	// клиент запросов для обновления данных в кеше
 	const queryClient = useQueryClient();
 
-	const { data: detailData, isFetching: detailFetching } =
-		useDatabaseItemDetails(editItemId ?? "");
-
+	// стейты для выпадающих списков
 	const brandState = buildDropdownState(
 		brands,
 		UploadConstants.chooseBrand,

@@ -3,7 +3,7 @@ import * as GlobalConstants from "Constants.js";
 import { useAuth } from "Components/Auth/AuthContext.js";
 import { fetchItemDetails } from "Components/Api/fetchItemDetails.js";
 
-const fetchDatabaseItemDetails = async ({ queryKey, signal }) => {
+const fetchItemDetailsPrivate = async ({ queryKey, signal }) => {
 	const [, itemID] = queryKey;
 	return fetchItemDetails({
 		endpointPath: GlobalConstants.post_detail_private,
@@ -12,7 +12,7 @@ const fetchDatabaseItemDetails = async ({ queryKey, signal }) => {
 	});
 };
 
-export const useDatabaseItemDetails = (itemID) => {
+export const useItemDetailsPrivate = (itemID) => {
 	const { checkAuth } = useAuth();
 
 	return useQuery({
@@ -21,7 +21,7 @@ export const useDatabaseItemDetails = (itemID) => {
 		// проверяем, авторизован ли пользователь
 		queryFn: async (ctx) => {
 			try {
-				return await fetchDatabaseItemDetails(ctx);
+				return await fetchItemDetailsPrivate(ctx);
 			} catch (e) {
 				if (e?.status === 401) {
 					await checkAuth();

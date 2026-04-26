@@ -11,7 +11,7 @@ import { ItemImageGrid } from "./ItemImageGrid.js";
 import { ItemDescription } from "./ItemDescription.js";
 import { ItemModalWindow } from "./ItemModalWindow.js";
 import { buildItemData } from "./Utils.js";
-import { useDatabaseItemDetails } from "./useDatabaseItemDetails.js";
+import { useItemDetailsPrivate } from "Components/hooks/useItemDetailsPrivate.js";
 
 import "Styles/MainPages/DatabaseItemPage/ImagesAndDescriptionWrapper.css";
 import "Styles/CenteredText.css";
@@ -23,7 +23,7 @@ export const DatabaseItemPageContent = ({ itemID }) => {
 	const queryClient = useQueryClient();
 	const { checkAuth } = useAuth();
 
-	const { data, isFetching, error } = useDatabaseItemDetails(itemID);
+	const { data, isFetching, error } = useItemDetailsPrivate(itemID);
 
 	const handleDeleteItem = async () => {
 		if (!itemID || isDeleting) return;
