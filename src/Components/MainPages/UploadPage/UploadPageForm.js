@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useQueryClient } from "@tanstack/react-query";
 
 import { DefaultButton } from "Components/Button.js"
-import { NumbersOnly } from 'Components/InputValidators.js'
+import { NumbersOnly } from 'Components/utils/inputFilters.js'
 import { FormDataLogger } from "Components/FormDataLogger.js";
 import { UploadFormValidation } from './Validations/Validations.js'
 import { NonEmpty, NonEmptyImages } from './Validations/Validations.js'
@@ -182,122 +182,87 @@ export const UploadPageForm = ({
 		detailData,
 	]);
 
-	// обработать нажатие на кнопку подтверждения
-	const handleOnSubmit =  async (event) => {
-		event.preventDefault()
-
+	// Общий каркас отправки формы: гонка-гард, isAdmin, валидация, fetch, 401, нотификации, finally.
+	// Параметры различия между upload/update:
+	//   - url            — куда отправлять POST с multipart-телом;
+	//   - setBusy        — какой флаг загрузки переключать;
+	//   - onSuccess      — что сделать с успешным ответом (reset формы / invalidate кеша);
+	//   - errorLogPrefix — префикс для console.error в catch-ветке.
+	const submitForm = async ({ url, setBusy, onSuccess, errorLogPrefix }) => {
 		if (isSubmitting || isUpdating) return;
-		setIsSubmitting(true);
-
-		if (!isAdmin) {
-			notificationStateSetter(UploadNotificationState.ERROR);
-			setIsSubmitting(false);
-			return;
-		}
-
-		if (!validateForm()) {
-			setIsSubmitting(false);
-			return;
-		}
-
-		const formData = buildFormData()
-
+		setBusy(true);
 		try {
-			const response = await fetch(Constants.base_server_url + Constants.post_upload, {
-			method: Constants.http_methods.POST,
-			body: formData,
-			credentials: 'include',
-			});
+			if (!isAdmin) {
+				notificationStateSetter(UploadNotificationState.ERROR);
+				return;
+			}
 
+			if (!validateForm()) return;
+
+			const response = await fetch(url, {
+				method: Constants.http_methods.POST,
+				body: buildFormData(),
+				credentials: "include",
+			});
 
 			if (response.status === 401) {
 				await checkAuth();
 				notificationStateSetter(UploadNotificationState.ERROR);
-				setIsSubmitting(false);
 				return;
 			}
 
-			const notificationState = response.ok ? UploadNotificationState.SUCCESS: UploadNotificationState.ERROR
-			notificationStateSetter(notificationState);
+			notificationStateSetter(
+				response.ok
+					? UploadNotificationState.SUCCESS
+					: UploadNotificationState.ERROR
+			);
 			if (!response.ok) {
 				throw new Error(`Ошибка сервера: ${response.status}`);
 			}
 
-			const responseJson = await response.json();
-			console.log("upload response:", responseJson);
-			resetForm()
-
-
+			await onSuccess?.(response);
 		} catch (error) {
-			console.error("upload error:", error);
+			console.error(errorLogPrefix, error);
 		} finally {
-			setIsSubmitting(false);
+			setBusy(false);
 		}
-	}
+	};
 
+	// обработчик отправки формы для создания
+	const handleOnSubmit = async (event) => {
+		event.preventDefault();
+		await submitForm({
+			url: `${Constants.base_server_url}${Constants.post_upload}`,
+			setBusy: setIsSubmitting,
+			onSuccess: async (response) => {
+				const responseJson = await response.json();
+				console.log("upload response:", responseJson);
+				resetForm();
+			},
+			errorLogPrefix: "upload error:",
+		});
+	};
+
+	// обработчик отправки формы для редактирования
 	const handleUpdateSubmit = async () => {
-		if (isSubmitting || isUpdating) return;
 		if (mode !== UploadConstants.uploadModeEdit) return;
 
-		setIsUpdating(true);
-
-		if (!isAdmin) {
-			notificationStateSetter(UploadNotificationState.ERROR);
-			setIsUpdating(false);
-			return;
-		}
-
-		const postIdInt = parseInt(String(editItemId), 10);
-		if (!Number.isInteger(postIdInt) || postIdInt < 1) {
-			notificationStateSetter(UploadNotificationState.ERROR);
-			setIsUpdating(false);
-			return;
-		}
-
-		if (!validateForm()) {
-			setIsUpdating(false);
-			return;
-		}
-
-		const formData = buildFormData();
-
-		try {
-			const response = await fetch(
-				`${Constants.base_server_url}${Constants.post_update}/${postIdInt}`,
-				{
-					method: Constants.http_methods.POST,
-					body: formData,
-					credentials: "include",
-				}
-			);
-
-			if (response.status === 401) {
-				await checkAuth();
-				notificationStateSetter(UploadNotificationState.ERROR);
-				setIsUpdating(false);
-				return;
-			}
-
-			const notificationState = response.ok
-				? UploadNotificationState.SUCCESS
-				: UploadNotificationState.ERROR;
-			notificationStateSetter(notificationState);
-			if (!response.ok) {
-				throw new Error(`Ошибка сервера: ${response.status}`);
-			}
-
-			await queryClient.invalidateQueries({ queryKey: [Constants.itemsQueryKey] });
-			await queryClient.invalidateQueries({
-				queryKey: [Constants.itemsPrivateQueryKey],
-			});
-			await queryClient.invalidateQueries({
-				queryKey: [Constants.itemDetailsPrivateQueryKey, editItemId],
-			});
-		} catch (error) {
-			console.error("update error:", error);
-		} finally {
-			setIsUpdating(false);
-		}
+		await submitForm({
+			url: `${Constants.base_server_url}${Constants.post_update}/${editItemId}`,
+			setBusy: setIsUpdating,
+			onSuccess: async () => {
+				await queryClient.invalidateQueries({
+					queryKey: [Constants.itemsQueryKey],
+				});
+				await queryClient.invalidateQueries({
+					queryKey: [Constants.itemsPrivateQueryKey],
+				});
+				await queryClient.invalidateQueries({
+					queryKey: [Constants.itemDetailsPrivateQueryKey, editItemId],
+				});
+			},
+			errorLogPrefix: "update error:",
+		});
 	};
 
 	const handleOnErrorChange = (newErrorState) => {
