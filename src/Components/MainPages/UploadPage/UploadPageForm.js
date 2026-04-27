@@ -135,9 +135,16 @@ export const UploadPageForm = ({
 	const [formState, setFormState] = useState(INITIAL_FORM);
 	const [errorState, setErrorState] = useState(INITIAL_ERRORS);
 
-	// Стабильный обработчик ошибок гидрации, чтобы хук не перезапускался на каждый рендер.
-	const handleHydrateError = useCallback(
+	// Локальные хелперы «покажи ошибку / покажи успех». Прячут конкретный enum
+	// нотификаций (UploadNotificationState) — места вызова описывают намерение,
+	// а не способ. Обёрнуты в useCallback, чтобы ссылки были стабильны и их
+	// можно было передавать в кастомные хуки без перезапуска их useEffect.
+	const showError = useCallback(
 		() => notificationStateSetter(UploadNotificationState.ERROR),
+		[notificationStateSetter]
+	);
+	const showSuccess = useCallback(
+		() => notificationStateSetter(UploadNotificationState.SUCCESS),
 		[notificationStateSetter]
 	);
 
@@ -148,7 +155,7 @@ export const UploadPageForm = ({
 		setFormState,
 		setErrorState,
 		initialErrors: INITIAL_ERRORS,
-		onError: handleHydrateError,
+		onError: showError,
 	});
 
 	// Общий каркас отправки формы: гонка-гард, isAdmin, валидация, fetch, 401, нотификации, finally.
@@ -162,7 +169,7 @@ export const UploadPageForm = ({
 		setBusy(true);
 		try {
 			if (!isAdmin) {
-				notificationStateSetter(UploadNotificationState.ERROR);
+				showError();
 				return;
 			}
 
@@ -176,15 +183,11 @@ export const UploadPageForm = ({
 
 			if (response.status === 401) {
 				await checkAuth();
-				notificationStateSetter(UploadNotificationState.ERROR);
+				showError();
 				return;
 			}
 
-			notificationStateSetter(
-				response.ok
-					? UploadNotificationState.SUCCESS
-					: UploadNotificationState.ERROR
-			);
+			response.ok ? showSuccess() : showError();
 			if (!response.ok) {
 				throw new Error(`Ошибка сервера: ${response.status}`);
 			}
@@ -377,7 +380,13 @@ export const UploadPageForm = ({
 
 		<form className="upload-page-form" onSubmit={handleOnSubmit}>
 
-			<ImageManagerWindow		images={formState.images}		errors={errorState.images}	onChange={handleOnChangeImages('images')}	onDelete={handleOnDeleteAllImages} onDeleteSpecific={handleOnDeleteSpecificImage}/>
+			<ImageManagerWindow
+				images={formState.images}
+				errors={errorState.images}
+				onChange={handleOnChangeImages('images')}
+				onDelete={handleOnDeleteAllImages}
+				onDeleteSpecific={handleOnDeleteSpecificImage}
+			/>
 
 			<div className="upload-form-inputs">
 				{inputFields.map(({ name, label, id, maxLength, inputValidator }) => (
