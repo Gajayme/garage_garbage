@@ -34,6 +34,12 @@ export const useHydrateUploadForm = ({
 	const { data: detailData, isFetching: detailFetching } =
 		useItemDetailsPrivate(editItemId ?? "");
 
+	// Сторож от повторной гидрации одного и того же id.
+	// Хранит editItemId, для которого форма уже была заполнена. Сравниваем
+	// его с текущим editItemId перед стартом эффекта: если совпало — выходим,
+	// иначе гидрируем и записываем сюда новый id.
+	// Сбрасывается в null при уходе в create-режим, чтобы возврат на тот же
+	// id (edit '42' → create → edit '42') снова прошёл гидрацию.
 	const hydratedForRef = useRef(null);
 
 	useEffect(() => {
@@ -44,6 +50,10 @@ export const useHydrateUploadForm = ({
 		if (paramsLoading || detailFetching || !detailData?.data) return;
 		if (hydratedForRef.current === editItemId) return;
 
+		// Флаг отмены для борьбы с race condition: если editItemId сменится,
+		// пока идёт `await mapDetailImagesToFormImages(...)`, cleanup выставит
+		// cancelled = true, и запоздавший результат не перезапишет уже
+		// актуальное состояние формы.
 		let cancelled = false;
 		(async () => {
 			try {

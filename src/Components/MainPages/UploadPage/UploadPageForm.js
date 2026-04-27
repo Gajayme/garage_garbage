@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -64,6 +64,24 @@ const VALIDATION_MAPPER = {
 	images: [NonEmptyImages],
 };
 
+// Декларативный конфиг дропдаунов. Статическая часть (имя поля формы, лейбл,
+// id, плейсхолдер, билдер опций, ключ источника данных в useInputParams)
+// живёт на module scope — пересоздавать её на каждый рендер незачем.
+// Опции (`options`) добавляются внутри компонента через useMemo поверх этого
+// конфига, потому что зависят от ответа useInputParams.
+const DROPDOWN_DEFS = [
+	{ name: "brand",    label: "Brand",    id: "brand_dropdown",
+		dataKey: "brands",    placeholder: UploadConstants.chooseBrand,    builder: buildDropdownState },
+	{ name: "type",     label: "Type",     id: "type_dropdown",
+		dataKey: "types",     placeholder: UploadConstants.chooseType,     builder: buildDropdownState },
+	{ name: "buyer",    label: "Buyer",    id: "buyer_dropdown",
+		dataKey: "buyers",    placeholder: UploadConstants.chooseBuyer,    builder: buildDropdownState },
+	{ name: "location", label: "Location", id: "location_dropdown",
+		dataKey: "locations", placeholder: UploadConstants.chooseLocation, builder: buildDropdownState },
+	{ name: "status",   label: "Status",   id: "status_dropdown",
+		dataKey: "statuses",  placeholder: UploadConstants.chooseStatus,   builder: buildStatusDropdownState },
+];
+
 
 
 export const UploadPageForm = ({
@@ -86,34 +104,7 @@ export const UploadPageForm = ({
 	// клиент запросов для обновления данных в кеше
 	const queryClient = useQueryClient();
 
-	// стейты для выпадающих списков
-	const brandState = buildDropdownState(
-		brands,
-		UploadConstants.chooseBrand,
-		UploadConstants.defaultID
-	);
-	const typeState = buildDropdownState(
-		types,
-		UploadConstants.chooseType,
-		UploadConstants.defaultID
-	);
-	const buyerState = buildDropdownState(
-		buyers,
-		UploadConstants.chooseBuyer,
-		UploadConstants.defaultID
-	);
-	const locationState = buildDropdownState(
-		locations,
-		UploadConstants.chooseLocation,
-		UploadConstants.defaultID
-	);
-	const statusState = buildStatusDropdownState(
-		statuses,
-		UploadConstants.chooseStatus,
-		UploadConstants.defaultID
-	);
-
-	// Описание полей формы (рендер ниже идёт через .map)
+	// Описание полей-инпутов (рендер ниже идёт через .map)
 	const inputFields = [
 		{ name: "item_name",   label: "Item Name",  id: "item_name_input",  maxLength: 50 },
 		{ name: "buyers_part", label: "Buyer Part", id: "buyer_part_input", maxLength: 10, inputValidator: NumbersOnly },
@@ -122,13 +113,18 @@ export const UploadPageForm = ({
 		{ name: "sold_for",    label: "Sold for",   id: "sold_for_input",   maxLength: 10, inputValidator: NumbersOnly },
 		{ name: "size",        label: "Size",       id: "size_input",       maxLength: 10 },
 	];
-	const dropdownFields = [
-		{ name: "brand",    label: "Brand",    id: "brand_dropdown",    options: brandState },
-		{ name: "type",     label: "Type",     id: "type_dropdown",     options: typeState },
-		{ name: "buyer",    label: "Buyer",    id: "buyer_dropdown",    options: buyerState },
-		{ name: "location", label: "Location", id: "location_dropdown", options: locationState },
-		{ name: "status",   label: "Status",   id: "status_dropdown",   options: statusState },
-	];
+
+	// Берём статический конфиг DROPDOWN_DEFS и достраиваем для каждой записи `options`,
+	// собранные подходящим билдером из соответствующего справочника useInputParams.
+	// Пересчёт идёт только при смене самих справочников, поэтому ссылки на options
+	// и на сам массив dropdownFields стабильны между «спокойными» рендерами.
+	const dropdownFields = useMemo(() => {
+		const dataByKey = { brands, types, buyers, locations, statuses };
+		return DROPDOWN_DEFS.map(({ dataKey, placeholder, builder, ...meta }) => ({
+			...meta,
+			options: builder(dataByKey[dataKey], placeholder, UploadConstants.defaultID),
+		}));
+	}, [brands, types, buyers, locations, statuses]);
 
 	// Происходит ли отправка формы прямо сейчас
 	const [isSubmitting, setIsSubmitting] = useState(false);
