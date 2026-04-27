@@ -18,6 +18,7 @@ import { buildDropdownState, buildStatusDropdownState } from "Components/MainPag
 import { useHydrateUploadForm } from "Components/MainPages/UploadPage/useHydrateUploadForm.js";
 import { normalizeFk, normalizeStatus } from "Components/MainPages/UploadPage/uploadFormNormalize.js";
 import { revokeBlobImage, revokeBlobImages } from "Components/MainPages/UploadPage/imageBlobs.js";
+import { urlToFile } from "Components/utils/urlToFile.js";
 
 import * as Constants from 'Constants.js'
 
@@ -95,6 +96,7 @@ export const UploadPageForm = ({
 		editItemId != null && editItemId !== ""
 			? UploadConstants.uploadModeEdit
 			: UploadConstants.uploadModeCreate;
+	const isEdit = mode === UploadConstants.uploadModeEdit;
 
 
 	// хук, который занимается загрузкой инпут параметров с сервера
@@ -130,6 +132,9 @@ export const UploadPageForm = ({
 	// Происходит ли отправка формы прямо сейчас
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isUpdating, setIsUpdating] = useState(false);
+	// Любая сетевая операция формы в данный момент. Единая точка для
+	// гонка-гарда в submitForm и для disabled у кнопок.
+	const isBusy = isSubmitting || isUpdating;
 
 	// стейты со значениями полей и ошибок (используем стабильные module-scope константы)
 	const [formState, setFormState] = useState(INITIAL_FORM);
@@ -165,7 +170,7 @@ export const UploadPageForm = ({
 	//   - onSuccess      — что сделать с успешным ответом (reset формы / invalidate кеша);
 	//   - errorLogPrefix — префикс для console.error в catch-ветке.
 	const submitForm = async ({ url, setBusy, onSuccess, errorLogPrefix }) => {
-		if (isSubmitting || isUpdating) return;
+		if (isBusy) return;
 		setBusy(true);
 		try {
 			if (!isAdmin) {
@@ -217,7 +222,7 @@ export const UploadPageForm = ({
 
 	// обработчик отправки формы для редактирования
 	const handleUpdateSubmit = async () => {
-		if (mode !== UploadConstants.uploadModeEdit) return;
+		if (!isEdit) return;
 
 		await submitForm({
 			url: `${Constants.base_server_url}${Constants.post_update}/${editItemId}`,
@@ -334,16 +339,10 @@ export const UploadPageForm = ({
 		});
 	};
 
-	const urlToFile = async (url, filename, mimeType) => {
-		const res = await fetch(url);
-		const blob = await res.blob();
-		return new File([blob], filename, { type: mimeType });
-	  };
-
 	// Автозаполнение всех полей для теста
 	const handleOnTestAutofill = async () => {
 
-		const imgFile = await urlToFile(DefaultImg, 'default.jpg', 'image/jpg')
+		const imgFile = await urlToFile(DefaultImg, 'default.jpg')
 		const imageObject = {
 			id: uuidv4(),
 			src: DefaultImg,
@@ -415,20 +414,16 @@ export const UploadPageForm = ({
 			<div className="upload-form-actions">
 				<DefaultButton
 					className={"upload-page-button"}
-					labelText={
-						mode === UploadConstants.uploadModeEdit
-							? "Upload as new"
-							: "upload"
-					}
-					disabled={isSubmitting || isUpdating}
+					labelText={isEdit ? UploadConstants.buttonUploadAsNew : UploadConstants.buttonUpload}
+					disabled={isBusy}
 					type="submit"
 					onClick={handleOnSubmit}
 				/>
-				{mode === UploadConstants.uploadModeEdit && (
+				{isEdit && (
 					<DefaultButton
 						className={"upload-page-button"}
-						labelText={"Save"}
-						disabled={isSubmitting || isUpdating}
+						labelText={UploadConstants.buttonSave}
+						disabled={isBusy}
 						type="button"
 						onClick={handleUpdateSubmit}
 					/>

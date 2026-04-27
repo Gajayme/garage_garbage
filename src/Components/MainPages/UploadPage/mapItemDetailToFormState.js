@@ -5,16 +5,7 @@ import {
 	normalizeFk,
 	normalizeStatus,
 } from "Components/MainPages/UploadPage/uploadFormNormalize.js";
-
-const urlToFile = async (url, filename, mimeType) => {
-	const res = await fetch(url);
-	if (!res.ok) {
-		throw new Error(`Failed to fetch image: ${res.status}`);
-	}
-	const blob = await res.blob();
-	const type = mimeType || blob.type || "image/jpeg";
-	return new File([blob], filename, { type });
-};
+import { urlToFile } from "Components/utils/urlToFile.js";
 
 /**
  * Синхронная часть полей формы из объекта вещи API (data внутри ответа detail).
