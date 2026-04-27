@@ -233,10 +233,6 @@ export const UploadPageForm = ({
 		});
 	};
 
-	const handleOnErrorChange = (newErrorState) => {
-		setErrorState(newErrorState); // Обновляем ошибки разом
-	};
-
 	const validateForm = () => {
 		const errorsLocal = UploadFormValidation(
 			formState,
@@ -244,7 +240,7 @@ export const UploadPageForm = ({
 			VALIDATION_MAPPER
 		);
 
-		handleOnErrorChange(errorsLocal);
+		setErrorState(errorsLocal);
 		return Object.values(errorsLocal).every(
 			(errorArray) => errorArray.length === 0
 		);
