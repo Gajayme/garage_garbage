@@ -17,6 +17,7 @@ import * as UploadConstants from "Components/MainPages/UploadPage/UploadPageCons
 import { buildDropdownState, buildStatusDropdownState } from "Components/MainPages/UploadPage/buildDropdownState.js";
 import { useHydrateUploadForm } from "Components/MainPages/UploadPage/useHydrateUploadForm.js";
 import { normalizeFk } from "Components/MainPages/UploadPage/uploadFormNormalize.js";
+import { revokeBlobImage, revokeBlobImages } from "Components/MainPages/UploadPage/imageBlobs.js";
 
 import * as Constants from 'Constants.js'
 
@@ -272,11 +273,7 @@ export const UploadPageForm = ({
 
 	// сброс формы
 	const resetForm = () => {
-		formState.images.forEach((img) => {
-			if (img?.src?.startsWith("blob:")) {
-				URL.revokeObjectURL(img.src);
-			}
-		});
+		revokeBlobImages(formState.images);
 		setFormState(INITIAL_FORM);
 		setErrorState(INITIAL_ERRORS);
 	};
@@ -323,22 +320,14 @@ export const UploadPageForm = ({
 
 	// удалить все изображения
 	const handleOnDeleteAllImages = () => {
-		formState.images.forEach((img) => {
-			if (img?.src?.startsWith("blob:")) {
-				URL.revokeObjectURL(img.src);
-			}
-		});
+		revokeBlobImages(formState.images);
 		setFormState((prev) => ({ ...prev, images: [] }));
 	};
 
 	// удалить конкретное изображения
 	const handleOnDeleteSpecificImage = (id) => {
 		setFormState((prev) => {
-			const image = prev.images.find((img) => img.id === id);
-			if (image?.src?.startsWith("blob:")) {
-				URL.revokeObjectURL(image.src);
-			}
-
+			revokeBlobImage(prev.images.find((img) => img.id === id));
 			return {
 				...prev,
 				images: prev.images.filter((img) => img.id !== id),
