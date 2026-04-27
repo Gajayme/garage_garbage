@@ -11,8 +11,8 @@ export const normalizeDigitString = (v) => {
 	return String(v);
 };
 
-/** Статус — строка для селекта. */
+/** Статус — null или непустая строка. */
 export const normalizeStatus = (v) => {
-	if (v == null || v === "") return "";
+	if (v == null || v === "") return null;
 	return String(v);
 };

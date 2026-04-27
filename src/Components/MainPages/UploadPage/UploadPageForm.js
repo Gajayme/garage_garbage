@@ -16,7 +16,7 @@ import { useAuth } from "Components/Auth/AuthContext.js";
 import * as UploadConstants from "Components/MainPages/UploadPage/UploadPageConstants.js";
 import { buildDropdownState, buildStatusDropdownState } from "Components/MainPages/UploadPage/buildDropdownState.js";
 import { useHydrateUploadForm } from "Components/MainPages/UploadPage/useHydrateUploadForm.js";
-import { normalizeFk } from "Components/MainPages/UploadPage/uploadFormNormalize.js";
+import { normalizeFk, normalizeStatus } from "Components/MainPages/UploadPage/uploadFormNormalize.js";
 import { revokeBlobImage, revokeBlobImages } from "Components/MainPages/UploadPage/imageBlobs.js";
 
 import * as Constants from 'Constants.js'
@@ -291,15 +291,11 @@ export const UploadPageForm = ({
 	}
 
 	const handleOnChangeDropDown = (key) => {
+		const normalize = key === "status" ? normalizeStatus : normalizeFk;
 		return (newVal) => {
 			setFormState((prevState) => ({
 				...prevState,
-				[key]:
-					key === "status"
-						? newVal == null || newVal === ""
-							? null
-							: String(newVal)
-						: normalizeFk(newVal),
+				[key]: normalize(newVal),
 			}));
 		};
 	};

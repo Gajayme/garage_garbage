@@ -48,7 +48,7 @@ export const mapItemDetailFields = (d) => {
 		location: normalizeFk(d.locationId ?? d.location),
 		brand: normalizeFk(d.brandId ?? d.brand),
 		type: normalizeFk(d.typeId ?? d.type),
-		status: normalizeStatus(d.status) || null,
+		status: normalizeStatus(d.status),
 	};
 };
 
