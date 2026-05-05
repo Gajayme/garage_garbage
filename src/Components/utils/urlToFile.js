@@ -19,21 +19,18 @@
  *          из тела ошибки.
  */
 export const urlToFile = async (url, filename, mimeType) => {
-	const finalUrl = url.includes('?')
-		? `${url}&cors=1`
-		: `${url}?cors=1`;
-
-	const res = await fetch(finalUrl, {
+	const res = await fetch(url, {
 		mode: 'cors',
 		credentials: 'omit',
+		cache: 'reload',
 	});
 
 	if (!res.ok) {
-		throw new Error(`Failed to fetch ${finalUrl}: ${res.status}`);
+		throw new Error(`Failed to fetch ${url}: ${res.status}`);
 	}
 
 	const blob = await res.blob();
-	const type = mimeType || blob.type || "image/jpeg";
+	const type = mimeType || blob.type || 'image/jpeg';
 
 	return new File([blob], filename, { type });
 };
