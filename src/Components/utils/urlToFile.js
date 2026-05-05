@@ -19,7 +19,13 @@
  *          из тела ошибки.
  */
 export const urlToFile = async (url, filename, mimeType) => {
-	const res = await fetch(url);
+	const res = await fetch(
+		url,
+		{
+			mode: 'cors',
+			credentials: "omit"
+		}
+	);
 	if (!res.ok) {
 		throw new Error(`Failed to fetch ${url}: ${res.status}`);
 	}
