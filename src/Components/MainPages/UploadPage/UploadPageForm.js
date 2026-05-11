@@ -124,8 +124,8 @@ export const UploadPageForm = ({
 	// и на сам массив dropdownFields стабильны между «спокойными» рендерами.
 	const dropdownFields = useMemo(() => {
 		const dataByKey = { brands, types, buyers, locations, statuses };
-		return DROPDOWN_DEFS.map(({ dataKey, placeholder, builder, ...meta }) => ({
-			...meta,
+		return DROPDOWN_DEFS.map(({ dataKey, placeholder, builder, ...rest }) => ({
+			...rest,
 			options: builder(dataByKey[dataKey], placeholder, UploadConstants.defaultID),
 		}));
 	}, [brands, types, buyers, locations, statuses]);
