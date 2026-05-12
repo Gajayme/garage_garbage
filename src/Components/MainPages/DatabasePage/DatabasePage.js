@@ -1,49 +1,28 @@
-import { OuterWindow } from "Components/Window/OuterWindow";
-import { WindowHeader } from "Components/Window/WindowHeader";
-import { ButtonLayer } from "Components/Window/ButtonLayer";
-import { InnerWindow } from "Components/Window/InnerWindow";
-import { DefaultNavButtons } from "Components/Navigation/DefaultNavButtons";
+import { usePrivateCatalogItems } from "Components/MainPages/DatabasePage/usePrivateCatalogItems.js";
+import { DatabaseItems } from "Components/MainPages/DatabasePage/Items/DatabaseItems.js";
 import { NavButton } from "Components/Navigation/NavButton";
-import { DatabasePageContent } from "Components/MainPages/DatabasePage/DatabasePageContent.js";
 import * as Nav from "Components/Navigation/Constants";
 
-import "Styles/MainPages/CatalogPage/FilterActivationButtons.css";
 import "Styles/Navigation/NavButton.css";
-import "Styles/Window/OuterWindow.css";
-import "Styles/Window/WindowHeader.css";
-import "Styles/Window/ButtonLayer.css";
-import "Styles/Window/InnerWindow.css";
-import "Styles/Navigation/DefaultNavButtons.css";
+import "Styles/CenteredText.css";
 
 export const DatabasePage = () => {
-	const header = <WindowHeader className="window-header" />;
+	const { data, error, isLoading } = usePrivateCatalogItems();
 
-	const buttonLayer = (
-		<ButtonLayer className="button-layer">
-			<DefaultNavButtons className="default-nav-buttons" />
-		</ButtonLayer>
-	);
+	if (isLoading) {
+		return <p className="centered-text">Loading...</p>;
+	}
 
-	const innerWindow = (
-		<InnerWindow className="inner-window">
-			<div>
-				<div className="filter-buttons-wrapper">
-					<NavButton
-						labelText="Add new"
-						destination={Nav.root + Nav.upload}
-					/>
-				</div>
-				<DatabasePageContent />
-			</div>
-		</InnerWindow>
-	);
+	if (error) {
+		return <p className="centered-text">Error happened</p>;
+	}
+
+	const items = data?.data ?? [];
 
 	return (
-		<OuterWindow
-			className="outer-window"
-			header={header}
-			buttonLayer={buttonLayer}
-			innerWindow={innerWindow}
-		/>
+		<>
+			<NavButton labelText="Add new" destination={`/${Nav.upload}`} />
+			<DatabaseItems catalogState={items} />
+		</>
 	);
 };

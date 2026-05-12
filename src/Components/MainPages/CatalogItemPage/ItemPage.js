@@ -1,44 +1,55 @@
-
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { OuterWindow } from "Components/Window/OuterWindow.js"
-import { InnerWindow } from "Components/Window/InnerWindow.js"
-import { ButtonLayer } from "Components/Window/ButtonLayer.js"
-import { WindowHeader } from "Components/Window/WindowHeader.js"
-import { DefaultNavButtons } from "Components/Navigation/DefaultNavButtons.js";
-import { ItemPageContent } from "./ItemPageContent.js";
+import { ItemImageGrid } from "./ItemImageGrid.js";
+import { ItemImageGallery } from "./ItemImageGallery.js";
+import { ItemDescription } from "./ItemDescription.js";
+import { ItemModalWindow } from "./ItemModalWindow.js";
+import { buildItemData } from "./Utils.js";
+import { useItemDetails } from "./useItemDetails.js";
+import { useHeightGreaterThanWidth } from "./useHeightGreaterThanWidth.js";
 
-import 'Styles/Window/OuterWindow.css'
-import 'Styles/Window/WindowHeader.css'
-import 'Styles/Window/ButtonLayer.css'
-import 'Styles/Window/InnerWindow.css'
+import "Styles/MainPages/CatalogItemPage/ImagesAndDescriptionWrapper.css";
+import "Styles/CenteredText.css";
 
 export const ItemPage = () => {
+	const { itemId } = useParams();
+	const [modalImageUrl, setModalImageUrl] = useState(null);
+	const tallNarrowViewport = useHeightGreaterThanWidth();
+	const { data, isFetching, error } = useItemDetails(itemId);
 
-	// Получение id вещи для запроса
-	// id === "123" для /Catalog/123
-	const { id } = useParams();
+	if (isFetching) {
+		return <p className="centered-text">Loading...</p>;
+	}
 
-	const header = <WindowHeader className="window-header"/>
+	if (error) {
+		return (
+			<p className="centered-text">Error while loading item details</p>
+		);
+	}
 
-	const buttonLayer = <ButtonLayer className="button-layer">
-		<DefaultNavButtons className="default-nav-buttons"/>
-	</ButtonLayer>
+	const itemData = buildItemData(data ? data.data : null);
+	const images = data ? data.data.images : null;
 
-	const innerWindow = <InnerWindow className="inner-window">
-		<ItemPageContent
-			itemID={id}>
-		</ItemPageContent>
-	</InnerWindow>
+	const wrapperClass = tallNarrowViewport
+		? "images-and-description-wrapper-narrow-screen"
+		: "images-and-description-wrapper-wide-screen";
 
 	return (
-		<div>
-			<OuterWindow
-				className="outer-window"
-				header={header}
-				buttonLayer={buttonLayer}
-				innerWindow={innerWindow}>
-			</OuterWindow>
+		<div className={wrapperClass}>
+			{tallNarrowViewport ? (
+				<ItemImageGallery
+					images={images}
+					onImageClick={setModalImageUrl}
+				/>
+			) : (
+				<ItemImageGrid images={images} onImageClick={setModalImageUrl} />
+			)}
+			<ItemDescription data={itemData} />
+			<ItemModalWindow
+				imageUrl={modalImageUrl}
+				onClose={() => setModalImageUrl(null)}
+			/>
 		</div>
-	)
-}
+	);
+};

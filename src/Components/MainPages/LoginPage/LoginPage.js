@@ -1,37 +1,71 @@
-import {OuterWindow} from "Components/Window/OuterWindow.js"
-import {InnerWindow} from "Components/Window/InnerWindow.js"
-import {ButtonLayer} from "Components/Window/ButtonLayer.js"
-import {WindowHeader} from "Components/Window/WindowHeader.js"
-import {DefaultNavButtons} from "Components/Navigation/DefaultNavButtons.js"
-import { LoginWindow } from "./LoginWindow.js"
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { CustomInput } from 'Components/CustomInput.js'
+import { DefaultButton } from 'Components/Button.js'
+import { useLogin } from './useLogin.js'
+import { useAuth } from 'Components/Auth/AuthContext.js'
+import * as Nav from 'Components/Navigation/Constants'
 
-import 'Styles/Window/OuterWindow.css'
-import 'Styles/Window/WindowHeader.css'
-import 'Styles/Window/ButtonLayer.css'
-import 'Styles/Window/InnerWindow.css'
-import 'Styles/Navigation/DefaultNavButtons.css'
 import 'Styles/MainPages/LoginPage/LoginPage.css'
-import "Styles/TopAndLeftBorders.css"
 
 export const LoginPage = () => {
-	const header = <WindowHeader className="window-header"/>
+	const [login, setLogin] = useState('')
+	const [password, setPassword] = useState('')
+	const navigate = useNavigate()
+	const { checkAuth } = useAuth()
 
-	const buttonLayer = <ButtonLayer className="button-layer">
-		<DefaultNavButtons className="default-nav-buttons"/>
-	</ButtonLayer>
+	const { mutate: doLogin, isPending, error } = useLogin()
 
-	const innerWindow = <InnerWindow className="inner-window login-page-inner-window">
-		<LoginWindow />
-	</InnerWindow>
+	const handleOnLogin = () => {
+		doLogin(
+			{ login, password },
+			{
+				onSuccess: async () => {
+					await checkAuth()
+					navigate(`/${Nav.upload}`)
+				},
+			}
+		)
+	}
 
 	return (
-		<div>
-			<OuterWindow
-				className="outer-window"
-				header={header}
-				buttonLayer={buttonLayer}
-				innerWindow={innerWindow}>
-			</OuterWindow>
+		<div className="login-page">
+			<div className="login-window ">
+				<p
+					className="centered-text">
+					Emm... to be honest, it's only for us.
+					You're not supposed to be here....
+				</p>
+
+				<CustomInput
+					value={login}
+					onChange={(e) => setLogin(e.target.value)}
+					id="login"
+					className="login-window__input top-and-left-borders"
+					placeholder="Login"
+					type="text"
+				/>
+				<CustomInput
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+					id="password"
+					className="login-window__input top-and-left-borders"
+					placeholder="Password"
+					type="password"
+				/>
+
+				<DefaultButton
+					className="login-window__button"
+					onClick={handleOnLogin}
+					labelText="Login"
+					disabled={isPending}
+				/>
+				{error && <div className="login-window__error">{error.message}</div>}
+				{isPending && <div className="login-window__sending">Sending…</div>}
+
+			</div>
+
 		</div>
+
 	)
 }

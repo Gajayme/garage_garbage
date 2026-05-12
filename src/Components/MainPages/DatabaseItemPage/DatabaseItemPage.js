@@ -1,43 +1,107 @@
-
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
-import { OuterWindow } from "Components/Window/OuterWindow.js"
-import { InnerWindow } from "Components/Window/InnerWindow.js"
-import { ButtonLayer } from "Components/Window/ButtonLayer.js"
-import { WindowHeader } from "Components/Window/WindowHeader.js"
-import { DefaultNavButtons } from "Components/Navigation/DefaultNavButtons.js";
-import { DatabaseItemPageContent } from "./DatabaseItemPageContent.js";
+import { DefaultButton } from "Components/Button.js";
+import { useAuth } from "Components/Auth/AuthContext.js";
+import * as Nav from "Components/Navigation/Constants.js";
+import * as Constants from "Constants.js";
 
-import 'Styles/Window/OuterWindow.css'
-import 'Styles/Window/WindowHeader.css'
-import 'Styles/Window/ButtonLayer.css'
-import 'Styles/Window/InnerWindow.css'
+import { ItemImageGrid } from "./ItemImageGrid.js";
+import { ItemDescription } from "./ItemDescription.js";
+import { ItemModalWindow } from "./ItemModalWindow.js";
+import { buildItemData } from "./Utils.js";
+import { useItemDetailsPrivate } from "Components/hooks/useItemDetailsPrivate.js";
+
+import "Styles/MainPages/DatabaseItemPage/ImagesAndDescriptionWrapper.css";
+import "Styles/CenteredText.css";
 
 export const DatabaseItemPage = () => {
+	const { itemId } = useParams();
+	const [modalImageUrl, setModalImageUrl] = useState(null);
+	const [isDeleting, setIsDeleting] = useState(false);
+	const navigate = useNavigate();
+	const queryClient = useQueryClient();
+	const { checkAuth } = useAuth();
 
-	// id вещи из URL, например /Database/123
-	const { id } = useParams();
+	const { data, isFetching, error } = useItemDetailsPrivate(itemId);
 
-	const header = <WindowHeader className="window-header"/>
+	const handleDeleteItem = async () => {
+		if (!itemId || isDeleting) return;
+		if (!window.confirm("Удалить эту вещь?")) return;
 
-	const buttonLayer = <ButtonLayer className="button-layer">
-		<DefaultNavButtons className="default-nav-buttons"/>
-	</ButtonLayer>
+		setIsDeleting(true);
+		try {
+			const response = await fetch(
+				`${Constants.base_server_url}${Constants.post_delete}/${encodeURIComponent(itemId)}`,
+				{
+					method: Constants.http_methods.DELETE,
+					credentials: "include",
+				}
+			);
 
-	const innerWindow = <InnerWindow className="inner-window">
-		<DatabaseItemPageContent
-			itemID={id}>
-		</DatabaseItemPageContent>
-	</InnerWindow>
+			if (response.status === 401) {
+				await checkAuth();
+				return;
+			}
+
+			if (!response.ok) {
+				console.error("Delete failed:", response.status);
+				return;
+			}
+			// Инвалидируем все в бд и в каталоге
+			await queryClient.invalidateQueries({ queryKey: [Constants.itemsQueryKey] });
+			await queryClient.invalidateQueries({queryKey: [Constants.itemsPrivateQueryKey],
+			});
+			navigate(`/${Nav.database}`);
+		} finally {
+			setIsDeleting(false);
+		}
+	};
+
+	if (isFetching) {
+		return <p className="centered-text">Loading...</p>;
+	}
+
+	if (error) {
+		return (
+			<p className="centered-text">Error while loading item details</p>
+		);
+	}
+
+	const itemData = buildItemData(data ? data.data : null);
+	const images = data ? data.data.images : null;
+
+	const handleEditItem = () => {
+		if (!itemId) return;
+		navigate(`/${Nav.upload}/edit/${encodeURIComponent(itemId)}`);
+	};
 
 	return (
-		<div>
-			<OuterWindow
-				className="outer-window"
-				header={header}
-				buttonLayer={buttonLayer}
-				innerWindow={innerWindow}>
-			</OuterWindow>
+		<div className="images-and-description-wrapper">
+			<ItemImageGrid images={images} onImageClick={setModalImageUrl} />
+			<div className="database-item-detail-column">
+				<ItemDescription data={itemData} />
+				<DefaultButton
+					className="database-item-button"
+					type="button"
+					labelText={"Delete"}
+					disabled={isDeleting}
+					onClick={handleDeleteItem}
+				/>
+				<DefaultButton
+					className="database-item-button"
+					type="button"
+					labelText={"Edit"}
+					disabled={!itemId}
+					onClick={handleEditItem}
+				/>
+			</div>
+			<ItemModalWindow
+				imageUrl={modalImageUrl}
+				onClose={() => setModalImageUrl(null)}
+			/>
 		</div>
-	)
-}
+	);
+};

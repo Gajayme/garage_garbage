@@ -1,32 +1,54 @@
-import { OuterWindow } from "Components/Window/OuterWindow";
-import { WindowHeader } from "Components/Window/WindowHeader";
-import { ButtonLayer } from "Components/Window/ButtonLayer";
-import { InnerWindow } from "Components/Window/InnerWindow";
-import { DefaultNavButtons } from "Components/Navigation/DefaultNavButtons";
-import { SettingsPageContent } from "./SettingsPageContent.js";
+import * as GlobalConstants from "Constants.js";
+import { useInputParams } from "Components/hooks/useInputParams.js";
+import { SettingsDictionarySection } from "Components/MainPages/SettingsPage/SettingsDictionarySection.js";
 
-import "Styles/Window/OuterWindow.css";
-import "Styles/Window/WindowHeader.css";
-import "Styles/Window/ButtonLayer.css";
-import "Styles/Window/InnerWindow.css";
-import "Styles/Navigation/DefaultNavButtons.css";
+import "Styles/CenteredText.css";
+import "Styles/MainPages/SettingsPage/SettingsPageContent.css";
 
 export const SettingsPage = () => {
+	const { brands, types, buyers, locations, isLoading } = useInputParams();
+
+	if (isLoading) {
+		return <p className="centered-text">Loading...</p>;
+	}
+
 	return (
-		<div>
-			<OuterWindow
-				className="outer-window"
-				header={<WindowHeader className="window-header" />}
-				buttonLayer={
-					<ButtonLayer className="button-layer">
-						<DefaultNavButtons className="default-nav-buttons" />
-					</ButtonLayer>
-				}
-				innerWindow={
-					<InnerWindow className="inner-window">
-						<SettingsPageContent />
-					</InnerWindow>
-				}
+		<div className="settings-params">
+			<SettingsDictionarySection
+				title="Brands"
+				items={brands}
+				uploadApiPath={GlobalConstants.brandUploadApi}
+				updateApiPath={GlobalConstants.brandUpdateApi}
+				deleteApiPath={GlobalConstants.brandDeleteApi}
+				queryKey={GlobalConstants.brandsQueryKey}
+				placeholder="Add brand"
+			/>
+			<SettingsDictionarySection
+				title="Types"
+				items={types}
+				uploadApiPath={GlobalConstants.typeUploadApi}
+				updateApiPath={GlobalConstants.typeUpdateApi}
+				deleteApiPath={GlobalConstants.typeDeleteApi}
+				queryKey={GlobalConstants.typesQueryKey}
+				placeholder="Add type"
+			/>
+			<SettingsDictionarySection
+				title="Buyers"
+				items={buyers}
+				uploadApiPath={GlobalConstants.buyerUploadApi}
+				updateApiPath={GlobalConstants.buyerUpdateApi}
+				deleteApiPath={GlobalConstants.buyerDeleteApi}
+				queryKey={GlobalConstants.buyersQueryKey}
+				placeholder="Add buyer"
+			/>
+			<SettingsDictionarySection
+				title="Locations"
+				items={locations}
+				uploadApiPath={GlobalConstants.locationUploadApi}
+				updateApiPath={GlobalConstants.locationUpdateApi}
+				deleteApiPath={GlobalConstants.locationDeleteApi}
+				queryKey={GlobalConstants.locationsQueryKey}
+				placeholder="Add location"
 			/>
 		</div>
 	);
