@@ -1,6 +1,4 @@
 
-export const none = ''
-
 // Названия полей для формы загрузки вещей (такие же, как в API)
 export const files = "files"
 export const item_name = "itemName"
@@ -82,7 +80,4 @@ export const http_methods = {
 	POST: 'POST',
 	PUT: 'PUT',
 	DELETE: 'DELETE',
-	PATCH: 'PATCH',
-	OPTIONS: 'OPTIONS',
-	HEAD: 'HEAD',
 };

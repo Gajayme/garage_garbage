@@ -246,7 +246,6 @@ export const UploadPageForm = ({
 	const validateForm = () => {
 		const errorsLocal = UploadFormValidation(
 			formState,
-			errorState,
 			VALIDATION_MAPPER
 		);
 
