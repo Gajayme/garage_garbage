@@ -1,6 +1,6 @@
 
 import "Styles/TopAndLeftBorders.css"
-import DefaultImg from "Images/default.jpg"
+import DefaultImg from "Assets/Images/default.jpg"
 
 
 export const BorderedImage = ({className, imageSrc, alt}) => {

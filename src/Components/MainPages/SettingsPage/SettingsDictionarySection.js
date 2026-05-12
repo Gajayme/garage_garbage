@@ -7,8 +7,8 @@ import { deleteSettingRequest } from "Components/MainPages/SettingsPage/deleteSe
 import { updateSettingRequest } from "Components/MainPages/SettingsPage/updateSettingRequest.js";
 import { ToggleIconButton } from "Components/ToggleIconButton.js";
 
-import arrowUp from "Images/Filters/arrow_up.svg";
-import arrowDown from "Images/Filters/arrow_down.svg";
+import arrowUp from "Assets/Images/Filters/arrow_up.svg";
+import arrowDown from "Assets/Images/Filters/arrow_down.svg";
 
 import "Styles/MainPages/SettingsPage/SettingsPageContent.css";
 

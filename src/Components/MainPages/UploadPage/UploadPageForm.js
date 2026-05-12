@@ -24,7 +24,7 @@ import * as Constants from 'Constants.js'
 
 import 'Styles/MainPages/UploadPage/UploadPageForm.css'
 import 'Styles/MainPages/UploadPage/UploadPageButton.css'
-import DefaultImg from "Images/default.jpg"
+import DefaultImg from "Assets/Images/default.jpg"
 
 
 // Стабильные пустые значения формы и ошибок — выносим на module scope,

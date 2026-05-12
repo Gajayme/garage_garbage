@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
 @import './Styles/Colors.css';
 
 
@@ -11,7 +10,8 @@ html, body, #root {
 }
 
 body {
-	font-family: "Pixelify Sans", sans-serif;
+	font-family: "Terminess Nerd Font", sans-serif;
+	font-weight: 700;
 }
 
 button,

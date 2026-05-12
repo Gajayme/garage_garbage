@@ -1,0 +1,18 @@
+@font-face {
+	font-family: 'Terminess Nerd Font';
+	src: url('../Assets/Fonts/TerminessNF.woff2') format('woff2'),
+		url('../Assets/Fonts/TerminessNF.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+
+@font-face {
+	font-family: 'Terminess Nerd Font';
+	src: url('../Assets/Fonts/TerminessNF-Bold.woff2') format('woff2'),
+		url('../Assets/Fonts/TerminessNF-Bold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
