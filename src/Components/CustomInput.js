@@ -13,6 +13,8 @@ import React from 'react';
  * @param {Function|null} inputValidator - Кастомный валидатор (event, onChange) => void.
  * @param {string} type - Тип поля (по умолчанию text).
  * @param {string} placeholder - Подсказка внутри поля.
+ * @param {string} [name] - Имя поля для формы.
+ * @param {string} [autoComplete] - Подсказка автозаполнения браузера.
  */
 export const CustomInput = ({
 	value,
@@ -22,7 +24,9 @@ export const CustomInput = ({
 	maxLength = 0,
 	inputValidator = null,
 	type = 'text',
-	placeholder = ''
+	placeholder = '',
+	name,
+	autoComplete
 }) => {
 
 	const handleInput = (event) => {
@@ -35,6 +39,8 @@ export const CustomInput = ({
 		<input
 			type={type}
 			id={id}
+			name={name}
+			autoComplete={autoComplete}
 			className={className}
 			value={value}
 			maxLength={maxLength || undefined}

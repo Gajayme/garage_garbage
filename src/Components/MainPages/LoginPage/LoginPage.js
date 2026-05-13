@@ -28,9 +28,14 @@ export const LoginPage = () => {
 		)
 	}
 
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		handleOnLogin()
+	}
+
 	return (
 		<div className="login-page">
-			<div className="login-window ">
+			<form className="login-window " onSubmit={handleSubmit}>
 				<p
 					className="centered-text">
 					Emm... to be honest, it's only for us.
@@ -41,6 +46,8 @@ export const LoginPage = () => {
 					value={login}
 					onChange={(e) => setLogin(e.target.value)}
 					id="login"
+					name="username"
+					autoComplete="username"
 					className="login-window__input top-and-left-borders"
 					placeholder="Login"
 					type="text"
@@ -49,6 +56,8 @@ export const LoginPage = () => {
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 					id="password"
+					name="password"
+					autoComplete="current-password"
 					className="login-window__input top-and-left-borders"
 					placeholder="Password"
 					type="password"
@@ -56,14 +65,14 @@ export const LoginPage = () => {
 
 				<DefaultButton
 					className="login-window__button"
-					onClick={handleOnLogin}
+					type="submit"
 					labelText="Login"
 					disabled={isPending}
 				/>
 				{error && <div className="login-window__error">{error.message}</div>}
 				{isPending && <div className="login-window__sending">Sending…</div>}
 
-			</div>
+			</form>
 
 		</div>
 
