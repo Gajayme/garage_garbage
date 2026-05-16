@@ -170,7 +170,13 @@ export const UploadPageForm = ({
 	//   - setBusy        — какой флаг загрузки переключать;
 	//   - onSuccess      — что сделать с успешным ответом (reset формы / invalidate кеша);
 	//   - errorLogPrefix — префикс для console.error в catch-ветке.
-	const submitForm = async ({ url, setBusy, onSuccess, errorLogPrefix }) => {
+	const submitForm = async ({
+		url,
+		setBusy,
+		onSuccess,
+		errorLogPrefix,
+		method = Constants.http_methods.POST,
+	}) => {
 		if (isBusy) return;
 		setBusy(true);
 		try {
@@ -182,7 +188,7 @@ export const UploadPageForm = ({
 			if (!validateForm()) return;
 
 			const response = await fetch(url, {
-				method: Constants.http_methods.POST,
+				method,
 				body: buildFormData(),
 				credentials: "include",
 			});
@@ -227,6 +233,7 @@ export const UploadPageForm = ({
 
 		await submitForm({
 			url: `${Constants.base_server_url}${Constants.post_update}/${editItemId}`,
+			method: Constants.http_methods.PUT,
 			setBusy: setIsUpdating,
 			onSuccess: async () => {
 				await queryClient.invalidateQueries({
