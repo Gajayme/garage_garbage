@@ -1,0 +1,8 @@
+
+.upload-page-textarea {
+	width: 100%;
+	min-height: 6rem;
+	padding: 8px;
+	resize: vertical;
+	box-sizing: border-box;
+}

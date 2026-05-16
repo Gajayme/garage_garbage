@@ -10,6 +10,7 @@ import { NonEmpty, NonEmptyImages } from './Validations/Validations.js'
 import { ImageManagerWindow } from "./ImageManager/ImageManagerWindow.js"
 import { UploadNotificationState } from './UploadPageNotificationWindow.js'
 import { LabeledInput } from "Components/MainPages/UploadPage/LabeledInput.js"
+import { LabeledTextArea } from "Components/MainPages/UploadPage/LabeledTextArea.js"
 import { LabeledDropdown } from "Components/MainPages/UploadPage/LabeledDropDown.js"
 import { useInputParams } from "Components/hooks/useInputParams.js";
 import { useAuth } from "Components/Auth/AuthContext.js";
@@ -42,6 +43,7 @@ const INITIAL_FORM = {
 	brand: null,
 	type: null,
 	status: null,
+	description: '',
 	images: [],
 };
 
@@ -63,12 +65,12 @@ const VALIDATION_MAPPER = {
 	brand: [NonEmpty],
 	type: [NonEmpty],
 	status: [NonEmpty],
+	description: [NonEmpty],
 	images: [NonEmptyImages],
 };
 
 // Декларативный конфиг дропдаунов. Статическая часть (имя поля формы, лейбл,
 // id, плейсхолдер, билдер опций, ключ источника данных в useInputParams)
-// живёт на module scope — пересоздавать её на каждый рендер незачем.
 // Опции (`options`) добавляются внутри компонента через useMemo поверх этого
 // конфига, потому что зависят от ответа useInputParams.
 const DROPDOWN_DEFS = [
@@ -82,6 +84,27 @@ const DROPDOWN_DEFS = [
 		dataKey: "locations", placeholder: UploadConstants.chooseLocation, builder: buildDropdownState },
 	{ name: "status",   label: "Status",   id: "status_dropdown",
 		dataKey: "statuses",  placeholder: UploadConstants.chooseStatus,   builder: buildStatusDropdownState },
+];
+
+// Описание полей-инпутов (рендер ниже идёт через .map)
+const INPUT_DEFS = [
+	{ name: "item_name",   label: "Item Name",  id: "item_name_input",  maxLength: 50 },
+	{ name: "buyers_part", label: "Buyer Part", id: "buyer_part_input", maxLength: 10, inputValidator: NumbersOnly },
+	{ name: "bought_for",  label: "Bought for", id: "bought_for_input", maxLength: 10, inputValidator: NumbersOnly },
+	{ name: "price",       label: "Price",      id: "price_input",      maxLength: 10, inputValidator: NumbersOnly },
+	{ name: "sold_for",    label: "Sold for",   id: "sold_for_input",   maxLength: 10, inputValidator: NumbersOnly },
+	{ name: "size",        label: "Size",       id: "size_input",       maxLength: 10 },
+];
+
+// Многострочные поля (textarea)
+const TEXT_AREA_DEFS = [
+	{
+		name: "description",
+		label: "Description",
+		id: "description_textarea",
+		maxLength: 2000,
+		rows: 5,
+	},
 ];
 
 
@@ -107,15 +130,6 @@ export const UploadPageForm = ({
 	// клиент запросов для обновления данных в кеше
 	const queryClient = useQueryClient();
 
-	// Описание полей-инпутов (рендер ниже идёт через .map)
-	const inputFields = [
-		{ name: "item_name",   label: "Item Name",  id: "item_name_input",  maxLength: 50 },
-		{ name: "buyers_part", label: "Buyer Part", id: "buyer_part_input", maxLength: 10, inputValidator: NumbersOnly },
-		{ name: "bought_for",  label: "Bought for", id: "bought_for_input", maxLength: 10, inputValidator: NumbersOnly },
-		{ name: "price",       label: "Price",      id: "price_input",      maxLength: 10, inputValidator: NumbersOnly },
-		{ name: "sold_for",    label: "Sold for",   id: "sold_for_input",   maxLength: 10, inputValidator: NumbersOnly },
-		{ name: "size",        label: "Size",       id: "size_input",       maxLength: 10 },
-	];
 
 	// Сбор опций для дропдаунов
 	// Берём статический конфиг DROPDOWN_DEFS и достраиваем для каждой записи `options`,
@@ -276,6 +290,7 @@ export const UploadPageForm = ({
 		formData.append(Constants.brand, parseInt(formState.brand, 10));
 		formData.append(Constants.type, parseInt(formState.type, 10));
 		formData.append(Constants.status, formState.status ?? "");
+		formData.append(Constants.description, formState.description);
 		formState.images.forEach((image) => {
 			if (image?.file) {
 				formData.append(Constants.files, image.file);
@@ -368,6 +383,7 @@ export const UploadPageForm = ({
 			brand: 1,
 			type: 1,
 			status: "Initiated",
+			description: 'Почти кархарт но вообще не совсем кархарт поэтому конечно кал вонючий',
 			images: [imageObject]
 		});
 	};
@@ -391,7 +407,7 @@ export const UploadPageForm = ({
 			/>
 
 			<div className="upload-form-inputs">
-				{inputFields.map(({ name, label, id, maxLength, inputValidator }) => (
+				{INPUT_DEFS.map(({ name, label, id, maxLength, inputValidator }) => (
 					<LabeledInput
 						key={name}
 						value={formState[name]}
@@ -414,6 +430,21 @@ export const UploadPageForm = ({
 						labelText={label}
 						id={id}
 						options={options}
+					/>
+				))}
+				{TEXT_AREA_DEFS.map(({ name, label, id, maxLength, rows, inputValidator, placeholder }) => (
+					<LabeledTextArea
+						key={name}
+						value={formState[name]}
+						errors={errorState[name]}
+						onChange={handleOnChangeInput(name)}
+						className="upload-form-item"
+						labelText={label}
+						id={id}
+						maxLength={maxLength}
+						rows={rows}
+						inputValidator={inputValidator}
+						placeholder={placeholder}
 					/>
 				))}
 			</div>

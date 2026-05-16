@@ -6,7 +6,8 @@ export const buildItemData = (data) => {
 	if (
 		data.itemName === undefined ||
 		data.size === undefined ||
-		data.price === undefined
+		data.price === undefined ||
+		data.description === undefined
 	) {
 		return null;
 	}
@@ -16,6 +17,7 @@ export const buildItemData = (data) => {
 		restData: {
 			size: data.size,
 			price: data.price,
+			description: data.description,
 		}
 	}
 }

@@ -25,6 +25,7 @@ export const mapItemDetailFields = (d) => {
 			brand: null,
 			type: null,
 			status: null,
+			description: "",
 		};
 	}
 
@@ -40,6 +41,7 @@ export const mapItemDetailFields = (d) => {
 		brand: normalizeFk(d.brandId ?? d.brand),
 		type: normalizeFk(d.typeId ?? d.type),
 		status: normalizeStatus(d.status),
+		description: d.description != null ? String(d.description) : "",
 	};
 };
 

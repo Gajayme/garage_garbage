@@ -12,6 +12,7 @@ export const location = "locationId"
 export const brand = "brandId"
 export const type = "typeId"
 export const status = "status"
+export const description = "description"
 
 export const base_server_url = "http://72.60.133.178:5000/"
 
