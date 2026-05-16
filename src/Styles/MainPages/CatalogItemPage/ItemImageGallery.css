@@ -46,9 +46,7 @@
 }
 
 .item-image-gallery__nav-button:active {
-	background: var(--dark-grey);
-	border-top: 2px solid var(--black);
-	border-left: 2px solid var(--black);
+	scale: 0.90;
 }
 
 .item-image-gallery__nav-button:disabled {

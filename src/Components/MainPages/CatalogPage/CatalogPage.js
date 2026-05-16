@@ -48,12 +48,12 @@ export const CatalogPage = () => {
 			<div className="filter-buttons-wrapper">
 				<DefaultButton
 					className="filter-activation-button"
-					labelText="Filters"
+					labelText="FILTERS"
 					onClick={() => setIsFiltersVisible((prev) => !prev)}
 				/>
 				<DefaultButton
 					className="filter-reset-button"
-					labelText="Reset Filters"
+					labelText="RESET"
 					onClick={resetFilters}
 				/>
 			</div>

@@ -9,19 +9,29 @@
 .filter-activation-button {
 	padding: 10px;
 	cursor: pointer;
+	font-size: 33px;
 
 	color: var(--white);
 	background-color: var(--black);
-	border: 2px solid var(--dark-grey);
+	border: 3px solid var(--dark-grey);
+}
+
+.filter-activation-button:active {
+	scale: 0.97;
 }
 
 .filter-reset-button {
 	padding: 10px;
 	cursor: pointer;
+	font-size: 33px;
 
 	color: var(--white);
 	background-color: var(--red);
-	border: 2px solid var(--dark-grey);
+	border: 3px solid var(--dark-grey);
+}
+
+.filter-reset-button:active {
+	scale: 0.97;
 }
 
 
