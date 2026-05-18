@@ -7,7 +7,7 @@
 }
 
 .filter-activation-button {
-	padding: 10px;
+	padding: 2px 20px 2px 20px;
 	cursor: pointer;
 	font-size: 33px;
 
@@ -21,7 +21,7 @@
 }
 
 .filter-reset-button {
-	padding: 10px;
+	padding: 2px 20px 2px 20px;
 	cursor: pointer;
 	font-size: 33px;
 
