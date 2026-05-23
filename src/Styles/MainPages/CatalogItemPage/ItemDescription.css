@@ -1,13 +1,9 @@
-
 .item-description {
-	flex: 1 1 0;
 	min-width: 0;
-
-	position: sticky;
-	top: 0;
-	align-self: flex-start;
+	width: 100%;
 }
 
 .item-description p {
 	margin: 0;
+	font-weight: 400;
 }

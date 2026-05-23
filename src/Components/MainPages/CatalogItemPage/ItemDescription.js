@@ -1,22 +1,16 @@
 import "Styles/MainPages/CatalogItemPage/ItemDescription.css";
 
-
-export const ItemDescription = ({data, delimiter = ": " }) => {
-	if (!data) return null;
-
-	const { title, restData } = data;
+/**
+ * Компонент с текстом описания вещи.
+ *
+ * @param {string} description - текст описания
+ */
+export const ItemDescription = ({ description }) => {
+	if (description == null || description === "") return null;
 
 	return (
 		<div className="item-description">
-			{/* Заголовок (имя вещи) */}
-			<p>{title}</p>
-
-			{/* Остальная информация */}
-			{Object.entries(restData).map(([key, value], index) => (
-				<p key={index}>
-					{key}{delimiter}{String(value)}
-				</p>
-			))}
+			<p>{String(description)}</p>
 		</div>
 	);
 };

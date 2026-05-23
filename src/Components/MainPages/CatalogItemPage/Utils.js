@@ -1,5 +1,4 @@
 
-
 export const buildItemData = (data) => {
 	if (!data || typeof data !== "object") return null;
 
@@ -14,10 +13,8 @@ export const buildItemData = (data) => {
 
 	return {
 		title: data.itemName,
-		restData: {
-			size: data.size,
-			price: data.price,
-			description: data.description,
-		}
-	}
-}
+		size: data.size,
+		price: data.price,
+		description: data.description,
+	};
+};

@@ -1,0 +1,9 @@
+.item-page-small-screen {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	min-width: 0;
+	min-height: 0;
+	align-items: stretch;
+	font-size: 25px;
+}
