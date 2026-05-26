@@ -2,14 +2,37 @@
 	background-color: var(--black);
 	flex-shrink: 0;
 	flex-grow: 1;
+	width: 100%;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: flex-start;
 	align-items: center;
-	padding-right: 8px;
+	gap: 16px;
+	padding: 8px;
+}
+
+.window-header__brand {
+	display: flex;
+	align-items: center;
+	gap: 13px;
+	min-width: 0;
+	color: var(--white);
+}
+
+.window-header__logo {
+	width: 30px;
+	height: 30px;
+	flex-shrink: 0;
+}
+
+.window-header__title {
+	font-size: 25px;
+	white-space: nowrap;
 }
 
 .window-header__admin {
+	margin-left: auto;
 	color: var(--middle-grey, #888);
-	font-size: 0.9rem;
+	font-size: 25px;
+	white-space: nowrap;
 }
 
