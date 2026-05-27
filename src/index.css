@@ -9,6 +9,9 @@ html, body, #root {
 	overflow: hidden;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
+	/* Убираем дефолтный синий tap-highlight на мобильных WebKit/Chromium. */
+	-webkit-tap-highlight-color: transparent;
 }
 
 body {
