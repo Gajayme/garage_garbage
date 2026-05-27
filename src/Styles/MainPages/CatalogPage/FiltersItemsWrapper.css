@@ -1,7 +1,11 @@
 
 .filters-items-wrapper {
-	display: flex;
+	position: relative;
+}
 
-	flex-direction: column;
-	gap: 10px;
+.filters-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
 }

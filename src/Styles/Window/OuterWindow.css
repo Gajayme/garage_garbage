@@ -3,8 +3,8 @@
 	flex-direction: column;
 	overflow: hidden;
 
-	padding-left: 5px;
-	padding-right: 5px;
+	padding-left: 9px;
+	padding-right: 9px;
 	padding-top: 5px;
 	padding-bottom: 7px;
 
@@ -29,7 +29,6 @@
 }
 
 .button-layer-part {
-	padding: 10px;
 	display: flex;
 }
 
