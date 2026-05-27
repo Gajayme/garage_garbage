@@ -1,6 +1,8 @@
 
 
 .filter-checkbox {
+	font-size: 25px;
+
 	display: flex;
 	align-items: center;
 	cursor: pointer;

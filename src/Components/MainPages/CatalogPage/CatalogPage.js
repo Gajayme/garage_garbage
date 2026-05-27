@@ -59,18 +59,23 @@ export const CatalogPage = () => {
 			</div>
 
 			<div className="filters-items-wrapper">
-				{isFiltersVisible && (
-					<FiltersWindow
-						availableFilters={allFilters}
-						filtersState={filtersState}
-						onFilterStateChanged={(name) => (value) => setFilter(name, value)}
-					/>
-				)}
 				{/* пока запрос идёт, отображаем загрузочный текст (только вместо карточек товаров)*/}
 				{isLoading ? (
 					<p className="centered-text">Loading...</p>
 				) : (
 					<Items catalogState={items} />
+				)}
+
+				{/* окно фильтров — поверх грида, его верхний-левый угол
+				    совпадает с верхним-левым углом первого изображения */}
+				{isFiltersVisible && (
+					<div className="filters-overlay">
+						<FiltersWindow
+							availableFilters={allFilters}
+							filtersState={filtersState}
+							onFilterStateChanged={(name) => (value) => setFilter(name, value)}
+						/>
+					</div>
 				)}
 			</div>
 		</div>
