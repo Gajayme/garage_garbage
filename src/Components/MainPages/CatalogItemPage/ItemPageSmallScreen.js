@@ -1,8 +1,10 @@
 import { ItemImageGallery } from "./ItemImageGallery.js";
 import { ItemInfo } from "./ItemInfo.js";
 import { ItemDescription } from "./ItemDescription.js";
+import { DefaultButton } from "Components/Button.js";
 
 import "Styles/MainPages/CatalogItemPage/ItemPageSmallScreen.css";
+import "Styles/MainPages/CatalogItemPage/BuyItemButton.css";
 
 /**
  * Раскладка страницы вещи для узких/высоких экранов.
@@ -21,6 +23,7 @@ export const ItemPageSmallScreen = ({ itemData, images, onImageClick }) => {
 			<ItemInfo title={title} size={size} price={price} />
 			<ItemImageGallery images={images} onImageClick={onImageClick} />
 			<ItemDescription description={description} />
+			<DefaultButton className="buy-item-button" labelText="BUY" />
 		</div>
 	);
 };

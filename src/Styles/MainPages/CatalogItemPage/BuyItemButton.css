@@ -1,0 +1,16 @@
+.buy-item-button {
+	align-self: center;
+
+	padding: 2px 80px 2px 80px;
+	cursor: pointer;
+	font-size: 33px;
+	font-weight: 600;
+
+	color: var(--white);
+	background-color: var(--red);
+	border: 3px solid var(--dark-grey);
+}
+
+.buy-item-button:active {
+	scale: 0.97;
+}
