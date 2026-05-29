@@ -41,18 +41,12 @@
 	padding: 4px;
 	border: none;
 	background: none;
-	-webkit-tap-highlight-color: transparent;
 	cursor: pointer;
 	line-height: 0;
 }
 
 .item-image-gallery__nav-button:active {
-	background-color: transparent;
 	scale: 0.90;
-}
-
-.item-image-gallery__nav-button:focus {
-	background-color: transparent;
 }
 
 .item-image-gallery__nav-button:disabled {
