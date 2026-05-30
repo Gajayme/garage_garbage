@@ -65,7 +65,11 @@ export const typeDeleteApi = "type/delete"
 export const buyerDeleteApi = "buyer/delete"
 export const locationDeleteApi = "location/delete"
 
+// API для получения ссылки на WhatsApp по вещи: /post/{id}/whatsapp-link
+export const postWhatsappLink = (postID) => `post/${postID}/whatsapp-link`
+
 // query namespaces
+export const whatsappLinkQueryKey = "whatsappLink" // whatsapp link for item page
 export const itemDetailsQueryKey = "itemDetails" // item details for catalog page
 export const itemDetailsPrivateQueryKey = "itemDetailsPrivate" // item details for database page
 export const itemsQueryKey = "items" // items for catalog page

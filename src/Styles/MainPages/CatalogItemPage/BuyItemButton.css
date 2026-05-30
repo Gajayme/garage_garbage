@@ -1,6 +1,10 @@
 .buy-item-button {
 	align-self: center;
 
+	display: inline-block;
+	text-align: center;
+	text-decoration: none;
+
 	padding: 2px 80px 2px 80px;
 	cursor: pointer;
 	font-size: 33px;
@@ -13,4 +17,11 @@
 
 .buy-item-button:active {
 	scale: 0.97;
+}
+
+/* Пока ссылка не загружена — кнопка неактивна. */
+.buy-item-button:disabled {
+	pointer-events: none;
+	opacity: 0.5;
+	cursor: default;
 }

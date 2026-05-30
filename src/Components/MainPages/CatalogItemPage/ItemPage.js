@@ -6,6 +6,7 @@ import { ItemPageSmallScreen } from "./ItemPageSmallScreen.js";
 import { ItemModalWindow } from "./ItemModalWindow.js";
 import { buildItemData } from "./Utils.js";
 import { useItemDetails } from "./useItemDetails.js";
+import { useWhatsappLink } from "./useWhatsappLink.js";
 import { useHeightGreaterThanWidth } from "./useHeightGreaterThanWidth.js";
 
 import "Styles/CenteredText.css";
@@ -15,6 +16,8 @@ export const ItemPage = () => {
 	const [modalImageUrl, setModalImageUrl] = useState(null);
 	const tallNarrowViewport = useHeightGreaterThanWidth();
 	const { data, isFetching, error } = useItemDetails(itemId);
+	const { data: whatsappData } = useWhatsappLink(itemId);
+	const whatsappLink = whatsappData?.data?.url ?? null;
 
 	if (isFetching) {
 		return <p className="centered-text">Loading...</p>;
@@ -40,12 +43,14 @@ export const ItemPage = () => {
 					itemData={itemData}
 					images={images}
 					onImageClick={setModalImageUrl}
+					whatsappLink={whatsappLink}
 				/>
 			) : (
 				<ItemPageBigScreen
 					itemData={itemData}
 					images={images}
 					onImageClick={setModalImageUrl}
+					whatsappLink={whatsappLink}
 				/>
 			)}
 

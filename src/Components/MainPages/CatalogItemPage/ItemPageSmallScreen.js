@@ -1,10 +1,9 @@
 import { ItemImageGallery } from "./ItemImageGallery.js";
 import { ItemInfo } from "./ItemInfo.js";
 import { ItemDescription } from "./ItemDescription.js";
-import { DefaultButton } from "Components/Button.js";
+import { BuyItemButton } from "./BuyItemButton.js";
 
 import "Styles/MainPages/CatalogItemPage/ItemPageSmallScreen.css";
-import "Styles/MainPages/CatalogItemPage/BuyItemButton.css";
 
 /**
  * Раскладка страницы вещи для узких/высоких экранов.
@@ -14,8 +13,9 @@ import "Styles/MainPages/CatalogItemPage/BuyItemButton.css";
  * @param {{ title: string, size: any, price: any, description: string }} itemData
  * @param {Array} images - массив изображений вещи
  * @param {Function} onImageClick - обработчик клика по изображению (открытие модалки)
+ * @param {string|null} whatsappLink - ссылка на WhatsApp для кнопки BUY
  */
-export const ItemPageSmallScreen = ({ itemData, images, onImageClick }) => {
+export const ItemPageSmallScreen = ({ itemData, images, onImageClick, whatsappLink }) => {
 	const { title, size, price, description } = itemData;
 
 	return (
@@ -23,7 +23,7 @@ export const ItemPageSmallScreen = ({ itemData, images, onImageClick }) => {
 			<ItemInfo title={title} size={size} price={price} />
 			<ItemImageGallery images={images} onImageClick={onImageClick} />
 			<ItemDescription description={description} />
-			<DefaultButton className="buy-item-button" labelText="BUY" />
+			<BuyItemButton whatsappLink={whatsappLink} />
 		</div>
 	);
 };
