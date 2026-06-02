@@ -13,14 +13,14 @@
 .window-header__brand {
 	display: flex;
 	align-items: center;
-	gap: 13px;
+	gap: 11px;
 	min-width: 0;
 	color: var(--white);
 }
 
 .window-header__logo {
-	width: 30px;
-	height: 30px;
+	width: 28px;
+	height: 28px;
 	flex-shrink: 0;
 }
 
