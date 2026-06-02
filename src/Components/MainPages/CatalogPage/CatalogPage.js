@@ -6,6 +6,7 @@ import { DefaultButton } from "Components/Button.js";
 import { useUrlFilters } from "./useUrlFilters";
 import { useCatalogItems } from "./useCatalogItems";
 
+import "Styles/MainPages/CatalogPage/CatalogPage.scss";
 import "Styles/MainPages/CatalogPage/Items/CatalogItems.scss";
 import "Styles/MainPages/CatalogPage/FilterActivationButtons.scss";
 import "Styles/MainPages/CatalogPage/FiltersItemsWrapper.scss";
@@ -44,7 +45,7 @@ export const CatalogPage = () => {
 
 	const items = data?.data ?? [];
 	return (
-		<div>
+		<div className="catalog-page">
 			<div className="filter-buttons-wrapper">
 				<DefaultButton
 					className="filter-activation-button"

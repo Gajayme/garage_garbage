@@ -5,7 +5,9 @@
 
 @use "../../../../Styles/_breakpoints" as bp;
 
-$grid-gap: 25px;
+$grid-gap-column-small: 15px;
+$grid-gap-column-medium: 50px;
+$grid-gap-row: 21px; // вертикальный промежуток — всегда фиксированный
 
 // Минимальная ширина колонки по брейкпоинтам
 $col-min-wide: 360px; // широкие экраны (> 2000px)
@@ -14,7 +16,8 @@ $col-min-small: 120px; // <= 500px
 
 .catalog-items {
 	display: grid;
-	gap: $grid-gap; // и горизонтальный, и вертикальный промежуток
+	column-gap: $grid-gap-column-medium; // горизонтальный промежуток — фиксированный на всех экранах
+	row-gap: $grid-gap-row; // вертикальный промежуток — фиксированный на всех экранах
 	overflow: visible; // на всякий случай для увеличения карточки при наведении
 
 	grid-template-columns: repeat(auto-fill, minmax($col-min-wide, 1fr));
@@ -25,5 +28,6 @@ $col-min-small: 120px; // <= 500px
 
 	@include bp.up-to(bp.$bp-small) {
 		grid-template-columns: repeat(auto-fill, minmax($col-min-small, 1fr));
+		column-gap: $grid-gap-column-small;
 	}
 }

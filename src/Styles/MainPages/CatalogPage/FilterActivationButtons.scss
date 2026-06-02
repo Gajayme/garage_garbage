@@ -1,9 +1,13 @@
-
+@use "../../../Styles/_breakpoints" as bp;
 
 .filter-buttons-wrapper {
 	display: flex;
 	gap: 10px;
-	margin-bottom: 15px;
+	margin-bottom: 32px;
+
+	@include bp.up-to(bp.$bp-small) {
+		margin-bottom: 16px;
+	}
 }
 
 .filter-activation-button {
