@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { DatabaseItem } from "Components/MainPages/DatabasePage/Items/DatabaseItem.js";
 import * as NavigationConstants from "Components/Navigation/Constants";
 
-import "Styles/NoDecorationTextLink.css";
-import "Styles/MainPages/DatabasePage/Items/DatabaseItems.css";
-import "Styles/CenteredText.css";
+import "Styles/NoDecorationTextLink.scss";
+import "Styles/MainPages/DatabasePage/Items/DatabaseItems.scss";
+import "Styles/CenteredText.scss";
 
 export const DatabaseItems = ({ catalogState }) => {
 	if (catalogState.length === 0) {

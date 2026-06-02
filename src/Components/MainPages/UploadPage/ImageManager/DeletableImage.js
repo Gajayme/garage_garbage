@@ -2,7 +2,7 @@ import React from 'react';
 
 import {BorderedImage} from "Components/BorderedImage.js"
 
-import "Styles/MainPages/UploadPage/ImageManager/DeletableImage.css"
+import "Styles/MainPages/UploadPage/ImageManager/DeletableImage.scss"
 import CrossIcon from "Assets/Images/cross.png"
 
 

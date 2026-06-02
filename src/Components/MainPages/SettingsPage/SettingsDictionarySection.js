@@ -10,7 +10,7 @@ import { ToggleIconButton } from "Components/ToggleIconButton.js";
 import arrowUp from "Assets/Images/Filters/arrow_up.svg";
 import arrowDown from "Assets/Images/Filters/arrow_down.svg";
 
-import "Styles/MainPages/SettingsPage/SettingsPageContent.css";
+import "Styles/MainPages/SettingsPage/SettingsPageContent.scss";
 
 export const SettingsDictionarySection = ({
 	title,

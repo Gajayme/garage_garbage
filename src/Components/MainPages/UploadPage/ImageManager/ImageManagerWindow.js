@@ -4,11 +4,11 @@ import {OuterWindow} from "Components/Window/OuterWindow.js"
 import {InnerWindow} from "Components/Window/InnerWindow.js"
 import {ButtonLayer} from "Components/Window/ButtonLayer.js"
 
-import 'Styles/MainPages/UploadPage/Validations/ErrorText.css'
-import 'Styles/Window/WindowHeader.css'
-import 'Styles/Window/ButtonLayer.css'
-import 'Styles/Window/InnerWindow.css'
-import 'Styles/Window/OuterWindow.css'
+import 'Styles/MainPages/UploadPage/Validations/ErrorText.scss'
+import 'Styles/Window/WindowHeader.scss'
+import 'Styles/Window/ButtonLayer.scss'
+import 'Styles/Window/InnerWindow.scss'
+import 'Styles/Window/OuterWindow.scss'
 
 export const ImageManagerWindow = ({images, errors, onChange, onDelete, onDeleteSpecific}) => {
 

@@ -3,8 +3,8 @@ import { DatabaseItems } from "Components/MainPages/DatabasePage/Items/DatabaseI
 import { NavButton } from "Components/Navigation/NavButton";
 import * as Nav from "Components/Navigation/Constants";
 
-import "Styles/Navigation/NavButton.css";
-import "Styles/CenteredText.css";
+import "Styles/Navigation/NavButton.scss";
+import "Styles/CenteredText.scss";
 
 export const DatabasePage = () => {
 	const { data, error, isLoading } = usePrivateCatalogItems();

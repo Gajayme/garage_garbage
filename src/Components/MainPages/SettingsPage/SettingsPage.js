@@ -2,8 +2,8 @@ import * as GlobalConstants from "Constants.js";
 import { useInputParams } from "Components/hooks/useInputParams.js";
 import { SettingsDictionarySection } from "Components/MainPages/SettingsPage/SettingsDictionarySection.js";
 
-import "Styles/CenteredText.css";
-import "Styles/MainPages/SettingsPage/SettingsPageContent.css";
+import "Styles/CenteredText.scss";
+import "Styles/MainPages/SettingsPage/SettingsPageContent.scss";
 
 export const SettingsPage = () => {
 	const { brands, types, buyers, locations, isLoading } = useInputParams();

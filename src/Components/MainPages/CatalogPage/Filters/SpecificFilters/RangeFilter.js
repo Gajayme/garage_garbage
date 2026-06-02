@@ -4,7 +4,7 @@ import {NumbersOnly} from 'Components/utils/inputFilters.js'
 import {CustomInput} from 'Components/CustomInput.js';
 import {priceMaxLength} from './Constants.js'
 
-import 'Styles/MainPages/CatalogPage/Filters/SpecificFilters/PriceRangeFilter.css'
+import 'Styles/MainPages/CatalogPage/Filters/SpecificFilters/PriceRangeFilter.scss'
 
 
 // фильтр с двумя окнами ввода минимального и максимального значений для фильтрации

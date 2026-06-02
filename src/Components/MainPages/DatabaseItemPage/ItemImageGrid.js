@@ -1,6 +1,6 @@
 import { ItemThumbnailButton } from "Components/ItemThumbnailButton.js";
 
-import "Styles/MainPages/DatabaseItemPage/ItemImageGrid.css";
+import "Styles/MainPages/DatabaseItemPage/ItemImageGrid.scss";
 
 
 export const ItemImageGrid = ({ images, onImageClick }) => {

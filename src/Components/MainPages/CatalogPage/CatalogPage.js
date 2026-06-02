@@ -6,10 +6,10 @@ import { DefaultButton } from "Components/Button.js";
 import { useUrlFilters } from "./useUrlFilters";
 import { useCatalogItems } from "./useCatalogItems";
 
-import "Styles/MainPages/CatalogPage/Items/CatalogItems.css";
-import "Styles/MainPages/CatalogPage/FilterActivationButtons.css";
-import "Styles/MainPages/CatalogPage/FiltersItemsWrapper.css";
-import "Styles/CenteredText.css";
+import "Styles/MainPages/CatalogPage/Items/CatalogItems.scss";
+import "Styles/MainPages/CatalogPage/FilterActivationButtons.scss";
+import "Styles/MainPages/CatalogPage/FiltersItemsWrapper.scss";
+import "Styles/CenteredText.scss";
 
 export const CatalogPage = () => {
 	// какие фильтры вообще существуют (приходят с бэка)

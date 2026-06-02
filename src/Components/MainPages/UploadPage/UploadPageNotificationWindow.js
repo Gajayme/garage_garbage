@@ -1,7 +1,7 @@
 import { NotificationWindow } from "Components/NotificationWindow.js";
 
-import 'Styles/MainPages/UploadPage/UploadNotificationWindow.css'
-import "Styles/ColoredText.css"
+import 'Styles/MainPages/UploadPage/UploadNotificationWindow.scss'
+import "Styles/ColoredText.scss"
 
 
 

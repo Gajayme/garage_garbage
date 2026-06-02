@@ -6,7 +6,7 @@ import { SwipeArea } from "./SwipeArea.js";
 import leftArrow from "Assets/Images/CatalogItem/left_arrow.png";
 import rightArrow from "Assets/Images/CatalogItem/arrow_right.png";
 
-import "Styles/MainPages/CatalogItemPage/ItemImageGallery.css";
+import "Styles/MainPages/CatalogItemPage/ItemImageGallery.scss";
 
 const getImageUrl = (imageData) => {
 	if (imageData == null) return null;

@@ -2,9 +2,9 @@
 import { ErrorMessage } from "./Validations/ErrorMessage.js";
 import { CustomTextArea } from "Components/CustomTextArea.js";
 
-import "Styles/MainPages/UploadPage/Labeled.css";
-import "Styles/MainPages/UploadPage/Validations/ErrorText.css";
-import "Styles/MainPages/UploadPage/UploadPageTextArea.css";
+import "Styles/MainPages/UploadPage/Labeled.scss";
+import "Styles/MainPages/UploadPage/Validations/ErrorText.scss";
+import "Styles/MainPages/UploadPage/UploadPageTextArea.scss";
 
 /**
  * Поле textarea с заголовком и ошибками.

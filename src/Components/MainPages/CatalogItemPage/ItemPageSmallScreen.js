@@ -3,7 +3,7 @@ import { ItemInfo } from "./ItemInfo.js";
 import { ItemDescription } from "./ItemDescription.js";
 import { BuyItemButton } from "./BuyItemButton.js";
 
-import "Styles/MainPages/CatalogItemPage/ItemPageSmallScreen.css";
+import "Styles/MainPages/CatalogItemPage/ItemPageSmallScreen.scss";
 
 /**
  * Раскладка страницы вещи для узких/высоких экранов.

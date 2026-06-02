@@ -9,7 +9,7 @@ import { useItemDetails } from "./useItemDetails.js";
 import { useWhatsappLink } from "./useWhatsappLink.js";
 import { useHeightGreaterThanWidth } from "./useHeightGreaterThanWidth.js";
 
-import "Styles/CenteredText.css";
+import "Styles/CenteredText.scss";
 
 export const ItemPage = () => {
 	const { itemId } = useParams();

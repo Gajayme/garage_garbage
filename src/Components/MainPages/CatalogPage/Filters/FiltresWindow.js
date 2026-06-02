@@ -4,10 +4,10 @@ import React, {useState} from 'react';
 import {OuterWindow} from "Components/Window/OuterWindow.js"
 import {InnerWindow} from "Components/Window/InnerWindow.js"
 
-import 'Styles/MainPages/CatalogPage/Filters/FilterButton.css'
-import 'Styles/MainPages/CatalogPage/Filters/FilterWithButton.css'
-import 'Styles/Window/OuterWindow.css'
-import 'Styles/Window/InnerWindow.css'
+import 'Styles/MainPages/CatalogPage/Filters/FilterButton.scss'
+import 'Styles/MainPages/CatalogPage/Filters/FilterWithButton.scss'
+import 'Styles/Window/OuterWindow.scss'
+import 'Styles/Window/InnerWindow.scss'
 
 
 import { FilterBuilder } from './FiltersBuilder.js';

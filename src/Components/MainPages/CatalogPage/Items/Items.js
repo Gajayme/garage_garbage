@@ -4,7 +4,7 @@ import { Item } from 'Components/MainPages/CatalogPage/Items/Item';
 import { validateItem } from 'Components/MainPages/CatalogPage/Items/validate';
 import * as NavigationConstants from "Components/Navigation/Constants";
 
-import "Styles/NoDecorationTextLink.css";
+import "Styles/NoDecorationTextLink.scss";
 
 export const Items = ({catalogState}) => {
 

@@ -6,7 +6,7 @@ import { useLogin } from './useLogin.js'
 import { useAuth } from 'Components/Auth/AuthContext.js'
 import * as Nav from 'Components/Navigation/Constants'
 
-import 'Styles/MainPages/LoginPage/LoginPage.css'
+import 'Styles/MainPages/LoginPage/LoginPage.scss'
 
 export const LoginPage = () => {
 	const [login, setLogin] = useState('')

@@ -1,7 +1,7 @@
 import React from 'react';
 import {DeletableImage} from "./DeletableImage";
 
-import 'Styles/MainPages/UploadPage/ImageManager/ImageViewer.css'
+import 'Styles/MainPages/UploadPage/ImageManager/ImageViewer.scss'
 
 export const ImageViewer = ({ images, onDeleteSpecific }) => {
 	return (

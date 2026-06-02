@@ -1,4 +1,4 @@
-import "Styles/MainPages/CatalogItemPage/ItemInfo.css";
+import "Styles/MainPages/CatalogItemPage/ItemInfo.scss";
 
 /**
  * Компонент с данными о вещи (имя, размер, цена) — без описания.

@@ -1,0 +1,30 @@
+// Каталог вещей: адаптивная сетка карточек.
+// На разных брейкпоинтах меняется только минимальная ширина колонки —
+// остальные свойства сетки одинаковы, поэтому заданы один раз.
+
+$grid-gap: 25px;
+
+// Минимальная ширина колонки по брейкпоинтам
+$col-min-wide: 360px; // широкие экраны (> 2000px)
+$col-min-medium: 260px; // <= 2000px
+$col-min-small: 130px; // <= 500px
+
+// Брейкпоинты
+$bp-medium: 2000px;
+$bp-small: 500px;
+
+.catalog-items {
+	display: grid;
+	gap: $grid-gap; // и горизонтальный, и вертикальный промежуток
+	overflow: visible; // на всякий случай для увеличения карточки при наведении
+
+	grid-template-columns: repeat(auto-fill, minmax($col-min-wide, 1fr));
+
+	@media (max-width: $bp-medium) {
+		grid-template-columns: repeat(auto-fill, minmax($col-min-medium, 1fr));
+	}
+
+	@media (max-width: $bp-small) {
+		grid-template-columns: repeat(auto-fill, minmax($col-min-small, 1fr));
+	}
+}

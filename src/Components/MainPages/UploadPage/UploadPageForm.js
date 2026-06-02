@@ -23,8 +23,8 @@ import { urlToFile } from "Components/utils/urlToFile.js";
 
 import * as Constants from 'Constants.js'
 
-import 'Styles/MainPages/UploadPage/UploadPageForm.css'
-import 'Styles/MainPages/UploadPage/UploadPageButton.css'
+import 'Styles/MainPages/UploadPage/UploadPageForm.scss'
+import 'Styles/MainPages/UploadPage/UploadPageButton.scss'
 import DefaultImg from "Assets/Images/default.jpg"
 
 

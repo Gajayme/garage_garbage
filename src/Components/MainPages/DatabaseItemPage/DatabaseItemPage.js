@@ -14,8 +14,8 @@ import { ItemModalWindow } from "./ItemModalWindow.js";
 import { buildItemData } from "./Utils.js";
 import { useItemDetailsPrivate } from "Components/hooks/useItemDetailsPrivate.js";
 
-import "Styles/MainPages/DatabaseItemPage/ImagesAndDescriptionWrapper.css";
-import "Styles/CenteredText.css";
+import "Styles/MainPages/DatabaseItemPage/ImagesAndDescriptionWrapper.scss";
+import "Styles/CenteredText.scss";
 
 export const DatabaseItemPage = () => {
 	const { itemId } = useParams();

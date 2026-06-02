@@ -1,4 +1,4 @@
-import "Styles/MainPages/DatabaseItemPage/ItemDescription.css";
+import "Styles/MainPages/DatabaseItemPage/ItemDescription.scss";
 
 
 export const ItemDescription = ({data, delimiter = ": " }) => {

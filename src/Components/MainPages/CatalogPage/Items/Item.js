@@ -1,8 +1,8 @@
 
 import { BorderedImage } from "Components/BorderedImage.js"
 
-import "Styles/MainPages/CatalogPage/Items/CatalogItem.css"
-import "Styles/TopAndLeftBorders.css"
+import "Styles/MainPages/CatalogPage/Items/CatalogItem.scss"
+import "Styles/TopAndLeftBorders.scss"
 
 
 /**

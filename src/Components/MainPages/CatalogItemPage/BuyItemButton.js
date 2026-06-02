@@ -1,4 +1,4 @@
-import "Styles/MainPages/CatalogItemPage/BuyItemButton.css";
+import "Styles/MainPages/CatalogItemPage/BuyItemButton.scss";
 
 /**
  * Кнопка BUY: ссылка, открывающая чат в WhatsApp в новой вкладке.

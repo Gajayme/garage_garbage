@@ -1,5 +1,5 @@
 
-import "Styles/TopAndLeftBorders.css"
+import "Styles/TopAndLeftBorders.scss"
 import DefaultImg from "Assets/Images/default.jpg"
 
 

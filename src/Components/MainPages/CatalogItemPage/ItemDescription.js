@@ -1,4 +1,4 @@
-import "Styles/MainPages/CatalogItemPage/ItemDescription.css";
+import "Styles/MainPages/CatalogItemPage/ItemDescription.scss";
 
 /**
  * Компонент с текстом описания вещи.

@@ -2,7 +2,7 @@ import React from 'react';
 
 import {BorderedImage} from "Components/BorderedImage.js"
 
-import "Styles/MainPages/DatabaseItemPage/ModalWindowImage.css"
+import "Styles/MainPages/DatabaseItemPage/ModalWindowImage.scss"
 import CrossIcon from "Assets/Images/cross.png"
 
 
