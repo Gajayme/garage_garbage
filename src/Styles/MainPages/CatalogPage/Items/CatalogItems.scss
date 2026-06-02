@@ -10,7 +10,7 @@ $grid-gap: 25px;
 // Минимальная ширина колонки по брейкпоинтам
 $col-min-wide: 360px; // широкие экраны (> 2000px)
 $col-min-medium: 260px; // <= 2000px
-$col-min-small: 130px; // <= 500px
+$col-min-small: 120px; // <= 500px
 
 .catalog-items {
 	display: grid;
