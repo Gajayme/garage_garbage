@@ -1,3 +1,5 @@
+@use "../../Styles/_breakpoints" as bp;
+
 .outer-window {
 	display: flex;
 	flex-direction: column;
@@ -7,6 +9,15 @@
 	padding-right: 12px;
 	padding-top: 8px;
 	padding-bottom: 14px;
+
+	@include bp.up-to(bp.$bp-small) {
+		padding-left: 6px;
+		padding-right: 6px;
+		padding-top: 7px;
+		padding-bottom: 13px;
+	}
+
+
 
 	/* На Android Chrome `100vh`/иногда `100dvh` могут давать высоту больше
 	   текущей видимой области при открытой адресной строке.

@@ -1,0 +1,14 @@
+// Общие брейкпоинты проекта и помощник для медиа-запросов.
+// Подключать через `@use "<путь>/breakpoints" as bp;`
+
+$bp-medium: 2000px;
+$bp-small: 500px;
+
+// Применяет вложенные стили на экранах не шире $width.
+// Использование:
+//   @include up-to($bp-small) { ... }
+@mixin up-to($width) {
+	@media (max-width: $width) {
+		@content;
+	}
+}
