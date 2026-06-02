@@ -1,3 +1,5 @@
+@use "../../../../Styles/_breakpoints" as bp;
+
 .catalog-item:hover {
 	transform: scale(1.03);
 }
@@ -18,5 +20,11 @@
 	text-overflow: ellipsis;		/* Добавляем троеточие (...) */
 	line-clamp: 2;					/* Ограничиваем количество строк (2) */
 	-webkit-line-clamp: 2;			/* Ограничиваем количество строк (2) */
-	line-height: 20px;
+	line-height: 33px;
+	font-size: 33px;
+
+	@include bp.up-to(bp.$bp-small) {
+		line-height: 20px;
+		font-size: 20px;
+	}
 }
