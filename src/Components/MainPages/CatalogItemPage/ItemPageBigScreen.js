@@ -27,7 +27,7 @@ export const ItemPageBigScreen = ({ itemData, images, onImageClick, whatsappLink
 				<ItemTitle className="item-page-big-screen__title" title={title} />
 				<ItemInfo className="item-page-big-screen__info" size={size} price={price} />
 				<ItemDescription className="item-page-big-screen__description" description={description} />
-				<BuyItemButton className="item-page-big-screen__button" whatsappLink={whatsappLink} />
+				<BuyItemButton whatsappLink={whatsappLink} />
 			</div>
 		</div>
 	);
