@@ -1,0 +1,20 @@
+// Общие лейаут-помощники проекта.
+// Подключать через `@use "<путь>/layout" as layout;`
+
+@use "breakpoints" as bp;
+
+// Внешние отступы контента страницы.
+// Значения по умолчанию соответствуют странице каталога;
+// при необходимости можно переопределить аргументами.
+@mixin page-margins(
+	$x: 66px,
+	$y: 32px,
+	$x-small: 16px,
+	$y-small: 16px
+) {
+	margin: $y $x;
+
+	@include bp.up-to(bp.$bp-small) {
+		margin: $y-small $x-small;
+	}
+}

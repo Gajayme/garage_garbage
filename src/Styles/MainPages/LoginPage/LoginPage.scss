@@ -1,5 +1,7 @@
+@use "../../_layout" as layout;
+
 .login-page{
-	align-items: center;
+	@include layout.page-margins;
 	justify-content: center;
 	display: flex;
 }
@@ -12,10 +14,32 @@
 	align-items: center;
 }
 
+.login-window__text {
+	margin: 0px;
+	text-align: center;
+	font-size: 25px;
+}
+
+.login-window__error {
+	font-size: 25px;
+	color: var(--red);
+}
+
 .login-window__input {
+	font-size: 25px;
 	padding: 5px;
 }
 
 .login-window__button {
-	padding: 5px;
+	padding: 2px 20px 2px 20px;
+	font-size: 25px;
+	font-weight: bold;
+	cursor: pointer;
+	color: var(--white);
+	background-color: var(--black);
+	border: 3px solid var(--dark-grey);
+}
+
+.login-window__button:active {
+	scale: 0.97;
 }

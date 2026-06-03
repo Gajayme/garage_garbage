@@ -1,18 +1,8 @@
 // Внешние отступы всего контента страницы каталога.
-// Брейкпоинты берём из общего партиала.
+// Логика отступов вынесена в общий лейаут-помощник.
 
-@use "../../_breakpoints" as bp;
+@use "../../_layout" as layout;
 
 .catalog-page {
-	margin-left: 66px;
-	margin-right: 66px;
-	margin-top: 32px;
-	margin-bottom: 32px;
-
-	@include bp.up-to(bp.$bp-small) {
-		margin-left: 16px;
-		margin-right: 16px;
-		margin-top: 16px;
-		margin-bottom: 16px;
-	}
+	@include layout.page-margins;
 }

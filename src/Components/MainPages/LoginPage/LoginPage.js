@@ -37,7 +37,7 @@ export const LoginPage = () => {
 		<div className="login-page">
 			<form className="login-window " onSubmit={handleSubmit}>
 				<p
-					className="centered-text">
+					className="login-window__text">
 					Emm... to be honest, it's only for us.
 					You're not supposed to be here....
 				</p>
