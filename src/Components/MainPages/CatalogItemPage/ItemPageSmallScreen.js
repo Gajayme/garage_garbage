@@ -21,11 +21,11 @@ export const ItemPageSmallScreen = ({ itemData, images, onImageClick, whatsappLi
 
 	return (
 		<div className="item-page-small-screen">
-			<ItemTitle title={title} />
-			<ItemInfo size={size} price={price} />
-			<ItemImageGallery images={images} onImageClick={onImageClick} />
-			<ItemDescription description={description} />
-			<BuyItemButton whatsappLink={whatsappLink} />
+			<ItemTitle className="item-page-small-screen__title" title={title} />
+			<ItemInfo className="item-page-small-screen__info" size={size} price={price} />
+			<ItemImageGallery className="item-page-small-screen__image-gallery" images={images} onImageClick={onImageClick} />
+			<ItemDescription className="item-page-small-screen__description" description={description} />
+			<BuyItemButton className="item-page-small-screen__button" whatsappLink={whatsappLink} />
 		</div>
 	);
 };

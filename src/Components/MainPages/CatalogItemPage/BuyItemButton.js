@@ -7,12 +7,14 @@ import "Styles/MainPages/CatalogItemPage/BuyItemButton.scss";
  *
  * @param {{ whatsappLink: string|null }} props
  */
-export const BuyItemButton = ({ whatsappLink }) => {
+export const BuyItemButton = ({ whatsappLink, className }) => {
+	const buttonClassName = `buy-item-button${className ? ` ${className}` : ""}`;
+
 	// Пока ссылка не загружена — рендерим неактивную кнопку (у <a> без href нет
 	// доступности с клавиатуры). Когда ссылка есть — настоящая ссылка.
 	if (!whatsappLink) {
 		return (
-			<button className="buy-item-button" type="button" disabled>
+			<button className={buttonClassName} type="button" disabled>
 				BUY
 			</button>
 		);
@@ -20,7 +22,7 @@ export const BuyItemButton = ({ whatsappLink }) => {
 
 	return (
 		<a
-			className="buy-item-button"
+			className={buttonClassName}
 			href={whatsappLink}
 			target="_blank"
 			rel="noopener noreferrer"

@@ -1,9 +1,29 @@
 .item-page-small-screen {
 	display: flex;
 	flex-direction: column;
-	gap: 30px;
 	min-width: 0;
 	min-height: 0;
 	align-items: stretch;
 	font-size: 25px;
+}
+
+
+.item-page-small-screen__title {
+	margin-bottom: 0px;
+}
+
+.item-page-small-screen__info {
+	margin-bottom: 25px;
+}
+
+.item-page-small-screen__image-gallery {
+	margin-bottom: 20px;
+}
+
+.item-page-small-screen__description {
+	margin-bottom: 35px;
+}
+
+.item-page-small-screen .item-page-small-screen__button {
+	align-self: center;
 }

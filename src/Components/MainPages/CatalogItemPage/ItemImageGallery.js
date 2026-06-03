@@ -14,7 +14,7 @@ const getImageUrl = (imageData) => {
 	return imageData.image_url ?? null;
 };
 
-export const ItemImageGallery = ({ images, onImageClick }) => {
+export const ItemImageGallery = ({ images, onImageClick, className }) => {
 	const [index, setIndex] = useState(0);
 
 	const count = images?.length ?? 0;
@@ -39,7 +39,7 @@ export const ItemImageGallery = ({ images, onImageClick }) => {
 		setIndex((i) => Math.min(last, Math.max(0, Math.min(last, i)) + 1));
 
 	return (
-		<div className="item-image-gallery">
+		<div className={`item-image-gallery${className ? ` ${className}` : ""}`}>
 			<SwipeArea
 				className="item-image-gallery__swipe-area"
 				onSwipeLeft={goNext}

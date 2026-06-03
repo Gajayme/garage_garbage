@@ -31,7 +31,7 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	gap: 16px;
+	gap: 80px;
 }
 
 .item-image-gallery__nav-button {
@@ -62,6 +62,8 @@
 }
 
 .item-image-gallery__counter {
-	font-size: 1rem;
+	color: var(--red);
+	font-size: 25px;
+	font-weight: var(--font-weight-bold);
 	white-space: nowrap;
 }
