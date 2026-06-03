@@ -1,0 +1,7 @@
+
+:root {
+	/* У шрифта "Terminess Nerd Font" реально доступно два начертания (см. Fonts.scss):
+	   regular (500) и bold (700). Прочие веса браузер всё равно округлит к ним. */
+	--font-weight-regular: 500;
+	--font-weight-bold: 700;
+}

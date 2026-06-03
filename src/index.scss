@@ -1,4 +1,5 @@
 @import './Styles/Colors.scss';
+@import './Styles/Typography.scss';
 
 
 /*базовый файл со стилями для проекта*/
@@ -16,7 +17,7 @@ html, body, #root {
 
 body {
 	font-family: "Terminess Nerd Font", sans-serif;
-	font-weight: 700;
+	font-weight: var(--font-weight-bold);
 }
 
 button,

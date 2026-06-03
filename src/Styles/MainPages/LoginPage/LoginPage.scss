@@ -33,7 +33,7 @@
 .login-window__button {
 	padding: 2px 20px 2px 20px;
 	font-size: 25px;
-	font-weight: bold;
+	font-weight: var(--font-weight-bold);
 	cursor: pointer;
 	color: var(--white);
 	background-color: var(--black);
