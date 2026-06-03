@@ -5,11 +5,11 @@ import "Styles/MainPages/CatalogItemPage/ItemDescription.scss";
  *
  * @param {string} description - текст описания
  */
-export const ItemDescription = ({ description }) => {
+export const ItemDescription = ({ description, className }) => {
 	if (description == null || description === "") return null;
 
 	return (
-		<div className="item-description">
+		<div className={`item-description${className ? ` ${className}` : ""}`}>
 			<p>{String(description)}</p>
 		</div>
 	);

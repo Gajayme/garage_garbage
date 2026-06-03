@@ -9,6 +9,7 @@ import { useItemDetails } from "./useItemDetails.js";
 import { useWhatsappLink } from "./useWhatsappLink.js";
 import { useHeightGreaterThanWidth } from "./useHeightGreaterThanWidth.js";
 
+import "Styles/MainPages/CatalogItemPage/ItemPage.scss";
 import "Styles/CenteredText.scss";
 
 export const ItemPage = () => {
@@ -37,7 +38,7 @@ export const ItemPage = () => {
 	}
 
 	return (
-		<>
+		<div className="item-page">
 			{tallNarrowViewport ? (
 				<ItemPageSmallScreen
 					itemData={itemData}
@@ -58,6 +59,6 @@ export const ItemPage = () => {
 				imageUrl={modalImageUrl}
 				onClose={() => setModalImageUrl(null)}
 			/>
-		</>
+		</div>
 	);
 };

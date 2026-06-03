@@ -1,21 +1,16 @@
 import "Styles/MainPages/CatalogItemPage/ItemInfo.scss";
 
 /**
- * Компонент с данными о вещи (имя, размер, цена) — без описания.
+ * Компонент с данными о вещи (размер, цена) — без заголовка и описания.
  *
- * @param {string} title - имя вещи
  * @param {string|number} size - размер
  * @param {string|number} price - цена
  * @param {string} [delimiter] - разделитель «ключ — значение»
+ * @param {string} [className] - дополнительный класс-обёртка
  */
-export const ItemInfo = ({ title, size, price, delimiter = ": " }) => {
+export const ItemInfo = ({ size, price, delimiter = ": ", className }) => {
 	return (
-		<div className="item-info">
-
-			{/* Заголовок (имя вещи) */}
-			<p className="item-info__title">
-				{title}
-			</p>
+		<div className={`item-info${className ? ` ${className}` : ""}`}>
 
 			{/* Размер */}
 			<p className="item-info__row">

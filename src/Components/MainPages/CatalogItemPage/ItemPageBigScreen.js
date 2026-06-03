@@ -1,4 +1,5 @@
 import { ItemImageGrid } from "./ItemImageGrid.js";
+import { ItemTitle } from "./ItemTitle.js";
 import { ItemInfo } from "./ItemInfo.js";
 import { ItemDescription } from "./ItemDescription.js";
 import { BuyItemButton } from "./BuyItemButton.js";
@@ -23,9 +24,10 @@ export const ItemPageBigScreen = ({ itemData, images, onImageClick, whatsappLink
 			<ItemImageGrid images={images} onImageClick={onImageClick} />
 
 			<div className="item-page-big-screen__aside">
-				<ItemInfo title={title} size={size} price={price} />
-				<ItemDescription description={description} />
-				<BuyItemButton whatsappLink={whatsappLink} />
+				<ItemTitle className="item-page-big-screen__title" title={title} />
+				<ItemInfo className="item-page-big-screen__info" size={size} price={price} />
+				<ItemDescription className="item-page-big-screen__description" description={description} />
+				<BuyItemButton className="item-page-big-screen__button" whatsappLink={whatsappLink} />
 			</div>
 		</div>
 	);

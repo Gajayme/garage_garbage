@@ -1,0 +1,6 @@
+
+@use "../../_layout" as layout;
+
+.item-page{
+	@include layout.page-margins(66px, 87px, 25px, 25px);
+}

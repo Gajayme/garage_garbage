@@ -1,4 +1,5 @@
 import { ItemImageGallery } from "./ItemImageGallery.js";
+import { ItemTitle } from "./ItemTitle.js";
 import { ItemInfo } from "./ItemInfo.js";
 import { ItemDescription } from "./ItemDescription.js";
 import { BuyItemButton } from "./BuyItemButton.js";
@@ -20,7 +21,8 @@ export const ItemPageSmallScreen = ({ itemData, images, onImageClick, whatsappLi
 
 	return (
 		<div className="item-page-small-screen">
-			<ItemInfo title={title} size={size} price={price} />
+			<ItemTitle title={title} />
+			<ItemInfo size={size} price={price} />
 			<ItemImageGallery images={images} onImageClick={onImageClick} />
 			<ItemDescription description={description} />
 			<BuyItemButton whatsappLink={whatsappLink} />
