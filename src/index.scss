@@ -13,6 +13,9 @@ html, body, #root {
 
 	/* Убираем дефолтный синий tap-highlight на мобильных WebKit/Chromium. */
 	-webkit-tap-highlight-color: transparent;
+
+	/* Отключаем «резинку» (overscroll bounce) у краёв скролла. */
+	overscroll-behavior: none;
 }
 
 body {
@@ -31,6 +34,7 @@ textarea {
 /* Учитываем границы в размерах элементов во всем проекте */
 *, *::before, *::after {
 	box-sizing: border-box;
+	overscroll-behavior: none;
 }
 
 /* Убираем baseline для всех картинок в проекте */
