@@ -11,16 +11,6 @@
 	min-width: 0;
 	display: flex;
 	flex-direction: column;
-
-	position: sticky;
-	top: 0;
-	align-self: flex-start;
-
-	/* Не выше видимой области inner-window; скролл только при переполнении. */
-	max-height: calc(100vh - 11rem);
-	max-height: calc(100dvh - 11rem);
-	max-height: calc(100svh - 11rem);
-	overflow-y: auto;
 }
 
 .item-page-big-screen__title {

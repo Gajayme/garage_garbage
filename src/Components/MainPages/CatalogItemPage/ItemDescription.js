@@ -1,4 +1,4 @@
-import "Styles/MainPages/CatalogItemPage/ItemDescription.scss";
+import "Styles/MainPages/CatalogItemPage/ItemDescriptionCatalog.scss";
 
 /**
  * Компонент с текстом описания вещи.
@@ -10,7 +10,7 @@ export const ItemDescription = ({ description, className }) => {
 	if (description == null || description === "") return null;
 
 	return (
-		<div className={`item-description${className ? ` ${className}` : ""}`}>
+		<div className={`item-description-catalog ${className ? ` ${className}` : ""}`}>
 			<p>{String(description)}</p>
 		</div>
 	);
