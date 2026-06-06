@@ -3,10 +3,10 @@ import { CheckboxMultiFilter } from './SpecificFilters/CheckboxMultiFilter';
 import { RangeFilter } from './SpecificFilters/RangeFilter';
 import { FilterWithButton } from './FilterWithButton';
 
-import arrowUp from 'Assets/Images/Filters/arrow_up.svg';
-import arrowDown from 'Assets/Images/Filters/arrow_down.svg';
-import checkmark from 'Assets/Images/checkmark.svg';
-import rangeArrow from 'Assets/Images/Filters/price_range_arrow.svg';
+import arrowUp from 'Assets/Icons/Filters/arrow_up.svg';
+import arrowDown from 'Assets/Icons/Filters/arrow_down.svg';
+import checkmark from 'Assets/Icons/Filters/checkmark.svg';
+import rangeArrow from 'Assets/Icons/Filters/price_range_arrow.svg';
 
 import * as Constants from './Constants';
 

@@ -3,7 +3,7 @@ import React from 'react';
 import {BorderedImage} from "Components/BorderedImage.js"
 
 import "Styles/MainPages/CatalogItemPage/ModalWindowImage.scss"
-import CrossIcon from "Assets/Images/cross.png"
+import CrossIcon from "Assets/Icons/cross.svg"
 
 
 export const ModalWindowImage = ({imageUrl, onCrossClick, onClick}) => {

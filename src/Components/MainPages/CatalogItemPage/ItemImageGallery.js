@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { ItemThumbnailButton } from "Components/ItemThumbnailButton.js";
 import { SwipeArea } from "./SwipeArea.js";
 
-import leftArrow from "Assets/Images/CatalogItem/left_arrow.png";
-import rightArrow from "Assets/Images/CatalogItem/arrow_right.png";
+import leftArrow from "Assets/Icons/CatalogItem/arrow_left.svg";
+import rightArrow from "Assets/Icons/CatalogItem/arrow_right.svg";
 
 import "Styles/MainPages/CatalogItemPage/ItemImageGallery.scss";
 
