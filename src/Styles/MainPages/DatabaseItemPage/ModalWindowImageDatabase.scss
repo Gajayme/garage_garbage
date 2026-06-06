@@ -10,19 +10,20 @@
 	cursor: default;
 }
 
-.cross-icon-button {
+.cross-icon-button-database {
 	position: absolute;
 	top: 0;
 	right: 0;
 
-	padding: 5px;
+	padding-top: 13px;
+	padding-right: 10px;
 	border: none;
 	background: none;
 	cursor: pointer;
 	opacity: 0.9;
 }
 
-.cross-icon-button:hover {
+.cross-icon-button-database:hover {
 	opacity: 1;
 }
 

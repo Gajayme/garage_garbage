@@ -3,7 +3,7 @@ import React from 'react';
 import {BorderedImage} from "Components/BorderedImage.js"
 
 import "Styles/MainPages/UploadPage/ImageManager/DeletableImage.scss"
-import CrossIcon from "Assets/Icons/cross.svg"
+import CrossIcon from "Assets/Icons/cross_gray.svg"
 
 
 export const DeletableImage = ({image, onCrossClick}) => {

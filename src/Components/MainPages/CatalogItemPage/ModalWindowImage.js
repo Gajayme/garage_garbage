@@ -2,8 +2,8 @@ import React from 'react';
 
 import {BorderedImage} from "Components/BorderedImage.js"
 
-import "Styles/MainPages/CatalogItemPage/ModalWindowImage.scss"
-import CrossIcon from "Assets/Icons/cross.svg"
+import "Styles/MainPages/CatalogItemPage/ModalWindowImageCatalog.scss"
+import CrossIcon from "Assets/Icons/cross_gray.svg"
 
 
 export const ModalWindowImage = ({imageUrl, onCrossClick, onClick}) => {
@@ -19,7 +19,7 @@ export const ModalWindowImage = ({imageUrl, onCrossClick, onClick}) => {
 			/>
 			<button
 				type="button"
-				className="cross-icon-button"
+				className="cross-icon-button-catalog"
 				aria-label="Close"
 				onClick={() => onCrossClick()}
 			>
