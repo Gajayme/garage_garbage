@@ -2,6 +2,7 @@
 // Названия полей для формы загрузки вещей (такие же, как в API)
 export const files = "files"
 export const item_name = "itemName"
+export const item_model = "model"
 export const buyer_part = "buyersPart"
 export const bought_for = "boughtFor"
 export const price = "price"

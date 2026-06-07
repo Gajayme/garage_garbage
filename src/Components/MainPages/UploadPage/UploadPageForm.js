@@ -33,6 +33,7 @@ import DefaultImg from "Assets/Images/default.jpg"
 // в кастомные хуки без триггера их useEffect.
 const INITIAL_FORM = {
 	item_name: '',
+	item_model: '',
 	bought_for: '',
 	price: '',
 	buyers_part: '',
@@ -89,6 +90,7 @@ const DROPDOWN_DEFS = [
 // Описание полей-инпутов (рендер ниже идёт через .map)
 const INPUT_DEFS = [
 	{ name: "item_name",   label: "Item Name",  id: "item_name_input",  maxLength: 50 },
+	{ name: "item_model",  label: "Item Model", id: "item_model_input", maxLength: 50 },
 	{ name: "buyers_part", label: "Buyer Part", id: "buyer_part_input", maxLength: 10, inputValidator: NumbersOnly },
 	{ name: "bought_for",  label: "Bought for", id: "bought_for_input", maxLength: 10, inputValidator: NumbersOnly },
 	{ name: "price",       label: "Price",      id: "price_input",      maxLength: 10, inputValidator: NumbersOnly },
@@ -280,6 +282,7 @@ export const UploadPageForm = ({
 	const buildFormData = () => {
 		const formData = new FormData();
 		formData.append(Constants.item_name, formState.item_name);
+		formData.append(Constants.item_model, formState.item_model);
 		formData.append(Constants.bought_for, parseInt(formState.bought_for, 10));
 		formData.append(Constants.price, parseInt(formState.price, 10));
 		formData.append(Constants.buyer_part, parseInt(formState.buyers_part, 10));
@@ -373,6 +376,7 @@ export const UploadPageForm = ({
 
 		setFormState({
 			item_name: 'Кроссовки Adidas',
+			item_model: 'Superstar',
 			bought_for: '5000',
 			price: '8500',
 			buyers_part: '50',
