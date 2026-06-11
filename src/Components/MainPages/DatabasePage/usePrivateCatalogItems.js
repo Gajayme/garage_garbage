@@ -24,5 +24,7 @@ export const usePrivateCatalogItems = () => {
 	return useQuery({
 		queryKey: [GlobalConstants.itemsPrivateQueryKey],
 		queryFn,
+		staleTime: Infinity, // данные не будут дергаться с сервера при прошествии таймера
+		gcTime: Infinity,   // данные не будут удаляться из кеша при прошествии таймера
 	});
 };
